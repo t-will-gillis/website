@@ -18,6 +18,10 @@ jobs:
 #             const { IN_PROGRESS_COLUMN_ID } = process.env;
 #             const script = require('./github-actions/add-update-label-weekly/add-label.js');
 #             script({ g: github, c: context }, IN_PROGRESS_COLUMN_ID);
+      
         with:
-            project: Project Board
-            column: In progress (actively working)
+          script: |
+            
+            const script = require('./github-actions/add-update-label-weekly/add-label.js');
+            script({ g: github, c: context }, In progress (actively working));
+
