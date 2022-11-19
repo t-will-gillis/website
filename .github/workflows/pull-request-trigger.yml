@@ -5,9 +5,18 @@ on:
     branches:
       - 'gh-pages'
       - 'feature-homepage-launch'
+      - 'remove-merged-prs-project-board-2592'
 
 jobs:
   Hello-World:
     runs-on: ubuntu-latest
     steps:
      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+     
+#   Remove-Merged-PRs-From-Project-Board:
+#     runs-on: ubuntu-latest
+#     # Trigger this action if pull request is merged
+#     if: ${{ github.event_name == 'pull_request' && github.event.action == 'merged'}}
+#     steps: 
+#       - uses: actions/checkout@v2
+#       - uses: actions/github-script@v4
