@@ -5,6 +5,7 @@ on:
     branches:
       - 'gh-pages'
       - 'feature-homepage-launch'
+      - 'test_project_board_for_gha'
 
 jobs:
   Hello-World:
