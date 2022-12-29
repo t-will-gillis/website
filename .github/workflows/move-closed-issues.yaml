@@ -1,6 +1,6 @@
 name: Move Closed Issues
 on:
-  issues:
+  pull_request_target:
     types:
       - closed
 jobs:
