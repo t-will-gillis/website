@@ -39,6 +39,7 @@ function main({ context }) {
 
   /** if issue does not include a hard label, but does contain an override label - move to QA */
   if (issueLabels.some(isOverrideLabel)) {
+    console.log('here at line 42')
     return QAColumn;
   }
 
@@ -48,6 +49,7 @@ function main({ context }) {
   }
 
   // all other issues go to QA column
+  console.log('yo line 52')
   return QAColumn;
 }
 
