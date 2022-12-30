@@ -18,11 +18,11 @@ jobs:
     if: ${{ github.event.action == 'merged'}} 
     steps: 
       - name: Delete Merged PRs
-      - uses: alex-page/github-project-automation-plus@v0.8.1
+        uses: alex-page/github-project-automation-plus@v0.8.1
         with:
           project: Project Board
           repo-token: ${{ secrets.GHPROJECT_TOKEN }}
           action: delete
           
       - name: Echo Delete Attempt
-      - run: echo "This job's status is ${{ job.status }}."
+        run: echo "This job's status is ${{ job.status }}."
