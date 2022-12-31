@@ -39,11 +39,15 @@ jobs:
      
   Delete-Merged-PRs:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.merged == true }} 
+    if: ${{ github.event.pull_request.merged == true }} 
     steps: 
       - name: Echo Delete Attempt
         run: echo "This job's status is ${{ job.status }}."
-        
+  
+  Delete-Merged-PRs2:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.merged == true }} 
+    steps: 
       - name: Delete Merged PRs
         uses: alex-page/github-project-automation-plus@v0.8.1
         with:
