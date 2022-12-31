@@ -10,13 +10,17 @@ on:
 jobs:
   Hello-World:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'merged'}} 
     steps:
      - run: echo "🎉 This 'Pull Request Trigger' job was automatically triggered by a ${{ github.event_name }} event."
      
   Delete-Merged-PRs:
     runs-on: ubuntu-latest
-    if: ${{ github.event.action == 'merged'}} 
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'merged'}} 
     steps: 
+      - name: Echo Delete Attempt
+        run: echo "This job's status is ${{ job.status }}."
+        
       - name: Delete Merged PRs
         uses: alex-page/github-project-automation-plus@v0.8.1
         with:
@@ -24,5 +28,4 @@ jobs:
           repo-token: ${{ secrets.GHPROJECT_TOKEN }}
           action: delete
           
-      - name: Echo Delete Attempt
-        run: echo "This job's status is ${{ job.status }}."
+      
