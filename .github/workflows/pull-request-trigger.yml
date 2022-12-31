@@ -10,13 +10,36 @@ on:
 jobs:
   Hello-World:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request' && github.event.action == 'merged'}} 
     steps:
      - run: echo "🎉 This 'Pull Request Trigger' job was automatically triggered by a ${{ github.event_name }} event."
      
+  Hey-I-Am-Merged:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'merged' }}
+    steps:
+     - run: echo "I am running beccause ***github.event_name == 'pull_request' && github.event.action == 'merged'***."
+  
+  Truncated-merge-message:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.action == 'merged'}}
+    steps:
+     - run: echo "I am running beceause only --> github.event.action == 'merged' <--."
+     
+  Hey-I-Am-Merged2:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.merged == true }}
+    steps:
+     - run: echo "I am running beccause ***github.event_name == 'pull_request' && github.event.pull_request.merged == true'***."
+  
+  Truncated-merge-message2:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.merged == true}}
+    steps:
+     - run: echo "I am running beceause only --> github.event.pull_request.merged == true <--."
+     
   Delete-Merged-PRs:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request' && github.event.action == 'merged'}} 
+    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.merged == true }} 
     steps: 
       - name: Echo Delete Attempt
         run: echo "This job's status is ${{ job.status }}."
@@ -28,4 +51,3 @@ jobs:
           repo-token: ${{ secrets.GHPROJECT_TOKEN }}
           action: delete
           
-      
