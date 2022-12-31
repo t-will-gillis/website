@@ -56,3 +56,13 @@ jobs:
           repo-token: ${{ secrets.GHPROJECT_TOKEN }}
           action: delete
           
+  Delete-Merged-PRs3:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.merged == true }} 
+    steps: 
+      - name: Delete Merged PRs
+        uses: alex-page/github-project-automation-plus@v0.8.1
+        with:
+          repo-token: ${{ secrets.GHPROJECT_TOKEN }}
+          action: delete
+          
