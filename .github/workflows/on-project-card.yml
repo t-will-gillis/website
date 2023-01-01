@@ -1,0 +1,15 @@
+name: Project Card Created
+on:
+  project_card:
+    types: [created]
+    branches:
+      - 'gh-pages'
+      - 'feature-homepage-launch'
+      - 'test_project_board_for_gha'
+
+jobs:
+  Hello-World:
+    runs-on: ubuntu-latest
+    steps:
+     - run: echo "🎉 This job was automatically triggered by a ${{ github.event_name }} event."
+     
