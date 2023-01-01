@@ -1,0 +1,15 @@
+name: Provide Project Data
+
+on:
+  project:
+    types: [edited]
+
+jobs:
+  Tell-Me-Project:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "The project card event is called ${{ github.event_name }}"
+  Tell-Me-Project2:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "The project card event is called ${{ github.project }}"
