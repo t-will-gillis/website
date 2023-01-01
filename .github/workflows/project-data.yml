@@ -1,7 +1,7 @@
-name: Provide Project Data
+name: Provide Project Column Data
 
 on:
-  project:
+  project_column:
     types: [edited]
 
 jobs:
@@ -12,4 +12,4 @@ jobs:
   Tell-Me-Project2:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "The project card event is called ${{ github.project }}"
+      - run: echo "The project card event is called ${{ github.project_card }}"
