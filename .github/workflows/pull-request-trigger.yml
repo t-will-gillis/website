@@ -17,25 +17,25 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' && github.event.action == 'merged' }}
     steps:
-     - run: echo "I am running beccause ***github.event_name == 'pull_request' && github.event.action == 'merged'***."
+     - run: echo "I am running because ***github.event_name == 'pull_request' && github.event.action == 'merged'***."
   
   Truncated-merge-message:
     runs-on: ubuntu-latest
     if: ${{ github.event.action == 'merged'}}
     steps:
-     - run: echo "I am running beceause only --> github.event.action == 'merged' <--."
+     - run: echo "I am running because only --> github.event.action == 'merged' <--."
      
   Hey-I-Am-Merged2:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' && github.event.pull_request.merged == true }}
     steps:
-     - run: echo "I am running beccause ***github.event_name == 'pull_request' && github.event.pull_request.merged == true'***."
+     - run: echo "I am running because ***github.event_name == 'pull_request' && github.event.pull_request.merged == true'***."
   
   Truncated-merge-message2:
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request.merged == true}}
     steps:
-     - run: echo "I am running beceause only --> github.event.pull_request.merged == true <--."
+     - run: echo "I am running because only --> github.event.pull_request.merged == true <--."
      
   Delete-Merged-PRs:
     runs-on: ubuntu-latest
