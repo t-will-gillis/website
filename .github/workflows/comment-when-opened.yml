@@ -12,3 +12,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE: ${{ github.event.issue.html_url }}
           PROJECT: ${{ github.project }}
+          
+  comment2:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo " This job was automatically triggered by  ${{ github.project }} ."
+      
+  comment3:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo " This  job was automatically triggered by  ${{ github.project_card }} ."
+
