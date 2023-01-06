@@ -2,16 +2,17 @@ name: Schedule Thursday 1100
 
 
 # Run this action at 11:00 (3 am Pacific) on the first Thursday of the month.
+# TWG changed to 11 am PST on Fridays
 on:
   schedule:
-    - cron:  0 11 * * 4 
+    - cron:  40 18 * * 5 
 
 jobs:
   # This workflow contains a single job called "trim_contirbutors"
   trim_contributors:
     runs-on: ubuntu-latest
 
-    if: github.repository == 'hackforla/website'
+    if: github.repository == 't-will-gillis/website'
 
     steps:
     # get the day number of the current month
@@ -23,7 +24,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GHPROJECT_TOKEN }}
 
     # setup node 
     - name: Setup node
@@ -40,6 +41,6 @@ jobs:
     # run js file if it is the first Thursday of the month
     - name: Trim Members
       env:
-        token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
-      if: ${{ steps.date.outputs.date <= 7 }}
-      run: node github-actions/github-data/contributors-data.js
+        token: ${{ secrets.GHPROJECT_TOKEN }}
+      if: ${{ steps.date.outputs.date <= 14 }}
+      run: node github-actions/trigger-schedule/contributors-data.js
