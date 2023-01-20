@@ -1,6 +1,6 @@
-name: Project Card Created
+name: Project Column Created
 on:
-  project_card:
+  project_column:
     types: [created]
     branches:
       - 'gh-pages'
