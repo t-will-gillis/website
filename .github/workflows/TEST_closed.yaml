@@ -16,7 +16,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3.0.1
         with:
-          repository: 'test_project_board_for_gha'
+          repository: 't-will-gillis/website'
       - name: handle input  
         id: set-matrix
         run: |
