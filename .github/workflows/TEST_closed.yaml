@@ -1,4 +1,4 @@
-name: Move Closed Issues
+name: TEST Move Closed Issues
 on:
   issues:
     types:
