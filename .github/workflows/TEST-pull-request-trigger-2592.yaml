@@ -5,24 +5,13 @@ on:
     branches:
       - 'gh-pages'
       - 'feature-homepage-launch'
+      - 'test_project_board_for_gha'
 
 jobs:
   Hello-World:
     runs-on: ubuntu-latest
     steps:
      - run: echo "🍺 This is the 'TEST Pull Request Trigger for Issue 2592' job, automatically triggered by a ${{ github.event_name }} event."
-          
-  TEST-Does-This-Work-1:
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.merged == true }}
-    steps:
-     - run: echo "I am running because ***github.event_name == 'pull_request' && github.event.pull_request.merged == true'***."
-  
-  TEST-Does-This-Work-2:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.merged == true}}
-    steps:
-     - run: echo "I am running because only --> github.event.pull_request.merged == true <--."
 
   Delete-Merged-PRs:
     runs-on: ubuntu-latest
@@ -32,9 +21,7 @@ jobs:
         uses: alex-page/github-project-automation-plus@v0.8.1
         with:
           project: 'Project Board'
-          column: 'TEST 2592'
+          column: "TEST 2592 || QA | QA"            
           repo-token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
           action: delete
-          
-
           
