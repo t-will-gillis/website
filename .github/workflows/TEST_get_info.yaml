@@ -1,6 +1,6 @@
 name: first-issues-to-beginner-project-board
 on:
-  workflow_run:
+  workflow_dispatch:
     inputs:
       labelsJson:
         type: string
