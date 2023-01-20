@@ -1,0 +1,44 @@
+name: Move Closed Issues
+on:
+  issues:
+    types:
+      - closed
+  inputs:
+      labelsJson:
+        type: string
+        description: The type of issue
+        required: true
+    
+jobs:
+  setup-matrixJson:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3.0.1
+        with:
+          repository: 'test_project_board_for_gha'
+      - name: handle input  
+        id: set-matrix
+        run: |
+          sudo bash script.sh ${{ inputs.labelsJson }}
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      
+  move-closed-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Sort Closed Issues by Label
+        uses: actions/github-script@v4
+        id: sort-closed-issues
+        with:
+          script: |
+            const script = require('./github-actions/move-closed-issues/sort-closed-issues.js')
+            const sortIssues = script({context})
+            return sortIssues
+          result-encoding: string
+      - uses: alex-page/github-project-automation-plus@v0.8.1
+        with:
+          project: Project Board
+          column: ${{ steps.sort-closed-issues.outputs.result }}
+          repo-token: ${{ secrets.GHPROJECT_TOKEN }}
