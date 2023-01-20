@@ -3,11 +3,11 @@ on:
   issues:
     types:
       - closed
-  inputs:
-      labelsJson:
-        type: string
-        description: The type of issue
-        required: true
+    inputs:
+        labelsJson:
+          type: string
+          description: The type of issue
+          required: true
     
 jobs:
   setup-matrixJson:
