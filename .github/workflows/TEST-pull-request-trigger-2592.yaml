@@ -20,8 +20,8 @@ jobs:
       - name: Delete Merged PRs
         uses: alex-page/github-project-automation-plus@v0.8.1
         with:
-          project: 'Project Board'
-          column: "TEST 2592 || QA | QA"            
+          projects_v2: 'Project Board'
+          column: "QA"            
           repo-token: ${{ secrets.GHPROJECT_TOKEN }}
           action: delete
           
