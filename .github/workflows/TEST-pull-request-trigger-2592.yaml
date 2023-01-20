@@ -22,6 +22,6 @@ jobs:
         with:
           project: 'Project Board'
           column: "TEST 2592 || QA | QA"            
-          repo-token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
+          repo-token: ${{ secrets.GHPROJECT_TOKEN }}
           action: delete
           
