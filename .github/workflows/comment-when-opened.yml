@@ -23,3 +23,7 @@ jobs:
     steps:
       - run: echo " This  job was automatically triggered by  ${{ github.project_card }} ."
 
+  comment4:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo " This  job was automatically triggered by  ${{ github.project }} ."
