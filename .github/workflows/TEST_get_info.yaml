@@ -1,0 +1,26 @@
+name: first-issues-to-beginner-project-board
+on:
+  workflow_call:
+    inputs:
+      labelsJson:
+        type: string
+        description: The type of issue
+        required: true
+    secrets:
+      PROJECT_BOARD_AUTOMATION_PAT:
+        required: true
+
+jobs:
+  setup-matrixJson:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3.0.1
+        with:
+          repository: 'test_project_board_for_gha'
+      - name: handle input  
+        id: set-matrix
+        run: |
+          sudo bash script.sh ${{ inputs.labelsJson }}
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
