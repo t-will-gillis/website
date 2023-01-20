@@ -16,7 +16,8 @@ jobs:
   comment2:
     runs-on: ubuntu-latest
     steps:
+      - run: echo " This job was automatically triggered by  ${{ github.event_name }} ."
       - run: echo " This job was automatically triggered by  ${{ github.event.project }} ."
       - run: echo " This  job was automatically triggered by  ${{ github.project_card }} ."
       - run: echo " This  job was automatically triggered by  ${{ github.project }} ."
-      - run: echo " This  job was automatically triggered by  ${{ github.project.name }} ."
+      - run: echo " This  job was automatically triggered by  ${{ github.project_name }} ."
