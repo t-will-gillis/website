@@ -21,3 +21,4 @@ jobs:
       - run: echo " This  job was automatically triggered by  ${{ github.project_card }} ."
       - run: echo " This  job was automatically triggered by  ${{ github.project }} ."
       - run: echo " This  job was automatically triggered by  ${{ github.project_name }} ."
+      - run: echo " This  job was automatically triggered by  ${{ comment.env.issue }} ."
