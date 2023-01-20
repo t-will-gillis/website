@@ -1,0 +1,109 @@
+name: "Delete Issue from Project"
+author: 'Tetsuya Mori'
+description: 'Delete GitHub Issues from GitHub Projects'
+branding:
+  icon: minus-square
+  color: red
+inputs:
+  github-token:
+    default: ''
+    required: true
+    description: 'Personal Access Token that with `repo` and `org:read` is granted.'
+  project-id:
+    default: ''
+    required: false
+    description: 'Node Id of project.'
+  project-owner:
+    default: ''
+    required: false
+    description: 'User/Organization name project contains.'
+  project-number:
+    default: 0
+    required: false
+    description: 'The number of the target project.'
+  project-item-id:
+    default: ''
+    required: false
+    description: 'Node Id of target ProjectItem'
+  issue-id:
+    default: ''
+    required: false
+    description: 'Node Id of issue.'
+  issue-repository:
+    default: ''
+    required: false
+    description: 'Repository name with owner of issue.'
+  issue-number:
+    default: 0
+    required: false
+    description: 'Number of issue.'
+outputs:
+  deleted-project-item-id:
+    description: 'Project Item Id that deleted from project.'
+    value: ${{ steps.delete-issue-from-project.outputs.deleted-project-item-id }}
+  error:
+    description: 'Error message.'
+    value: ${{ steps.delete-issue-from-project.outputs.error }}
+runs:
+  using: "composite"
+  steps:
+    - uses: monry/actions-get-project-id@v2
+      id: get-project-id
+      if: inputs.project-id == ''
+      with:
+        github-token: ${{ inputs.github-token }}
+        project-owner: ${{ inputs.project-owner }}
+        project-number: ${{ inputs.project-number }}
+    - uses: monry/actions-get-project-item-id@v2
+      id: get-project-item-id
+      if: inputs.project-item-id == ''
+      with:
+        github-token: ${{ inputs.github-token }}
+        project-id: ${{ inputs.project-id }}
+        project-owner: ${{ inputs.project-owner }}
+        project-number: ${{ inputs.project-number }}
+        issue-id: ${{ inputs.issue-id }}
+        issue-repository: ${{ inputs.issue-repository }}
+        issue-number: ${{ inputs.issue-number }}
+    - name: delete Issue from Project
+      uses: actions/github-script@v6
+      id: delete-issue-from-project
+      with:
+        result-encoding: string
+        github-token: ${{ inputs.github-token }}
+        script: |
+          var projectId = '${{ inputs.project-id }}' || '${{ steps.get-project-id.outputs.project-id }}';
+          if (!projectId) {
+            core.setOutput('error', 'Project does not found.');
+            return;
+          }
+          var projectItemId = '${{ inputs.project-item-id }}' || '${{ steps.get-project-item-id.outputs.project-item-id }}';
+          if (!projectItemId) {
+            core.setOutput('error', 'Project Item does not found.');
+            return;
+          }
+          const variables = {
+            projectId: projectId,
+            projectItemId: projectItemId
+          };
+          const mutation = `
+            mutation($projectId: ID!, $projectItemId: ID!) {
+              deleteProjectV2Item(input: {projectId: $projectId, itemId: $projectItemId}) {
+                deletedItemId
+              }
+            }
+          `;
+          let deletedProjectV2ItemId = null;
+          try {
+            var result = await github.graphql(mutation, variables);
+            if (result && result.deleteProjectV2Item) {
+              deletedProjectV2ItemId = result.deleteProjectV2Item.deletedItemId;
+            }
+          } catch (error) {
+            if (error.errors && error.errors.length > 0) {
+              core.setOutput('error', error.errors[0].message);
+              return;
+            }
+          }
+          core.setOutput('deleted-project-item-id', deletedProjectV2ItemId);
+          return;
