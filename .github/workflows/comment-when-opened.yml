@@ -11,14 +11,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE: ${{ github.event.issue.html_url }}
-          
+          PROJECT: ${{ github.projects_v2 }}
           
   comment2:
     runs-on: ubuntu-latest
     steps:
       - run: echo " This job was automatically triggered by  ${{ github.event_name }} ."
-      - run: echo " This job was automatically triggered by  ${{ github.event.project }} ."
+      - run: echo " This job was automatically triggered by  ${{ github.event.projects_v2 }} ."
       - run: echo " This  job was automatically triggered by  ${{ github.project_card }} ."
-      - run: echo " This  job was automatically triggered by  ${{ github.project }} ."
-      - run: echo " This  job was automatically triggered by  ${{ github.project_name }} ."
-      - run: echo " This  job was automatically triggered by  ${{ comment.env.issue }} ."
+      - run: echo " This  job was automatically triggered by  ${{ github.projects_v2 }} ."
+      - run: echo " This  job was automatically triggered by  ${{ github.projects_v2_name }} ."
+      - run: echo " This  job was automatically triggered by  ${{ env.issue }} ."
