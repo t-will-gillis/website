@@ -8,12 +8,14 @@ on:
       - 'test_project_board_for_gha'
 
 jobs:
+# The purpose of the echo is to show that this workflow was triggered. Once everything is working, this may be deleted.
   Hello-World:
     runs-on: ubuntu-latest
     steps:
      - run: echo "🍺 This is the 'TEST Pull Request Trigger for Issue 2592' job, automatically triggered by a ${{ github.event_name }} event."
-     
 
+# The purpose of Move-PR is to gather merged PRs from every location 
+# into a single column so that in the next step they may be deleted.
   Move-PR:
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request.merged == true }} 
@@ -22,10 +24,10 @@ jobs:
         uses: alex-page/github-project-automation-plus@v0.8.1
         with:
           project: Project Board
-          column: UAT
+          column: 'test-approved-by-reviewer (Automated Column, do not place items here manually)'
           repo-token: ${{ secrets.GHPROJECT_TOKEN }}
 
-
+# The purpose of Delete-Merged-PRs is to delete 
   Delete-Merged-PRs:
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request.merged == true }} 
@@ -34,7 +36,6 @@ jobs:
         uses: alex-page/github-project-automation-plus@v0.8.1
         with:
           project: Project Board
-          column: UAT            
+          column: 'test-approved-by-reviewer (Automated Column, do not place items here manually)'            
           repo-token: ${{ secrets.GHPROJECT_TOKEN }}
           action: delete
-          
