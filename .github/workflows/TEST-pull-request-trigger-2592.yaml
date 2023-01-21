@@ -12,6 +12,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
      - run: echo "🍺 This is the 'TEST Pull Request Trigger for Issue 2592' job, automatically triggered by a ${{ github.event_name }} event."
+     
+
+  Move-PR:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.merged == true }} 
+    steps:
+      - name: Move PR
+        uses: alex-page/github-project-automation-plus@v0.8.1
+        with:
+          project: Project Board
+          column: UAT
+          repo-token: ${{ secrets.GHPROJECT_TOKEN }}
+
 
   Delete-Merged-PRs:
     runs-on: ubuntu-latest
@@ -20,8 +33,8 @@ jobs:
       - name: Delete Merged PRs
         uses: alex-page/github-project-automation-plus@v0.8.1
         with:
-          projects_v2: 'Project Board'
-          column: "QA"            
+          project: Project Board
+          column: UAT            
           repo-token: ${{ secrets.GHPROJECT_TOKEN }}
           action: delete
           
