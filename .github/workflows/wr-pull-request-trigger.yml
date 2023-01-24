@@ -4,8 +4,8 @@ on:
     workflows: ["Pull Request Trigger"]
     types: [completed]
 
-jobs:  
+jobs:
   Hello-World:
     runs-on: ubuntu-latest
     steps:
-     - run: echo "🍺 The job was automatically triggered by a ${{ github.event_name }} event."
+     - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
