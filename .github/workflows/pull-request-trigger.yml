@@ -4,7 +4,6 @@ on:
     types: [closed]
     branches:
       - 'gh-pages'
-      - 'feature-homepage-launch'
       - 'remove-merged-prs-project-board-2592'
 
 jobs:
@@ -14,29 +13,29 @@ jobs:
     steps:
      - run: echo "🍺 The job was automatically triggered by a ${{ github.event_name }} event."
 
-  # Gathers merged PRs from every location and moves to column 'test-approved-by-reviewer'
-  Move-PR:
+  # Gathers merged PRs from every location and moves to column 'test-approved-by-reviewer...'
+  Gather-Merged-PRs:
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request.merged == true }} 
     steps:
-      - name: Move PR
+      - name: Gather Merged PRs
         uses: alex-page/github-project-automation-plus@v0.8.1
         with:
-          project: 'Project Board 77'
+          project: Project Board
           column: 'test-approved-by-reviewer (Automated Column, do not place items here manually)'
           repo-token: ${{ secrets.GHPROJECT_TOKEN }}
 
-  # Deletes merged PRs from column 'test-approved-by-reviewer' w/ inclusion of 'needs: Move-PR'
+  # Deletes merged PRs from column 'test-approved-by-reviewer...' after 'needs: Gather-Merged-PRs'
   Delete-Merged-PRs:
-    needs: Move-PR
+    needs: Gather-Merged-PRs
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request.merged == true }} 
     steps: 
       - name: Delete Merged PRs
         uses: alex-page/github-project-automation-plus@v0.8.1
         with:
-          project: 'Project Board 77'
-          column: 'test-approved-by-reviewer (Automated Column, do not place items here manually)'            
+          project: Project Board
+          column: 'test-approved-by-reviewer (Automated Column, do not place items here manually)'               
           repo-token: ${{ secrets.GHPROJECT_TOKEN }}
           action: delete
 
