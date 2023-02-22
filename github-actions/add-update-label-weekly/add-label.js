@@ -7,9 +7,9 @@ var context;
 const statusUpdatedLabel = 'Status: Updated';
 const toUpdateLabel = 'To Update !';
 const inactiveLabel = '2 weeks inactive';
-const updatedByDays = 3; // number of days ago to check for to update label
-const inactiveUpdatedByDays = 14; // number of days ago to check for inactive label
-const commentByDays = 7; // number of days ago to check for comment by assignee
+const updatedByDays = 1; // number of days ago to check for to update label
+const inactiveUpdatedByDays = 3; // number of days ago to check for inactive label
+const commentByDays = 2; // number of days ago to check for comment by assignee
 const threeDayCutoffTime = new Date()
 threeDayCutoffTime.setDate(threeDayCutoffTime.getDate() - updatedByDays)
 const sevenDayCutoffTime = new Date()
@@ -112,6 +112,8 @@ async function getTimeline(issueNum) {
       });
       if (results.data.length) {
 	      arra = arra.concat(results.data);
+	      console.log('printing value of --arra--')
+	      console.log(arra)
       } else {
         break
       }
@@ -136,6 +138,10 @@ async function getTimeline(issueNum) {
  */
 
 async function isTimelineOutdated(timeline, issueNum, assignees) {
+	console.log('printing --timeline-- --issueNum-- --assignees--')
+	console.log(timeline)
+	console.log(issueNum)
+	console.log(assignees)
 	for await (let [index, moment] of timeline.entries()) {
 		if (isMomentRecent(moment.created_at, threeDayCutoffTime)) { // all the events of an issue within last three days will return true
 			if (moment.event == 'cross-referenced' && isLinkedIssue(moment, issueNum)) { // checks if cross referenced within last three days 
