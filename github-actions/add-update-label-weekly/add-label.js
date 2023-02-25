@@ -6,7 +6,7 @@ var github;
 var context;
 const statusUpdatedLabel = '✔ Status: Updated';
 const toUpdateLabel = '⚠ To Update !';
-const inactiveLabel = '💤 2 weeks inactive';
+const inactiveLabel = '😴 2 weeks inactive';
 const updatedByDays = 3; // number of days ago to check for to update label
 const inactiveUpdatedByDays = 5; // number of days ago to check for inactive label
 const commentByDays = 4; // number of days ago to check for comment by assignee
