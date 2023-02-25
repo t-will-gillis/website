@@ -17,6 +17,13 @@ sevenDayCutoffTime.setDate(sevenDayCutoffTime.getDate() - commentByDays)
 const fourteenDayCutoffTime = new Date()
 fourteenDayCutoffTime.setDate(fourteenDayCutoffTime.getDate() - inactiveUpdatedByDays)
 
+// The following variables are to be removed by after one month:
+const prevStatusUpdatedLabel = 'Status: Updated';
+const prevUpdateLabel = 'To Update !';
+const prevInactiveLabel = '2 weeks inactive';
+
+
+
 /**
  * The main function, which retrieves issues from a specific column in a specific project, before examining the timeline of each issue for outdatedness. If outdated, the old status label is removed, and an updated is requested. Otherwise, the issue is labeled as updated.
  * @param {Object} g github object from actions/github-script 
