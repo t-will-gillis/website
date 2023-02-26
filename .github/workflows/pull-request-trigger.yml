@@ -19,7 +19,7 @@ jobs:
     if: ${{ github.event.pull_request.opened == true }}
     steps:
       - name: Move PR to Project Board
-        run: echo "🍺 I am supposed to move this to the project board!!! i am"
+        run: echo "😜 I am supposed to move this to the project board!!!"
 
   # Gathers merged PRs from every location and moves to column 'test-approved-by-reviewer...'
   Gather-Merged-PRs:
