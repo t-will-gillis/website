@@ -1,7 +1,7 @@
 name: Pull Request Trigger
 on:
   pull_request_target:
-    types: [closed]
+    types: [opened, closed]
     branches:
       - 'gh-pages'
 
@@ -11,6 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
      - run: echo "🍺 This job was automatically triggered by a ${{ github.event_name }} event."
+     
+  # Move opened PRs onto Project Board
+  PRs-To-Project-Board:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.opened == true }}
+    steps:
+      - name: Move PR to Project Board
+        run: echo "🍺 I am supposed to move this to the project board!!!"
 
   # Gathers merged PRs from every location and moves to column 'test-approved-by-reviewer...'
   Gather-Merged-PRs:
