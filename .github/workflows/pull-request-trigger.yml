@@ -16,7 +16,7 @@ jobs:
   # Move opened PRs onto Project Board
   PRs-To-Project-Board:
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.opened == true }}
+    if: ${{ github.event.action == 'opened'}}
     steps:
       - name: Move PR to Project Board
         run: echo "😜 I am supposed to move this to the project board!!!"
