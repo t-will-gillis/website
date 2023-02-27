@@ -16,35 +16,14 @@ jobs:
   # Move opened PRs onto Project Board
   PRs-To-Project-Board:
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request == 'opened' }}
-    steps:
-      - name: Move PR to Project Board
-        run: echo "😜 I am supposed to move this to the project board!!! github.event.pull_request == 'opened' !"
-        
-  # Move opened PRs onto Project Board
-  PRs-To-Project-Board2:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.opened == true }}
-    steps:
-      - name: Move PR to Project Board
-        run: echo "😜 I am supposed to move this to the project board!!! github.event.pull_request.opened == true !"
-        
-  # Move opened PRs onto Project Board
-  PRs-To-Project-Board3:
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request' && github.event.action == 'opened' }}
-    steps:
-      - name: Move PR to Project Board
-        run: echo "😜 I am supposed to move this to the project board!!!  github.event_name == 'pull_request' && github.event.action == 'opened'!"
-
-  # Move opened PRs onto Project Board
-  PRs-To-Project-Board4:
-    runs-on: ubuntu-latest
     if: ${{ github.event.action == 'opened' }}
     steps:
-      - name: Move PR to Project Board
-        run: echo "😜 I am supposed to move this to the project board!!!  github.event.action == 'opened'!"
-        
+      - name: Move Opened PR to Project Board
+        uses: alex-page/github-project-automation-plus@v0.8.1
+        with:
+          project: Project Board
+          column: 'PR Needs review (Automated Column, do not place items here manually)'
+          repo-token: ${{ secrets.TEST_GHA_TOKEN }}
         
   # Gathers merged PRs from every location and moves to column 'test-approved-by-reviewer...'
   Gather-Merged-PRs:
