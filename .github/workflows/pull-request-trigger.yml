@@ -43,7 +43,7 @@ jobs:
     if: ${{ github.event.action == 'opened' }}
     steps:
       - name: Move PR to Project Board
-        run: echo "😜 I am supposed to move this to the project board!!!  github.event.action == 'opened'!"
+        run: echo "😜 I am supposed to move this to the project board!!!  github.event.action == 'opened'!!!"
         
         
   # Gathers merged PRs from every location and moves to column 'test-approved-by-reviewer...'
