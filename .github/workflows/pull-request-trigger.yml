@@ -28,6 +28,14 @@ jobs:
     steps:
       - name: Move PR to Project Board
         run: echo "😜 I am supposed to move this to the project board!!! github.event.pull_request.opened == true !"
+        
+  # Move opened PRs onto Project Board
+  PRs-To-Project-Board3:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'opened' }}
+    steps:
+      - name: Move PR to Project Board
+        run: echo "😜 I am supposed to move this to the project board!!!  github.event_name == 'pull_request' && github.event.action == 'opened'!"
 
   # Gathers merged PRs from every location and moves to column 'test-approved-by-reviewer...'
   Gather-Merged-PRs:
