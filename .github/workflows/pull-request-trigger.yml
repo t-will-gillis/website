@@ -27,7 +27,7 @@ jobs:
     if: ${{ github.event.pull_request.opened == true }}
     steps:
       - name: Move PR to Project Board
-        run: echo "😜 I am supposed to move this to the project board!!! github.event.pull_request.opened == true !"
+        run: echo "😜 I am supposed to move this to the project board!!! github.event.pull_request.opened == true !!!!"
         
   # Move opened PRs onto Project Board
   PRs-To-Project-Board3:
