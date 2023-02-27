@@ -31,7 +31,7 @@ jobs:
         with:
           project: Project Board
           column: 'test-approved-by-reviewer (Automated Column, do not place items here manually)'
-          repo-token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
+          repo-token: ${{ secrets.TEST_GHA_TOKEN }}
 
   # Deletes merged PRs from column 'test-approved-by-reviewer...' after 'needs: Gather-Merged-PRs'
   Delete-Merged-PRs:
@@ -44,5 +44,5 @@ jobs:
         with:
           project: Project Board
           column: 'test-approved-by-reviewer (Automated Column, do not place items here manually)'            
-          repo-token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
+          repo-token: ${{ secrets.TEST_GHA_TOKEN }}
           action: delete
