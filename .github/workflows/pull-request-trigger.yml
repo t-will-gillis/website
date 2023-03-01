@@ -11,6 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
      - run: echo "🍺 This job was automatically triggered by a ${{ github.event_name }} event."
+     
+# Move opened PRs onto Project Board
+  PRs-To-Project-Board:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.action == 'opened' }}
+    steps:
+      - name: Move Opened PR to Project Board
+        uses: alex-page/github-project-automation-plus@v0.8.1
+        with:
+          project: Project Board
+          column: 'PR Needs review (Automated Column, do not place items here manually)'
+          repo-token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}      
 
   # Gathers merged PRs from every location and moves to column 'test-approved-by-reviewer...'
   Gather-Merged-PRs:
