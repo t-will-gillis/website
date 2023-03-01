@@ -11,7 +11,7 @@ jobs:
   Hello-World:
     runs-on: ubuntu-latest
     steps:
-     - run: echo "🍺 This job was automatically triggered by a ${{ github.event_name }} event."
+     - run: echo "🍺 This job was automatically triggered by a ${{ github.event_name }} event..."
      
 # Move opened PRs onto Project Board
   PRs-To-Project-Board:
