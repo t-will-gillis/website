@@ -1,7 +1,7 @@
 name: Pull Request Trigger
 on:
   pull_request_target:
-    types: [closed]
+    types: [opened, closed]
     branches:
       - 'gh-pages'
 
