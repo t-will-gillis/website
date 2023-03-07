@@ -13,7 +13,7 @@ const inactiveLabel = '2 weeks inactive'; // If the last time an issue was cross
 Note: The team discussed and decided to use only the sevenDayCutoffTime to check for updated/outdated, so I'm commenting out the 3-day variables  
 */
 // const updatedByDays = 3; // number of days ago to check for to update label
-const inactiveUpdatedByDays = 14; // number of days ago to check for inactive label
+const inactiveUpdatedByDays = 19; // number of days ago to check for inactive label
 const commentByDays = 7; // number of days ago to check for comment by assignee
 // const threeDayCutoffTime = new Date()
 // threeDayCutoffTime.setDate(threeDayCutoffTime.getDate() - updatedByDays)
