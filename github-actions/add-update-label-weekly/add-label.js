@@ -14,7 +14,7 @@ Note: The team discussed and decided to use only the sevenDayCutoffTime to check
 */
 // const updatedByDays = 3; // number of days ago to check for to update label
 const inactiveUpdatedByDays = 19; // number of days ago to check for inactive label
-const commentByDays = 7; // number of days ago to check for comment by assignee
+const commentByDays = 3; // number of days ago to check for comment by assignee
 // const threeDayCutoffTime = new Date()
 // threeDayCutoffTime.setDate(threeDayCutoffTime.getDate() - updatedByDays)
 const sevenDayCutoffTime = new Date()
