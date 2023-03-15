@@ -163,7 +163,7 @@ function isTimelineOutdated(timeline, issueNum, assignees) { // assignees is an 
   }
 
   if (lastCommentTimestamp && isMomentRecent(lastCommentTimestamp, threeDayCutoffTime)) { // if commented within 3 days
-    console.log(``Issue #${issueNum} commented by assignee within 3 days, retain 'Status: Updated' label`);
+    console.log(`Issue #${issueNum} commented by assignee within 3 days, retain 'Status: Updated' label`);
     return { result: false, labels: statusUpdatedLabel } // retain updated label, remove the other two
   }
 
@@ -178,9 +178,9 @@ function isTimelineOutdated(timeline, issueNum, assignees) { // assignees is an 
   }
 
   if ((lastCommentTimestamp && isMomentRecent(lastCommentTimestamp, fourteenDayCutoffTime)) || (lastAssignedTimestamp && isMomentRecent(lastAssignedTimestamp, fourteenDayCutoffTime))) { // if last comment was between 7-14 days, or no comment but an assginee was assigned during this period, issue is outdated and add 'To Update !' label
-    console.log(``Issue #${issueNum} commented by assignee or assigned between 7 and 14 days, use 'To Update !' label`);
+    console.log(`Issue #${issueNum} commented by assignee or assigned between 7 and 14 days, use 'To Update !' label`);
     if ((lastCommentTimestamp && isMomentRecent(lastCommentTimestamp, fourteenDayCutoffTime))) {
-      console.log(``Issue #${issueNum} commented by assignee between 7 and 14 days, use 'To Update !' label; timestamp: ${lastCommentTimestamp}`)
+      console.log(`Issue #${issueNum} commented by assignee between 7 and 14 days, use 'To Update !' label; timestamp: ${lastCommentTimestamp}`)
     } else if (lastAssignedTimestamp && isMomentRecent(lastAssignedTimestamp, fourteenDayCutoffTime)) {
       console.log(`Issue #${issueNum} assigned between 7 and 14 days, use 'To Update !' label; timestamp: ${lastAssignedTimestamp}`)
     }
