@@ -11,7 +11,7 @@ jobs:
   Hello-World:
     runs-on: ubuntu-latest
     steps:
-     - run: echo "🍺 This job was automatically triggered by a ${{ github.event_name }} event."
+     - run: echo "🍺 This job was automatically triggered by a ${{ github.event_name }} event!"
 
 
   # Move opened PRs onto Project Board
@@ -20,7 +20,7 @@ jobs:
     if: ${{ github.event.action == 'opened' }}
     steps:
       - name: Move Opened PR to Project Board
-        uses: alex-page/github-project-automation-plus@v0.8.1
+        uses: alex-page/github-project-automation-plus@v0.8.3
         with:
           project: Project Board
           column: 'PR Needs review (Automated Column, do not place items here manually)'
