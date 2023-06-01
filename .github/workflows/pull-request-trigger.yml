@@ -4,6 +4,7 @@ on:
     types: [opened, closed]
     branches:
       - 'gh-pages'
+      - 'TEST-change-alexpage-version'
 
 jobs:
   # Run an echo to confirm that the action was triggered
@@ -19,11 +20,11 @@ jobs:
     if: ${{ github.event.action == 'opened' }}
     steps:
       - name: Move Opened PR to Project Board
-        uses: alex-page/github-project-automation-plus@v0.8.1
+        uses: alex-page/github-project-automation-plus@v0.8.3
         with:
           project: Project Board
           column: 'PR Needs review (Automated Column, do not place items here manually)'
-          repo-token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}      
+          repo-token: ${{ secrets.TEST_GHAs}}      
     
     
   # Gathers merged PRs from every location and moves to column 'test-approved-by-reviewer...'
@@ -32,11 +33,11 @@ jobs:
     if: ${{ github.event.pull_request.merged == true }} 
     steps:
       - name: Gather Merged PRs
-        uses: alex-page/github-project-automation-plus@v0.8.1
+        uses: alex-page/github-project-automation-plus@v0.8.3
         with:
           project: Project Board
           column: 'test-approved-by-reviewer (Automated Column, do not place items here manually)'
-          repo-token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
+          repo-token: ${{ secrets.TEST_GHAs }}
 
 
   # Deletes merged PRs from column 'test-approved-by-reviewer...' after 'needs: Gather-Merged-PRs'
@@ -46,11 +47,11 @@ jobs:
     if: ${{ github.event.pull_request.merged == true }} 
     steps: 
       - name: Delete Merged PRs
-        uses: alex-page/github-project-automation-plus@v0.8.1
+        uses: alex-page/github-project-automation-plus@v0.8.3
         with:
           project: Project Board
           column: 'test-approved-by-reviewer (Automated Column, do not place items here manually)'            
-          repo-token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
+          repo-token: ${{ secrets.TEST_GHAs }}
           action: delete
 
   # Removes PRs that are closed and not merged
@@ -59,9 +60,9 @@ jobs:
     if: ${{ github.event.pull_request.merged == false && github.event.action == 'closed' }}
     steps:
       - name: Delete Closed and Unmerged PRs
-        uses: alex-page/github-project-automation-plus@v0.8.1
+        uses: alex-page/github-project-automation-plus@v0.8.3
         with:
           project: Project Board
           column: 'PR Needs review (Automated Column, do not place items here manually)'
-          repo-token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
+          repo-token: ${{ secrets.TEST_GHAs }}
           action: delete
