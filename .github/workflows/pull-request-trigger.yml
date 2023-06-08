@@ -4,7 +4,7 @@ on:
     types: [opened, closed]
     branches:
       - 'gh-pages'
-      - 'TEST-issue-trigger-bot-changes`
+      - 'TEST-issue-trigger-bot-changes'
 
 jobs:
   # Run an echo to confirm that the action was triggered
