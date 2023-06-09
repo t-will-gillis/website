@@ -31,7 +31,7 @@ body:
         - label: "Check the mobile responsiveness of this page (use your mobile to do it ;) )"
         - label: "If there is any bug/any inconsistency or problem, however small or large, edit this issue and list the bug with screenshots in the Overview section above. _You have more than one bug? duplicate this issue and create one issue per bug. "
         - label: "List all the changes to implement to correct the bug (eg: resizing..) in the development action items below. (don't hesitate to create 1 checkbox for each changes)"
-        - label: "Put the issue(s) in the review column to check the feasibility with the devs. "
+        - label: "Put the issue(s) in THE review column to check the feasibility with the devs. "
   - type: textarea
     id: action-development
     attributes:
