@@ -51,7 +51,7 @@ jobs:
 
       # Check if the issue has the required roles
       - name: Check Labels Prelim
-        uses: actions/github-script@v6
+        uses: actions/github-script@v5
         id: check-labels-prelim
         with:
           script: |
@@ -63,7 +63,7 @@ jobs:
       # Post the comment based on the result of the previous step
       - name: Post assigning issue comment
         id: assigned-comment
-        uses: actions/github-script@v6
+        uses: actions/github-script@v5
         with:
           script: |
             const results = ${{ steps.check-labels-prelim.outputs.result }}
