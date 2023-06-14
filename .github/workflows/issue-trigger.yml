@@ -6,7 +6,7 @@ on:
 jobs:
   Add-Missing-Labels-To-Issues:
     runs-on: ubuntu-latest
-    # Only trigger this action when an issue is newly created
+    # Only trigger this action when an issue is newly created!!!
     if: ${{ github.event_name == 'issues' && (github.event.action == 'opened' || github.event.action == 'transferred')}}
     steps:
       - uses: actions/checkout@v2      
