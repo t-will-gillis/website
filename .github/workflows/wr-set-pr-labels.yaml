@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
-      - run: echo 'The Set PR Labels workflow failed. Please check the logs.'
+      - run: echo 'The Set PR Labels workflow failed. Please check the logs!'
       - run: exit 1
   on-success:
     runs-on: ubuntu-latest
