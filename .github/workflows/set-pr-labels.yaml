@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - id: parse-pr-body
-        name: 'Parse the pull request body for all linked issues'
+        name: 'Parse the pull request body for all linked issues!'
         uses: actions/github-script@v6
         with:
           script: |
