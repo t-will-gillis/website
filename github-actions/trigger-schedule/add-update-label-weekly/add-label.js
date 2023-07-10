@@ -107,7 +107,7 @@ async function getTimeline(issueNum) {
   let page = 1
   while (true) {
     try {
-      const results = await github.issues.listEventsForTimeline({
+      const results = await github.rest.issues.listEventsForTimeline({
         owner: context.repo.owner,
         repo: context.repo.repo,
         issue_number: issueNum,
@@ -207,7 +207,7 @@ async function removeLabels(issueNum, ...labels) {
   for (let label of labels) {
     try {
       // https://octokit.github.io/rest.js/v18#issues-remove-label
-      await github.issues.removeLabel({
+      await github.rest.issues.removeLabel({
         owner: context.repo.owner,
         repo: context.repo.repo,
         issue_number: issueNum,
@@ -227,7 +227,7 @@ async function removeLabels(issueNum, ...labels) {
 async function addLabels(issueNum, ...labels) {
   try {
     // https://octokit.github.io/rest.js/v18#issues-add-labels
-    await github.issues.addLabels({
+    await github.rest.issues.addLabels({
       owner: context.repo.owner,
       repo: context.repo.repo,
       issue_number: issueNum,
@@ -243,7 +243,7 @@ async function postComment(issueNum, assignees, labelString) {
   try {
     const assigneeString = createAssigneeString(assignees);
     const instructions = formatComment(assigneeString, labelString);
-    await github.issues.createComment({
+    await github.rest.issues.createComment({
       owner: context.repo.owner,
       repo: context.repo.repo,
       issue_number: issueNum,
@@ -275,7 +275,7 @@ function isCommentByAssignees(data, assignees) {
 }
 async function getAssignees(issueNum) {
   try {
-    const results = await github.issues.get({
+    const results = await github.rest.issues.get({
       owner: context.repo.owner,
       repo: context.repo.repo,
       issue_number: issueNum,
