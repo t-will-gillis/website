@@ -9,7 +9,10 @@
     "declaration-block-no-duplicate-properties": [
       true,
       {
-        "ignore": ["consecutive-duplicates-with-different-values"]
+        "ignore": [
+          "consecutive-duplicates-with-different-values",
+          "rule-empty-line-before",
+        ]
       }
     ],
     "declaration-block-no-shorthand-property-overrides": true,
@@ -19,6 +22,5 @@
     "selector-type-no-unknown": true,
     "comment-no-empty": true,
     "no-duplicate-selectors": true,
-    "rule-empty-line-before": false,
   }
 }
