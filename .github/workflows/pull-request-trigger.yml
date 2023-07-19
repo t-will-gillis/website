@@ -5,6 +5,9 @@ on:
     branches:
       - 'gh-pages'
       - 'test-4945'
+      - 'test-4945-rp'
+      - 'test-4945-wg'
+      - 'test-4945-aa'
 
 jobs:
   # Run an echo to confirm that the action was triggered
