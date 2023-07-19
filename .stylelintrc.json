@@ -6,12 +6,10 @@
     "color-no-invalid-hex": true,
     "unit-no-unknown": true,
     "property-no-unknown": true,
-    "declaration-block-no-duplicate-properties": [
+     "declaration-block-no-duplicate-properties": [
       true,
       {
-        "ignore": [
-          "consecutive-duplicates-with-different-values",
-        ]
+        "ignore": ["consecutive-duplicates-with-different-values"]
       }
     ],
     "declaration-block-no-shorthand-property-overrides": true,
