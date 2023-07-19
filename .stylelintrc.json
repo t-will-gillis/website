@@ -11,7 +11,6 @@
       {
         "ignore": [
           "consecutive-duplicates-with-different-values",
-          "rule-empty-line-before",
         ]
       }
     ],
@@ -22,5 +21,6 @@
     "selector-type-no-unknown": true,
     "comment-no-empty": true,
     "no-duplicate-selectors": true,
+    "rule-empty-line-before": "never",
   }
 }
