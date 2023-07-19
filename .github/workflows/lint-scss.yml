@@ -2,9 +2,9 @@ name: Lint SCSS
 
 on:
   pull_request:
-    branches: [test-4945]
+    branches: [test-4945-wg]
   push:
-    branches: [test-4945]
+    branches: [test-4945-wg]
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
         uses: github/super-linter@v5.0.0
         env:
           VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: test-4945
+          DEFAULT_BRANCH: test-4945-wg
           GITHUB_TOKEN: ${{ secrets.TEST_GHAS }}
 
 
