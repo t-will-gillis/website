@@ -19,6 +19,6 @@
     "selector-type-no-unknown": true,
     "comment-no-empty": true,
     "no-duplicate-selectors": true,
-    "rule-empty-line-before": "never",
+   
   }
 }
