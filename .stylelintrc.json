@@ -1,5 +1,5 @@
 {
-  "extends": ["stylelint-config-standard-scss"],
+  "extends": ["stylelint-config-recommended-scss"],
   "customSyntax": "postcss-scss",
   "rules": {
     "color-no-invalid-hex": true,
