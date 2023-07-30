@@ -1,9 +1,12 @@
+@use "../variables/layout";
+@use "mixins";
+
 .sr-only {
-  @include sr-only();
+  @include mixins.sr-only();
 }
 
 .sr-only-focusable {
-  @include sr-only-focusable();
+  @include mixins.sr-only-focusable();
 }
 
 /* stylelint-disable declaration-no-important */
@@ -12,7 +15,7 @@
 }
 
 .hide-mobile {
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     display: none !important;
   }
 }

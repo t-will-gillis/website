@@ -1,3 +1,6 @@
+@use "../variables/colors";
+@use "../variables/layout";
+
 //New class names:
 //program-header-container
 //project-wrapper
@@ -23,7 +26,7 @@
 
 //This allows the background of the page content to be the light grey color
 .project-wrapper {
-    background: $color-pink;
+    background: colors.$color-pink;
 }
 
 //This is the default styling for the cards when they are in mobile view.
@@ -43,7 +46,7 @@
 
             h3 {
                 margin: 0;
-                color: $color-red;
+                color: colors.$color-red;
             }
             .dropdown-arrow {
                 transition: transform .5s;
@@ -66,7 +69,7 @@
 
         h3 {
             margin-bottom: 10px;
-            color: $color-red;
+            color: colors.$color-red;
         }
         p {
             text-align: center;
@@ -86,7 +89,7 @@
         text-align: center;
 
         h3 {
-            color: $color-black;
+            color: colors.$color-black;
         }
 
     }
@@ -119,20 +122,20 @@
             margin-bottom: 10px;
             font-style: bold;
             font-size: 20px;
-            color: $color-black;
+            color: colors.$color-black;
         }
     }
 
     .sustainable-dev-goal {
         display: block;
-        background: $color-pink;
+        background: colors.$color-pink;
         padding: 24px 22px;
 
         h4 {
             margin-bottom: 10px;
             font-style: bold;
             font-size: 20px;
-            color: $color-black;
+            color: colors.$color-black;
         }
 
         .card-bottom-info {
@@ -152,7 +155,7 @@
 
 //We maintain mobile styling until we reach 480px, then we switch to this styling for tablet.
 //The styling for the card is column based until we reach desktop width
-@media #{$bp-mobile-up} {
+@media #{layout.$bp-mobile-up} {
 
     .program-area, 
     .missing-area {
@@ -187,13 +190,13 @@
                 margin-bottom: 10px;
                 font-style: bold;
                 font-size: 20px;
-                color: $color-black;
+                color: colors.$color-black;
             }
         }
     }
     .sustainable-dev-goal {
         display: block !important;
-        background: $color-pink;
+        background: colors.$color-pink;
         padding: 24px 22px;
         border-radius: 10px;
         align-self: center;
@@ -202,7 +205,7 @@
             margin-bottom: 10px;
             font-style: bold;
             font-size: 20px;
-            color: $color-black;
+            color: colors.$color-black;
         }
 
         .card-bottom-info {
@@ -220,7 +223,7 @@
   
 }
 
-@media #{$bp-tablet-up} {
+@media #{layout.$bp-tablet-up} {
     .program-area-container {
         max-width: 1080px !important; 
     }
@@ -269,14 +272,14 @@
                     margin-bottom: 10px;
                     font-style: bold;
                     font-size: 20px;
-                    color: $color-black;
+                    color: colors.$color-black;
                 }
             }
         }
 
         .sustainable-dev-goal {
             display: block !important;
-            background: $color-pink;
+            background: colors.$color-pink;
             border-radius: 10px;
             padding: 20px;
             grid-row: 2/3;
@@ -289,7 +292,7 @@
                 margin-bottom: 10px;
                 font-style: bold;
                 font-size: 20px;
-                color: $color-black;
+                color: colors.$color-black;
             }
 
             .card-bottom-info {
@@ -317,7 +320,7 @@
                 text-align: center;
 
                 h3 {
-                    color: $color-black;
+                    color: colors.$color-black;
                 }
 
                 p {

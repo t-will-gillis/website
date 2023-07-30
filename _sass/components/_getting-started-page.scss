@@ -1,3 +1,6 @@
+@use "../variables/colors";
+@use "../variables/layout";
+
 .header-h1 {
   margin-top: 35px;
 }
@@ -10,7 +13,7 @@
   max-width: 580px;
   margin: 0 auto 16px;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     font-size: 18px;
     text-align: left;
     margin-bottom: 23px;
@@ -25,14 +28,14 @@
   // padding-bottom: 10px;
   margin: 12px auto;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     text-align: left;
     padding: 0px;
   }
 }
 
 .getting-started-page {
-  background: $color-darkblue;
+  background: colors.$color-darkblue;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -70,7 +73,7 @@
   font-weight: 500;
   margin-bottom: 0px;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     padding: 0 .5em 0 .5em;
     font-size: 1.25rem;
     text-align: center;
@@ -97,18 +100,18 @@
 }
 
 .rsvp-button {
-  color: $color-white;
+  color: colors.$color-white;
   font-size: 15px;
   font-weight: bold;
-  background-color: $color-red;
+  background-color: colors.$color-red;
   border-radius: 20px;
-  box-shadow: 0 0 3px $color-mediumgrey;
+  box-shadow: 0 0 3px colors.$color-mediumgrey;
   height: 2.6em;
   width: 13em;
   margin-left: 2em;
   margin-top: -.2em;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     display: none;
   }
 }
@@ -122,14 +125,14 @@
   visibility: hidden;
   max-height: 0;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     visibility: visible;
-    color: $color-white !important;
+    color: colors.$color-white !important;
     font-size: 15px;
     font-weight: bold;
-    background-color: $color-red;
+    background-color: colors.$color-red;
     border-radius: 20px;
-    box-shadow: 0 0 3px $color-mediumgrey;
+    box-shadow: 0 0 3px colors.$color-mediumgrey;
     height: 2.6em;
     width: 13em;
     display: flex;
@@ -148,7 +151,7 @@
 }
 
 .card-intro {
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     padding: 0 1em 0 1em;
   }
 
@@ -163,7 +166,7 @@
   padding-top: 2.5em;
   padding-left: 1.3em;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     padding-top: 1.5em;
     max-width: 90%
   }
@@ -176,7 +179,7 @@
  .left {
    width: 32%;
 
-   @media #{$bp-below-tablet} {
+   @media #{layout.$bp-below-tablet} {
      width: 100%;
      text-align: left;
    }
@@ -186,7 +189,7 @@
    width: 68%;
    padding-left: 60px;
 
-   @media #{$bp-below-tablet} {
+   @media #{layout.$bp-below-tablet} {
      width: 100%;
      padding-left: 20px;
    }
@@ -203,7 +206,7 @@
 .step-img {
   transform: scale(.6);
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     width: 60%;
     display: block;
     margin: auto;
@@ -214,7 +217,7 @@
   transform: scale(.7);
   padding-top: 1em;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     width: 60%;
     display: block;
     margin: auto;
@@ -318,7 +321,7 @@
   display: flex;
   justify-content: space-evenly;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     // flex-direction: column;
     // text-align: -webkit-center;
     display: none;
@@ -331,7 +334,7 @@
   color: #000000;
   font-family: "Roboto"sans-serif;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     justify-content: center;
   }
 }
@@ -340,7 +343,7 @@
   padding: 40px 80px;
 
   // NEW MOBILE FRIENDLY RULES
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     padding: 32px 16px;
   }
 }
@@ -375,7 +378,7 @@
 .getting-started-step-title-faq {
   margin-left: 2px;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     font-size: 1.25rem;
     text-align: center;
     font-weight: bold;
@@ -390,7 +393,7 @@
   margin-left: 26px;
   text-align: center;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     flex-direction: column;
     flex-wrap: wrap;
     padding: 8px 5px;
@@ -403,7 +406,7 @@
   margin: 0px 30px;
   width: 50%;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     flex-direction: column;
     width: auto;
   }
@@ -418,7 +421,7 @@
   padding-right: 5px;
   text-align: center;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     flex-direction: column;
     flex-wrap: wrap;
   }
@@ -440,7 +443,7 @@
   width: 50%;
 
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     flex-direction: column;
     width: auto;
   }

@@ -3,91 +3,91 @@
  */
 
 // This is the original reset included when we used bourbon.sass
-@import 'normalize.scss';
+@use 'normalize.scss';
 
 /**
  * General Settings and Utilities
  */
-@import 'core/mixins';
-@import 'variables/colors';
-@import 'variables/layout';
-@import 'variables/typography';
-@import 'variables/utilities';
-@import 'variables/colors-sdg';
+@use 'core/mixins';
+@use 'variables/colors';
+@use 'variables/layout';
+@use 'variables/typography';
+@use 'variables/utilities';
+@use 'variables/colors-sdg';
 
 // /**
 //  * Base global styles.
 //  */
-@import 'elements/base';
+@use 'elements/base';
 
 // /**
 //  * Elements
 //  */
-@import 'elements/background-sdg-colors';
-@import 'elements/accordion';
-@import 'elements/buttons';
-@import 'elements/forms';
-@import 'elements/icons';
-@import 'elements/lists';
-@import 'elements/loader';
-@import 'elements/typography';
-@import 'elements/containers';
-@import 'elements/cards';
-@import 'elements/color-styles';
-@import 'elements/dropdown_filters';
-@import 'elements/old_dropdown_filters';
+@use 'elements/background-sdg-colors';
+@use 'elements/accordion';
+@use 'elements/buttons';
+@use 'elements/forms';
+@use 'elements/icons';
+@use 'elements/lists';
+@use 'elements/loader';
+@use 'elements/typography' as typography2;
+@use 'elements/containers';
+@use 'elements/cards';
+@use 'elements/color-styles';
+@use 'elements/dropdown_filters';
+@use 'elements/old_dropdown_filters';
 
 // /**
 //  * Components
 //  */
-@import 'components/404';
-@import 'components/home';
-@import 'components/about';
-@import 'components/communities-of-practice';
-@import 'components/footer';
-@import 'components/events.scss';
-@import 'components/header';
-@import 'components/header-nav';
-@import 'components/impact-stats';
-@import 'components/social-links';
-@import 'components/credit-items.scss';
-@import 'components/project-meetings.scss';
-@import 'components/guide-pages.scss';
-@import 'components/getting-started-page';
-@import 'components/dashboard';
-@import 'components/guide-pages/2FA.scss';
-@import 'components/toolkit.scss';
-@import 'components/wins-page.scss';
-@import 'components/wins-form.scss';
-@import 'components/join-us.scss';
-@import 'components/sitemap.scss';
-@import 'components/program-areas.scss';
-@import 'components/projects-page.scss';
-@import 'components/donate.scss';
-@import 'components/donate-components.scss';
-@import 'components/design-system.scss';
-@import 'components/citizen_engagement.scss';
-@import 'components/privacy-policy.scss';
-@import 'components/guides.scss';
+@use 'components/404';
+@use 'components/home';
+@use 'components/about';
+@use 'components/communities-of-practice';
+@use 'components/footer';
+@use 'components/events.scss';
+@use 'components/header';
+@use 'components/header-nav';
+@use 'components/impact-stats';
+@use 'components/social-links';
+@use 'components/credit-items.scss';
+@use 'components/project-meetings.scss';
+@use 'components/guide-pages.scss';
+@use 'components/getting-started-page';
+@use 'components/dashboard';
+@use 'components/guide-pages/2FA.scss';
+@use 'components/toolkit.scss';
+@use 'components/wins-page.scss';
+@use 'components/wins-form.scss';
+@use 'components/join-us.scss';
+@use 'components/sitemap.scss';
+@use 'components/program-areas.scss';
+@use 'components/projects-page.scss';
+@use 'components/donate.scss';
+@use 'components/donate-components.scss';
+@use 'components/design-system.scss';
+@use 'components/citizen_engagement.scss';
+@use 'components/privacy-policy.scss';
+@use 'components/guides.scss';
 
 
 //Guide Pages (Within Components)
-@import 'components/guide-pages/github-issue-guide.scss';
-@import 'components/guide-pages/survey-reporting-dashboard.scss';
+@use 'components/guide-pages/github-issue-guide.scss';
+@use 'components/guide-pages/survey-reporting-dashboard.scss';
 
 // /**
 //  * Layouts
 //  */
-@import 'layouts/main';
-@import 'layouts/redirect';
+@use 'layouts/main';
+@use 'layouts/redirect';
 
 // /**
 //  * Utility
 //  */
-@import 'core/utility';
-@import 'core/print';
+@use 'core/utility';
+@use 'core/print';
 
 // /**
 //  * Prototype Project Page
 //  */
-@import 'components/project-page';
+@use 'components/project-page';

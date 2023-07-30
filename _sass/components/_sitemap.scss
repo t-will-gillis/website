@@ -1,13 +1,16 @@
+@use "../variables/colors";
+@use "../variables/layout";
+
 //mobile view
 
 @mixin mobile {
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     @content;
   }
 }
 
 .sitemap-page {
-  background: $color-pink;
+  background: colors.$color-pink;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -34,7 +37,7 @@
     width: 100%;
     padding: 48px;
 
-    @media #{$bp-below-mobile} {
+    @media #{layout.$bp-below-mobile} {
       padding: 32px 16px;
     }
   

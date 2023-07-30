@@ -1,3 +1,5 @@
+@use "../variables/layout";
+
 .wide-div {
   margin-top: 29px;
   background: #030c2c;
@@ -12,7 +14,7 @@
 }
 
 .mobile-image {
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     padding: 0;
   }
 }
@@ -23,7 +25,7 @@
   display: flex;
   justify-content: space-evenly;
 
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     flex-direction: column;
     text-align: -webkit-center;
   }
@@ -37,7 +39,7 @@
   align-items: center;
   justify-content: space-evenly;
   
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     margin: 5px;
   }
 }
@@ -50,7 +52,7 @@
   align-items: flex-start;
   justify-content: space-evenly;
   
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     margin: 5px;
     padding-left: 15px;
   }
@@ -60,7 +62,7 @@
   padding: 30px;
   margin-top: 60px;
 
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     padding: 32px 16px;
     margin-top: 12px;
   }
@@ -69,7 +71,7 @@
 .credits-list {
   order: 2;
 
-  @media #{$bp-tablet-up} {
+  @media #{layout.$bp-tablet-up} {
     display: grid;
     grid-gap: 32px 54px;
     grid-template-columns: repeat(2, 1fr);
@@ -82,7 +84,7 @@
   display: flex;
   flex-direction: column;
 
-  @media #{$bp-mobile-up} {
+  @media #{layout.$bp-mobile-up} {
     flex-direction: row;
     flex-wrap: wrap;
   }
@@ -91,7 +93,7 @@
 .credits-heading {
   padding-left: 15px;
   margin-bottom: 15px;
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     padding-left: 20px;
     font-size: 20px;
   }
@@ -103,7 +105,7 @@
   padding-right: 20px;
   display: flex;
   justify-content: center;
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     width: 60px;
     padding-right: 10px;
   }

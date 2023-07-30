@@ -1,3 +1,6 @@
+@use "../variables/colors";
+@use "../variables/layout";
+
 .toolkit-header {
     &__text-group {
         display: flex; 
@@ -5,27 +8,27 @@
         justify-content: space-evenly;
         text-align: center;
         padding: 1.4rem 0;
-        background-color: $color-pink;
+        background-color: colors.$color-pink;
 
         a {
             font-weight: 400;
             text-decoration: none;
-            color: $color-black;
+            color: colors.$color-black;
         }
         a:hover {
-            color: $color-red;
+            color: colors.$color-red;
             transform: scale(1.01);
         }
 
         .selected-category {
             font-weight: 700;
-            color: $color-red;
+            color: colors.$color-red;
         }
     }
 }
 
 .toolkit-background {
-    background-color: $color-darkblue;
+    background-color: colors.$color-darkblue;
 }
 
 .suggest-guide-group {
@@ -43,7 +46,7 @@
     font-style: normal;
     font-weight: normal;
     font-size: 1.75rem;
-    color: $color-white;
+    color: colors.$color-white;
     margin-bottom: 0;
 }
 
@@ -54,7 +57,7 @@
 }
 
 .toolkit-filters * {
-    color: $color-white
+    color: colors.$color-white
 }
 
 .toolkit-filters .filter-tag-container {
@@ -66,7 +69,7 @@
     }
     
     a {
-        color: $color-white;
+        color: colors.$color-white;
     }
 }
 
@@ -130,12 +133,12 @@
 }
 
 .no-results-message {
-    color: $color-white;
+    color: colors.$color-white;
     margin: 1rem;
 }
 
 .toolkit-red {
-    color: $color-red
+    color: colors.$color-red
 }
 
 @media only screen and (max-width: 1430px) {
@@ -153,7 +156,7 @@
     }
 }
 
-@media #{$bp-below-desktop} {
+@media #{layout.$bp-below-desktop} {
 
     .toolkit-header {
 
@@ -184,7 +187,7 @@
     }
 }
 
-@media #{$bp-below-tablet} {
+@media #{layout.$bp-below-tablet} {
     .toolkit-svg {
         max-width: 350px;
     }
@@ -206,7 +209,7 @@
     margin-bottom: 1.5rem;
 }
 
-@media #{$bp-below-mobile} {
+@media #{layout.$bp-below-mobile} {
     .toolkit-svg {
         max-width: 250px;
     }
@@ -228,7 +231,7 @@
     }   
 }
 
-@media #{$bp-below-mobile} {
+@media #{layout.$bp-below-mobile} {
 
     .toolkit-header {
 
@@ -248,13 +251,13 @@
 #dropdown-select {
     width: 310px;
     height: 44px;
-    background: $color-white;
+    background: colors.$color-white;
     border: 1px solid rgba(0, 0, 0, 0.24);
     box-sizing: border-box;
     border-radius: 5px;
 }
 
-@media #{$bp-mobile-up} {
+@media #{layout.$bp-mobile-up} {
     .dropdown {
         display: none;
     }
@@ -274,7 +277,7 @@
     }
 }
 
-@media #{$bp-below-tablet} {
+@media #{layout.$bp-below-tablet} {
     .toolkit-filters *:not(button) {
         color: unset;
     }
@@ -284,7 +287,7 @@
     }
 
     .filtersDiv-background {
-        background-color: $color-darkblue;
+        background-color: colors.$color-darkblue;
     }
 
     .toolkit-flex-container {
@@ -298,6 +301,6 @@
 
     .toolkit-filters .filter-tag-container {
         margin: 10px 10px 0 10px;
-        color: $color-white;
+        color: colors.$color-white;
     }
 }

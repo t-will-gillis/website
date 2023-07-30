@@ -1,3 +1,8 @@
+@use "../variables/colors";
+@use "../variables/layout";
+@use "../variables/typography";
+
+@use "sass:map";
 .header-container {
   .header-hero-image--privacy-policy {
     object-fit: contain;
@@ -15,7 +20,7 @@
   }
   ul,
   p {
-    font-size: $font-size-paragraph2;
+    font-size: typography.$font-size-paragraph2;
   }
 
   h2 {
@@ -27,7 +32,7 @@
   }
 
   h3 {
-    font-size: #{map-get($font-size-title4, desktop)};
+    font-size: #{get(typography.$font-size-title4, desktop)};
     margin-bottom: 18px;
   }
   #visiting-hackforlaorg + p,
@@ -36,7 +41,7 @@
   }
 }
 
-@media #{$bp-desktop-up} {
+@media #{layout.$bp-desktop-up} {
   .header-container {
     .header-hero-image--privacy-policy {
       align-self: start;
@@ -56,7 +61,7 @@
   }
 }
 
-@media #{$bp-below-desktop} {
+@media #{layout.$bp-below-desktop} {
   /* 
   This has the same font-size as paragraph3 so it can be used for the Privacy Policy page in mobile screen sizes,
   which is a different font-size than the paragraph2 classes used for desktop size screens.
@@ -64,11 +69,11 @@
   .content-section--privacy-policy {
     ul,
     p {
-      font-size: $font-size-paragraph3;
+      font-size: typography.$font-size-paragraph3;
       line-height: 1.375;
       font-family: "Roboto", sans-serif;
       font-weight: 400;
-      color: $color-black;
+      color: colors.$color-black;
     }
     h2 {
       margin-top: 32px;

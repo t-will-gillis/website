@@ -1,3 +1,9 @@
+@use "sass:color";
+@use "sass:map";
+@use "../variables/colors";
+@use "../variables/layout";
+@use "../variables/typography";
+
 /*================================================================
 
   Buttons
@@ -27,9 +33,9 @@
 
 .btn {
   border: 0;
-  box-shadow: 0 0 8px 0 rgba($color-black, 0.2);
+  box-shadow: 0 0 8px 0 rgba(colors.$color-black, 0.2);
   display: inline-block;
-  font-weight: map-get($font-weight, bold);
+  font-weight: map.get(typography.$font-weight, bold);
   text-decoration: none;
   transition: all 100ms ease-in;
   white-space: nowrap;
@@ -52,19 +58,19 @@
 /*   Primary Button  ---  Pink   */
 
 .btn-primary {
-  background: $color-red;
-  color: $color-white;
+  background: colors.$color-red;
+  color: colors.$color-white;
 
   &:link,
   &:visited {
-    color: $color-white;
+    color: colors.$color-white;
   }
 
   &:hover,
   &:active,
   &:focus {
-    background: darken($color-red, 10%);
-    color: $color-white;
+    background: color.adjust(colors.$color-red, $lightness: -10%);
+    color: colors.$color-white;
     text-decoration: none;
   }
 }
@@ -73,19 +79,19 @@
 /*   Primary on Dark Button  ---  Pink & white hover state   */
 
 .btn-primary-on-dark {
-  background: $color-red;
-  color: $color-white;
+  background: colors.$color-red;
+  color: colors.$color-white;
 
   &:link,
   &:visited {
-    color: $color-white;
+    color: colors.$color-white;
   }
 
   &:hover,
   &:active,
   &:focus {
-    background-color: $color-white;
-    color: $color-black;
+    background-color: colors.$color-white;
+    color: colors.$color-black;
   }
 }
 
@@ -93,18 +99,18 @@
 /*   Dark Button  ---  Black   */
 
 .btn-dark {
-  background-color: $color-black;
-  color: $color-white;
+  background-color: colors.$color-black;
+  color: colors.$color-white;
 
   &:link,
   &:visited {
-    color: $color-white;
+    color: colors.$color-white;
   }
 
   &:hover,
   &:active,
   &:focus {
-    background-color: $color-red;
+    background-color: colors.$color-red;
   }
 }
 
@@ -124,7 +130,7 @@
   border-radius: 100px;
   font-size: 1.5rem;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     height: 60px;
     padding: 0 50px;
     border-radius: 60px;
@@ -140,7 +146,7 @@ padding: 0 80px;
 border-radius: 100px;
 font-size: 1.5rem;
 
-@media #{$bp-below-tablet} {
+@media #{layout.$bp-below-tablet} {
 height: 60px;
 padding: 0 70px;
 border-radius: 60px;

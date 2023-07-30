@@ -1,11 +1,14 @@
+@use "../../variables/colors";
+@use "../../variables/layout";
+
 //Issue Template Classes
 .issue-template-container {
   position: relative;
 }
 
 .issue-template-code {
-  border: 1px solid $color-pink;
-  background-color: $color-pink;
+  border: 1px solid colors.$color-pink;
+  background-color: colors.$color-pink;
   font-family: monospace;
   text-align: left;
   font-size: 0.8em;
@@ -17,10 +20,10 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background: $color-white;
-  border: 0.5px solid $color-white;
+  background: colors.$color-white;
+  border: 0.5px solid colors.$color-white;
   border-radius: 4px;
-  color: $color-black;
+  color: colors.$color-black;
   width: 85px;
   height: 30px;
   right: 1%;
@@ -31,9 +34,9 @@
 .copy-err {
   position: absolute;
   z-index: 10;
-  background: $color-darkgrey;
+  background: colors.$color-darkgrey;
   border-radius: 4px;
-  color: $color-white;
+  color: colors.$color-white;
   padding: 0.3rem;
   right: 1%;
   top: -6%;
@@ -46,7 +49,7 @@
 }
 
 .copy-button:active {
-  border: 0.5px solid $color-cement;
+  border: 0.5px solid colors.$color-cement;
   box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.39);
 }
 
@@ -57,11 +60,11 @@
 }
 
 .green-text {
-  color: $color-forestgreen;
+  color: colors.$color-forestgreen;
 }
 
 .blue-text {
-  color: $color-azure;
+  color: colors.$color-azure;
 }
 
 //
@@ -218,7 +221,7 @@
 }
 
 //Scale overlay-text down on smaller screens
-@media #{$bp-below-tablet} {
+@media #{layout.$bp-below-tablet} {
   .overlay-links h4 {
     font-size: 0.4em;
   }

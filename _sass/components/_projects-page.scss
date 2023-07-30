@@ -1,5 +1,8 @@
+@use "../variables/colors";
+@use "../variables/layout";
+
 .projects {
-    background: $color-pink;
+    background: colors.$color-pink;
     padding: 32px 16px;
   }
   
@@ -7,7 +10,7 @@
     display: flex;
     flex-direction: column;
     
-    @media #{$bp-mobile-up} {
+    @media #{layout.$bp-mobile-up} {
       flex-direction: row;
       flex-wrap: wrap;
     }
@@ -17,7 +20,7 @@
     margin-bottom: 24px;
     order: 2;
   
-    @media #{$bp-tablet-up} {
+    @media #{layout.$bp-tablet-up} {
       display: grid;
       grid-gap: 24px;
       grid-template-columns: repeat(2, 1fr);
@@ -27,20 +30,20 @@
   }
   
   .project-card {
-    background: $color-white;
-    border: 0 solid rgba($color-black, 0.06);
+    background: colors.$color-white;
+    border: 0 solid rgba(colors.$color-black, 0.06);
     border-radius: 16px;
-    box-shadow: 0 0 8px 0 rgba($color-black, 0.2);
+    box-shadow: 0 0 8px 0 rgba(colors.$color-black, 0.2);
     margin-bottom: 24px;
     overflow: hidden;
   
-    @media #{$bp-tablet-up} {
+    @media #{layout.$bp-tablet-up} {
       margin-bottom: 0;
     }
   }
   
   .project-title-no-page {
-    color: $color-black;
+    color: colors.$color-black;
   }
   
   .project-tmb-img {
@@ -53,7 +56,7 @@
   }
   
   .project-header {
-    color: $color-black;
+    color: colors.$color-black;
     margin-bottom: 16px;
     margin-right: auto;
     order: 1;
@@ -62,14 +65,14 @@
   .project-pitch {
     order: 3;
   
-    @media #{$bp-tablet-up} {
+    @media #{layout.$bp-tablet-up} {
       align-self: flex-end;
       margin-bottom: 16px;
       margin-left: auto;
       order: 2;
     }
   
-    @media #{$bp-below-mobile} {
+    @media #{layout.$bp-below-mobile} {
       font-size: 0.9em;
     }
   
@@ -86,11 +89,11 @@
     float: right;
     text-align: center;
     margin-left: 10px;
-    background-color: $color-lightyellow;
+    background-color: colors.$color-lightyellow;
     width: 92px;
     padding: 2px 7px;
     border-radius: 6px;
-    box-shadow: 0 0 8px 0 rgba($color-black, 0.1);
+    box-shadow: 0 0 8px 0 rgba(colors.$color-black, 0.1);
   }
   
   .status-text {
@@ -98,7 +101,7 @@
   }
   
   .status-Active {
-    background-color: $color-lightgreen;
+    background-color: colors.$color-lightgreen;
   }
   
   .status-Rebooting {
@@ -106,7 +109,7 @@
   }
   
   .status-Completed {
-    background-color: $color-salmon;
+    background-color: colors.$color-salmon;
   }
   
   .project-card-field-inline {

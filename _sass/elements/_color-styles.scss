@@ -1,55 +1,57 @@
+@use "../variables/colors";
+
 /**
  * Colors
  */
 
 // Reds
-.color-red { color: $color-red; }
-.color-firebrick { color: $color-firebrick; }
-.color-mediumvioletred { color: $color-mediumvioletred; }
-.color-deeppink { color: $color-deeppink; }
-.color-orangered { color: $color-orangered; }
-.color-salmon { color: $color-salmon; }
+.color-red { color: colors.$color-red; }
+.color-firebrick { color: colors.$color-firebrick; }
+.color-mediumvioletred { color: colors.$color-mediumvioletred; }
+.color-deeppink { color: colors.$color-deeppink; }
+.color-orangered { color: colors.$color-orangered; }
+.color-salmon { color: colors.$color-salmon; }
 
 // Oranges
-.color-chocolate { color: $color-chocolate; }
-.color-lightorange { color: $color-lightorange; }
-.color-orange { color: $color-orange; }
-.color-gold { color: $color-gold; }
+.color-chocolate { color: colors.$color-chocolate; }
+.color-lightorange { color: colors.$color-lightorange; }
+.color-orange { color: colors.$color-orange; }
+.color-gold { color: colors.$color-gold; }
 
 // Yellows
-.color-mustard { color: $color-mustard; }
-.color-lightyellow { color: $color-lightyellow; }
+.color-mustard { color: colors.$color-mustard; }
+.color-lightyellow { color: colors.$color-lightyellow; }
 
 // Greens
-.color-forestgreen { color: $color-forestgreen; }
-.color-darkolive { color: $color-darkolive; }
-.color-teal { color: $color-teal; }
-.color-lightseagreen { color: $color-lightseagreen; }
-.color-lightgreen { color: $color-lightgreen; }
+.color-forestgreen { color: colors.$color-forestgreen; }
+.color-darkolive { color: colors.$color-darkolive; }
+.color-teal { color: colors.$color-teal; }
+.color-lightseagreen { color: colors.$color-lightseagreen; }
+.color-lightgreen { color: colors.$color-lightgreen; }
 
 // Blues
-.color-midnightblue { color: $color-midnightblue; }
-.color-darkroyalblue { color: $color-darkroyalblue; }
-.color-blue { color: $color-blue; }
-.color-brightblue { color: $color-brightblue; }
-.color-azure { color: $color-azure; }
-.color-dodgerblue { color: $color-dodgerblue; }
-.color-skyblue { color: $color-skyblue; }
+.color-midnightblue { color: colors.$color-midnightblue; }
+.color-darkroyalblue { color: colors.$color-darkroyalblue; }
+.color-blue { color: colors.$color-blue; }
+.color-brightblue { color: colors.$color-brightblue; }
+.color-azure { color: colors.$color-azure; }
+.color-dodgerblue { color: colors.$color-dodgerblue; }
+.color-skyblue { color: colors.$color-skyblue; }
 
 // Violets
-.color-blueviolet { color: $color-blueviolet; }
-.color-redpurple { color: $color-redpurple; }
-.color-darkorchid { color: $color-darkorchid; }
+.color-blueviolet { color: colors.$color-blueviolet; }
+.color-redpurple { color: colors.$color-redpurple; }
+.color-darkorchid { color: colors.$color-darkorchid; }
 
 // Browns
 
 // Blacks, Greys, White
-.color-black { color: $color-black; }
-.color-darkblue { color: $color-darkblue; }
-.color-darkgrey { color: $color-darkgrey; }
-.color-cement { color: $color-cement; }
-.color-mediumgrey { color: $color-mediumgrey; }
-.color-lightgrey { color: $color-lightgrey; }
-.color-pink { color: $color-pink; }
-.color-whitesmoke { color: $color-whitesmoke; }
-.color-white { color: $color-white; }
+.color-black { color: colors.$color-black; }
+.color-darkblue { color: colors.$color-darkblue; }
+.color-darkgrey { color: colors.$color-darkgrey; }
+.color-cement { color: colors.$color-cement; }
+.color-mediumgrey { color: colors.$color-mediumgrey; }
+.color-lightgrey { color: colors.$color-lightgrey; }
+.color-pink { color: colors.$color-pink; }
+.color-whitesmoke { color: colors.$color-whitesmoke; }
+.color-white { color: colors.$color-white; }

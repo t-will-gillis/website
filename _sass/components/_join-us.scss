@@ -1,3 +1,6 @@
+@use "../variables/colors";
+@use "../variables/layout";
+
 /*--------
 | Mobile 
 ----------*/
@@ -7,7 +10,7 @@
 }
 
 .join-us-card-container {
-  background: $color-pink;
+  background: colors.$color-pink;
   display: flex;
   flex-direction: column;
 
@@ -22,7 +25,7 @@
 
   .join-us-donation {
     margin: 20px auto;
-    background: $color-whitesmoke;
+    background: colors.$color-whitesmoke;
     padding: 20px;
     border-radius: 20px;
 
@@ -42,7 +45,7 @@
 /*---------
 | Tablet
 -----------*/
-@media #{$bp-tablet-up} {
+@media #{layout.$bp-tablet-up} {
   .join-us-card-container {
     .page-card--join {
 

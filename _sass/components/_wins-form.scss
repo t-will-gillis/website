@@ -1,8 +1,11 @@
+@use "../variables/colors";
+@use "../variables/layout";
+
 .wins-form {
   min-height: calc(100vh - 223px);
   display: flex;
   align-items: center;
-  background: $color-darkblue;
+  background: colors.$color-darkblue;
   .wins-form-title {
     font-size: 35px;
     font-weight: 400;
@@ -17,7 +20,7 @@
     padding: 48px 100px;
     margin: 16px auto;
     // NEW MOBILE FRIENDLY RULES
-    @media #{$bp-below-tablet} {
+    @media #{layout.$bp-below-tablet} {
       padding: 32px 16px;
       margin: 12px auto;
     }
@@ -28,7 +31,7 @@
   .page-card {
     border-radius: 20px;
     overflow: hidden;
-    background: $color-white;
+    background: colors.$color-white;
   }
   #professionalLinkForm {
     display: none;
@@ -64,16 +67,16 @@
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    background-color: $color-white;
+    background-color: colors.$color-white;
     background-clip: padding-box;
-    border-bottom: 1.5px solid $color-black;
+    border-bottom: 1.5px solid colors.$color-black;
     border-radius: 0;
     box-shadow: inset 0px 0px 0px 0px;
   }
   .form-control:focus {
     outline: none;
-    border-bottom: 2px solid $color-blue; //need to change color
-    background-color: $color-whitesmoke;
+    border-bottom: 2px solid colors.$color-blue; //need to change color
+    background-color: colors.$color-whitesmoke;
   }
   .container-fluid {
     width: 100%;
