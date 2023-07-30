@@ -32,7 +32,7 @@
   }
 
   h3 {
-    font-size: #{get(typography.$font-size-title4, desktop)};
+    font-size: #{map-get($font-size-title4, desktop)};
     margin-bottom: 18px;
   }
   #visiting-hackforlaorg + p,
