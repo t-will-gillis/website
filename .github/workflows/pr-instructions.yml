@@ -5,6 +5,7 @@ on:
     branches:
       - 'gh-pages'
       - 'feature-homepage-launch'
+      - 'test-5048'
 
 jobs:
   Add-Pull-Request-Instructions:
