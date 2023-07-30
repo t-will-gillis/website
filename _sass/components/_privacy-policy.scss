@@ -1,3 +1,4 @@
+@use "sass:map";
 .header-container {
   .header-hero-image--privacy-policy {
     object-fit: contain;
@@ -27,7 +28,7 @@
   }
 
   h3 {
-    font-size: #{map-get($font-size-title4, desktop)};
+    font-size: #{map.get($font-size-title4, desktop)};
     margin-bottom: 18px;
   }
   #visiting-hackforlaorg + p,
