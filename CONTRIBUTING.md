@@ -14,7 +14,7 @@ The following is a set of guidelines for contributing to the website repository,
 ## **Table of Contents**
 - [**How to Contribute to Hack for LA**](#how-to-contribute-to-hack-for-la)
   - [**Table of Contents**](#table-of-contents)
-  - [**Part 1: Setting up the development environment**](#part-1-setting-up-the-development-environment)
+  - ![**Part 1: Setting up the development environment**](#part-1-setting-up-the-development-environment)
     - [**1.1 Dev setup (1): Join the repository team**](#11-dev-setup-1-join-the-repository-team)
     - [**1.2 Dev setup (2): Installing Git**](#12-dev-setup-2-installing-git)
     - [**1.3 Dev setup (3): Fork the repository**](#13-dev-setup-3-fork-the-repository)
