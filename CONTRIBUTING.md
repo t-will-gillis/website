@@ -15,7 +15,7 @@ The following is a set of guidelines for contributing to the website repository,
 - [**How to Contribute to Hack for LA**](#how-to-contribute-to-hack-for-la)
   - [**Table of Contents**](#table-of-contents)
   - [Part 1: Setting up the development environment](#part-1-setting-up-the-development-environment)
-    - [**1.1 Dev setup (1): Join the repository team**](#11-dev-setup-1-join-the-repository-team)
+    - [1.1 Dev setup (1): Join the repository team](#11-dev-setup-1-join-the-repository-team)
     - [**1.2 Dev setup (2): Installing Git**](#12-dev-setup-2-installing-git)
     - [**1.3 Dev setup (3): Fork the repository**](#13-dev-setup-3-fork-the-repository)
     - [**1.4 Dev setup (4): Clone (Create) a copy on your computer**](#14-dev-setup-4-clone-create-a-copy-on-your-computer)
@@ -85,7 +85,7 @@ The following is a set of guidelines for contributing to the website repository,
       - [**4.2.b Tools Documentation**](#42b-tools-documentation)
 
 ## Part 1: Setting up the development environment
-### **1.1 Dev setup (1): Join the repository team**
+### 1.1 Dev setup (1): Join the repository team
 
 In the `hfla-site` Slack channel, send an introductory message with your GitHub handle/username asking to be added to the Hack for LA website GitHub repository (this repository).
 
