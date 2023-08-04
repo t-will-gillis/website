@@ -12,15 +12,15 @@ const team = 'website-write';
 
 // set a date limit for when to remove a contributor from the team 
 const today = new Date();
-let monthAgo = new Date(today.setMonth(today.getMonth() - 1));
-monthAgo = monthAgo.toISOString();
+let twoMonthAgo = new Date(today.setMonth(today.getMonth() - 6));
+twoMonthAgo = twoMonthAgo.toISOString();
 
 
 (async function main(){
   const commentCommitIssueContributors = await fetchContributors();
 
   console.log('-------------------------------------------------------')
-  console.log('List of active contributors since' + ' ⏰ ' + monthAgo.slice(0, 10) + ':');
+  console.log('List of active contributors since' + ' ⏰ ' + twoMonthAgo.slice(0, 10) + ':');
   console.log(commentCommitIssueContributors);
 
   const removedContributors = await removeInactiveMembers(commentCommitIssueContributors);
@@ -52,7 +52,7 @@ async function fetchContributors(){
       const contributors = await octokit.request(api, {
         owner: org,
         repo: repo,
-        since: monthAgo,
+        since: twoMonthAgo,
         per_page: 100,
         page: pageNum
       })
@@ -158,7 +158,7 @@ async function toRemove(member){
   // not consider for removal as they are new;
   for(const repository of repos.data){
     // if repo is recently cloned, return 'false' or member is not be removed;
-    if(repository.name === repo && repository.created_at > monthAgo){
+    if(repository.name === repo && repository.created_at > twoMonthAgo){
       return false;
     }
   }
