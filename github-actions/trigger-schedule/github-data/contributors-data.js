@@ -1,7 +1,7 @@
 const { Octokit } = require("@octokit/rest");
 const trueContributorsMixin = require("true-github-contributors");
 
-// Extend Octokit with new contributor endpoints and construct instance of class with Auth token 
+// Extend Octokit with new contributor endpoints and construct instance of class with Auth token!
 Object.assign(Octokit.prototype, trueContributorsMixin);
 const octokit = new Octokit({ auth: process.env.token });
 
