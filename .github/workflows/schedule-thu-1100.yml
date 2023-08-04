@@ -5,25 +5,21 @@ name: Schedule Thursday 1100
 on:
   schedule:
     - cron:  0 11 * * 4 
+  workflow_dispatch:
 
 jobs:
-  # This workflow contains a single job called "trim_contirbutors"
+  # This workflow contains a single job called "trim_contributors"
   trim_contributors:
     runs-on: ubuntu-latest
 
-    if: github.repository == 'hackforla/website'
+    if: github.repository == 't-will-gillis'/website'
 
-    steps:
-    # get the day number of the current month
-    - name: Get current date
-      id: date
-      run: echo "::set-output name=date::$(date +\%d)"
-
+    steps:   
     # checkout repo
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.TEST_GHAS }}
 
     # setup node 
     - name: Setup node
@@ -35,11 +31,10 @@ jobs:
     # install dependencies to run js file
     - name: Install npm dependencies
       run: npm install
-      working-directory: ./github-actions/trigger-schedule/trim-contributors
+      working-directory: ./github-actions/trigger-schedule/github-data
 
     # run js file if it is the first Thursday of the month
     - name: Trim Members
       env:
-        token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
-      if: ${{ steps.date.outputs.date <= 7 }}
-      run: node github-actions/github-data/contributors-data.js
+        token: ${{ secrets.TEST_GHAS }}
+      run: node github-actions/trigger-schedule/github-data/contributors-data.js
