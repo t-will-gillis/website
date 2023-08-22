@@ -2,9 +2,9 @@ name: Lint SCSS
 
 on:
   pull_request:
-    branches: [gh-pages]
+    branches: [test-5068-august]
   push:
-    branches: [gh-pages]
+    branches: [test-5068-august]
 
 jobs:
   build:
@@ -19,11 +19,11 @@ jobs:
           fetch-depth: 0
 
       - name: Lint SCSS
-        uses: github/super-linter@v5.0.0
+        uses: super-linter/super-linter/slim@v5
         env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: gh-pages
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_ALL_CODEBASE: true
+          DEFAULT_BRANCH: test-5068-august
+          GITHUB_TOKEN: ${{ secrets.TEST_GHAS }}
 
 
           LINTER_RULES_PATH: /
