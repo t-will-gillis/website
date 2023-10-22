@@ -35,6 +35,12 @@ const createIssue = async (owner, repo, inactiveLists) => {
 
   let removedList = removeList.map(x => "@ " + x).join("\n");  
   let notifiedList = notifyList.map(x => "@ " + x).join("\n"); 
+
+  let thisIssuePredict = await github.rest.issues.get({
+    owner,
+    repo,
+    per_page: 1
+  });
   
   let title = "Review Inactive Team Members";
   let body = "# DRAFT\n"
@@ -50,9 +56,9 @@ const createIssue = async (owner, repo, inactiveLists) => {
   + "If you have been inactive in the last 30 days (using the above measurements), you can become active again by doing at least one of the above actions.\n\n"
   + "If you were active during the last 30 days (using the above measurements) and the bot made a mistake, let us know by responding in a comment (reopening this issue) with this message:\n"
   + "```\n"
-  + "I am responding to Issue #{this issue}.\n"
+  + "I am responding to Issue \#{theIssuePredict}.\n"
   + "The Hack for LA website bot made a mistake, I have been active!\n" 
-  + "See my Issue # or PR #  review
+  + "See my Issue \# or PR \#  review
   + "```\n"
   + "After you leave the comment, please send us a Slack message on the \"hfla-site\" channel with a link to your comment.\n\n"
   + "### Temporary leave\n"
@@ -65,7 +71,7 @@ const createIssue = async (owner, repo, inactiveLists) => {
   + removedList + "\n\n"
   + "If this is a mistake or if you would like to return to the Hack for LA Website team, please respond in a comment with this message:\n"
   + "```\n"
-  + "I am responding to Issue #{this issue}.\n"
+  + "I am responding to Issue \#{thisIssuePredict}.\n"
   + "I want to come back to the team!\n"
   + "Please add me back to the 'website-write' team, I am ready to work on an issue now.\n"
   + "```\n"
