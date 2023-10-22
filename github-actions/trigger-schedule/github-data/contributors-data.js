@@ -14,10 +14,10 @@ const team = 'website-write';
 // Set date limits: at one month, warn contributor that they are 
 // inactive, and at two months remove contributor from team(s)
 let oneMonthAgo = new Date();                        // oneMonthAgo instantiated with date of "today"
-oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);   // then set oneMonthAgo from "today"
+oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 3);   // then set oneMonthAgo from "today"
 oneMonthAgo = oneMonthAgo.toISOString();
 let twoMonthsAgo = new Date();                        // twoMonthsAgo instantiated with date of "today"
-twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);  // then set twoMonthsAgo from "today"
+twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 4);  // then set twoMonthsAgo from "today"
 twoMonthsAgo = twoMonthsAgo.toISOString();
 
 
