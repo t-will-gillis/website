@@ -1,78 +1,48 @@
-name: "Github Actions"
-description: This is to create a new GHA
-labels: ['role missing', 'Complexity: Missing', 'Feature: Board/GitHub Maintenance', 'size: missing', 'Draft']
-title: "Sample form for GitHub actions "
-body:
-  - type: input
-    id: title
-    attributes:
-      label: "Title"
-      description:  "Enter the title of this issue"
-    validations:
-      required: true
-  - type: dropdown
-    id: dependency
-    attributes:
-      label: Is there a dependency?
-      options:
-        - "Yes"
-        - "No"
-    validations:
-      required: true
-  - type: textarea
-    id: dependency-explanation
-    attributes:
-      label: If Yes, please explain
-  - type: textarea
-    id: overview
-    attributes:
-      label: "Overview"
-      description: "Clearly state the purpose of this issue in 2 sentences or less"
-    validations:
-      required: true
-  - type: markdown
-    attributes:
-      value: "## Action Items/Pseudo-code"
-  - type: markdown
-    attributes:
-      value: |
-          - [ ] When an issue/PR is closed:
-            - [ ] If the issue/PR contains a label from the hard label list:
-              - [ ] Place the issue/PR in the column marked 'Done'.
-            - [ ] Else if the issue/PR contains a label from the soft label list:
-              - [ ] If the issue also contains a label from the soft label counter list:
-                - [ ] Place the issue/PR in the column marked 'UAT'
-              - [ ] Else:
-                - [ ] Place the issue/PR in the column marked 'Done'.
-            - [ ] Else:
-              - [ ] Place the issue/PR in the column marked 'UAT'.
-          - [ ] Hard label list: any labels involving refactoring
-          - [ ] Soft label list: 'role: back end' label, 'Feature: Analytics'
-          - [ ] Soft label counter-list: 'role: front end'
-  - type: checkboxes
-    id: checklist
-    attributes:
-      label: Checks
-      options:
-        - "label":  "An issue containing only 'role: back end' and 'role: front end' labels closes -> UAT."
-        - "label":  "An issue containing only 'role: front end' closes -> UAT."
-        - "label":  "An issue containing only 'Feature: Refactor CSS', 'Feature: Refactor JS / Liquid', and 'P-Feature: Home page' -> Done."
-        - "label":  "An issue containing no label -> UAT"
-        - "label":  "Make sure the labels are placed in the code in such a way that we can easily add, edit, or delete labels"
-        - "label":  "~~The columns id should ideally be a secret, so that they are not exposed. When the id is found, please consult an admin to add it to [our secrets](https://docs.github.com/en/actions/reference/encrypted-secrets).~~ Columns id can be retrieved as a link, from the columns settings menu, [for example ](https://github.com/hackforla/website/projects/7#column-7198257). Please retrieve the id from there."
-        - "label":  "In the PR, request the reviewer to, after merging, test that the board automation does not intercept or supercede this GHA. If so, the team leads will need to remove the default automation to allow this one to work."
-  - type: markdown
-    attributes:
-      value: "## Resources/Instructions"
-  - type: markdown
-    attributes:
-      value: "A link to [Github actions!](https://github.com/hackforla/website/wiki/Hack-for-LA's-GitHub-Actions)"
-  - type: checkboxes
-    attributes:
-      label: Create new GHA
-      options:
-        - label: "This is to create a new GHA [Start here!](https://docs.github.com/en/actions)"
-          required: true
-  - type: markdown
-    attributes:
-      value: "Note that you might want to do something outside the scope of the above psudo-code. If so, be sure to leave comments in your PR or this issue that justifies your reasoning. If you feel you need guidance, be sure to reach out! We cannot foresee whether this issue is solvable, or what hard decisions have to be made, but we would love to hear and help you!"
+---
+name: Review Inactive Team Members
+about: Issue template used only by `schedule-monthly.yml`
+title: "Review Inactive Team Members"
+labels: "Feature: Administrative, Feature: Onboarding/Contributing.md, role: dev leads, Complexity: Small, Size: 0.5pt"
+assignees: ''
+---
+# DRAFT
+# Review of Inactive Website Team Members
+## Inactive Members
+Developers: If your name is on the following list, our team bot has determined that you have not been active with the Website team in the last 30 days. If we don't hear back from you in the upcoming weeks, we will unassign you from any issues you may be working on and remove you from the 'website-write' team.  
+
+{notifiedList}  
+
+### Did we make a mistake?
+The bot is checking for the following activity:
+- If you are assigned to an issue, that you have provided an update on the issue in the past 30 days.  The updates are due weekly.
+- If your issue is a `Draft` in the "New Issue Approval" column, that you have added to it within the last 30 days.
+- If you are reviewing PRs, that you have done some kind of activity in the past 30 days.
+
+If you have been inactive in the last 30 days (using the above measurements), you can become active again by doing at least one of the above actions.
+
+If you were active during the last 30 days (using the above measurements) and the bot made a mistake, let us know by responding in a comment (reopening this issue) with this message:
+```
+I am responding to Issue #{this issue}.
+The Hack for LA website bot made a mistake, I have been active!  
+See my Issue # or PR #  review
+```
+After you leave the comment, please send us a Slack message on the "hfla-site" channel with a link to your comment.
+
+
+### Temporary leave
+If you have taken a temporary leave, and you have been authorized to keep your assignment to an issue:  
+- Your issue should be in the "Questions/ In Review" column, with the `Ready for dev lead` label and a note letting us know when you will be back.
+- We generally try to encourage you to unassign yourself from the issue and allow us to return it to the prioritized backlog.  However, exceptions are sometimes made.
+
+## Removed Members
+Our team bot has determined that the following member(s) have not been active with the Website team for over 60 days, and therefore the member(s) have been removed from the 'website-write' team.
+
+{removedList}
+
+If this is a mistake or if you would like to return to the Hack for LA Website team, please respond in a comment with this message:
+```
+I am responding to Issue #{this issue}.
+I want to come back to the team!
+Please add me back to the write team, I am ready to work on an issue now.
+```
+After you leave the comment, please send us a Slack message on the "hfla-site" channel with a link to your comment.
