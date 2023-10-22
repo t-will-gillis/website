@@ -58,7 +58,7 @@ const createIssue = async (owner, repo, inactiveLists) => {
   + "```\n"
   + "I am responding to Issue # -thisIssue-.\n"
   + "The Hack for LA website bot made a mistake, I have been active!\n" 
-  + "See my Issue # or PR #  review"
+  + "See my Issue # or my review in PR #  \n"
   + "```\n"
   + "After you leave the comment, please send us a Slack message on the \"hfla-site\" channel with a link to your comment.\n\n"
   + "### Temporary leave\n"
