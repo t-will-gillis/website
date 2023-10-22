@@ -45,7 +45,7 @@ const createIssue = async (owner, repo, inactiveLists) => {
   + "### Did we make a mistake?\n"
   + "The bot is checking for the following activity:\n"
   + "- If you are assigned to an issue, that you have provided an update on the issue in the past 30 days. The updates are due weekly.\n"
-  + "- If your issue is a `Draft` in the \"New Issue Approval\" column, that you have added to it within the last 30 days.\n"
+  + "- If your issue is a \`Draft\` in the \"New Issue Approval\" column, that you have added to it within the last 30 days.\n"
   + "- If you are reviewing PRs, that you have done some kind of activity in the past 30 days.\n"
   + "If you have been inactive in the last 30 days (using the above measurements), you can become active again by doing at least one of the above actions.\n\n"
   + "If you were active during the last 30 days (using the above measurements) and the bot made a mistake, let us know by responding in a comment (reopening this issue) with this message:\n"
@@ -57,7 +57,7 @@ const createIssue = async (owner, repo, inactiveLists) => {
   + "After you leave the comment, please send us a Slack message on the \"hfla-site\" channel with a link to your comment.\n\n"
   + "### Temporary leave\n"
   + "If you have taken a temporary leave, and you have been authorized to keep your assignment to an issue: \n"
-  + "- Your issue should be in the \"Questions/ In Review\" column, with the `Ready for dev lead` label and a note letting us know when you will be back.\n"
+  + "- Your issue should be in the \"Questions/ In Review\" column, with the \`Ready for dev lead\` label and a note letting us know when you will be back.\n"
   + "- We generally try to encourage you to unassign yourself from the issue and allow us to return it to the prioritized backlog. However, exceptions are sometimes made."
 
   + "## Removed Members\n"
