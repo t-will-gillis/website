@@ -45,7 +45,7 @@ const createIssue = async (owner, repo, inactiveLists) => {
   + "### Did we make a mistake?\n"
   + "The bot is checking for the following activity:\n"
   + "- If you are assigned to an issue, that you have provided an update on the issue in the past 30 days. The updates are due weekly.\n"
-  + "- If your issue is a `Draft` in the "New Issue Approval" column, that you have added to it within the last 30 days.\n"
+  + "- If your issue is a `Draft` in the \"New Issue Approval\" column, that you have added to it within the last 30 days.\n"
   + "- If you are reviewing PRs, that you have done some kind of activity in the past 30 days.\n"
   + "If you have been inactive in the last 30 days (using the above measurements), you can become active again by doing at least one of the above actions.\n\n"
   + "If you were active during the last 30 days (using the above measurements) and the bot made a mistake, let us know by responding in a comment (reopening this issue) with this message:\n"
