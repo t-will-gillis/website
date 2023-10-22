@@ -11,7 +11,7 @@ async function main({ g, c }, artifactContent) {
   // Retrieve lists data from json file written in previous step
   let inactiveLists = JSON.parse(artifactContent);
   
-  const owner = "hackforla";
+  const owner = "t-will-gillis";
   const repo = "website";
 
   // Create a new issue in repo, return the issue id for later: creating the project card linked to this issue
