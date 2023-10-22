@@ -9,13 +9,13 @@ async function main({ g, c }, newIssueNumber) {
   context = c;
 
   // Issue #2607 is the `Dev/PM Agenda and Notes` 
-  let agendaAndNotesIssueNumber = 2607;
+  let agendaAndNotesIssueNumber = 336;
   await commentOnIssue(agendaAndNotesIssueNumber, newIssueNumber);
 }
 
 // Add a link to the `Review Inactive Team Members` issue
 const commentOnIssue = async (agendaAndNotesIssueNumber, newIssueNumber) => {
-  const owner = "hackforla";
+  const owner = "t-will-gillis";
   const repo = "website";
   await github.rest.issues.createComment({
     owner,
