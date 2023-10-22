@@ -9,14 +9,14 @@ on:
 jobs:
   Trim_Contributors:
     runs-on: ubuntu-latest
-    if: github.repository == 'hackforla/website'      
+    if: github.repository == 't-will-gillis/website'      
 
     steps:
     # Checkout repo
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
+        token: ${{ secrets.TEST_GHAS }}
 
     # Setup node 
     - name: Setup node
@@ -34,7 +34,7 @@ jobs:
     # 'website-write' team, then compiles list of one-month inactive members for notification
     - name: Trim Members
       env:
-        token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
+        token: ${{ secrets.TEST_GHAS }}
       run: node github-actions/trigger-schedule/github-data/contributors-data.js
 
     # Upload artifact file to allow list sharing with next job "Create_New_Issue"
@@ -70,7 +70,7 @@ jobs:
       uses: actions/github-script@v6
       id: create-new-issue
       with:
-        github-token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
+        github-token: ${{ secrets.TEST_GHAS }}
         script: |
           const artifactContent = process.env.TRIM_LISTS;
           const script = require('./github-actions/trigger-schedule/list-inactive-members/create-new-issue.js');
@@ -82,7 +82,7 @@ jobs:
       uses: actions/github-script@v6
       id: comment-issue
       with:
-        github-token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
+        github-token: ${{ secrets.TEST_GHAS }}
         script: |
           const script = require('./github-actions/trigger-schedule/list-inactive-members/comment-issue.js');
           const newIssueNumber = ${{ steps.create-new-issue.outputs.result }};
