@@ -5,7 +5,7 @@ on:
     branches:
       - 'gh-pages'
       - 'feature-homepage-launch'
-      - 'dependabot-test-5899'
+      - 'dependabot-tests-5899'
 
 jobs:
   Add-Pull-Request-Instructions:
