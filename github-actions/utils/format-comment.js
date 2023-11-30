@@ -1,3 +1,6 @@
+// import modules
+const fs = require('fs');
+
 /**
  * @description - This function is called by makeComment() and it formats the comment to be posted based on an object input.
  * @param {String} replacementString - the string to replace the placeholder in the md file
