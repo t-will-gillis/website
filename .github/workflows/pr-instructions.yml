@@ -5,7 +5,7 @@ on:
     branches:
       - 'gh-pages'
       - 'feature-homepage-launch'
-
+      - 'check-consolidated-5944'
 jobs:
   Add-Pull-Request-Instructions:
     runs-on: ubuntu-latest
