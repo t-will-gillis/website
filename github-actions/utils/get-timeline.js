@@ -21,7 +21,7 @@ async function getTimeline(issueNum) {
           break
         }
       } catch (err) {
-        console.log(error);
+        console.log(err);
         continue
       }
       finally {
