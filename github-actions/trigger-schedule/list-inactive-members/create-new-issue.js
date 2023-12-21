@@ -11,7 +11,7 @@ async function main({ g, c }, artifactContent) {
   // Retrieve lists data from json file written in previous step
   let inactiveLists = JSON.parse(artifactContent);
   
-  const owner = "hackforla";
+  const owner = "t-will-gillis";
   const repo = "website";
 
   // Create a new issue in repo, return the issue id for later: creating the project card linked to this issue
@@ -33,8 +33,8 @@ const createIssue = async (owner, repo, inactiveLists) => {
   let removeList = inactiveLists['removedContributors'];
   let notifyList = inactiveLists['notifiedContributors'];
 
-  let removedList = removeList.map(x => "@" + x).join("\n");  
-  let notifiedList = notifyList.map(x => "@" + x).join("\n"); 
+  let removedList = removeList.map(x => "@ " + x).join("\n");  
+  let notifiedList = notifyList.map(x => "@ " + x).join("\n"); 
 
   // This finds all issues in the repo and returns the only the number for the last issue created. 
   // Add 1 to this issue number to get the number for the next issue- i.e. the one being created.
@@ -96,7 +96,7 @@ const createIssue = async (owner, repo, inactiveLists) => {
     "Size: 0.5pt",
   ];
   // Note that 8 represents ".08 Team workflow" i.e. the 8th workflow on HfLAs Project Board 
-  let milestone = 8;
+  let milestone = 1;
   const issue = await github.rest.issues.create({
     owner,
     repo,
