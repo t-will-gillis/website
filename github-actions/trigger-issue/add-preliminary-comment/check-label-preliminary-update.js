@@ -41,37 +41,9 @@ function obtainLabels(){
  * @returns - A boolean which tells whether we are supposed to post a preliminary update based on the given issue checks
  */
 
-// function postComment(existingLabels){
-//     //issue states that we are to post the comment if--> there is a role: back end/devOps tag...(continued on next comment)
-//     if(existingLabels.includes("role: back end/devOps")){
-//         return true
-//     }
-
-//     // or if there is a role: front end tag
-//     else if(existingLabels.includes("role: front end")){
-//         return true
-//     }
-
-//     //or if there is a role: design tag
-//     else if(existingLabels.includes("role: design")){
-//         return true
-//     }
-
-//     //or if there is a role: user research
-//     else if(existingLabels.includes("role: user research")){
-//         return true
-//     }
-
-//     //otherwise we return a false
-//     return false
-// }
-
-// Simplify postComment()
 function postComment(existingLabels){
     // Post the comment if there is a role: back end/devOps tag...(continued on next comment)
     const labelsThatTriggerComments = ["role: back end/devOps", "role: front end", "role: design", "role: user research"]
-    console.log('in add-preliminary-comment.js')
-    console.log(existingLabels.some(value => labelsThatTriggerComments.includes(value)));
     return existingLabels.some(value => labelsThatTriggerComments.includes(value));
 
 }
