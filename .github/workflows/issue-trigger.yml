@@ -14,11 +14,11 @@ jobs:
     steps:
       - name: Add issue to project board
         id: add-issue-project-board
-        uses: alex-page/github-project-automation-plus@v0.8.3
+        uses: alex-page/github-project-automation-plus@v0.9.0
         with:
           project: Project Board
           column: ${{ env.COLUMN_NAME }}
-          repo-token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
+          repo-token: ${{ secrets.TEST_GHAS }}
  
   Add-Missing-Labels-To-Issues:
     runs-on: ubuntu-latest
