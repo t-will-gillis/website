@@ -12,5 +12,5 @@ jobs:
     
     steps:
      - run: echo "github.event ${{ github.event_name }}"
-     - run: echo "github.event ${{ github.event }}"
-     - run: echo "github.event ${{ github }}"
+     - run: echo "github.event ${{ github.event.commits }}"
+     - run: echo "github.event ${{ github.event.compare }}"
