@@ -1,0 +1,14 @@
+name: Update Label Directory
+
+# This action runs when changes are made to Labels
+on:
+  label:
+    types: edited
+
+jobs:
+  Update-Label-Directory:
+    runs-on: ubuntu-latest
+    if: github.repository == 't-will-gillis/website'
+    
+    steps:
+     - run: echo "Yooooooooooooo! Time to update directory"
