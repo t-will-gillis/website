@@ -11,4 +11,4 @@ jobs:
     if: github.repository == 't-will-gillis/website'
     
     steps:
-     - run: echo "Yooooooooooooo! Time to update directory"
+     - run: echo "Yooooooooooooo! Time to update directory {{ github }}"
