@@ -12,5 +12,6 @@ jobs:
     
     steps:
      - run: echo "github.event ${{ github.event_name }}"
-     - run: echo "github.event ${{ github.event['commits'] }}"
-     - run: echo "github.event ${{ github.api_url }}"
+
+     - run: echo "github.event ${{ github.event_path }}"
+     - run: echo "${{ github.event }}" > temp.txt
