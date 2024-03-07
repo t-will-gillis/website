@@ -23,7 +23,7 @@ jobs:
        with:
         github-token: ${{ secrets.HACKFORLA_MIMIC }}
         script: |
-          const script = require('./github-actions/utils/return-label-name.js')
+          const script = require('./github-actions/utils/label_update_name.js')
           script({g: github, c: context})
 
 
