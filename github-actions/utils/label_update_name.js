@@ -32,7 +32,7 @@ async function main({ g, c }) {
     console.log(labelId);
     console.log(prevName);
     console.log(labelName);
-    
+    console.log(data['draft']);
     for(let [key, value] of Object.entries(data)) {
       if (value.includes(labelId)) {
         const keyName = key;
