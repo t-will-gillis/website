@@ -6,8 +6,14 @@ async function main({ g, c }) {
   github = g;
   context = c;
 
+  console.log('****************************************************');
   console.log(context);
-  console.log(github.context);
+  console.log('****************************************************');
+  console.log('****************************************************');
+  console.log(context.label);
+  console.log('****************************************************');
+  console.log(context.label.id);
+  console.log('****************************************************');
 
 
   
