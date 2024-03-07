@@ -1,8 +1,8 @@
 name: This is an example
 
 on:
-  # label:
-    types:
+  label:
+    types: edited
 
 jobs:
   one:
