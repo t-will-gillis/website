@@ -9,20 +9,15 @@ async function main({ g, c }) {
   context = c;
 
   // const labelNameNew = context.payload.label.name;
-  const labelId = context.payload.label.id
-
-  console.log('****************************************************');
+  const labelId = context.payload.label.id;
+  const labelName = context.payload.name;
   console.log(context.payload.label);
-  console.log('label id ********************************************');
-  console.log(context.payload.label.id);
-  console.log('label name ******************************************');
-  console.log(context.payload.label.name);
-  console.log('payload changes *************************************');
+  console.log('-----------------------------------------------------------------------');
   console.log(context.payload.changes);
-  console.log('****************************************************');
+  console.log('-----------------------------------------------------------------------');
+  
   if(context.payload.changes.name) {
 
-    
     // Retrieve label directory
     const filepath = './_data/label_directory.json';
     const rawData = fs.readFileSync(filepath, 'utf8');
@@ -32,8 +27,13 @@ async function main({ g, c }) {
     console.log('Name changed!!!!');
     console.log(prevName);
     
-
-    
+    for(let [key, value] of Object.entries(data)) {
+      if (value.includes(prevName)) {
+        console.log('Changing label name value from: ' + prevName + ' to: ' + labelName);
+      } else {
+        console.log('Something went wrong!');
+      }
+    }
   } else {
     console.log('    did not change name');
   } 
