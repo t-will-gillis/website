@@ -28,7 +28,7 @@ async function main({ g, c }) {
     const rawData = fs.readFileSync(filepath, 'utf8');
     const data = JSON.parse(rawData);
     
-    const prevName context.payload.changes.name.from;
+    const prevName = context.payload.changes.name.from;
     console.log('Name changed!!!!);
     console.log(prevName);
 
