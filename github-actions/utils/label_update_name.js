@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 // Global variables
 var github;
 var context;
@@ -18,19 +20,24 @@ async function main({ g, c }) {
   console.log('payload changes *************************************');
   console.log(context.payload.changes);
   console.log('****************************************************');
-  if(context.payload.changes.name){
-    console.log(context.payload.changes.name);
+  if(context.payload.changes.name) {
+
+    
+    // Retrieve label directory
+    const filepath = './_data/label_directory.json';
+    const rawData = fs.readFileSync(filepath, 'utf8');
+    const data = JSON.parse(rawData);
+    
+    const prevName context.payload.changes.name.from;
+    console.log('Name changed!!!!);
+    console.log(prevName);
+
+    
   } else {
     console.log('    did not change name');
   } 
 
-  
-
-
-
-
-
-  
+ 
 }
 
 
