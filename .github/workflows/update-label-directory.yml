@@ -23,7 +23,7 @@ jobs:
         github-token: ${{ secrets.HACKFORLA_MIMIC }}
         script: |
           const artifactContent = process.env.GITHUB_CONTEXT
-          const script = require('./github-actions/utils/list-inactive-members/return-label-name.js')
+          const script = require('./github-actions/utils/return-label-name.js')
           script({g: github, c: context}, artifactContent)
      
      - name: third time
