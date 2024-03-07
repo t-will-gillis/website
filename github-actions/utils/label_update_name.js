@@ -18,12 +18,12 @@ async function main({ g, c }) {
   
   if(context.payload.changes.name) {
 
-    const prevName = context.payload.changes.name.from;
+    const prevName1 = context.payload.changes.name.from;
     console.log('Name changed!!!! before');
-    console.log(prevName);
+    console.log(prevName1);
     
     // Retrieve label directory
-    const filepath = '../_data/label_directory.json';
+    const filepath = 'github-actions/utils/_data/label_directory.json';
     const rawData = fs.readFileSync(filepath, 'utf8');
     const data = JSON.parse(rawData);
     
