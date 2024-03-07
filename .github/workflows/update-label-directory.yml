@@ -27,9 +27,5 @@ jobs:
           const artifactContent = process.env.GITHUB_CONTEXT
           const script = require('./github-actions/utils/return-label-name.js')
           script({g: github, c: context}, artifactContent)
-     
-     - name: third time
-       env:
-         GITHUB_CONTEXT_NUTHER: ${{ toJson(github) }}
-       run: |
-         echo "THIRD_TIME=$(cat GITHUB_CONTEXT_NUTHER)" >> $GITHUB_ENV
+
+
