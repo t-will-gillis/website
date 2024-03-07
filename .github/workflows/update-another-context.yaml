@@ -39,7 +39,8 @@ jobs:
           echo "The id of this action is: $GITHUB_ACTION"   # reference the default environment variables
           echo "The run id is: $GITHUB_RUN_ID"
           echo "The GitHub Actor's username is: $GITHUB_ACTOR"
-          echo "GitHub SHA: $GITHUB_EVENT"
-          echo "GitHub SHA: $GITHUB_EVENT_CHANGES"
-          echo "GitHub SHA: $GITHUB_LABEL"
-          echo "GitHub SHA: $GITHUB_LABEL_ID"
+          echo "GitHub Event: $GITHUB_EVENT"
+          echo "GitHub Event name: $GITHUB_EVENT_NAME"
+          echo "GitHub Event try again: $GITHUB_EVENT.ACTION"
+          echo "GitHub Label Name: $GITHUB_LABEL"
+          echo "GitHub SHA: $GITHUB_LABEL.ID"
