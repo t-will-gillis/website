@@ -10,9 +10,9 @@ async function main({ g, c }) {
   console.log(context);
   console.log('****************************************************');
   console.log('****************************************************');
-  console.log(context.label);
-  console.log('****************************************************');
-  console.log(context.label.id);
+  console.log(context.payload.label);
+  console.log(context.payload.changes.color);
+  console.log(context.payload.label.id);
   console.log('****************************************************');
 
 
