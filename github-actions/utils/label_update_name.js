@@ -29,8 +29,9 @@ async function main({ g, c }) {
     const data = JSON.parse(rawData);
     
     const prevName = context.payload.changes.name.from;
-    console.log('Name changed!!!!);
+    console.log('Name changed!!!!');
     console.log(prevName);
+    
 
     
   } else {
