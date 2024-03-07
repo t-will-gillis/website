@@ -12,3 +12,6 @@ async function main({ g, c }, artifactContent) {
   console.log('**********************************************');
   console.log(parsedEvent);
 }
+
+
+module.exports = main;
