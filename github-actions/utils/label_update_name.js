@@ -34,18 +34,24 @@ async function main({ g, c }) {
     
     for(let [key, value] of Object.entries(data)) {
       if (value.includes(labelId)) {
-        const keyName = data[key];
+        const keyName = key;
         console.log('Changing label name value:\n   Reference Name: ' + keyName + '\n   Previous Name: ' + prevName + '\n   Edited Name: ' + labelName);
-        
+
+        // Write new data to label directory
+        data[key] = [labelId, labelName];
+        fs.writefile(filepath, JSON.stringify(data, null, 2), (err) => {
+          if (err) throw err;
+          console.log('-------------------------------------------------------');
+          console.log("File 'label-directory.json' saved successfully!");
+        });
         break;
       } 
     }
   } else {
     console.log('Label name was not changed');
   } 
-
- 
 }
+
 
 
 module.exports = main;
