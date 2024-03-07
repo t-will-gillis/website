@@ -16,7 +16,7 @@ jobs:
      - name: dump context
        env: 
          GITHUB_CONTEXT: ${{ toJson(github) }}
-       run: echo "$GITHUB_LABEL" 
+       run: echo "$GITHUB_CONTEXT_LABEL" 
        
      - name: show label
        run: echo '${{ toJSON(github) }}' >> GITHUB_NEW
