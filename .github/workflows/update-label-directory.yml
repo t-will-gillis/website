@@ -14,19 +14,15 @@ jobs:
      - name: dump context
        env: 
          GITHUB_CONTEXT: ${{ toJson(github) }}
-       run: |
-         echo "$GITHUB_LABEL" 
-         echo "$GITHUB_CONTEXT.LABEL" 
+       run: echo "$GITHUB_CONTEXT" 
     
-       
      - name: send context
        uses: actions/github-script@v7
        id: send-context
        with:
         github-token: ${{ secrets.HACKFORLA_MIMIC }}
         script: |
-          const artifactContent = process.env.GITHUB_NEW
           const script = require('./github-actions/utils/return-label-name.js')
-          script({g: github, c: context}, artifactContent)
+          script({g: github, c: context})
 
 
