@@ -2,11 +2,12 @@
 var github;
 var context;
 
-async function main({ g, c }, artifactContent) {
+async function main({ g, c }) {
   github = g;
   context = c;
 
-  console.log(artifactContent);
+  console.log(context);
+  console.log(github.context);
 
 
   
