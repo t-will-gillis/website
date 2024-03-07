@@ -6,11 +6,20 @@ async function main({ g, c }, artifactContent) {
   github = g;
   context = c;
 
-  // Retrieve lists data from json file written in previous step
-  let parsedEvent = JSON.parse(artifactContent);
+  console.log(artifactContent);
 
-  console.log('**********************************************');
-  console.log(parsedEvent);
+
+  
+  // Retrieve lists data from json file written in previous step
+  // let parsedEvent = JSON.parse(artifactContent);
+
+  // console.log('**********************************************');
+  // console.log(parsedEvent);
+
+
+
+
+  
 }
 
 
