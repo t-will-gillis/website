@@ -42,8 +42,7 @@ jobs:
           echo "GitHub Event: $GITHUB_EVENT"
           echo "GitHub Event name: $GITHUB_EVENT_NAME"
           echo "GitHub Event try again: $GITHUB_EVENT.ACTION"
-          echo "GitHub Event try again: ${{ fromJSON(GITHUB_EVENT) }}"
-          echo "GitHub Event try again: ${{ toJSON(GITHUB_EVENT) }}"
+          
           echo "GitHub Label Name: $GITHUB_LABEL"
           echo "GitHub Event try again: $GITHUB_LABEL['id']"
           echo "GitHub SHA: $GITHUB_LABEL.id"
