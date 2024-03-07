@@ -14,6 +14,26 @@ jobs:
      - name: dump context
        env: 
          GITHUB_CONTEXT: ${{ toJson(github) }}
-       run: echo "$GITHUB_CONTEXT['label']" 
-     
+       run: echo "$GITHUB_CONTEXT" 
 
+     - name: try again
+       env:
+         GITHUB_CONTEXT_SUB: ${{ toJson(github['label']) }}
+       run: echo "$GITHUB_CONTEXT_SUB"
+     
+     - name: third time
+       env:
+         GITHUB_CONTEXT_NUTHER: ${{ toJson(github) }}
+       run: |
+         echo "THIRD_TIME=$GITHUB_CONTEXT_NUTHER" >> $GITHUB_ENV
+
+     - name: Create new issue
+       uses: actions/github-script@v7
+       id: create-new-issue
+       with:
+        github-token: ${{ secrets.HACKFORLA_MIMIC }}
+        script: |
+          const artifactContent = process.env.THIRD_TIME
+          const script = require('./github-actions/utils/list-inactive-members/return-label-name.js')
+          script({g: github, c: context}, artifactContent)
+     
