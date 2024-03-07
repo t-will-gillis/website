@@ -10,7 +10,7 @@ async function main({ g, c }) {
 
   // const labelNameNew = context.payload.label.name;
   const labelId = context.payload.label.id;
-  const labelName = context.payload.name;
+  const labelName = context.payload.label.name;
 
   console.log('-----------------------------------------------------------------------');
   console.log('Context and current info for edited label: ');
@@ -33,15 +33,15 @@ async function main({ g, c }) {
     console.log(labelName);
     
     for(let [key, value] of Object.entries(data)) {
-      if (value.includes(prevName)) {
-        console.log('Changing label name value from: ' + prevName + ' to: ' + labelName);
+      if (value.includes(labelId)) {
+        const keyName = data[key];
+        console.log('Changing label name value:\n   Reference Name: ' + keyName + '\n   Previous Name: ' + prevName + '\n   Edited Name: ' + labelName);
+        
         break;
-      } else {
-        console.log('Something went wrong!');
-      }
+      } 
     }
   } else {
-    console.log('    did not change name');
+    console.log('Label name was not changed');
   } 
 
  
