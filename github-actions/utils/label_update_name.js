@@ -29,11 +29,12 @@ async function main({ g, c }) {
     
     const prevName = context.payload.changes.name.from;
     console.log('Name changed!!!!');
+    console.log(labelId);
     console.log(prevName);
     console.log(labelName);
     
     for(let [key, value] of Object.entries(data)) {
-      if (value.includes(labelId)) {
+      if (value.includes(prevName)) {
         const keyName = key;
         console.log('Changing label name value:\n   Reference Name: ' + keyName + '\n   Previous Name: ' + prevName + '\n   Edited Name: ' + labelName);
 
