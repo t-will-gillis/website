@@ -1,7 +1,7 @@
 name: This is an example
 
 on:
-  label:
+  # label:
     types:
 
 jobs:
