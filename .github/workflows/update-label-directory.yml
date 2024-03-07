@@ -16,7 +16,7 @@ jobs:
          GITHUB_CONTEXT: ${{ toJson(github) }}
        run: |
          echo "$GITHUB_LABEL" 
-         echo "$GITHUB_CONTEXT_LABEL" 
+         echo "$GITHUB_CONTEXT.LABEL" 
     
        
      - name: send context
