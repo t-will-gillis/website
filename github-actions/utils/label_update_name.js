@@ -8,8 +8,8 @@ async function main({ g, c }) {
   github = g;
   context = c;
 
-  // const labelNameNew = context.payload.label.name;
-  const labelId = context.payload.label.id;
+ 
+  const labelId = context.payload.label.id + '';
   const labelName = context.payload.label.name;
 
   console.log('-----------------------------------------------------------------------');
