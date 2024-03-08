@@ -34,13 +34,12 @@ async function main({ g, c }) {
     for(let [key, value] of Object.entries(data)) {
       if (value.includes(labelId)) {
         keyName = key;
-        data[keyName] = [labelId, labelName];
         break;
       }
     };
-    console.log('test- this is value of keyName: ' + keyName); 
+
     // If labelId does not exist, create new (camelCased) keyName so label entry can be added to directory
-    if (keyName = '') {
+    if (keyName === '') {
       let labelInterim = labelName.split(/[^a-zA-Z0-9]+/);
       for(let i = 0; i < labelInterim.length ; i++) {
           if(i === 0) {
@@ -49,15 +48,12 @@ async function main({ g, c }) {
               keyName += labelInterim[i].split(' ').map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase()).join(' ');
           }
       }
-      data[keyName] = [labelId, labelName];
-      console.log('blank keyname, now keyName: ' + keyName);
     };
-    
-    console.log('test- this is value of keyName: ' + keyName); 
-    // Log the entry, then save to data file
-    console.log('Writing data ==> "' + keyName + '": ["' + labelId + '", "' + labelName + '"]\n');
-    
 
+    // Log the entry, then save to data file
+    console.log('Writing data {"' + keyName + '": ["' + labelId + '", "' + labelName + '"]}\n');
+    data[keyName] = [labelId, labelName];
+    
     // Write data file in prep for committing changes to label directory
     fs.writeFile(filepath, JSON.stringify(data, null, 2), (err) => {
       if (err) throw err;
