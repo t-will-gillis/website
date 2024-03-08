@@ -13,6 +13,7 @@ async function labelRetrieveName(...keyNames) {
   const data = JSON.parse(rawData);
 
   const displayNames = keyNames.map(keyName => data(keyName)[1]);
-  return displayNames
+  return displayNames;
+}
 
 module.exports = labelRetrieveName;
