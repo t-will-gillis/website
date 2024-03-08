@@ -8,7 +8,7 @@ async function main({ g, c }) {
   
   github = g;
   context = c;
-
+  conssole.log(context.payload);
   // Proceed only if the label name changed or if the label is completely new
   if((context.payload.event.action === 'edited' && context.payload.changes.name) || (context.payload.event.action === 'created')) {
 
