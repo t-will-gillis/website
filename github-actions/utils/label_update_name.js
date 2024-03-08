@@ -5,54 +5,66 @@ var github;
 var context;
 
 async function main({ g, c }) {
+  
   github = g;
   context = c;
 
- 
-  const labelId = context.payload.label.id + '';
-  const labelName = context.payload.label.name;
-
-  console.log('-----------------------------------------------------------------------');
-  console.log('Context and current info for edited label: ');
-  console.log(context.payload.label);
-  console.log('-----------------------------------------------------------------------');
-  console.log('What was changed: ');
-  console.log(context.payload.changes);
-  console.log('-----------------------------------------------------------------------');
-  
+  // Proceed only if the label name changed
   if(context.payload.changes.name) {
 
+    const labelId = context.payload.label.id + '';
+    const labelName = context.payload.label.name;
+    const prevName = context.payload.changes.name.from;
+    
+    console.log('-----------------------------------------------------------------------');
+    console.log('Context and current info for edited label: ');
+    console.log(context.payload.label);
+    console.log('-----------------------------------------------------------------------');
+    console.log('What was changed: ');
+    console.log(context.payload.changes);
+    console.log('-----------------------------------------------------------------------');
+    
     // Retrieve label directory
     const filepath = 'github-actions/utils/_data/label_directory.json';
     const rawData = fs.readFileSync(filepath, 'utf8');
     const data = JSON.parse(rawData);
-    
-    const prevName = context.payload.changes.name.from;
-    console.log('Name changed!!!!');
-    console.log(labelId);
-    console.log(prevName);
-    console.log(labelName);
-    console.log(data['draft']);
+    let keyName = '';
+
+    // Check if labelId exists in label directory, if so, set keyName
     for(let [key, value] of Object.entries(data)) {
       if (value.includes(labelId)) {
-        const keyName = key;
-        console.log('Changing label name value:\n   Reference Name: ' + keyName + '\n   Previous Name: ' + prevName + '\n   Edited Name: ' + labelName);
-
-        // Write new data to label directory
-        data[key] = [labelId, labelName];
-        fs.writeFile(filepath, JSON.stringify(data, null, 2), (err) => {
-          if (err) throw err;
-          console.log('-------------------------------------------------------');
-          console.log("File 'label-directory.json' saved successfully!");
-        });
+        keyName = key;
         break;
-      } 
-    }
+      }
+    };
+      
+    // If labelId does not exist, create new (camelCased) keyName so label entry can be added to directory
+    if (keyName = '') {
+      let labelInterim = labelName.split(/[^a-zA-Z0-9]+/);
+      for(let i = 0; i < labelInterim.length ; i++) {
+          if(i === 0) {
+              keyName += labelInterim[0].toLowerCase();
+          } else if(isAlphanumeric(labelInterim[i])) {
+              keyName += labelInterim[i].split(' ').map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase()).join(' ');
+          }
+      }
+    };
+    
+    // Log the entry, then save to data file
+    console.log('Writing data to label_directory.json for:\n\n - "' + keyName + '": ["' + labelId + '", "' + labelName + '"]');
+    data[keyName] = [labelId, labelName];
+
+    // Write data file in prep for committing changes to label directory
+    fs.writeFile(filepath, JSON.stringify(data, null, 2), (err) => {
+      if (err) throw err;
+      console.log('-------------------------------------------------------');
+      console.log("File 'label-directory.json' saved successfully!");
+    });
+    
   } else {
     console.log('Label name was not changed');
   } 
 }
-
 
 
 module.exports = main;
