@@ -8,7 +8,7 @@ const fs = require('fs');
 async function labelRetrieveName(...keyNames) {
 
   // Retrieve label directory
-  const filepath = './_data/label_directory.json';
+  const filepath = './_data/label-directory.json';
   const rawData = fs.readFileSync(filepath, 'utf8');
   const data = JSON.parse(rawData);
 
