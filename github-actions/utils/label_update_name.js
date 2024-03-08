@@ -10,7 +10,7 @@ async function main({ g, c }) {
   context = c;
   console.log(context.payload);
   // Proceed only if the label name changed or if the label is completely new
-  if((context.payload.event.action === 'edited' && context.payload.changes.name) || (context.payload.event.action === 'created')) {
+  if((context.payload.action === 'edited' && context.payload.changes.name) || (context.payload.action === 'created')) {
 
     const labelId = context.payload.label.id + '';
     const labelName = context.payload.label.name;
@@ -23,7 +23,7 @@ async function main({ g, c }) {
 
         
     // Check if labelId exists in label directory, if so, set keyName
-    if(context.payload.event.action === 'edited') {
+    if(context.payload.action === 'edited') {
       for(let [key, value] of Object.entries(data)) {
         if (value.includes(labelId)) {
           keyName = key;
@@ -33,7 +33,7 @@ async function main({ g, c }) {
     }
 
     // If labelId does not exist, create new (camelCased) keyName so label entry can be added to directory
-    if(context.payload.event.action === 'created') {
+    if(context.payload.action === 'created') {
       let labelInterim = labelName.split(/[^a-zA-Z0-9]+/);
       for(let i = 0; i < labelInterim.length ; i++) {
           if(i === 0) {
@@ -48,7 +48,7 @@ async function main({ g, c }) {
     console.log('-------------------------------------------------------');
     console.log('Current info for edited label:\n' + context.payload.label);
     console.log('-------------------------------------------------------');
-    if(context.payload.event.action === 'edited') {
+    if(context.payload.action === 'edited') {
       console.log('What was changed:\n' + context.payload.changes);
       console.log('-------------------------------------------------------');;
     }
