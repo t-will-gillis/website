@@ -34,6 +34,7 @@ async function main({ g, c }) {
 
     // If labelId does not exist, create new (camelCased) keyName so label entry can be added to directory
     if(context.payload.action === 'created') {
+      const isAlphanumeric = str => /^[a-z0-9]+$/gi.test(str);
       let labelInterim = labelName.split(/[^a-zA-Z0-9]+/);
       for(let i = 0; i < labelInterim.length ; i++) {
           if(i === 0) {
