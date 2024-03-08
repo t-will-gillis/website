@@ -14,33 +14,26 @@ async function main({ g, c }) {
 
     const labelId = context.payload.label.id + '';
     const labelName = context.payload.label.name;
-    const prevName = context.payload.changes.name.from;
-    
-    console.log('-----------------------------------------------------------------------');
-    console.log('Context and current info for edited label: ');
-    console.log(context.payload.label);
-    console.log('-----------------------------------------------------------------------');
-    console.log('What was changed: ');
-    console.log(context.payload.changes);
-    console.log('-----------------------------------------------------------------------');
-    
+
     // Retrieve label directory
     const filepath = 'github-actions/utils/_data/label_directory.json';
     const rawData = fs.readFileSync(filepath, 'utf8');
     const data = JSON.parse(rawData);
     let keyName = '';
 
-    
+        
     // Check if labelId exists in label directory, if so, set keyName
-    for(let [key, value] of Object.entries(data)) {
-      if (value.includes(labelId)) {
-        keyName = key;
-        break;
-      }
-    };
+    if(context.payload.event.action === 'edited') {
+      for(let [key, value] of Object.entries(data)) {
+        if (value.includes(labelId)) {
+          keyName = key;
+          break;
+        }
+      };
+    }
 
     // If labelId does not exist, create new (camelCased) keyName so label entry can be added to directory
-    if (keyName === '') {
+    if(context.payload.event.action === 'created') {
       let labelInterim = labelName.split(/[^a-zA-Z0-9]+/);
       for(let i = 0; i < labelInterim.length ; i++) {
           if(i === 0) {
@@ -52,7 +45,16 @@ async function main({ g, c }) {
     };
 
     // Log the entry, then save to data file
-    console.log('Writing data {"' + keyName + '": ["' + labelId + '", "' + labelName + '"]}\n');
+    console.log('-------------------------------------------------------');
+    console.log('Current info for edited label:\n' + context.payload.label);
+    console.log('-------------------------------------------------------');
+    if(context.payload.event.action === 'edited') {
+      console.log('What was changed:\n' + context.payload.changes);
+      console.log('-------------------------------------------------------');;
+    }
+    console.log('Writing data:\n {"' + keyName + '": ["' + labelId + '", "' + labelName + '"]}\n');
+    
+    // Save entry to data file
     data[keyName] = [labelId, labelName];
     
     // Write data file in prep for committing changes to label directory
