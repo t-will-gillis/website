@@ -1,13 +1,19 @@
 // Import modules
-const findLinkedIssue = require('../../utils/find-linked-issue');
-const getTimeline = require('../../utils/get-timeline');
 var fs = require("fs");
+const getTimeline = require('../../utils/get-timeline');
+const findLinkedIssue = require('../../utils/find-linked-issue');
+const labelRetrieveName = require('../../utils/label-retrieve-name');
+
 // Global variables
 var github;
 var context;
-const statusUpdatedLabel = 'Status: Updated';
-const toUpdateLabel = 'To Update !';
-const inactiveLabel = '2 weeks inactive';
+
+const statusUpdatedLabel = 'statusUpdated';
+const toUpdateLabel = 'toUpdate';
+const inactiveLabel = '2WeeksInactive';
+[statusUpdatedLabel, toUpdateLabel, inactiveLabel] = labelRetrieveName([statusUpdatedLabel, toUpdateLabel, inactiveLabel]);
+console.log(statusUpdatedLabel, toUpdateLabel, inactiveLabel);
+
 const updatedByDays = 3; // If there is an update within 3 days, the issue is considered updated
 const inactiveUpdatedByDays = 14; // If no update within 14 days, the issue is considered '2 weeks inactive'
 const commentByDays = 7; // If there is an update within 14 days but no update within 7 days, the issue is considered outdated and the assignee needs 'To Update !' it
