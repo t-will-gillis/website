@@ -53,8 +53,9 @@ async function main({ g, c }) {
       console.log('blank keyname, now keyName: ' + keyName);
     };
     
+    console.log('test- this is value of keyName: ' + keyName); 
     // Log the entry, then save to data file
-    console.log('Writing data to label_directory.json for:\n\n"' + keyName + '": ["' + labelId + '", "' + labelName + '"]\n');
+    console.log('Writing data ==> "' + keyName + '": ["' + labelId + '", "' + labelName + '"]\n');
     
 
     // Write data file in prep for committing changes to label directory
