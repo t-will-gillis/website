@@ -9,8 +9,8 @@ async function main({ g, c }) {
   github = g;
   context = c;
 
-  // Proceed only if the label name changed
-  if(context.payload.changes.name) {
+  // Proceed only if the label name changed or if the label is completely new
+  if((context.payload.event.action === 'edited' && context.payload.changes.name) || (context.payload.event.action === 'created')) {
 
     const labelId = context.payload.label.id + '';
     const labelName = context.payload.label.name;
@@ -30,6 +30,7 @@ async function main({ g, c }) {
     const data = JSON.parse(rawData);
     let keyName = '';
 
+    
     // Check if labelId exists in label directory, if so, set keyName
     for(let [key, value] of Object.entries(data)) {
       if (value.includes(labelId)) {
