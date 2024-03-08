@@ -47,13 +47,13 @@ async function main({ g, c }) {
 
     // Log the entry, then save to data file
     console.log('-------------------------------------------------------');
-    console.log('Current info for edited label:'):  
+    console.log('Current info for edited label:');
     console.log(context.payload.label);
     console.log('-------------------------------------------------------');
     if(context.payload.action === 'edited') {
       console.log('What was changed:');
       console.log(context.payload.changes);
-      console.log('-------------------------------------------------------');;
+      console.log('-------------------------------------------------------');
     }
     console.log('Writing data:\n {"' + keyName + '": ["' + labelId + '", "' + labelName + '"]}\n');
     
