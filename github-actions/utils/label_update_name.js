@@ -8,7 +8,7 @@ async function main({ g, c }) {
   
   github = g;
   context = c;
-  console.log(context.payload);
+
   // Proceed only if the label name changed or if the label is completely new
   if((context.payload.action === 'edited' && context.payload.changes.name) || (context.payload.action === 'created')) {
 
@@ -47,10 +47,12 @@ async function main({ g, c }) {
 
     // Log the entry, then save to data file
     console.log('-------------------------------------------------------');
-    console.log('Current info for edited label:\n' + context.payload.label);
+    console.log('Current info for edited label:'):  
+    console.log(context.payload.label);
     console.log('-------------------------------------------------------');
     if(context.payload.action === 'edited') {
-      console.log('What was changed:\n' + context.payload.changes);
+      console.log('What was changed:');
+      console.log(context.payload.changes);
       console.log('-------------------------------------------------------');;
     }
     console.log('Writing data:\n {"' + keyName + '": ["' + labelId + '", "' + labelName + '"]}\n');
