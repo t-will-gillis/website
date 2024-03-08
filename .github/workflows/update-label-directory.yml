@@ -23,14 +23,14 @@ jobs:
        with:
         github-token: ${{ secrets.HACKFORLA_MIMIC }}
         script: |
-          const script = require('./github-actions/utils/label_update_name.js')
+          const script = require('./github-actions/utils/label-update-name.js')
           script({g: github, c: context})
 
      - name: Update label directory
        uses: stefanzweifel/git-auto-commit-action@v5.0.0
        with:
          # Glob pattern of file which should be added to the commit
-         file_pattern: github-actions/utils/_data/label_directory.json
+         file_pattern: github-actions/utils/_data/label-directory.json
          
          # Optional commit message and author settings
          commit_message: Update label directory
