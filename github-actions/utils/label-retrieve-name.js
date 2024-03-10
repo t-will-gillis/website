@@ -7,7 +7,7 @@ const fs = require('fs');
  */
 function labelRetrieveName(keyNames) {
 
-
+  console.log('in retrieve before');
   
   // Retrieve label directory
   const filepath = 'github-actions/utils/_data/label-directory.json';
