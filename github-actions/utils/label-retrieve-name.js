@@ -7,8 +7,6 @@ const fs = require('fs');
  */
 function labelRetrieveName(keyNames) {
 
-  console.log('in retrieve before');
-  
   // Retrieve label directory
   const filepath = 'github-actions/utils/_data/label-directory.json';
   const rawData = fs.readFileSync(filepath, 'utf8');
@@ -16,13 +14,9 @@ function labelRetrieveName(keyNames) {
 
   response = [ ]
   for(key of keyNames){
-    console.log(key, data[key]);
     response.push(data[key][1]);
   }
 
-  // const displayNames = keyNames.map(keyName => data[keyName][1]);
-  console.log('in retrieve');
-  console.log(response);
   return response;
 }
 
