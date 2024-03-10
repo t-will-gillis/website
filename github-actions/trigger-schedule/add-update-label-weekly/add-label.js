@@ -14,8 +14,8 @@ const inactiveLabel = labelRetrieveName('2WeeksInactive');
 console.log(statusUpdatedLabel, toUpdateLabel, inactiveLabel);
 
 const updatedByDays = 3; // If there is an update within 3 days, the issue is considered updated
-const inactiveUpdatedByDays = 14; // If no update within 14 days, the issue is considered '2 weeks inactive'
-const commentByDays = 7; // If there is an update within 14 days but no update within 7 days, the issue is considered outdated and the assignee needs 'To Update !' it
+const inactiveUpdatedByDays = 14; // If no update within 14 days, the issue is considered '2WeeksInactive'
+const commentByDays = 7; // If there is an update within 14 days but no update within 7 days, the issue is considered outdated and the assignee needs 'toUpdate' it
 const threeDayCutoffTime = new Date()
 threeDayCutoffTime.setDate(threeDayCutoffTime.getDate() - updatedByDays)
 const sevenDayCutoffTime = new Date()
@@ -51,12 +51,12 @@ async function main({ g, c }, columnId) {
     const responseObject = await isTimelineOutdated(timeline, issueNum, assignees)
 
 
-    if (responseObject.result === true && responseObject.labels === toUpdateLabel) { // 7-day outdated, add 'To Update !' label
+    if (responseObject.result === true && responseObject.labels === toUpdateLabel) { // 7-day outdated, add 'toUpdate' label
       console.log(`Going to ask for an update now for issue #${issueNum}`);
       await removeLabels(issueNum, statusUpdatedLabel, inactiveLabel);
       await addLabels(issueNum, responseObject.labels);
       await postComment(issueNum, assignees, toUpdateLabel);
-    } else if (responseObject.result === true && responseObject.labels === inactiveLabel) { // 14-day outdated, add '2 Weeks Inactive' label
+    } else if (responseObject.result === true && responseObject.labels === inactiveLabel) { // 14-day outdated, add '2WeeksInactive' label
       console.log(`Going to ask for an update now for issue #${issueNum}`);
       await removeLabels(issueNum, toUpdateLabel, statusUpdatedLabel);
       await addLabels(issueNum, responseObject.labels);
@@ -167,17 +167,17 @@ function isTimelineOutdated(timeline, issueNum, assignees) { // assignees is an 
     return { result: false, labels: '' } // remove all three labels
   }
 
-  if ((lastCommentTimestamp && isMomentRecent(lastCommentTimestamp, fourteenDayCutoffTime)) || (lastAssignedTimestamp && isMomentRecent(lastAssignedTimestamp, fourteenDayCutoffTime))) { // if last comment was between 7-14 days, or no comment but an assginee was assigned during this period, issue is outdated and add 'To Update !' label
+  if ((lastCommentTimestamp && isMomentRecent(lastCommentTimestamp, fourteenDayCutoffTime)) || (lastAssignedTimestamp && isMomentRecent(lastAssignedTimestamp, fourteenDayCutoffTime))) { // if last comment was between 7-14 days, or no comment but an assginee was assigned during this period, issue is outdated and add 'toUpdate' label
     if ((lastCommentTimestamp && isMomentRecent(lastCommentTimestamp, fourteenDayCutoffTime))) {
-      console.log(`Issue #${issueNum} commented by assignee between 7 and 14 days, use 'To Update !' label; timestamp: ${lastCommentTimestamp}`)
+      console.log(`Issue #${issueNum} commented by assignee between 7 and 14 days, use 'toUpdate' label; timestamp: ${lastCommentTimestamp}`)
     } else if (lastAssignedTimestamp && isMomentRecent(lastAssignedTimestamp, fourteenDayCutoffTime)) {
-      console.log(`Issue #${issueNum} assigned between 7 and 14 days, use 'To Update !' label; timestamp: ${lastAssignedTimestamp}`)
+      console.log(`Issue #${issueNum} assigned between 7 and 14 days, use 'toUpdate' label; timestamp: ${lastAssignedTimestamp}`)
     }
     return { result: true, labels: toUpdateLabel } // outdated, add 'To Update!' label
   }
 
-  // if no comment or assigning found within 14 days, issue is outdated and add '2 weeks inactive' label
-  console.log(`Issue #${issueNum} has no update within 14 days, use '2 weeks inactive' label`)
+  // if no comment or assigning found within 14 days, issue is outdated and add '2WeeksInactive' label
+  console.log(`Issue #${issueNum} has no update within 14 days, use '2WeeksInactive' label`)
   return { result: true, labels: inactiveLabel }
 }
 
