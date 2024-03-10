@@ -11,7 +11,7 @@ var context;
 const statusUpdatedLabel = 'statusUpdated'; 
 const toUpdateLabel = 'toUpdate';
 const inactiveLabel = '2WeeksInactive'; 
-var updateLabels = [statusUpdatedLabel, toUpdateLabel, inactiveLabel]
+var updateLabels = ['bobby', 'suz', 'jane']
   
 [statusUpdatedLabel, toUpdateLabel, inactiveLabel] = labelRetrieveName(updateLabels);
 console.log(statusUpdatedLabel, toUpdateLabel, inactiveLabel);
