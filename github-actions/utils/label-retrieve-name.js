@@ -15,7 +15,7 @@ function labelRetrieveName(keyNames) {
   const data = JSON.parse(rawData);
 
   response = [ ]
-  for(key in keyNames){
+  for(key of keyNames){
     console.log(key, data[key]);
     response.push(data[key][1]);
   }
