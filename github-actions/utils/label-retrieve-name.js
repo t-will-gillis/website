@@ -5,9 +5,12 @@ const fs = require('fs');
  * @param {Array} keyNames       - List of reference names to look up display names
  * @return {Array} displayNames  - List of display names
  */
-function labelRetrieveName(...keyNames) {
+function labelRetrieveName(keyNames) {
 
-  console.log(keyNames);
+  for(key in keyNames){
+    console.log(key);
+  }
+  
   // Retrieve label directory
   const filepath = 'github-actions/utils/_data/label-directory.json';
   const rawData = fs.readFileSync(filepath, 'utf8');
