@@ -12,7 +12,7 @@ async function labelRetrieveName(keyName) {
   const rawData = fs.readFileSync(filepath, 'utf8');
   const data = JSON.parse(rawData);
 
-  const displayName = data[keyName][1]);
+  const displayName = data[keyName][1];
   return displayName;
 }
 
