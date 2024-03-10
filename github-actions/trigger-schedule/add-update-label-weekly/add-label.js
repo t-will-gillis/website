@@ -13,7 +13,7 @@ const toUpdateLabel = '';
 const inactiveLabel = ''; 
 const updateLabels = ['statusUpdated','toUpdate','2WeeksInactive']
   
-[statusUpdatedLabel, toUpdateLabel, inactiveLabel] = labelRetrieveName(updateLabels);
+[statusUpdatedLabel, toUpdateLabel, inactiveLabel] = await labelRetrieveName(updateLabels);
 console.log(statusUpdatedLabel, toUpdateLabel, inactiveLabel);
 
 const updatedByDays = 3; // If there is an update within 3 days, the issue is considered updated
