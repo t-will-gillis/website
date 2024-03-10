@@ -8,10 +8,9 @@ const labelRetrieveName = require('../../utils/label-retrieve-name');
 var github;
 var context;
 
-const statusUpdatedLabel = '';
-const toUpdateLabel = '';
-const inactiveLabel = '';
-[statusUpdatedLabel, toUpdateLabel, inactiveLabel] = labelRetrieveName('statusUpdated', 'toUpdate', '2WeeksInactive');
+const statusUpdatedLabel = labelRetrieveName('statusUpdated');
+const toUpdateLabel = labelRetrieveName('toUpdate');
+const inactiveLabel = labelRetrieveName('2WeeksInactive');
 console.log(statusUpdatedLabel, toUpdateLabel, inactiveLabel);
 
 const updatedByDays = 3; // If there is an update within 3 days, the issue is considered updated
