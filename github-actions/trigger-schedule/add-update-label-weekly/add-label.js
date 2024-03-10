@@ -8,10 +8,10 @@ const labelRetrieveName = require('../../utils/label-retrieve-name');
 var github;
 var context;
 
-const statusUpdatedLabel = ''; 
-const toUpdateLabel = '';
-const inactiveLabel = ''; 
-var updateLabels = ['statusUpdated','toUpdate','2WeeksInactive']
+const statusUpdatedLabel = 'statusUpdated'; 
+const toUpdateLabel = 'toUpdate';
+const inactiveLabel = '2WeeksInactive'; 
+const updateLabels = [statusUpdatedLabel, toUpdateLabel, inactiveLabel]
   
 [statusUpdatedLabel, toUpdateLabel, inactiveLabel] = labelRetrieveName(updateLabels);
 console.log(statusUpdatedLabel, toUpdateLabel, inactiveLabel);
