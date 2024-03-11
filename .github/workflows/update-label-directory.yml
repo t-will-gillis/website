@@ -3,7 +3,7 @@ name: Update Label Directory
 # This action triggered by change to Labels, updates github-actions/utils/_data/label_directory.json
 on:
   label:
-    types: [edited, created]
+    types: [edited, created, deleted]
 
 jobs:
   Update-Label-Directory:
