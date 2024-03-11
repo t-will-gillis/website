@@ -20,14 +20,7 @@ async function main({ g, c }) {
     const rawData = fs.readFileSync(filepath, 'utf8');
     const data = JSON.parse(rawData);
     let keyName = '';
-
-    // Log the entry, then save to data file
-    console.log('-------------------------------------------------------');
-    console.log('Label reference info:');
-    console.log(context.payload.label);
-    console.log('-------------------------------------------------------');
-
-    
+  
     // If label is to be edited or deleted, check for labelId in label directory and return keyName
     if(context.payload.action === 'edited' || context.payload.action === 'deleted') {
       for(let [key, value] of Object.entries(data)) {
@@ -62,7 +55,6 @@ async function main({ g, c }) {
       console.log('-------------------------------------------------------');
     }
 
-
     // Update directory (delete, edit, or create) and log
     if(context.payload.action === 'deleted') {
       delete data[keyName];
@@ -71,7 +63,6 @@ async function main({ g, c }) {
       data[keyName] = [labelId, labelName];
       console.log('Writing data:\n {"' + keyName + '": ["' + labelId + '", "' + labelName + '"]}\n');
     }
-    
     
     // Write revised data file in prep for committing changes to label directory
     fs.writeFile(filepath, JSON.stringify(data, null, 2), (err) => {
