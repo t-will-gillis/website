@@ -58,10 +58,10 @@ async function main({ g, c }) {
     // Update directory (delete, edit, or create) and log
     if(context.payload.action === 'deleted') {
       delete data[keyName];
-      console.log('Deleted:\n {"' + keyName + '": ["' + labelId + '", "' + labelName + '"]}\n');
+      console.log('\nDeleted label:\n {"' + keyName + '": ["' + labelId + '", "' + labelName + '"]}\n');
     } else {
       data[keyName] = [labelId, labelName];
-      console.log('Writing data:\n {"' + keyName + '": ["' + labelId + '", "' + labelName + '"]}\n');
+      console.log('\nWriting data:\n {"' + keyName + '": ["' + labelId + '", "' + labelName + '"]}\n');
     }
     
     // Write revised data file in prep for committing changes to label directory
