@@ -14,10 +14,10 @@ var context;
  * @param {Number} issueNum - the number of the issue where the post will be made 
  * @param {String} instruction - commandline instructions
  */
-async function main({ g, c }, { issueNum, instruction }) {
+async function main({ g, c }, { issueNum, instruction  {
     github = g;
-    context = c;
+    = c;
     postComment(issueNum, decodeURI(instruction), github, context);
-}
+
 
 module.exports = main
