@@ -9,7 +9,7 @@ function main({ context }) {
   const doneColumn = "Done"
   const QAColumn = "QA"
 
-  const hardLabels = [
+  const  = [
     "Feature: Refactor CSS",
     "Feature: Refactor HTML",
     "Feature: Refactor JS / Liquid",
@@ -23,7 +23,7 @@ function main({ context }) {
 
   const overrideSoftLabels = ["role: front end"]
 
-  const issueLabels = obtainLabels(context);
+  const issueLabels = obtainLabels(
 
   // checks if label is a hard label
   const isHardLabel = label => hardLabels.includes(label);
