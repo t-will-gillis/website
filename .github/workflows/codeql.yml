@@ -13,10 +13,10 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "emoji-tests" ]
+    branches: [ "emoji_tests" ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ "emoji-tests" ]
+    branches: [ "emoji_tests" ]
   schedule:
     - cron: '30 5 * * 5'
 
