@@ -11,7 +11,7 @@ async function main({ g, c }, artifactContent) {
   context = c;
 
   // Retrieve lists data from json file written in previous step
-  let inactiveLists = JSON.parse(artifactContent);
+  let  = JSON.parse(artifactContent);
   
   const owner = context.repo.owner;
   const repo = context.repo.repo;
@@ -22,7 +22,7 @@ async function main({ g, c }, artifactContent) {
   const issueId = issue.id;
   const issueNumber = issue.number;
   // Get project id, in order to get the column id of `New Issue Approval` in `Project Board`
-  const projectId = await getProjectId(owner, repo);
+  const projectId = await getProjec
   // Get column id, in order to create a project card in `Project Board` and place in `New Issue Approval`
   const columnId = await getColumnId(projectId);
   // Create the project card, which links to the issue created in createIssue() above
@@ -37,7 +37,7 @@ const createIssue = async (owner, repo, inactiveLists) => {
   let removeList = inactiveLists['removedContributors'];
   let notifyList = inactiveLists['notifiedContributors'];
 
-  let removedList = removeList.map(x => "@" + x).join("\n");  
+  let removedList = removeList.map(x =>>>>>>>>>>> "@" + x).join("\n");  
   let notifiedList = notifyList.map(x => "@" + x).join("\n"); 
 
   // This finds all issues in the repo and returns the only the number for the last issue created. 
