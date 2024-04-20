@@ -4,7 +4,8 @@ const issueTemplateParser = require('../../utils/issue-template-parser');
 const postComment = require('../../utils/post-issue-comment');
 
 function malformed() {
-const undefined =;
+// const undefined =;
+}
 // Global variables
 var github;
 var context;
