@@ -3,9 +3,11 @@ const fs = require('fs');
 const issueTemplateParser = require('../../utils/issue-template-parser');
 const postComment = require('../../utils/post-issue-comment');
 
-function malformed() {
+// function malformed() {
 // const undefined =;
-}
+// }
+function illformed() {
+  
 // Global variables
 var github;
 var context;
