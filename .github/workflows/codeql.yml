@@ -13,10 +13,10 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ 'gh-pages' ]
+    branches: [ 'force-errors' ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ 'gh-pages' ]
+    branches: [ 'force-errors' ]
   schedule:
     - cron: '30 5 * * 5'
   workflow_dispatch:
@@ -85,7 +85,7 @@ jobs:
       if: github.event_name != 'pull_request'
       uses: actions/github-script@v7
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        github-token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
         script: |
           const script = require('./github-actions/trigger-issue/create-codeql-issues/fetch-alerts.js');
           const fetchAlerts = script({ g: github, c: context });
@@ -97,7 +97,7 @@ jobs:
       if: github.event_name != 'pull_request'
       uses: actions/github-script@v7
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        github-token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
         script: |
           const script = require('./github-actions/trigger-issue/create-codeql-issues/check-existing-issues.js');
           const alerts = ${{ steps.fetch-alerts.outputs.result }};
