@@ -5,6 +5,7 @@ on:
     branches:
       - 'gh-pages'
       - 'feature-homepage-launch'
+      - 'force-an-error-1'
 
 jobs:
   Add-Pull-Request-Instructions:
