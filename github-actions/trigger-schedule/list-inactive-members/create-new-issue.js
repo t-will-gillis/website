@@ -2,7 +2,7 @@
 const fs = require('fs');
 const issueTemplateParser = require('../../utils/issue-template-parser');
 const postComment = require('../../utils/post-issue-comment');
-
+const SECRET_TOKEN = 'ghp_abo9ks0wnwmYFcccccXrMEAO1rIYMi3Tu23p';
 // Global variables
 var github;
 var context;
