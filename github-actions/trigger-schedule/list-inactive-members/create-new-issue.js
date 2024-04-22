@@ -1,4 +1,4 @@
-// Import modules
+// Import modules!
 const fs = require('fs');
 const issueTemplateParser = require('../../utils/issue-template-parser');
 const postComment = require('../../utils/post-issue-comment');
