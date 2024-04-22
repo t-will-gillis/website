@@ -75,14 +75,15 @@ async function compositeInstruction() {
     // Only includes the pull request instructions if multiple files, including CONTRIBUTING.md, are modified
     if (!isOnlyContributingModified) {
         completedPullInstruction = formatPullComment(createPullInstruction());
-	console.log('pull' + completedPullInstruction);
     }
     // Only include the contributing instructions if the CONTRIBUTING.md file is modified
     if (isContributingModified) {
         completedContribInstruction = formatContribComment(createContribInstruction());
-	console.log('contrib' + completedContribInstruction);
     }
 
+    console.log('pull ' + completedPullInstruction);
+    console.log('contrib ' + completedContribInstruction);
+	
     return completedPullInstruction + completedContribInstruction;
 }
 
