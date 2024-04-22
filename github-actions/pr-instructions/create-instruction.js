@@ -23,7 +23,7 @@ function formatPullComment(instruction) {
 }
 
 function formatContribComment(instruction){
-	const path = './github-actions/pr-instructions/pr-instructions-contrib-template.md'
+    const path = './github-actions/pr-instructions/pr-instructions-contrib-template.md'
     const text = fs.readFileSync(path).toString('utf-8');
     const completedInstructions = text.replace('${previewContribInstructions}', instruction);
     return completedInstructions;
@@ -41,10 +41,10 @@ git pull ${cloneURL} ${nameOfFromBranch}`
 }
 
 function createContribInstruction(){
-	const nameOfCollaborator = context.payload.pull_request.head.repo.owner.login;
+    const nameOfCollaborator = context.payload.pull_request.head.repo.owner.login;
     const nameOfFromBranch = context.payload.pull_request.head.ref;
-	const previewContribURL = `https://github.com/${nameOfCollaborator}/website/blob/${nameOfFromBranch}/CONTRIBUTING.md`
-	return previewContribURL;
+    const previewContribURL = `https://github.com/${nameOfCollaborator}/website/blob/${nameOfFromBranch}/CONTRIBUTING.md`
+    return previewContribURL;
 }
 
 async function getModifiedFiles() {
@@ -60,7 +60,7 @@ async function getModifiedFiles() {
     });
     // Maps the files array to only include the filename of each file
     const modifiedFiles = files.map(file => file.filename);
-
+    console.log(modifiedFiles);
     return modifiedFiles;
 }
 
@@ -75,10 +75,12 @@ async function compositeInstruction() {
     // Only includes the pull request instructions if multiple files, including CONTRIBUTING.md, are modified
     if (!isOnlyContributingModified) {
         completedPullInstruction = formatPullComment(createPullInstruction());
+	console.log('pull' + completedPullInstruction);
     }
     // Only include the contributing instructions if the CONTRIBUTING.md file is modified
     if (isContributingModified) {
         completedContribInstruction = formatContribComment(createContribInstruction());
+	console.log('contrib' + completedContribInstruction);
     }
 
     return completedPullInstruction + completedContribInstruction;
