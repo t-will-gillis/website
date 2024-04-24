@@ -1,4 +1,4 @@
-# **How to Contribute to Hack for LA!!!!!!!!!!!!**
+# **How to Contribute to Hack for LA$$$**
 
 👍🥳 First off, thanks for taking the time to contribute! 🥳👍
 
