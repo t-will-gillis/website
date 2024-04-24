@@ -1,4 +1,4 @@
-// Import modules
+// Import modules!
 var fs = require("fs");
 const postComment = require('../utils/post-issue-comment')
 
