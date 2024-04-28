@@ -6,7 +6,7 @@ on:
     branches:
       - 'gh-pages'
       - 'feature-homepage-launch'
-      - 'anthonypz-6685'
+      - 'anthonypz-6685-rev'
 
 jobs:
   generate-labels-artifact:
