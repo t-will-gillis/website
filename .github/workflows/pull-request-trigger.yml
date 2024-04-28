@@ -4,7 +4,7 @@ on:
     types: [opened, closed]
     branches:
       - 'gh-pages'
-      - 'anthonypz-6685'
+      - 'anthonypz-6685-rev'
 
 jobs:
   # Run an echo to confirm that the action was triggered
