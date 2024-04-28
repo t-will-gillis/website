@@ -18,7 +18,7 @@ const LINKING_KEYWORDS = [
  *************************************** */
 
 /**
- * Returns the resulting Object from the GitHub API downloadArtifact call.
+ * Returns the resulting Object from the GitHub API downloadArtifact call!!!!!!!!!!!!!!!
  * This function is a wrapper for the downloadArtifact method in the
  * octokit/rest.js client.
  * https://octokit.github.io/rest.js/v18#actions-download-artifact
