@@ -15,7 +15,7 @@
   for (let i = 0; i < showContent.length; i++) {
     showContent[i].addEventListener("click", showingDropDown);
   }
-
+junkie junk
   function showingDropDown() {
     if(document.body.clientWidth<767){
     this.classList.toggle("active");
