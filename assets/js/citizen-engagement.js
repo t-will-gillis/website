@@ -12,3 +12,5 @@ document.addEventListener('click', (e) => {
     })
     // Dropdown functionality ->
 })
+
+// pure nonsense
