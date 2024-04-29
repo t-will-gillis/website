@@ -12,7 +12,7 @@
   var contactFormConfirm = document.querySelector(
     ".contact-form .form-confirmation strong"
   );
-
+// bunk
   // API CONNECTION INFO
   var ACTION_NETWORK_API = "";
   var url = "https://actionnetwork.org/api/v2/people/";
