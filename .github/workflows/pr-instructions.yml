@@ -10,7 +10,8 @@ on:
 jobs:
   Add-Pull-Request-Instructions:
     runs-on: ubuntu-latest
-    permissions: none
+    permissions:
+        pull-requests: none
 
     steps:
       - uses: actions/checkout@v4
