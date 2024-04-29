@@ -12,7 +12,7 @@ const FLAGS = {
     'displayChanged': true,
     'listenerNotAttached': true
 }
-
+some sort of bunk
 document.addEventListener("DOMContentLoaded", function () {
   
   const accomplishments=retrieveAccomplishmentsData();
