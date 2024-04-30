@@ -22,7 +22,7 @@ for (let i = 0; i < navLinks.length; i++) {
         }, 1000);
     });
 }
-
+// JUNK TEXT for PR
 /*************************************************/
 /**** Script 2: Makes the side stick and scrollable *****/
 /*************************************************/
