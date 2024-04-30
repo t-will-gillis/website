@@ -5,7 +5,7 @@ on:
     branches:
       - 'gh-pages'
       - 'feature-homepage-launch'
-      - 'testing-pr'
+      - 'testing-pr-false-org'
 
 jobs:
   Add-Pull-Request-Instructions:
