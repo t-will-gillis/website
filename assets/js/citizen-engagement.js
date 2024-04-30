@@ -12,3 +12,4 @@ document.addEventListener('click', (e) => {
     })
     // Dropdown functionality ->
 })
+// unneeded comment
