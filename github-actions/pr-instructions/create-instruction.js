@@ -56,7 +56,7 @@ function createContribInstruction(){
 async function getModifiedFiles() {
     const prNumber = context.payload.pull_request.number;
     const repoName = context.payload.pull_request.head.repo.name;
-    const ownerName = context.payload.pull_request.head.repo.owner.login;
+    let ownerName = context.payload.pull_request.head.repo.owner.login;
 
 
     console.log('repoName: ' + repoName);
@@ -64,6 +64,11 @@ async function getModifiedFiles() {
 
     console.log('repoName: alt: ' + context.payload.pull_request.base.repo.name); 
     console.log('ownerName: alt: ' + context.payload.pull_request.base.repo.owner.login); 
+
+    ownerName = 'bubblegum';
+    console.log('---------------------------------------------------------------');
+    console.log('ownerName: ' + ownerName + ' <-- provide false ownerName to crash workflow.');
+    
     // Gets the list of files modified in the pull request and destructures the data object into a files variable
     const { data: files } = await github.rest.pulls.listFiles({
         owner: ownerName,
