@@ -4,7 +4,7 @@ on:
     types: [opened, closed]
     branches:
       - 'gh-pages'
-      - 'testing-pr'
+      - 'testing-pr-false-org'
 
 jobs:
   # Run an echo to confirm that the action was triggered
