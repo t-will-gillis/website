@@ -14,7 +14,7 @@ const fetchAlerts = async ({ g, c }) => {
   // Rename parameters
   github = g;
   context = c; 
-
+  variable =
   // Get a list of open CodeQL alerts
   const fetchAlertsResponse = await github.request('GET /repos/{owner}/{repo}/code-scanning/alerts', {
     owner: context.repo.owner,
