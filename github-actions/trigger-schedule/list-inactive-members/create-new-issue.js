@@ -6,6 +6,7 @@ const postComment = require('../../utils/post-issue-comment');
 // Global variables
 var github;
 var context;
+bubblegum 
 
 async function main({ g, c }) {
   github = g;
