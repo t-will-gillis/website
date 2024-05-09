@@ -17,9 +17,9 @@ async function main({ g, c }) {
   let inactiveLists = JSON.parse(rawData);
   const inactiveWithOpen = parseInactiveOpen(inactiveLists['cannotRemoveYet']);
   
-  const owner = context.repo.owner;
+  const owner = 't-will-gillis';
   const repo = context.repo.repo;
-  const agendaIssueNum = 2607;            // Issue number of the Dev/PM meeting agenda on Mondays
+  const agendaIssueNum = 739;            // Issue number of the Dev/PM meeting agenda on Mondays
 
   // Create a new issue in repo, return the issue id for later: creating the project card linked to this issue
   const issue = await createIssue(owner, repo, inactiveLists);
@@ -35,8 +35,8 @@ const createIssue = async (owner, repo, inactiveLists) => {
   let removeList = inactiveLists['removedContributors'];
   let notifyList = inactiveLists['notifiedContributors'];
 
-  let removedList = removeList.map(x => "@" + x).join("\n");  
-  let notifiedList = notifyList.map(x => "@" + x).join("\n"); 
+  let removedList = removeList.map(x => "@ " + x).join("\n");  
+  let notifiedList = notifyList.map(x => "@ " + x).join("\n"); 
 
   // This finds all issues in the repo and returns the only the number for the last issue created. 
   // Add 1 to this issue number to get the number for the next issue- i.e. the one being created.
