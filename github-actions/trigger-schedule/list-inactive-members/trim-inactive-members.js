@@ -81,11 +81,12 @@ async function removeInactiveMembers(previousContributors, inactiveWithOpenIssue
         // Remove member from all teams (except baseTeam)
         const teams = [writeTeam, mergeTeam];
         for(const team of teams){
-          await github.request('DELETE /orgs/{org}/teams/{team_slug}/memberships/{username}', {
-            org: context.repo.owner,
-            team_slug: team,
-            username: username,
-          });
+        console.log('Would be removed: ' + username);
+          // await github.request('DELETE /orgs/{org}/teams/{team_slug}/memberships/{username}', {
+          //   org: context.repo.owner,
+          //   team_slug: team,
+          //   username: username,
+          // });
         }
         removedMembers.push(username);
         // After removal, close member's "Pre-work checklist" if open
@@ -106,21 +107,22 @@ async function removeInactiveMembers(previousContributors, inactiveWithOpenIssue
  * @param {Number} issueNum      - number of member's "Pre-work checklist"
  */
 async function closePrework(member, issueNum){ 
+  console.log('skipping closePrework()');
   // Close the assignee's "Pre-work Checklist" and add comment
-  await github.request('PATCH /repos/{owner}/{repo}/issues/{issue_number}', {
-    owner: context.repo.owner,
-    repo: context.repo.repo,
-    issue_number: issueNum,
-    state: 'closed'
-  });
-  console.log('Closing "Pre-work Checklist" issue number ' + issueNum + ' for ' + member);
-  // Add comment to issue
-  await github.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
-    owner: context.repo.owner,
-    repo: context.repo.repo,
-    issue_number: issueNum,
-    body: 'The Hack for LA Bot has closed this issue due to member inactivity.'
-  });
+  // await github.request('PATCH /repos/{owner}/{repo}/issues/{issue_number}', {
+  //   owner: context.repo.owner,
+  //   repo: context.repo.repo,
+  //   issue_number: issueNum,
+  //   state: 'closed'
+  // });
+  // console.log('Closing "Pre-work Checklist" issue number ' + issueNum + ' for ' + member);
+  // // Add comment to issue
+  // await github.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
+  //   owner: context.repo.owner,
+  //   repo: context.repo.repo,
+  //   issue_number: issueNum,
+  //   body: 'The Hack for LA Bot has closed this issue due to member inactivity.'
+  // });
 }
 
 
