@@ -55,7 +55,7 @@ const createIssue = async (owner, repo, inactiveLists) => {
 
   let title = issueObject['title'];
   let labels = issueObject['labels'];
-  let milestone = parseInt(issueObject['milestone']);
+  // let milestone = parseInt(issueObject['milestone']);
   let body = issueObject['body'];
 
   // Replace variables in issue template body
@@ -70,7 +70,7 @@ const createIssue = async (owner, repo, inactiveLists) => {
     title,
     body,
     labels,
-    milestone,
+    // milestone,
   });
   console.log('Created issue ' + thisIssueNumber);
   return issue.data;
