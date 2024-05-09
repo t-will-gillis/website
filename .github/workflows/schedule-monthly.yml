@@ -43,6 +43,7 @@ jobs:
       id: update-inactive-members-json
       uses: stefanzweifel/git-auto-commit-action@v5.0.1
       with:
+        github-token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
        # Glob pattern of file which should be added to the commit
         file_pattern: github-actions/utils/_data/inactive-members.json
 
