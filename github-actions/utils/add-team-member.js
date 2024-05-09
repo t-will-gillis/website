@@ -8,7 +8,7 @@
 async function addTeamMember(github, context, team, username){
 
   const baseMember = await github.request('GET /orgs/{org}/teams/{team_slug}/memberships/{username}', {
-      org: context.repo.owner,
+      org: 'hackforla',
       team_slug: team,
       username: username,
     });
