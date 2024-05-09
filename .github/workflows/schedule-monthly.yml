@@ -23,7 +23,7 @@ jobs:
       id: get-contributors
       uses: actions/github-script@v7
       with:
-        # github-token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
+        github-token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
         script: |
           const script = require('./github-actions/trigger-schedule/list-inactive-members/get-contributors-data.js')
           const results = script({ g: github, c: context })
