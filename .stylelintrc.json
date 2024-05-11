@@ -16,7 +16,6 @@
     "selector-pseudo-element-no-unknown": true,
     "selector-type-no-unknown": true,
     "comment-no-empty": true,
-    "no-duplicate-selectors": true,
-    "no-extra-semicolons": true
+    "no-duplicate-selectors": true
   }
 }
