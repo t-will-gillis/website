@@ -1,3 +1,6 @@
+@use "../variables/colors";
+@use "../variables/layout";
+
 .accordion {
     color: black;
     cursor: pointer;
@@ -9,7 +12,7 @@
     margin-top: 45px;
     padding: 0.2rem;
   
-    @media #{$bp-below-mobile} {
+    @media #{layout.$bp-below-mobile} {
       margin-top: 20px;
       min-width: 255px;
       font-size: 1.125rem;
@@ -30,7 +33,7 @@
     float: right;
     transform: rotate(-45deg);
     transition: transform 0.25s ease-in;
-    color: $color-red;
+    color: colors.$color-red;
     font-weight: bolder;
     font-size: 24px;
   }
@@ -53,7 +56,7 @@
   display: block;
 }
 
-@media #{$bp-below-desktop} {
+@media #{layout.$bp-below-desktop} {
     .accordion {
         min-width: 150px;
     }

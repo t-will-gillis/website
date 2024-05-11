@@ -1,3 +1,9 @@
+@use "sass:map";
+@use "../core/mixins";
+@use "../variables/colors";
+@use "../variables/layout";
+@use "../variables/typography";
+
 $nav-width: 240px;
 
 .header-nav {
@@ -5,8 +11,8 @@ $nav-width: 240px;
   left: 0;
   right:0;
   bottom: 0;
-  background: $color-white;
-  box-shadow: 0 -1px 0 0 rgba($color-black, 0.12);
+  background: colors.$color-white;
+  box-shadow: 0 -1px 0 0 rgba(colors.$color-black, 0.12);
   padding: 10px 0;
 
   ul {
@@ -24,23 +30,23 @@ $nav-width: 240px;
 
     &:link,
     &:visited {
-      color: $color-black;
+      color: colors.$color-black;
     }
 
     &:hover,
     &:active,
     &:focus {
-      color: $color-red;
+      color: colors.$color-red;
     }
   }
 
-  @media #{$bp-below-tablet} {
-    font-size: #{map-get($font-size-small, mobile)};
-    line-height: #{map-get($line-height-small, mobile)};
+  @media #{layout.$bp-below-tablet} {
+    font-size: #{map.get(typography.$font-size-small, mobile)};
+    line-height: #{map.get(typography.$line-height-small, mobile)};
     text-transform: uppercase;
   }
 
-  @media #{$bp-tablet-up} {
+  @media #{layout.$bp-tablet-up} {
     background: none;
     box-shadow: none;
     flex-grow: 1;
@@ -64,18 +70,18 @@ body {
   &.nav-active {
     transform: translateX(-$nav-width);
 
-    @media #{$bp-tablet-up} {
+    @media #{layout.$bp-tablet-up} {
       transform: none;
     }
   }
 }
 
 .nav-icon {
-  @include size(20px);
+  @include mixins.size(20px);
   display: block;
   margin: 0 auto 8px;
 
-  @media #{$bp-tablet-up} {
+  @media #{layout.$bp-tablet-up} {
     display: none;
   }
 }
@@ -83,14 +89,14 @@ body {
 /* Hamburger nav CSS */
 
 // On larger displays the hamburger nav doesn't show.
-@media #{$bp-tablet-up} {
+@media #{layout.$bp-tablet-up} {
   #swapButton {
     display: none;
   }
 }  
 
 // This styles the hamburger nav and menus on mobile
-@media #{$bp-below-tablet} {
+@media #{layout.$bp-below-tablet} {
   #burgerImage { 
     display: block;
     height: 25px;
@@ -154,7 +160,7 @@ body {
     &:hover,
     &:active,
     &:focus {
-      color: $color-black;
+      color: colors.$color-black;
     }
 
     &:active {

@@ -1,3 +1,5 @@
+@use "../variables/layout";
+
 /*--------
 | Mobile 
 ----------*/
@@ -27,10 +29,10 @@
             font-size: 18px;
             max-width: 300px;
             text-align: left;
-            @media #{$bp-tablet-up} {
+            @media #{layout.$bp-tablet-up} {
                 max-width: 500px;
             }
-            @media #{$bp-mobile-up} {
+            @media #{layout.$bp-mobile-up} {
                 font-size: 16px;
                 text-align: left;
                 padding-left: 0px;                

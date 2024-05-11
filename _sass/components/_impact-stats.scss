@@ -1,15 +1,19 @@
+@use "sass:map";
+@use "../variables/layout";
+@use "../variables/typography";
+
 .impact-stats {
   display: grid;
   grid-gap: 12px;
   grid-template-columns: repeat(3, 1fr);
 
-  @media #{$bp-mobile-up} {
+  @media #{layout.$bp-mobile-up} {
     grid-gap: 24px;
   }
 }
 
 .impact-stat {
-  font-weight: map-get($font-weight, bold);
+  font-weight: map.get(typography.$font-weight, bold);
 }
 
 .impact-large {

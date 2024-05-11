@@ -1,3 +1,5 @@
+@use "../variables/layout";
+
 /**
  * This combination of styles pushes the footer to the bottom of the page even
  * when the content is short.
@@ -11,7 +13,7 @@
  #content {
   padding-bottom: 160px;
 
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     padding-bottom: 200px;
   }
  }
@@ -29,7 +31,7 @@
 
 .page-contain {
   margin: 0 auto;
-  max-width: $max-content-width;
+  max-width: layout.$max-content-width;
 }
 
 .content-section {

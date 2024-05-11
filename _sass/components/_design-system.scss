@@ -1,3 +1,6 @@
+@use "../variables/colors";
+@use "../variables/layout";
+
 .design-system-wrapper {
     display: grid;
     grid-template:
@@ -6,9 +9,9 @@
     width: 100vw;
     margin-top: 61px;
     padding-bottom: 160px;
-    background-color: $color-pink;
+    background-color: colors.$color-pink;
 
-    @media #{$bp-below-mobile} {
+    @media #{layout.$bp-below-mobile} {
         margin-top: 54px;
         grid-template:
             "nav" auto
@@ -52,11 +55,11 @@
     }
 
     .active-group {
-        color: $color-black;
+        color: colors.$color-black;
         font-weight: 500;
     }
 
-    @media #{$bp-below-mobile} {
+    @media #{layout.$bp-below-mobile} {
         padding: 50px 20px 40px;
 
         h1:after {
@@ -64,7 +67,7 @@
             float: right;
             transform: rotate(-45deg);
             transition: transform 0.25s ease-in;
-            color: $color-red;
+            color: colors.$color-red;
             font-weight: bolder;
             font-size: 24px;
         }
@@ -90,8 +93,8 @@
     margin: 80px 60px auto 60px;
 
     &--header {
-        color: $color-white;
-        background-color: $color-darkblue;
+        color: colors.$color-white;
+        background-color: colors.$color-darkblue;
         width: 100%;
         margin: 0;
         padding-top: 13px;
@@ -125,7 +128,7 @@
         }
     }
 
-    @media #{$bp-below-mobile} {
+    @media #{layout.$bp-below-mobile} {
         margin: 40px 30px;
     }
 }
@@ -138,7 +141,7 @@
 
 // must set background color of parent div for primary on dark buttons
 .primary-on-dark-example {
-    background-color: $color-darkblue;
+    background-color: colors.$color-darkblue;
     width: fit-content;
     padding: 20px 23px;
 }

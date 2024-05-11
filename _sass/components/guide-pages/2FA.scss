@@ -1,3 +1,6 @@
+@use "../../variables/colors";
+@use "../../variables/layout";
+
 
 #myCanvas {
     justify-content: center;
@@ -23,11 +26,11 @@
 }
 
 .used {
-    background-color: $color-skyblue;
+    background-color: colors.$color-skyblue;
 }
 
 .never-used {
-    background-color: $color-brightblue;
+    background-color: colors.$color-brightblue;
 }
 
 .indent {
@@ -35,7 +38,7 @@
 }
 
 .highlight {
-    background-color: $color-lightgrey;
+    background-color: colors.$color-lightgrey;
     word-wrap: break-word;
 }
 
@@ -54,13 +57,13 @@
     text-align: left;
 }
 
-@media #{$bp-tablet-up} {
+@media #{layout.$bp-tablet-up} {
     .screenshot-2FA img {
         width: 100%;
     }
 }
 
-@media #{$bp-below-tablet} {
+@media #{layout.$bp-below-tablet} {
     .screenshot-2FA img {
         width: 100%;
     }
@@ -75,14 +78,14 @@
     }
 }
 
-@media #{$bp-below-desktop} {
+@media #{layout.$bp-below-desktop} {
     .screenshot-2FA img {
         min-width: 200px;
         width: 100%;
     }
 }
 
-@media #{$bp-desktop-up} {
+@media #{layout.$bp-desktop-up} {
     .screenshot-2FA img {
         width: 50%;
     }

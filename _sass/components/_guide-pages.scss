@@ -1,10 +1,13 @@
+@use "../variables/colors";
+@use "../variables/layout";
+
 .bg-color {
-  background-color: $color-pink;
+  background-color: colors.$color-pink;
 } 
 
 .page-hero {
     background-size: cover !important;
-    background-color: $color-white;
+    background-color: colors.$color-white;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -20,25 +23,25 @@
       right: 0;
       background: linear-gradient(
         to bottom,
-        rgba($color-darkblue, 0.3) 0%,
-        rgba($color-darkblue, 1) 100%
+        rgba(colors.$color-darkblue, 0.3) 0%,
+        rgba(colors.$color-darkblue, 1) 100%
       );
       content: "";
       display: block;
       z-index: 1;
   
-      @media #{$bp-tablet-up} {
+      @media #{layout.$bp-tablet-up} {
         background: linear-gradient(
           to bottom,
-          rgba($color-darkblue, 0) 30%,
-          rgba($color-darkblue, 1) 100%
+          rgba(colors.$color-darkblue, 0) 30%,
+          rgba(colors.$color-darkblue, 1) 100%
         );
         opacity: 1;
       }
   
       // NEW MOBILE FRIENDLY RULES
-      @media #{$bp-below-mobile} {
-        background: linear-gradient(to bottom, rgba(3,13,45,0.3) 30%, $color-darkblue 100%);
+      @media #{layout.$bp-below-mobile} {
+        background: linear-gradient(to bottom, rgba(3,13,45,0.3) 30%, colors.$color-darkblue 100%);
       }
     }
 }
@@ -49,7 +52,7 @@
     align-items: flex-start;
     width: 100%;
     padding: 3%;
-    background-color: $color-white;
+    background-color: colors.$color-white;
 
     h1 {
       font-size: 30px;
@@ -63,7 +66,7 @@
         width: 30%;
     }
 
-    @media #{$bp-below-mobile} {
+    @media #{layout.$bp-below-mobile} {
       .left-col {
           width: 100%;
           margin: 5%;
@@ -76,7 +79,7 @@
 }
 
 //only show header divider if screen is bigger than mobile
-@media #{$bp-mobile-up} {
+@media #{layout.$bp-mobile-up} {
   .border-right {
     border-right: 1px solid rgba(0,0,0, 0.3);
     align-self: center;
@@ -137,7 +140,7 @@
 }
 
 .section-container {
-  background: $color-white;
+  background: colors.$color-white;
   box-shadow: 0px 4px 8px rgba(51, 51, 51, 0.2);
   border-radius: 10px;
   margin: 2% 12%;
@@ -146,7 +149,7 @@
 }
 
 .grayarrow {
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     width: 15px;
   }
 
@@ -155,7 +158,7 @@
   margin: 1rem auto;
 }
 
-@media #{$bp-below-tablet} {
+@media #{layout.$bp-below-tablet} {
   .section-container {
     padding: 12.5% 10%;
   }
@@ -168,7 +171,7 @@
 
   h4 {
     font-size: 0.85em;
-    @media #{$bp-below-tablet} {
+    @media #{layout.$bp-below-tablet} {
       line-height: 1.5em;
     }
 
@@ -179,7 +182,7 @@
 }
 
 .guide-pages-text-section-reduced-width {
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     width: 100%
   }
   width: 90%;
@@ -193,7 +196,7 @@
 
 // image within overlay-links section
 .overlay-links-img {
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     width: 100%
   }
   max-width: none;
@@ -248,7 +251,7 @@
 
 //mobile-adjusted arrow classes
 .hide-guide-page-arrow-on-mobile {
-    @media #{$bp-below-mobile} {
+    @media #{layout.$bp-below-mobile} {
       display: none;
       visibility: hidden;
 

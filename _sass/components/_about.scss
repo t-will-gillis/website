@@ -1,3 +1,6 @@
+@use "../variables/colors";
+@use "../variables/layout";
+
 /* This page is built using a mobile first method.  Plain tags apply to mobile. Breakpoints below for larger sizes. */
 
 .header-link--about {
@@ -6,13 +9,13 @@
 
     &:link,
     &:visited {
-      color: $color-black;
+      color: colors.$color-black;
     }
 
     &:hover,
     &:active,
     &:focus {
-      color: $color-red;
+      color: colors.$color-red;
     }
 }
 
@@ -53,7 +56,7 @@
 // Make the active link different
 .is-active {
   font-weight: 700;
-  color:$color-black !important;
+  color:colors.$color-black !important;
   a {
     font-weight: 700;
     &:link,
@@ -61,7 +64,7 @@
     &:hover,
     &:active,
     &:focus {
-      color: $color-black;
+      color: colors.$color-black;
     }
   }
 }
@@ -89,7 +92,7 @@ a.anchor {
 .sticky-nav {
   grid-area: nav;
   display: none;
-  background: $color-white;
+  background: colors.$color-white;
   border: 0px solid rgba(51, 51, 51, 0.06);
   border-radius: 16px;
   box-shadow: 0 0 8px 0 rgba(51, 51, 51, 0.2);
@@ -146,7 +149,7 @@ a.anchor {
   float: right;
   transform: rotate(-45deg);
   transition: transform 0.25s ease-in;
-  color: $color-red;
+  color: colors.$color-red;
   font-weight: bolder;
   font-size: 24px;
 }
@@ -167,7 +170,7 @@ a.anchor {
   float: right;
   transform: rotate(-45deg);
   transition: transform 0.25s ease-in;
-  color: $color-red;
+  color: colors.$color-red;
   font-weight: bolder;
   font-size: 24px;
 }
@@ -190,7 +193,7 @@ a.anchor {
 }
 
 .read-more {
-  color: $color-red;
+  color: colors.$color-red;
   text-align: right;
   margin-right: 30px;
   cursor: pointer;
@@ -201,13 +204,13 @@ a.anchor {
   position: absolute;
   margin-left: 10px;
   transform: rotate(-45deg);
-  color: $color-red;
+  color: colors.$color-red;
   font-weight: bolder;
   font-size: 16px;
 }
 
 .read-less {
-  color: $color-red;
+  color: colors.$color-red;
   text-align: right;
   margin-right: 30px;
   cursor: pointer;
@@ -218,7 +221,7 @@ a.anchor {
   position: absolute;
   margin-left: 10px;
   transform: rotate(135deg);
-  color: $color-red;
+  color: colors.$color-red;
   font-weight: bolder;
   font-size: 16px;
 }
@@ -280,89 +283,89 @@ a.anchor {
 .border-dodgerblue {
   border-left-style: solid;
   border-left-width: 5px;
-  border-left-color: $color-dodgerblue;
+  border-left-color: colors.$color-dodgerblue;
 }
 .border-lightseagreen {
   border-left-style: solid;
   border-left-width: 5px;
-  border-left-color: $color-lightseagreen;
+  border-left-color: colors.$color-lightseagreen;
 }
 
 .border-orange {
   border-left-style: solid;
   border-left-width: 5px;
-  border-left-color: $color-orange;
+  border-left-color: colors.$color-orange;
 }
 
 .border-chocolate {
   border-left-style: solid;
   border-left-width: 5px;
-  border-left-color: $color-chocolate;
+  border-left-color: colors.$color-chocolate;
 }
 
 .border-firebrick {
   border-left-style: solid;
   border-left-width: 5px;
-  border-left-color: $color-firebrick;
+  border-left-color: colors.$color-firebrick;
 }
 
 .border-deeppink {
   border-left-style: solid;
   border-left-width: 5px;
-  border-left-color: $color-deeppink;
+  border-left-color: colors.$color-deeppink;
 }
 
 .border-mediumvioletred {
   border-left-style: solid;
   border-left-width: 5px;
-  border-left-color: $color-mediumvioletred;
+  border-left-color: colors.$color-mediumvioletred;
 }
 
 .border-darkorchid {
   border-left-style: solid;
   border-left-width: 5px;
-  border-left-color: $color-darkorchid;
+  border-left-color: colors.$color-darkorchid;
 }
 
 .border-blueviolet {
   border-left-style: solid;
   border-left-width: 5px;
-  border-left-color: $color-blueviolet;
+  border-left-color: colors.$color-blueviolet;
 }
 
 // SDG Colors
 .color-goldenrod-2 {
-  color: $color-mustard;
+  color: colors.$color-mustard;
   font-weight: 700;
 }
 
 .color-orangered {
-  color: $color-orangered;
+  color: colors.$color-orangered;
   font-weight: 700;
 }
 
 .color-brown {
-  color: $color-redpurple;
+  color: colors.$color-redpurple;
   font-weight: 700;
 }
 
 .color-goldenrod-11 {
-  color: $color-lightorange; 
+  color: colors.$color-lightorange; 
   font-weight: 700;
   }
 
 .color-darkolivegreen {
-  color: $color-darkolive;
+  color: colors.$color-darkolive;
   font-weight: 700;
 }
 
 .color-teal {
-  color: $color-darkroyalblue;
+  color: colors.$color-darkroyalblue;
   font-weight: 700;
 }
 
 .color-midnightblue {
-  color: $color-midnightblue;
+  color: colors.$color-midnightblue;
   font-weight: 700;
 }
 
@@ -454,7 +457,7 @@ a.anchor {
  padding-top: 10px;
 }
 
-@media #{$bp-mobile-up} {
+@media #{layout.$bp-mobile-up} {
   .accomplishment-nav select {
    display: none;
   } 
@@ -493,12 +496,12 @@ a.anchor {
 
 .accomplishment-program-area {
   padding: 10px 0 0 0;
-  color: $color-black;
+  color: colors.$color-black;
   font-weight: 700;
 }
 
 .accomplishment-title {
-  color: $color-red;
+  color: colors.$color-red;
   text-decoration: underline;
   padding: 10px 0 5px 0;
   font-weight: 500;
@@ -579,14 +582,14 @@ a.anchor {
   font-size: 2rem;
   text-decoration: none;
   font-weight: 700;
-  color: $color-red;
+  color: colors.$color-red;
 }
 
 .metrics-vrms-title {
   font-size: 2.2rem;
   text-decoration: none;
   font-weight: 900;
-  color: $color-black; 
+  color: colors.$color-black; 
   text-align: center;
   padding: 40px 0 36px 0;
 }
@@ -635,7 +638,7 @@ a.anchor {
 /* Below are the breakpoints and adjustments for different size monitors */
 
 // Below tablet - 768px
-@media #{$bp-below-tablet} {
+@media #{layout.$bp-below-tablet} {
   .page-content-container-grid {
     margin-top: 0; 
   }
@@ -653,7 +656,7 @@ a.anchor {
 // @media #{$bp-tablet-up} {}
 
 //Bigger than desktop - 960px
-@media #{$bp-desktop-up} {
+@media #{layout.$bp-desktop-up} {
   // The next two tags turn on and off the sticky nav sidebar
   .page-content-container-grid {
     grid-template-columns: 996px auto;
@@ -950,7 +953,7 @@ a.anchor {
   position: relative;
   bottom: 50px;
   left: 20px;
-  color: $color-cement;
+  color: colors.$color-cement;
   font-style: normal;
 }
 .quote-text{
@@ -978,7 +981,7 @@ a.anchor {
     position: relative;
     left:125px;
     bottom: 90px;
-    color: $color-cement;
+    color: colors.$color-cement;
     font-style: normal;
   }
   .garcetti-quote{

@@ -1,5 +1,8 @@
+@use "../variables/colors";
+@use "../variables/layout";
+
 .calendar-started-page {
-    background: $color-darkblue;
+    background: colors.$color-darkblue;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -11,7 +14,7 @@
     padding: 30px;
 
     // NEW MOBILE FRIENDLY RULES
-    @media #{$bp-below-mobile} {
+    @media #{layout.$bp-below-mobile} {
         padding: 32px 16px;
     }
 }
@@ -21,7 +24,7 @@
 
     li:before {
         content: "\2022";
-        color: $color-red;
+        color: colors.$color-red;
         font-weight: bold;
         font-size: 28px;
         display: inline-block;

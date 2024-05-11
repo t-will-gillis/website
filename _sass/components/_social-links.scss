@@ -1,11 +1,13 @@
+@use "../core/mixins";
+
 .js-inline-link {
   display: inline-block;
-  @include size(24px);
+  @include mixins.size(24px);
 
   &.js-inline-link-meetup {
-    @include size(89px, 32px);
+    @include mixins.size(89px, 32px);
   }
   .icon {
-    @include size(100%);
+    @include mixins.size(100%);
   }
 }

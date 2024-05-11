@@ -1,3 +1,6 @@
+@use "../variables/colors";
+@use "../variables/layout";
+
 /*---------------------------
 
   Cards
@@ -58,13 +61,13 @@
   // White Page Card
   
   .card-primary {
-    background: $color-white;
+    background: colors.$color-white;
   }
   
   // Beige / Pink Page Card 
   
   .card-secondary {
-    background: $color-pink;
+    background: colors.$color-pink;
   }
   
   
@@ -82,7 +85,7 @@
     margin: 14px auto;
     max-width: 1080px;
   
-    @media #{$bp-below-tablet} { 
+    @media #{layout.$bp-below-tablet} { 
         padding: 12.5% 10%;
     }
   }
@@ -96,7 +99,7 @@
     margin: 14px auto;
   
     // NEW MOBILE FRIENDLY RULES
-    @media #{$bp-below-mobile} {
+    @media #{layout.$bp-below-mobile} {
         margin: 12px auto;
         p.accordion {
         display: inline-block;
@@ -207,21 +210,21 @@
   | Mobile 
   ----------*/
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     .page-card--large-icon-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 48px;
 
-      @media #{$bp-below-mobile} {
+      @media #{layout.$bp-below-mobile} {
         padding: 32px 20px;
       }
 
       .page-card--large-icon-header {
         margin-bottom: 1rem;
         // Fixes title wrap at smallest mobile size
-        @media (max-width: #{$screen-mobile - 160}) {
+        @media (max-width: #{layout.$screen-mobile - 160}) {
           padding: 0 43px;
           text-align: center;
         }

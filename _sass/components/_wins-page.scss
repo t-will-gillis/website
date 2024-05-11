@@ -1,3 +1,7 @@
+@use "../variables/colors";
+@use "../variables/layout";
+@use "../variables/typography";
+
 //Hero styling
 
 //mobile for wins info
@@ -25,7 +29,7 @@
     margin-bottom: 24px;
     order: 2;
 
-  @media #{$bp-desktop-up} {
+  @media #{layout.$bp-desktop-up} {
     display: grid;
     grid-gap: 24px;
     grid-template-columns: repeat(2, 1fr);
@@ -36,7 +40,7 @@
 
 .project-card.wins-card{
     overflow: visible;
-    @media #{$bp-below-desktop} {
+    @media #{layout.$bp-below-desktop} {
         margin-bottom: 24px;
     }
 }
@@ -46,7 +50,7 @@
     background-color: white;
     right: 32px;
     bottom: 26px;
-    color: $color-red;
+    color: colors.$color-red;
     padding: 0px 3px;
     cursor: pointer;
 }
@@ -69,7 +73,7 @@
 
 .see-more-div {
 
-	@media #{$bp-below-desktop} {
+	@media #{layout.$bp-below-desktop} {
         display: inline-block;
         width: 44px;
         height: 28px;
@@ -103,10 +107,10 @@
     width: 279%;
     left: -108%;
     padding: .6em .5em;
-    background: $color-black;
+    background: colors.$color-black;
     text-align: center;
     font-weight: 900;
-    color: $color-white;
+    color: colors.$color-white;
     font-family: arial;
     position: absolute;
     z-index: 1;
@@ -119,7 +123,7 @@
     width: 0px;
     height: 0px;
     position: absolute;
-    border-left: 10px solid $color-black;
+    border-left: 10px solid colors.$color-black;
     border-right: 10px solid transparent;
     transform: rotate(45deg);
     border-bottom: 10px solid transparent;
@@ -142,7 +146,7 @@
 
 .wins-badge-icon:hover + .wins-text-bubble{
     display: block;
-    font-family: $font-family-body;
+    font-family: typography.$font-family-body;
 }
 
 #overlay-info{
@@ -166,7 +170,7 @@
     max-width: 14em;
 }
 
-@media #{$bp-below-tablet} {
+@media #{layout.$bp-below-tablet} {
     .wins-hero{
 
         img{
@@ -187,7 +191,7 @@
 }
 
 
-@media #{$bp-below-mobile} {
+@media #{layout.$bp-below-mobile} {
     .wins-hero{
         img{
             height: 105px;
@@ -266,7 +270,7 @@
     // align-items: center;
 }
 .wins-team-role-color {
-    color: $color-cement;
+    color: colors.$color-cement;
     margin-right: 7px;
 }
 .wins-card-title{
@@ -280,7 +284,7 @@
     display: flex;
 }
 
-@media #{$bp-below-desktop} {
+@media #{layout.$bp-below-desktop} {
     .wins-card {
         position: relative;
     }
@@ -313,7 +317,7 @@
     }
 }
 
-@media #{$bp-below-mobile} {
+@media #{layout.$bp-below-mobile} {
     .wins-card-text{
         max-height: 80px;
         margin-top: 16px;
@@ -363,7 +367,7 @@
 
 
 //modal overlay
-@media #{$bp-desktop-up} {
+@media #{layout.$bp-desktop-up} {
     .wins-card-overview{
         overflow: hidden;
     }
@@ -436,7 +440,7 @@
 }
 
 //mobile see more
-@media #{$bp-below-desktop} {
+@media #{layout.$bp-below-desktop} {
     .overlay {
         display: none;
     }
@@ -478,7 +482,7 @@
     grid-template-rows: none;
 }
 
-@media #{$bp-below-desktop}{
+@media #{layout.$bp-below-desktop}{
     .wins-tablet{
         margin-left: 0em;
 
@@ -506,7 +510,7 @@
             left: 0;
             padding: 0;
             background: inherit;
-            color: $color-black;
+            color: colors.$color-black;
         }
         .wins-text-bubble::before{
             border: none;
@@ -514,7 +518,7 @@
     }
 }
 
-@media #{$bp-below-mobile} {
+@media #{layout.$bp-below-mobile} {
     .wins-tablet {
         .wins-item-container{
             margin-left: 0;
@@ -542,7 +546,7 @@
 
 
 //tablet view mode media query
-@media screen and (max-width: $screen-desktop) and (min-width: $screen-mobile){
+@media screen and (max-width: layout.$screen-desktop) and (min-width: layout.$screen-mobile){
     .wins-tablet{
         align-items: flex-start;
         display: grid;

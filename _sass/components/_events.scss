@@ -1,7 +1,10 @@
+@use "../variables/colors";
+@use "../variables/layout";
+
 .content-hack-night {
   margin: 40px 0px 83px 0px;
   padding: 25px;
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     margin: 0;
     padding: 0;
   }
@@ -27,7 +30,7 @@
   font-size: 1.125rem;
   margin: 2% 0 20px 5%;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     font-size: 16px;
     line-height: 19px;
     margin-bottom: 20px;
@@ -36,7 +39,7 @@
 
 .show-desc {
   margin-left: 43%;
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     margin: 74px 0px;
     font-size: 13px;
     line-height: 15px;
@@ -48,7 +51,7 @@
   margin-left: 40px;
   margin-bottom: -7%;
   justify-content: center;
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     flex-direction: row-reverse;
     flex-grow: 6;
     margin: 0;
@@ -61,17 +64,17 @@
   margin-left: 45px;
   margin-right: 45px;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     flex-direction: column;
     width: 90%;
   }
 
-  @media #{$bp-below-mobile}{
+  @media #{layout.$bp-below-mobile}{
     width: 95%;
   }
 
   & > .column-card-lg--events {
-    background: $color-white;
+    background: colors.$color-white;
     border: 0 solid rgba(51, 51, 51, 0.06);
     border-radius: 20px;
     box-shadow: 0 0 8px 0 rgba(51, 51, 51, 0.2);
@@ -92,7 +95,7 @@
     }
 
     // NEW MOBILE FRIENDLY RULES
-    @media #{$bp-below-tablet} {
+    @media #{layout.$bp-below-tablet} {
       padding: 5px 15px;
       max-width: 100%;
 
@@ -109,12 +112,12 @@
   content: "\226A";
   float: left;
   transition: transform 0.25s ease-in;
-  color: $color-black;
+  color: colors.$color-black;
   font-weight: normal;
   font-size: 18px;
   margin: 0 6px 65px 6px;
 
-  @media #{$bp-below-desktop} {
+  @media #{layout.$bp-below-desktop} {
     content: "\226A";
     transform: rotate(90deg);
     transition: transform 0.25s ease-in;
@@ -134,7 +137,7 @@
 }
 
 .fullwidth-background-container {
-  background-color: $color-gold;
+  background-color: colors.$color-gold;
   margin: 0 -2em;
 }
 .add-padding-container {
@@ -142,7 +145,7 @@
 }
 
 .getting-started-mobile-page {
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     padding: 0 2em;
     display: inline;
     margin: 20px;
@@ -156,7 +159,7 @@
   width: 387px;
   height: 250px;
 
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     left: 0;
     top: 0;
     width: 325px;
@@ -169,7 +172,7 @@
   align-items: center;
   margin: 24px 0;
 
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     flex-direction: column;
     text-align: center;
   }
@@ -178,7 +181,7 @@
   display: flex;
   align-items: center;
   margin: 24px 0;
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     flex-direction: column;
     text-align: center;
   }
@@ -189,7 +192,7 @@
   font-size: 16px;
   line-height: 19px;
 
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     padding: 0;
     text-align: initial;
     margin: 37px;
@@ -200,7 +203,7 @@
   font-size: 16px;
   line-height: 19px;
 
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     padding: 8px;
     text-align: initial;
     margin-bottom: 25px;
@@ -208,13 +211,13 @@
 }
 
 .notification-banner {
-  background-color: $color-gold;
+  background-color: colors.$color-gold;
   width: 100%;
   display: flex;
   justify-content: center;
   align-content: center;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     flex-direction: column;
   }
 }
@@ -226,7 +229,7 @@
   font-size: 1rem;
   font-weight: 700;
 
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     margin: 0;
     padding: 1em 2em;
     font-size: 16px;
@@ -246,7 +249,7 @@
   margin-bottom:32px;
   text-align: center;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     margin: 0 auto 24px auto;
     width: 100%;
 	height: min-content;
@@ -261,7 +264,7 @@
   height: 100%;
   object-fit: cover;
   max-width: 414px;
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     /* Positions image so location text is visible */
     object-position: center 80%;
     border-radius: 5.8%;
@@ -283,7 +286,7 @@
   margin-top: 48px;
   align-content: center;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     flex-direction: column;
     height: min-content;
 	text-align: center;
@@ -297,7 +300,7 @@
   margin: 24px;
   overflow: scroll;
   overflow-x: hidden;
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     margin: 40px 0;
     padding: 0;
   }
@@ -307,7 +310,7 @@
   display: flex;
   flex-wrap: wrap;
 
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     margin: 11px;
     font-size: 12px;
     line-height: 14px;
@@ -334,7 +337,7 @@
   font-size: 0.9rem;
   margin: 22px 32px;
 
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     font-size: 0.7rem;
     margin: 0;
   }
@@ -345,14 +348,14 @@
   text-align: left;
   font-weight: 700;
   margin-bottom: 16px;
-  color: $color-black;
+  color: colors.$color-black;
 }
 
 .class-btn {
   text-align: center;
   margin-top: 8px;
 
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     margin: 0;
   }
 }
@@ -369,7 +372,7 @@
   line-height: 35px;
   font-weight: normal;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     font-size: 17px;
     display: flex;
     justify-content: space-around;
@@ -381,18 +384,18 @@
 .event-title-1::after {
   content: "\221F";
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     content: "\221F";
     float: right;
     transform: rotate(-45deg);
     transition: transform 0.25s ease-in;
-    color: $color-red;
+    color: colors.$color-red;
     font-weight: bolder;
     font-size: 24px;
   }
 }
 .active::after {
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     content: "\221F";
     transform: rotate(135deg);
     transition: transform 0.25s ease-in;
@@ -407,7 +410,7 @@
 
 }
 
-@media #{$bp-below-tablet} {
+@media #{layout.$bp-below-tablet} {
   .event-title {
     font-size: 17px;
     display: flex;
@@ -419,7 +422,7 @@
     float: right;
     transform: rotate(-45deg);
     transition: transform 0.25s ease-in;
-    color: $color-red;
+    color: colors.$color-red;
     font-weight: bolder;
     font-size: 24px;
   }
@@ -437,21 +440,21 @@
 .vector-img {
   display: none;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     display: initial;
   }
 }
 
 .mobile-dropdown {
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     display: none;
   }
 }
 
 .mobile-locations-dropdown {
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     display: none;
-    background: $color-gold;
+    background: colors.$color-gold;
     width: 100vw;
   }
 }
@@ -459,7 +462,7 @@
 .days-display-1 {
   margin: 22px 32px;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     margin: 0;
   }
 }
@@ -473,7 +476,7 @@
   display: grid;
   padding-left: 0;
 
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     font-size: 13px;
     line-height: 15px;
   }
@@ -485,9 +488,9 @@
   font-size: 1rem;
   font-weight: 700;
   margin: 30px 0 10px 0;
-  color: $color-black;
+  color: colors.$color-black;
   padding:0;
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     font-size: 15px;
     line-height: 18px;
   }
@@ -496,7 +499,7 @@
 .description {
   margin: 0;
 
-  @media #{$bp-below-mobile} {
+  @media #{layout.$bp-below-mobile} {
     text-align: initial;
     margin: 57px;
     font-size: 16px;
@@ -505,7 +508,7 @@
 
 /* These styles are for the mobile view of the events page */
 
-@media #{$bp-below-desktop} {
+@media #{layout.$bp-below-desktop} {
   .header-container--events {
     padding: 2rem 2rem 2rem 2rem;
   }
@@ -521,7 +524,7 @@
 }
 
 //This hides the mobile positioned video on displays larger than mobile
-@media #{$bp-desktop-up} {
+@media #{layout.$bp-desktop-up} {
   .fullscreen--hide-video {
     display:none;
   }
@@ -540,21 +543,21 @@
 /* The below styles were moved from _hack-nights.scss, which has been deleted along with it's page namesake.
     They have been saved because they are still being used in other places on the site. */
     .section-hack-nights {
-      background: $color-darkblue;
-      color: $color-white;
+      background: colors.$color-darkblue;
+      color: colors.$color-white;
     }
 
 
 /* This specific selector is created to maintain a total top-margin + top-padding of 44px for .events-page-header (below) without altering
 or overriding .content-section. See Issue #1609. If this comment is no longer relevant, please remove. */
 .content-section--events + .events-page-header {
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     padding-top: 12px;
   }
 }
 
 .events-page, .content-section--events {
-  background: $color-darkblue;
+  background: colors.$color-darkblue;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -570,13 +573,13 @@ or overriding .content-section. See Issue #1609. If this comment is no longer re
 }
 
 .events-page-header {
-  color: $color-white;
+  color: colors.$color-white;
   margin-top: 48px;
   font-size: 36px;
-  @media #{$bp-below-desktop} {
+  @media #{layout.$bp-below-desktop} {
     font-size: 2rem;
   }
-  @media #{$bp-below-tablet} {
+  @media #{layout.$bp-below-tablet} {
     font-size: 1.75rem;
     margin-top: 32px;
     margin-bottom: 44px;

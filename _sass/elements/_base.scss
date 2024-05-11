@@ -1,3 +1,6 @@
+@use "sass:color";
+@use "../variables/colors";
+
 html {
   box-sizing: border-box;
 }
@@ -12,9 +15,9 @@ html {
 
 html,
 body {
-  $color-text-shadow: rgba($color-black, 0.01);
-  background: $color-white;
-  color: $color-black;
+  $color-text-shadow: rgba(colors.$color-black, 0.01);
+  background: colors.$color-white;
+  color: colors.$color-black;
   // These are non-standard attributes and not prefixed by the postprocessror.
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -53,13 +56,13 @@ a {
 
   &:link,
   &:visited {
-    color: $color-red;
+    color: colors.$color-red;
   }
 
   &:hover,
   &:active,
   &:focus {
-    color: darken($color-red, 10%);
+    color: color.adjust(colors.$color-red, $lightness: -10%);
   }
 }
 
