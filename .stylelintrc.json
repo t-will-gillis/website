@@ -1,5 +1,5 @@
 {
-  "extends": "stylelint-config-sass-guidelines"
+  "extends": "stylelint-config-sass-guidelines",
   "rules": {
     "color-no-invalid-hex": true,
     "unit-no-unknown": true,
