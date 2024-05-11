@@ -1,9 +1,11 @@
 a.old-filter-item {
   text-decoration: none;
 }
+
 .old-project-list {
   margin-top: 0.5rem;
 }
+
 //filter container
 ul.old-filter-list {
   background: $color-pink;
@@ -168,7 +170,8 @@ a.old-clear-filter-tags {
   }
 }
 
-@media (max-width: 659px) {
+//media query is up to the browser defined laptop size to eliminate wrapping
+@media (max-width: 1024px) {
   //creating 2 rows and 2 columns to display categories on mobile
   ul.old-filter-list {
     display: grid;
