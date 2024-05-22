@@ -14,11 +14,12 @@ section.filter-content-container {
   display: flex;
   justify-content: center;
 }
+
 .page-contain.projects-inner {
-  margin: 0px 0px;
+  margin: 0 0;
 }
 .page-contain.projects-inner.curr-projects {
-  margin: 0px auto;
+  margin: 0 auto;
 }
 
 a.filter-item {
@@ -139,7 +140,7 @@ border-radius: 2.5px;
 .filter-checkbox {
   border: 1px solid #000000;
   border-radius: 4px;
-  margin: 0px 5px;
+  margin: 0 5px;
   cursor: pointer;
   vertical-align: middle;
 }
