@@ -17,14 +17,14 @@ async function main({ g, c }) {
   const labelId = context.payload.label.id + '';
   const labelName = context.payload.label.name;
 
-  console.log('-------------------------------------------------------');
-  console.log('Label reference info:');
+  console.log(`-------------------------------------------------------`);
+  console.log(`Label reference info:`);
   console.log(context.payload.label);
-  console.log('-------------------------------------------------------');
+  console.log(`-------------------------------------------------------`);
   if(context.payload.action === 'edited') {
-    console.log('What was changed:');
+    console.log(`What was changed:`);
     console.log(context.payload.changes);
-    console.log('-------------------------------------------------------');
+    console.log(`-------------------------------------------------------`);
   }
   
   // If the action is 'edited' but does not entail name change, label directory is not affected.
@@ -124,8 +124,10 @@ function createKeyName(data, labelName) {
 
 
 
-function postWarning(labelId, labelName, ) {
-  console.log('In postWarning()- Temp message!');
+function postWarning(labelId, labelName, message) {
+  console.log(`-------------------------------------------------------`);
+  console.log(`\nIn postWarning()- Temp message!`);
+  console.log(`\n${message}`);
 }
 
 
