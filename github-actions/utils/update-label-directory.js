@@ -38,28 +38,33 @@ async function main({ g, c }) {
   const rawData = fs.readFileSync(filepath, 'utf8');
   const data = JSON.parse(rawData);
   let keyName = '';
+  let message = '';
 
   // Check for 'labelId' in label directory and return 'keyName'
   if (context.payload.action === 'edited' || context.payload.action === 'deleted') {
-    for (let [key, value] of Object.entries(data)) {
-      if (value.includes(labelId)) {
-        console.log(`The labelId: ${labelId} found; '${labelName}' will be ${context.payload.action}`);
-        keyName = key;
-        break;
-      }
-    }
-    // If 'labelId' not found...
-    if (!keyName) { 
-      // ...but 'labelName' deleted from repo, won't affect `label-directory.json`
-      if (context.payload.action === 'deleted') {
-        console.log(`\nThe labelId: ${labelId} matching the labelName: '${labelName}' was not found in repo.`);
-        console.log(`The label does not exist in \`label-directory.json\`; file was not updated!`);
-        postWarning();
-        return;
+    keyName = cycleThroughDirectory(data, labelId);
+    if (keyName) { 
+      console.log(`The labelId: ${labelId} found; '${labelName}' will be ${context.payload.action}`);
+      break;
+    } else if (context.payload.action === 'deleted') {
+      // If no keyName found, check that the labelName does not exist
+      keyName = cycleThroughDirectory(data, labelName);
+      if (keyName) {
+        message = `\nThe labelId: '${labelId}' was not found, but the labelName: '${labelName}' was- this needs review!`;
       } else {
-        console.log(`The labelId: ${labelId} not found in repo! Creating new keyName and entry`);
-        keyName = createKeyName(data, labelName);
+        message = `\nNeither the labelId: ${labelId} nor the labelName: '${labelName}' were found in repo.`;
       }
+      console.log(message);
+      console.log(`The label does not exist in \`label-directory.json\`; file was not updated!`);
+      postWarning(labelId, labelName, message);
+      return;
+    } else {
+      // The last option is that the labelId doesn't exist because it is being added
+      keyName = createKeyName(data, labelName);
+      message = `The labelId: ${labelId} not found in repo! Created new keyName and adding to \`label-directory.json\``;
+      console.log(message);
+      postWarning(labelId, labelName, message);
+      continue;
     }
   }
 
@@ -89,6 +94,17 @@ async function main({ g, c }) {
 
 
 
+function cycleThroughDirectory(data, searchValue) {
+  for (let [key, value] of Object.entries(data)) {
+    if (value.includes(searchValue)) {
+      keyName = key;
+      return keyName;
+    } 
+  }
+  return undefined;
+}
+
+
 function createKeyName(data, labelName) {
   let keyName = '';
   const isAlphanumeric = str => /^[a-z0-9]+$/gi.test(str);
@@ -110,7 +126,7 @@ function createKeyName(data, labelName) {
 
 
 
-function postWarning() {
+function postWarning(labelId, labelName, ) {
   console.log('In postWarning()- Temp message!');
 }
 
