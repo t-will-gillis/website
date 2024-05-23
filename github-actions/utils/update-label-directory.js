@@ -66,7 +66,7 @@ async function main({ g, c }) {
     
   // If 'labelId' does not exist, create new camelCased 'keyName' so label entry can be added to directory
   if (context.payload.action === 'created') {
-    createKeyName(data, labelName);
+    keyName = createKeyName(data, labelName);
   }
 
   // Update directory (delete, edit, or create) and log
