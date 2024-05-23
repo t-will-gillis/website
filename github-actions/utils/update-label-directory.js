@@ -31,7 +31,11 @@ async function main({ g, c }) {
     // If label is to be edited or deleted, check for labelId in label directory and return keyName
     if(context.payload.action === 'edited' || context.payload.action === 'deleted') {
       for(let [key, value] of Object.entries(data)) {
+        
         if (value.includes(labelId)) {
+          console.log('Line 36');
+          console.log(labelId);
+          console.log(key, value);
           keyName = key;
           break;
         }
