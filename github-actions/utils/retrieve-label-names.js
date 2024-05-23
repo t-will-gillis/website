@@ -16,9 +16,9 @@ function labelRetrieveNames(...keyNames) {
   for(let keyName of keyNames) {
     try {
       displayNames.push(data[keyName][1]);
-      console.log(`Input ${keyName} with output ${data[keyName][1]}`);
+      console.log(`Success! From label key: '${keyName}' found label display: '${data[keyName][1]}'`);
     } catch (err) {
-      console.error(`Failed to find label display name for label keyName ${keyName}`)
+      console.error(`Failed to find label display for label key: '${keyName}'`)
     }
   }
 
