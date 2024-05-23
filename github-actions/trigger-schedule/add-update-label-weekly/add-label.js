@@ -2,7 +2,7 @@
 const fs = require("fs");
 const findLinkedIssue = require('../../utils/find-linked-issue');
 const getTimeline = require('../../utils/get-timeline');
-const retrieveLabelNames = require('../../util/retrieve-label-names');
+const retrieveLabelNames = require('../../utils/retrieve-label-names');
 
 // Global variables
 var github;
