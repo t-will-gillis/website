@@ -40,6 +40,7 @@ async function main({ g, c }) {
           break;
         } else {
           console.log(`${labelId} not found!`);
+        }
       }
     };
 
