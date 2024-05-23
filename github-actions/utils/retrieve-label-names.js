@@ -5,7 +5,7 @@ const fs = require('fs');
  * @param {Array} keyNames       - List of reference names to look up display names
  * @return {Array} displayNames  - List of display names
  */
-function labelRetrieveName(keyNames) {
+function labelRetrieveNames(keyNames) {
 
   // Retrieve label directory
   const filepath = 'github-actions/utils/_data/label-directory.json';
@@ -14,10 +14,15 @@ function labelRetrieveName(keyNames) {
 
   const displayNames = [ ];
   for(let keyName of keyNames) {
-    displayNames.push(data[keyName][1]);
+    try {
+      displayNames.push(data[keyName][1]);
+      console.log(`Input ${keyName} with output ${data[keyName][1]}`);
+    } catch (err) {
+      console.error(`Failed to find label display name for label keyName ${keyName}`)
+    }
   }
 
   return displayNames;
 }
 
-module.exports = labelRetrieveName;
+module.exports = labelRetrieveNames;
