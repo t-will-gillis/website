@@ -5,7 +5,7 @@ const fs = require('fs');
  * @param {Array} keyNames       - List of reference names to look up display names
  * @return {Array} displayNames  - List of display names
  */
-function labelRetrieveNames(keyNames) {
+function labelRetrieveNames(...keyNames) {
 
   // Retrieve label directory
   const filepath = 'github-actions/utils/_data/label-directory.json';
