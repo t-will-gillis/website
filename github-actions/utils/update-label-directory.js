@@ -39,6 +39,7 @@ async function main({ g, c }) {
         break;
       }
     }
+    // If 'labelId' not found, the 'keyName' will need to be created
     if (!keyName) { 
       console.log(`${labelId} not found!`);
       keyName = createKeyName();
@@ -68,6 +69,8 @@ async function main({ g, c }) {
   });
 }
 
+
+
 function logLabelAction() {
   // Log the label information
   console.log('-------------------------------------------------------');
@@ -81,11 +84,16 @@ function logLabelAction() {
   }
 }
 
+
+
 function postWarning() {
   console.log('in postWarning()- Temp message!');
 }
 
+
+
 function createKeyName() {
+  let keyName = '';
   const isAlphanumeric = str => /^[a-z0-9]+$/gi.test(str);
   let labelInterim = labelName.split(/[^a-zA-Z0-9]+/);
   for (let i = 0; i < labelInterim.length ; i++) {
@@ -95,10 +103,11 @@ function createKeyName() {
           keyName += labelInterim[i].split(' ').map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase()).join(' ');
       }
   }
-  // If the 'keyName' already exists for some reason, add the word 'COPY' to flag it
+  // If the 'keyName' already exists for some reason, add the word 'COPY' so it does not overwrite existing (and to flag it)
   if (data[keyName]) {
     keyName += 'COPY';
   }
+  console.log(`A new 'keyName' ${keyName} has been created.`);
   return keyName;
 }
 
