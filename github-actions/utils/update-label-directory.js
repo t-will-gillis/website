@@ -19,9 +19,8 @@ async function main({ g, c }) {
 
   // If the action is 'edited' but does not involve changing the name, label directory is not affected
   if (context.payload.action === 'edited' && !context.payload.changes.name) {
-    // logLabelAction(github, context);
-    logLabelAction(); // use if works, else switch to other
-    console.log(`\nThe label-directory.json was not updated!`);
+    logLabelAction(); 
+    console.log(`\nThe file \`label-directory.json\` was not updated!`);
     return;
   } 
 
@@ -40,25 +39,16 @@ async function main({ g, c }) {
         break;
       }
     }
-    console.log(`${labelId} not found!`);
+    if (!keyName) { 
+      console.log(`${labelId} not found!`);
+      keyName = createKeyName();
+    }
   }
 
     
   // If 'labelId' does not exist, create new camelCased 'keyName' so label entry can be added to directory
   if (context.payload.action === 'created') {
-    const isAlphanumeric = str => /^[a-z0-9]+$/gi.test(str);
-    let labelInterim = labelName.split(/[^a-zA-Z0-9]+/);
-    for (let i = 0; i < labelInterim.length ; i++) {
-        if (i === 0) {
-            keyName += labelInterim[0].toLowerCase();
-        } else if (isAlphanumeric(labelInterim[i])) {
-            keyName += labelInterim[i].split(' ').map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase()).join(' ');
-        }
-    }
-    // If the 'keyName' already exists for some reason, add the word 'COPY' to flag it
-    if (data[keyName]) {
-      keyName += 'COPY';
-    }
+    createKeyName();
   }
 
   // Update directory (delete, edit, or create) and log
@@ -94,4 +84,22 @@ function logLabelAction() {
 function postWarning() {
   console.log('in postWarning()- Temp message!');
 }
+
+function createKeyName() {
+  const isAlphanumeric = str => /^[a-z0-9]+$/gi.test(str);
+  let labelInterim = labelName.split(/[^a-zA-Z0-9]+/);
+  for (let i = 0; i < labelInterim.length ; i++) {
+      if (i === 0) {
+          keyName += labelInterim[0].toLowerCase();
+      } else if (isAlphanumeric(labelInterim[i])) {
+          keyName += labelInterim[i].split(' ').map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase()).join(' ');
+      }
+  }
+  // If the 'keyName' already exists for some reason, add the word 'COPY' to flag it
+  if (data[keyName]) {
+    keyName += 'COPY';
+  }
+  return keyName;
+}
+
 module.exports = main;
