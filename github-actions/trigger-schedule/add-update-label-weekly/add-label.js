@@ -8,7 +8,7 @@ const retrieveLabelNames = require('../../utils/retrieve-label-names');
 var github;
 var context;
 
-const [statusUpdatedLabel, toUpdateLabel, inactiveLabel ] = retrieveLabelNames('statusUpdated', 'toUpdate', '2weeksInactive');
+const [statusUpdatedLabel, toUpdateLabel, inactiveLabel ] = retrieveLabelNames('statusUpdated', 'toUpdate', '2WeeksInactive');
 const updatedByDays = 3;           // If there is an update within 3 days, the issue is labeled 'Status: Updated'
 const inactiveUpdatedByDays = 14;  // If no update within 14 days, the issue is labeled '2 weeks inactive' 
 const commentByDays = 7;           // If there is an update within 14 days but not within 7 days, the issue is labeled 'To Update !' 
@@ -46,12 +46,12 @@ async function main({ g, c }, columnId) {
     const responseObject = await isTimelineOutdated(timeline, issueNum, assignees)
 
 
-    if (responseObject.result === true && responseObject.labels === toUpdateLabel) { // 7-day outdated, add 'To Update !' label
+    if (responseObject.result === true && responseObject.labels === toUpdateLabel) {      // 7-day outdated, add 'toUpdate' label
       console.log(`Going to ask for an update now for issue #${issueNum}`);
       await removeLabels(issueNum, statusUpdatedLabel, inactiveLabel);
       await addLabels(issueNum, responseObject.labels);
       await postComment(issueNum, assignees, toUpdateLabel);
-    } else if (responseObject.result === true && responseObject.labels === inactiveLabel) { // 14-day outdated, add '2 Weeks Inactive' label
+    } else if (responseObject.result === true && responseObject.labels === inactiveLabel) { // 14-day outdated, add '2WeeksInactive' label
       console.log(`Going to ask for an update now for issue #${issueNum}`);
       await removeLabels(issueNum, toUpdateLabel, statusUpdatedLabel);
       await addLabels(issueNum, responseObject.labels);
@@ -84,14 +84,14 @@ async function* getIssueNumsFromColumn(columnId) {
         for (let card of results.data) {
           if (card.hasOwnProperty('content_url')) {
             const arr = card.content_url.split('/');
-            yield arr.pop()
+            yield arr.pop();
           }
         }
       } else {
-        return
+        return;
       }
     } catch {
-      continue
+      continue;
     } finally {
       page++;
     }
