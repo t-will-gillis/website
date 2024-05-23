@@ -8,7 +8,7 @@ const retrieveLabelNames = require('../../util/retrieve-label-names');
 var github;
 var context;
 
-const [statusUpdatedLabel, toUpdateLabel, inactiveLabel ] = retrieveLabelNames(statusUpdated, toUpdate, 2weeksInactive);
+const [statusUpdatedLabel, toUpdateLabel, inactiveLabel ] = retrieveLabelNames('statusUpdated', 'toUpdate', '2weeksInactive');
 const updatedByDays = 3;           // If there is an update within 3 days, the issue is labeled 'Status: Updated'
 const inactiveUpdatedByDays = 14;  // If no update within 14 days, the issue is labeled '2 weeks inactive' 
 const commentByDays = 7;           // If there is an update within 14 days but not within 7 days, the issue is labeled 'To Update !' 
