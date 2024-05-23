@@ -104,7 +104,7 @@ function createKeyName(data, labelName) {
   if (data[keyName]) {
     keyName += 'COPY';
   }
-  console.log(`A new 'keyName' ${keyName} has been created.`);
+  console.log(`A new keyName '${keyName}' has been created.`);
   return keyName;
 }
 
