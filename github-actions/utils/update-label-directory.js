@@ -42,30 +42,31 @@ async function main({ g, c }) {
     // If 'labelId' not found, the 'keyName' will need to be created
     if (!keyName) { 
       console.log(`${labelId} not found!`);
-      keyName = createKeyName();
+      keyName = createKeyName(labelName);
     }
   }
 
     
   // If 'labelId' does not exist, create new camelCased 'keyName' so label entry can be added to directory
   if (context.payload.action === 'created') {
-    createKeyName();
+    createKeyName(labelName);
   }
 
   // Update directory (delete, edit, or create) and log
   if(context.payload.action === 'deleted') {
     delete data[keyName];
-    console.log('\nDeleted label:\n {"' + keyName + '": ["' + labelId + '", "' + labelName + '"]}\n');
+    console.log(`\nDeleted label:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`);
+    postWarning();
   } else {
     data[keyName] = [labelId, labelName];
-    console.log('\nWriting data:\n {"' + keyName + '": ["' + labelId + '", "' + labelName + '"]}\n');
+    console.log(`\nWriting data:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`);
   }
 
   // Write data file in prep for committing changes to label directory
   fs.writeFile(filepath, JSON.stringify(data, null, 2), (err) => {
     if (err) throw err;
     console.log('-------------------------------------------------------');
-    console.log("File 'label-directory.json' saved. Next step will commit file.");
+    console.log(`File \`label-directory.json\` staged. Next step will commit file.`);
   });
 }
 
@@ -86,13 +87,7 @@ function logLabelAction() {
 
 
 
-function postWarning() {
-  console.log('in postWarning()- Temp message!');
-}
-
-
-
-function createKeyName() {
+function createKeyName(labelName) {
   let keyName = '';
   const isAlphanumeric = str => /^[a-z0-9]+$/gi.test(str);
   let labelInterim = labelName.split(/[^a-zA-Z0-9]+/);
@@ -110,5 +105,13 @@ function createKeyName() {
   console.log(`A new 'keyName' ${keyName} has been created.`);
   return keyName;
 }
+
+
+
+
+function postWarning() {
+  console.log('in postWarning()- Temp message!');
+}
+
 
 module.exports = main;
