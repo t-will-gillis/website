@@ -1,22 +1,23 @@
 // Import modules
+const fs = require("fs");
 const findLinkedIssue = require('../../utils/find-linked-issue');
 const getTimeline = require('../../utils/get-timeline');
-var fs = require("fs");
+const retrieveLabelNames = require('../../util/retrieve-label-names');
+
 // Global variables
 var github;
 var context;
-const statusUpdatedLabel = 'Status: Updated';
-const toUpdateLabel = 'To Update !';
-const inactiveLabel = '2 weeks inactive';
-const updatedByDays = 3; // If there is an update within 3 days, the issue is considered updated
-const inactiveUpdatedByDays = 14; // If no update within 14 days, the issue is considered '2 weeks inactive'
-const commentByDays = 7; // If there is an update within 14 days but no update within 7 days, the issue is considered outdated and the assignee needs 'To Update !' it
-const threeDayCutoffTime = new Date()
-threeDayCutoffTime.setDate(threeDayCutoffTime.getDate() - updatedByDays)
-const sevenDayCutoffTime = new Date()
-sevenDayCutoffTime.setDate(sevenDayCutoffTime.getDate() - commentByDays)
-const fourteenDayCutoffTime = new Date()
-fourteenDayCutoffTime.setDate(fourteenDayCutoffTime.getDate() - inactiveUpdatedByDays)
+
+const [statusUpdatedLabel, toUpdateLabel, inactiveLabel ] = retrieveLabelNames(statusUpdated, toUpdate, 2weeksInactive);
+const updatedByDays = 3;           // If there is an update within 3 days, the issue is labeled 'Status: Updated'
+const inactiveUpdatedByDays = 14;  // If no update within 14 days, the issue is labeled '2 weeks inactive' 
+const commentByDays = 7;           // If there is an update within 14 days but not within 7 days, the issue is labeled 'To Update !' 
+const threeDayCutoffTime = new Date();
+threeDayCutoffTime.setDate(threeDayCutoffTime.getDate() - updatedByDays);
+const sevenDayCutoffTime = new Date();
+sevenDayCutoffTime.setDate(sevenDayCutoffTime.getDate() - commentByDays);
+const fourteenDayCutoffTime = new Date();
+fourteenDayCutoffTime.setDate(fourteenDayCutoffTime.getDate() - inactiveUpdatedByDays);
 
 /**
  * The main function, which retrieves issues from a specific column in a specific project, before examining the timeline of each issue for outdatedness.
