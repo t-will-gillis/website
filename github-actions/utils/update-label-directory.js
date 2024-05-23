@@ -36,6 +36,7 @@ async function main({ g, c }) {
     for (let [key, value] of Object.entries(data)) {
       if (value.includes(labelId)) {
         console.log(`${labelId} found; '${labelName}' will be ${context.payload.action}`);
+        keyName = key;
         break;
       }
     }
