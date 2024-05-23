@@ -43,7 +43,7 @@ async function main({ g, c }) {
   if (context.payload.action === 'edited' || context.payload.action === 'deleted') {
     for (let [key, value] of Object.entries(data)) {
       if (value.includes(labelId)) {
-        console.log(`${labelId} found; '${labelName}' will be ${context.payload.action}`);
+        console.log(`The labelId: ${labelId} found; '${labelName}' will be ${context.payload.action}`);
         keyName = key;
         break;
       }
@@ -83,7 +83,7 @@ async function main({ g, c }) {
   fs.writeFile(filepath, JSON.stringify(data, null, 2), (err) => {
     if (err) throw err;
     console.log(`-------------------------------------------------------`);
-    console.log(`File \`label-directory.json\` has been staged. Next step will commit file.`);
+    console.log(`Changes to \`label-directory.json\` have been staged. Next step will commit changes.`);
   });
 }
 
