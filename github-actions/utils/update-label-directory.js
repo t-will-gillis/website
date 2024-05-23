@@ -39,7 +39,7 @@ async function main({ g, c }) {
           keyName = key;
           break;
         } else {
-          console.log(`${labelId} not found!`};
+          console.log(`${labelId} not found!`);
       }
     };
 
