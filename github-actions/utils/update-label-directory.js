@@ -45,7 +45,6 @@ async function main({ g, c }) {
     keyName = cycleThroughDirectory(data, labelId);
     if (keyName) { 
       console.log(`The labelId: ${labelId} found; '${labelName}' will be ${context.payload.action}`);
-      break;
     } else if (context.payload.action === 'deleted') {
       // If no keyName found, check that the labelName does not exist
       keyName = cycleThroughDirectory(data, labelName);
@@ -64,7 +63,6 @@ async function main({ g, c }) {
       message = `The labelId: ${labelId} not found in repo! Created new keyName and adding to \`label-directory.json\``;
       console.log(message);
       postWarning(labelId, labelName, message);
-      continue;
     }
   }
 
