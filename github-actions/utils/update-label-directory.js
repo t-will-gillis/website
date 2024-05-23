@@ -17,10 +17,19 @@ async function main({ g, c }) {
   const labelId = context.payload.label.id + '';
   const labelName = context.payload.label.name;
 
-  // If the action is 'edited' but does not involve changing the name, label directory is not affected
+  console.log('-------------------------------------------------------');
+  console.log('Label reference info:');
+  console.log(context.payload.label);
+  console.log('-------------------------------------------------------');
+  if(context.payload.action === 'edited') {
+    console.log('What was changed:');
+    console.log(context.payload.changes);
+    console.log('-------------------------------------------------------');
+  }
+  
+  // If the action is 'edited' but does not entail name change, label directory is not affected.
   if (context.payload.action === 'edited' && !context.payload.changes.name) {
-    logLabelAction(); 
-    console.log(`\nThe file \`label-directory.json\` was not updated!`);
+    console.log(`\nThe label edits do not affect \`label-directory.json\`; file was not updated!`);
     return;
   } 
 
@@ -30,7 +39,7 @@ async function main({ g, c }) {
   const data = JSON.parse(rawData);
   let keyName = '';
 
-  // Check for 'labelId' in label directory and return 'keyName', other
+  // Check for 'labelId' in label directory and return 'keyName'
   if (context.payload.action === 'edited' || context.payload.action === 'deleted') {
     for (let [key, value] of Object.entries(data)) {
       if (value.includes(labelId)) {
@@ -39,10 +48,18 @@ async function main({ g, c }) {
         break;
       }
     }
-    // If 'labelId' not found, the 'keyName' will need to be created
+    // If 'labelId' not found...
     if (!keyName) { 
-      console.log(`${labelId} not found!`);
-      keyName = createKeyName(data, labelName);
+      // ...but 'labelName' deleted from repo, won't affect `label-directory.json`
+      if (context.payload.action === 'deleted') {
+        console.log(`\nThe labelId: ${labelId} matching the labelName: '${labelName}' was not found in repo.`);
+        console.log(`The label does not exist in \`label-directory.json\`; file was not updated!`);
+        postWarning();
+        return;
+      } else {
+        console.log(`The labelId: ${labelId} not found in repo! Creating new keyName and entry`);
+        keyName = createKeyName(data, labelName);
+      }
     }
   }
 
@@ -55,34 +72,19 @@ async function main({ g, c }) {
   // Update directory (delete, edit, or create) and log
   if(context.payload.action === 'deleted') {
     delete data[keyName];
-    console.log(`\nDeleted label:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`);
+    console.log(`\nDeleting label from directory:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`);
     postWarning();
   } else {
     data[keyName] = [labelId, labelName];
-    console.log(`\nWriting data:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`);
+    console.log(`\nWriting label data to directory:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`);
   }
 
   // Write data file in prep for committing changes to label directory
   fs.writeFile(filepath, JSON.stringify(data, null, 2), (err) => {
     if (err) throw err;
-    console.log('-------------------------------------------------------');
-    console.log(`File \`label-directory.json\` staged. Next step will commit file.`);
+    console.log(`-------------------------------------------------------`);
+    console.log(`File \`label-directory.json\` has been staged. Next step will commit file.`);
   });
-}
-
-
-
-function logLabelAction() {
-  // Log the label information
-  console.log('-------------------------------------------------------');
-  console.log('Label reference info:');
-  console.log(context.payload.label);
-  console.log('-------------------------------------------------------');
-  if(context.payload.action === 'edited') {
-    console.log('What was changed:');
-    console.log(context.payload.changes);
-    console.log('-------------------------------------------------------');
-  }
 }
 
 
@@ -108,9 +110,8 @@ function createKeyName(data, labelName) {
 
 
 
-
 function postWarning() {
-  console.log('in postWarning()- Temp message!');
+  console.log('In postWarning()- Temp message!');
 }
 
 
