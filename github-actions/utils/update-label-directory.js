@@ -42,14 +42,14 @@ async function main({ g, c }) {
     // If 'labelId' not found, the 'keyName' will need to be created
     if (!keyName) { 
       console.log(`${labelId} not found!`);
-      keyName = createKeyName(labelName);
+      keyName = createKeyName(data, labelName);
     }
   }
 
     
   // If 'labelId' does not exist, create new camelCased 'keyName' so label entry can be added to directory
   if (context.payload.action === 'created') {
-    createKeyName(labelName);
+    createKeyName(data, labelName);
   }
 
   // Update directory (delete, edit, or create) and log
@@ -87,7 +87,7 @@ function logLabelAction() {
 
 
 
-function createKeyName(labelName) {
+function createKeyName(data, labelName) {
   let keyName = '';
   const isAlphanumeric = str => /^[a-z0-9]+$/gi.test(str);
   let labelInterim = labelName.split(/[^a-zA-Z0-9]+/);
