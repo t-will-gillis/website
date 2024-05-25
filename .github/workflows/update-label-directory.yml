@@ -28,9 +28,9 @@ jobs:
           return labelPacket
 
      - name: Send POST request to Google Apps Script
-       if: ${{ steps.update-label-directory.outputs.result }} != ''
+       if: steps.update-label-directory.outputs.result != ''
        run: |
-         curl -X POST "https://script.google.com/macros/s/AKfycbzwuxvODMTYPIQP2COg-CyGIKqeJ1UQmsLDlNK2Rh5CosneVhOEwTw7o95DFbmBNC4Q/exec" \
+         curl -X POST "https://script.google.com/macros/s/AKfycby9EnfSP4odwYrLBqC7GTG5qBRoUoIM4XoujPv_ScJQ0Vnz873RSa99w307L31bTukJ/exec" \
            -H "Content-Type: application/json" \
            -d '${{ steps.update-label-directory.outputs.result }}'
        
