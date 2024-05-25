@@ -12,5 +12,5 @@ updates:
     # default location of `.github`
     directory: "/"
     schedule:
-      interval: "daily"
-      workflow_dispatch:
+      interval: "hourly"
+
