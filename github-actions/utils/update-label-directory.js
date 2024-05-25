@@ -56,14 +56,14 @@ async function main({ g, c }) {
       }
       console.log(`The label does not exist in \`label-directory.json\`; file was not updated!`);
       console.log(message);
-      labelPacket = postWarning(labelId, labelName, message);
+      labelPacket = postToAppsSheet(labelId, labelName, message);
       return labelPacket;
     } else {
       // The last option is that the labelId doesn't exist because it is being added
       keyName = createKeyName(data, labelName);
       message = `The labelId: ${labelId} not found in repo! Created new keyName and adding to \`label-directory.json\``;
       console.log(message);
-      labelPacket = postWarning(labelId, labelName, message);
+      labelPacket = postToAppsSheet(labelId, labelName, message);
       return labelPacket;
     }
   }
@@ -79,7 +79,7 @@ async function main({ g, c }) {
     delete data[keyName];
     message = `\nDeleted label from directory:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`;
     console.log(message);
-    labelPacket = postWarning(labelId, labelName, message);
+    labelPacket = postToAppsSheet(labelId, labelName, message);
     return labelPacket;
   } else {
     data[keyName] = [labelId, labelName];
@@ -128,28 +128,17 @@ function createKeyName(data, labelName) {
 
 
 
-function postWarning(labelId, labelName, message) {
+function postToAppsSheet(labelId, labelName, message) {
   console.log(`-------------------------------------------------------`);
   console.log(`\nCreating labelPacket to send to Google Apps Script file`);
 
   // Create label packet to send to Google Apps Script sheet
   let prePacket = { labelId, labelName, message };
   const packet = JSON.stringify( prePacket , null, 2 );
+  console.log('this is the packet: '):
+  console.log(packet);
   return packet
 }
-
-
-// function writeData(removedContributors, notifiedContributors, cannotRemoveYet){
-  
-//   const filepath = 'github-actions/utils/_data/inactive-members.json';
-//   const inactiveMemberLists = { removedContributors, notifiedContributors, cannotRemoveYet };
-
-//   fs.writeFile(filepath, JSON.stringify(inactiveMemberLists, null, 2), (err) => {
-//     if (err) throw err;
-//     console.log('-------------------------------------------------------');
-//     console.log("File 'inactive-members.json' saved successfully!");
-//    });
-// }
 
 
 
