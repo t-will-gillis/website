@@ -16,6 +16,7 @@ async function main({ g, c }) {
 
   const labelId = context.payload.label.id + '';
   const labelName = context.payload.label.name;
+  let labelPacket = {};
 
   console.log(`-------------------------------------------------------`);
   console.log(`Label reference info:`);
@@ -27,10 +28,10 @@ async function main({ g, c }) {
     console.log(`-------------------------------------------------------`);
   }
   
-  // If the action is 'edited' but does not entail name change, label directory is not affected.
+  // If action is 'edited' but doesn't entail name change, label directory is not affected- exit
   if (context.payload.action === 'edited' && !context.payload.changes.name) {
     console.log(`\nThe label edits do not affect \`label-directory.json\`; file was not updated!`);
-    return;
+    return labelPacket;
   } 
 
   // Otherwise, retrieve label directory 
@@ -38,7 +39,7 @@ async function main({ g, c }) {
   const rawData = fs.readFileSync(filepath, 'utf8');
   const data = JSON.parse(rawData);
   let keyName = '';
-  let message = '';
+  
 
   // Check for 'labelId' in label directory and return 'keyName'
   if (context.payload.action === 'edited' || context.payload.action === 'deleted') {
@@ -55,14 +56,15 @@ async function main({ g, c }) {
       }
       console.log(message);
       console.log(`The label does not exist in \`label-directory.json\`; file was not updated!`);
-      postWarning(labelId, labelName, message);
-      return;
+      labelPacket = postWarning(labelId, labelName, message);
+      return labelPacket;
     } else {
       // The last option is that the labelId doesn't exist because it is being added
       keyName = createKeyName(data, labelName);
       message = `The labelId: ${labelId} not found in repo! Created new keyName and adding to \`label-directory.json\``;
       console.log(message);
-      postWarning(labelId, labelName, message);
+      labelPacket = postWarning(labelId, labelName, message);
+      return labelPacket;
     }
   }
 
@@ -76,7 +78,8 @@ async function main({ g, c }) {
   if(context.payload.action === 'deleted') {
     delete data[keyName];
     console.log(`\nDeleting label from directory:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`);
-    postWarning();
+    labelPacket = postWarning(labelId, labelName, message);
+      return labelPacket;
   } else {
     data[keyName] = [labelId, labelName];
     console.log(`\nWriting label data to directory:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`);
@@ -126,9 +129,26 @@ function createKeyName(data, labelName) {
 
 function postWarning(labelId, labelName, message) {
   console.log(`-------------------------------------------------------`);
-  console.log(`\nIn postWarning()- Temp message!`);
-  console.log(`\n${message}`);
+  console.log(`\nCreating labelPacket to send to Google Apps Script file`);
+
+  // Create label packet to send to Google Apps Script sheet
+  const packet = JSON.stringify( { labelId, labelName, message }, null, 2 );
+  return packet
 }
+
+
+// function writeData(removedContributors, notifiedContributors, cannotRemoveYet){
+  
+//   const filepath = 'github-actions/utils/_data/inactive-members.json';
+//   const inactiveMemberLists = { removedContributors, notifiedContributors, cannotRemoveYet };
+
+//   fs.writeFile(filepath, JSON.stringify(inactiveMemberLists, null, 2), (err) => {
+//     if (err) throw err;
+//     console.log('-------------------------------------------------------');
+//     console.log("File 'inactive-members.json' saved successfully!");
+//    });
+// }
+
 
 
 module.exports = main;
