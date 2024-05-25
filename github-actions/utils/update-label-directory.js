@@ -67,7 +67,7 @@ async function main({ g, c }) {
       return labelPacket;
     }
   }
-
+  
     
   // If 'labelId' does not exist, create new camelCased 'keyName' so label entry can be added to directory
   if (context.payload.action === 'created') {
@@ -77,9 +77,10 @@ async function main({ g, c }) {
   // Update directory (delete, edit, or create) and log
   if(context.payload.action === 'deleted') {
     delete data[keyName];
-    console.log(`\nDeleting label from directory:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`);
+    message = `\nDeleted label from directory:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`;
+    console.log(message);
     labelPacket = postWarning(labelId, labelName, message);
-      return labelPacket;
+    return labelPacket;
   } else {
     data[keyName] = [labelId, labelName];
     console.log(`\nWriting label data to directory:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`);
