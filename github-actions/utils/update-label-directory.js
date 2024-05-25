@@ -133,7 +133,8 @@ function postWarning(labelId, labelName, message) {
   console.log(`\nCreating labelPacket to send to Google Apps Script file`);
 
   // Create label packet to send to Google Apps Script sheet
-  const packet = JSON.stringify( { labelId, labelName, message }, null, 2 );
+  let prePacket = { labelId, labelName, message };
+  const packet = JSON.stringify( prePacket , null, 2 );
   return packet
 }
 
