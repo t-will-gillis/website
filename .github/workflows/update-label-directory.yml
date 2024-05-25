@@ -24,8 +24,15 @@ jobs:
         github-token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
         script: |
           const script = require('./github-actions/utils/update-label-directory.js')
-          script({g: github, c: context})
+          const results = script({g: github, c: context})
+          return results
 
+     - name: Send POST request to Google Apps Script
+       run: |
+         curl -X POST "https://script.google.com/macros/s/AKfycbycZV2uZ8SCIbM5hjOB3iw1Gvtx3JrX4oV1nzY8LFdJtqUpoTxfi6VqJVH4uNzEPeCC/exec" \
+           -H "Content-Type: application/json" \
+           -d '{"repository": {"full_name": "user/repo"}, "pusher": {"name": "username"}, "head_commit": {"message": "Test commit message"}}'
+       
      - name: Commit changes
        uses: stefanzweifel/git-auto-commit-action@v5.0.0
        with:
