@@ -135,7 +135,7 @@ function postToAppsSheet(labelId, labelName, message) {
   // Create label packet to send to Google Apps Script sheet
   let prePacket = { labelId, labelName, message };
   const packet = JSON.stringify( prePacket , null, 2 );
-  console.log('this is the packet: '):
+  console.log('this is the packet: ');
   console.log(packet);
   return packet
 }
