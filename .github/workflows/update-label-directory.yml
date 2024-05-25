@@ -30,7 +30,7 @@ jobs:
      - name: Send POST request to Google Apps Script
        if: steps.update-label-directory.outputs.result != ''
        run: |
-         curl -X POST "https://script.google.com/macros/s/AKfycbzUC1t59kYDrE-0r959_VzIHSnd_867Q2zT8mrHHJdKp-Dry8RG41Q7hc8ya61nS3Jc/exec" \
+         curl -X POST "https://script.google.com/macros/s/AKfycbzzRmJm0NSi6qDzspv1GyffabLPPNynu0qaBk5GAGuo-GLU5T0wwE_pbb043GlnCT2q/exec" \
            -H "Content-Type: application/json" \
            -d '${{ steps.update-label-directory.outputs.result }}'
        
