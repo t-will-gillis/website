@@ -54,8 +54,8 @@ async function main({ g, c }) {
       } else {
         message = `\nNeither the labelId: ${labelId} nor the labelName: '${labelName}' were found in repo.`;
       }
-      console.log(message);
       console.log(`The label does not exist in \`label-directory.json\`; file was not updated!`);
+      console.log(message);
       labelPacket = postWarning(labelId, labelName, message);
       return labelPacket;
     } else {
