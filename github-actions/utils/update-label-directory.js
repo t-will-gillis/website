@@ -73,7 +73,7 @@ async function main({ g, c }) {
     } else {
       // If the 'labelId' is not found, create a new 'keyName' and flag this label edit for review
       keyName = createKeyName(data, labelName);
-      message = `A keyName for labelId: ${labelId} not found in JSON! Adding new keyName: ${keyName} to \`label-directory.json\``;
+      message = `A keyName for labelId: ${labelId} not found in JSON! Adding new keyName: '${keyName}' to \`label-directory.json\``;
       actionAddOn = ' / added';
     }
     writeToJsonFile(filepath, data, keyName, labelId, labelName);
