@@ -46,7 +46,7 @@ async function main({ g, c }) {
     keyName = cycleThroughDirectory(data, labelId);
     if (keyName) {
       // If the 'keyName' is found with 'labelId', remove from JSON but flag for review
-      message = `The keyName: \'${keyName}\' for labelId: \'${labelId}\' found, but Id no longer valid--> wiping in JSON. This needs review!`;
+      message = `The keyName: \'${keyName}\' for labelId: ${labelId} found, but Id no longer valid--> wiping in JSON. This needs review!`;
       labelId = 9999999999;
       actionAddOn = ' / id found';
       writeToJsonFile(filepath, data, keyName, labelId, labelName);
