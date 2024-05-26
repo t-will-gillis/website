@@ -14,9 +14,9 @@ async function main({ g, c }) {
   github = g;
   context = c;
 
-  const labelId = context.payload.label.id + '';
-  const labelName = context.payload.label.name;
-  const labelAction = context.payload.action;
+  var labelId = context.payload.label.id + '';
+  var labelName = context.payload.label.name;
+  var labelAction = context.payload.action;
 
   console.log(`-------------------------------------------------------`);
   console.log(`Label reference info:`);
