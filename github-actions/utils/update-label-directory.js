@@ -73,7 +73,7 @@ async function main({ g, c }) {
     } else {
       // If the 'labelId' is not found, create a new 'keyName' and flag this label edit for review
       keyName = createKeyName(data, labelName);
-      message = `A keyName for labelId: ${labelId} not found in JSON! Adding new keyName: '${keyName}' to \`label-directory.json\``;
+      message = `A keyName for labelId: ${labelId} not found in JSON! Adding new keyName: '${keyName}' to JSON.`;
       actionAddOn = ' / added';
     }
     writeToJsonFile(filepath, data, keyName, labelId, labelName);
@@ -82,7 +82,7 @@ async function main({ g, c }) {
   // If 'created' then 'keyName' won't exist, create new camelCased 'keyName' so label entry can be added to directory
   if (labelAction === 'created') {
     keyName = createKeyName(data, labelName);
-    message = `A keyName for new labelId: ${labelId} and labelName: '${labelName}' created, adding '${keyName}' to \`label-directory.json\``;
+    message = `A keyName for new labelId: ${labelId} and labelName: '${labelName}' created, adding '${keyName}' to JSON.`;
     writeToJsonFile(filepath, data, keyName, labelId, labelName);
   }
 
