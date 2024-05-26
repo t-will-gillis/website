@@ -16,7 +16,7 @@ async function main({ g, c }) {
 
   const labelId = context.payload.label.id + '';
   const labelName = context.payload.label.name;
-  let labelPacket = {};
+  const labelAction = context.payload.action;
 
   console.log(`-------------------------------------------------------`);
   console.log(`Label reference info:`);
@@ -28,10 +28,10 @@ async function main({ g, c }) {
     console.log(`-------------------------------------------------------`);
   }
   
-  // If action is 'edited' but doesn't entail name change, label directory is not affected- exit
+  // If label 'edited' but changes do not include 'name', label directory is not updated and workflow exits
   if (context.payload.action === 'edited' && !context.payload.changes.name) {
-    console.log(`\nThe label edits do not affect \`label-directory.json\`; file was not updated!`);
-    return labelPacket;
+    console.log(`\nThe label edits do not affect \`label-directory.json\`; file will not be updated!`);
+    return {};
   } 
 
   // Otherwise, retrieve label directory 
@@ -39,59 +39,56 @@ async function main({ g, c }) {
   const rawData = fs.readFileSync(filepath, 'utf8');
   const data = JSON.parse(rawData);
   let keyName = '';
-  
+  let actionAddOn = '';
 
-  // Check for 'labelId' in label directory and return 'keyName'
-  if (context.payload.action === 'edited' || context.payload.action === 'deleted') {
+  // If label 'deleted', check for 'labelId' in label directory and if found return 'keyName' 
+  if (labelAction === 'deleted') {
     keyName = cycleThroughDirectory(data, labelId);
-    if (keyName) { 
-      console.log(`The labelId: ${labelId} found; '${labelName}' will be ${context.payload.action}`);
-    } else if (context.payload.action === 'deleted') {
-      // If no keyName found, check that the labelName does not exist
+    if (keyName) {
+      // If the 'keyName' is found with 'labelId', remove from JSON but flag for review
+      message = `The keyName: '${keyName}' for labelId: '${labelId}' found, but Id no longer valid--> wiping in JSON. This needs review!`;
+      labelId = 999999999;
+      actionAddOn = ' / id found';
+      writeToJsonFile(filepath, data, keyName, labelId, labelName);
+    } else {
+      // If the 'keyName' not found with 'labelId', rerun with 'labelName'
       keyName = cycleThroughDirectory(data, labelName);
       if (keyName) {
-        message = `\nThe labelId: '${labelId}' was not found, but the labelName: '${labelName}' was- this needs review!`;
+        message = `\nThe labelId: '${labelId}' not found, but labelName: '${labelName}' was- this needs review! No updates to JSON.`;
+        actionAddOn = ' / check name';
       } else {
-        message = `\nNeither the labelId: ${labelId} nor the labelName: '${labelName}' were found in repo.`;
+        message = `\nNeither labelId: ${labelId} nor labelName: '${labelName}' found- this needs review! No updates to JSON.`;
+        actionAddOn = ' / not found';
       }
-      console.log(`The label does not exist in \`label-directory.json\`; file was not updated!`);
-      console.log(message);
-      labelPacket = postToAppsSheet(labelId, labelName, message);
-      return labelPacket;
-    } else {
-      // The last option is that the labelId doesn't exist because it is being added
-      keyName = createKeyName(data, labelName);
-      message = `The labelId: ${labelId} not found in repo! Created new keyName and adding to \`label-directory.json\``;
-      console.log(message);
-      labelPacket = postToAppsSheet(labelId, labelName, message);
-      return labelPacket;
     }
   }
-  
-    
-  // If 'labelId' does not exist, create new camelCased 'keyName' so label entry can be added to directory
-  if (context.payload.action === 'created') {
+ 
+  // If 'edited' incl. 'name', check for 'labelId' in label directory and if found return 'keyName' 
+  if (labelAction === 'edited' ) {
+    keyName = cycleThroughDirectory(data, labelId);
+    // If the 'keyName' is returned, it is assumed that the change is known. Label directory will be updated w/ new 'name'
+    if (keyName) {
+      message = `The keyName: '${keyName}' for labelId: ${labelId} found; '${labelName}' will be ${labelAction}`;
+      actionAddOn = ' / found';
+    } else {
+      // If the 'labelId' is not found, create a new 'keyName' and flag this label edit for review
+      keyName = createKeyName(data, labelName);
+      message = `A keyName for labelId: ${labelId} not found in JSON! Adding new keyName: ${keyName} to \`label-directory.json\``;
+      actionAddOn = ' / added';
+    }
+    writeToJsonFile(filepath, data, keyName, labelId, labelName);
+  }
+
+  // If 'created' then 'keyName' won't exist, create new camelCased 'keyName' so label entry can be added to directory
+  if (labelAction === 'created') {
     keyName = createKeyName(data, labelName);
+    writeToJsonFile(filepath, data, keyName, labelId, labelName);
   }
 
-  // Update directory (delete, edit, or create) and log
-  if(context.payload.action === 'deleted') {
-    delete data[keyName];
-    message = `\nDeleted label from directory:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`;
-    console.log(message);
-    labelPacket = postToAppsSheet(labelId, labelName, message);
-    return labelPacket;
-  } else {
-    data[keyName] = [labelId, labelName];
-    console.log(`\nWriting label data to directory:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`);
-  }
-
-  // Write data file in prep for committing changes to label directory
-  fs.writeFile(filepath, JSON.stringify(data, null, 2), (err) => {
-    if (err) throw err;
-    console.log(`-------------------------------------------------------`);
-    console.log(`Changes to \`label-directory.json\` have been staged. Next step will commit changes.`);
-  });
+  // Final step is to return labelPacket to workflow
+  console.log(`\nCreating labelPacket to send to Google Apps Script file`);
+  labelAction += labelAddOn;
+  return { labelAction, keyName, labelName, labelId, message };
 }
 
 
@@ -128,18 +125,18 @@ function createKeyName(data, labelName) {
 
 
 
-function postToAppsSheet(labelId, labelName, message) {
-  console.log(`-------------------------------------------------------`);
-  console.log(`\nCreating labelPacket to send to Google Apps Script file`);
-
-  // Create label packet to send to Google Apps Script sheet
-  let prePacket = { labelId, labelName, message };
-  return prePacket
-  // const packet = JSON.stringify( prePacket , null, 2 );
-  // console.log('this is the packet: ');
-  // console.log(packet);
-  // return packet
+function writeToJsonFile(filepath, data, keyName, labelId, labelName) {
+  data[keyName] = [labelId, labelName];                                                                 // Needs Try-catch
+  console.log(`\nWriting label data to directory:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`);
+  
+  // Write data file in prep for committing changes to label directory
+  fs.writeFile(filepath, JSON.stringify(data, null, 2), (err) => {
+    if (err) throw err;
+    console.log(`-------------------------------------------------------`);
+    console.log(`Changes to \`label-directory.json\` have been staged. Next step will commit changes.`);
+  });  
 }
+
 
 
 
