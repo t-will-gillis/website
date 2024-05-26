@@ -54,10 +54,10 @@ async function main({ g, c }) {
       // If the 'keyName' not found with 'labelId', rerun with 'labelName'
       keyName = cycleThroughDirectory(data, labelName);
       if (keyName) {
-        message = `\nThe labelId: ${labelId} not found, but labelName: \'${labelName}\' was- this needs review! No updates to JSON.`;
+        message = `The labelId: ${labelId} not found, but labelName: \'${labelName}\' was- this needs review! No updates to JSON.`;
         actionAddOn = ' / check name';
       } else {
-        message = `\nNeither labelId: ${labelId} nor labelName: \'${labelName}\' found- this needs review! No updates to JSON.`;
+        message = `Neither labelId: ${labelId} nor labelName: \'${labelName}\' found- this needs review! No updates to JSON.`;
         actionAddOn = ' / not found';
       }
     }
@@ -68,7 +68,7 @@ async function main({ g, c }) {
     keyName = cycleThroughDirectory(data, labelId);
     // If the 'keyName' is returned, it is assumed that the change is known. Label directory will be updated w/ new 'name'
     if (keyName) {
-      message = `The keyName: \'${keyName}\' for labelId: ${labelId} found; \'${labelName}\' will be ${labelAction}`;
+      message = `The keyName: \'${keyName}\' for labelId: ${labelId} found; \'${labelName}\' will be ${labelAction}.`;
       actionAddOn = ' / found';
     } else {
       // If the 'labelId' is not found, create a new 'keyName' and flag this label edit for review
