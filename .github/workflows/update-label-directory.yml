@@ -27,10 +27,11 @@ jobs:
           const labelPacket = script({g: github, c: context})
           return labelPacket
 
+     # Note the the URL below match the Google Apps spreadsheet that tracks label changes. If something is broken, check this link
      - name: Send POST request to Google Apps Script
        if: steps.update-label-directory.outputs.result != ''
        run: |
-         curl -X POST "https://script.google.com/macros/s/AKfycbxORZZFDwn05JA_UhwJLeyf3lSaUj6rfv-y0oiSs1swMGYR7wwTnOPDCX0LsEsSzOrq/exec" \
+         curl -X POST "https://script.google.com/macros/s/AKfycbzbFQjMbpjaSlwFVi0HSl1Tr_Osk3DnjVR_8U4G50RYjifqD4jjE4Iyj8F74JOiuJc/exec" \
            -H "Content-Type: application/json" \
            -d '${{ steps.update-label-directory.outputs.result }}'
        
