@@ -54,7 +54,7 @@ async function main({ g, c }) {
       // If the 'keyName' not found with 'labelId', rerun with 'labelName'
       keyName = cycleThroughDirectory(data, labelName);
       if (keyName) {
-        message = `\nThe labelId: '${labelId}' not found, but labelName: '${labelName}' was- this needs review! No updates to JSON.`;
+        message = `\nThe labelId: ${labelId} not found, but labelName: '${labelName}' was- this needs review! No updates to JSON.`;
         actionAddOn = ' / check name';
       } else {
         message = `\nNeither labelId: ${labelId} nor labelName: '${labelName}' found- this needs review! No updates to JSON.`;
@@ -82,6 +82,7 @@ async function main({ g, c }) {
   // If 'created' then 'keyName' won't exist, create new camelCased 'keyName' so label entry can be added to directory
   if (labelAction === 'created') {
     keyName = createKeyName(data, labelName);
+    message = `A keyName for new labelId: ${labelId} and labelName: '${labelName}' created, adding '${keyName}' to \`label-directory.json\``;
     writeToJsonFile(filepath, data, keyName, labelId, labelName);
   }
 
