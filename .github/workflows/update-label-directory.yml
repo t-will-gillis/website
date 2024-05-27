@@ -31,12 +31,12 @@ jobs:
      - name: Send POST request to Google Apps Script
        if: steps.update-label-directory.outputs.result != ''
        run: |
-         curl -X POST "https://script.google.com/macros/s/AKfycbywu8lAF4qd8uNg9xp3h84QAbKwbcRrqQqxyVy3zaa683K2HdTnTW4w_D6sxHsqTAfW/exec" \
+         curl -X POST "https://script.google.com/macros/s/AKfycbxz-gDk4zhM_WEe1SPVE9oLLTOcqp7NuQ6MBMidzxTlEMuftMZa61bTLyCrdFuRbu0B/exec" \
            -H "Content-Type: application/json" \
            -d '${{ steps.update-label-directory.outputs.result }}'
        
      - name: Commit changes
-       uses: stefanzweifel/git-auto-commit-action@v5.0.0
+       uses: stefanzweifel/git-auto-commit-action@v5.0.1
        with:
          # Glob pattern of file to commit, and opt. commit message + author
          file_pattern: github-actions/utils/_data/label-directory.json
