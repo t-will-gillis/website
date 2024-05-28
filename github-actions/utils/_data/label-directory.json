@@ -284,15 +284,16 @@
     5202352984
   ],
   "dependency": [
-    "7006312163",
-    "Dependency"
+    "Dependency",
+    7006312163
   ],
   "proper": [
-    9999999999,
-    "proper"
+    "proper",
+    9999999999
   ],
   "makeUpMyOwnCOPY": [
-    "4727399997",
-    "Make Up My Own"
+    "Make Up My Own",
+    4727399997
+    
   ]
 }
