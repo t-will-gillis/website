@@ -87,6 +87,7 @@ async function main({ g, c }) {
   }
 
   // Final step is to return labelPacket to workflow
+  console.log(message);
   console.log(`\nCreating labelPacket to send to Google Apps Script file`);
   labelAction += actionAddOn;
   return { labelAction, keyName, labelName, labelId, message };
