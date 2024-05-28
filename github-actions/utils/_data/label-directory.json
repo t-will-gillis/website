@@ -1,5 +1,5 @@
 {
-  "feature:OnboardingContributingMd": [
+  "featureOnboardingContributingMd": [
     "Feature: Onboarding/Contributing.md",
     6284221356
   ],
@@ -11,7 +11,7 @@
     "Size: 0.5pt",
     6284221360
   ],
-  "2WeeksInactive-Yep": [
+  "2WeeksInactiveYep": [
     "2 weeks inactive - yep",
     6986807955
   ],
@@ -22,6 +22,10 @@
   "aNewerOne": [
     "a newer one",
     6990757710
+  ],
+  "addingThisLabelNow": [
+    "Adding this label now",
+    7006596919
   ],
   "anUnseenLabel!": [
     "An Unseen Label!",
@@ -44,20 +48,24 @@
     5613098266
   ],
   "complexityMissing": [
-    "Complexity Missing",
-    5078553256
+    "Complexity: Missing",
+    5198902832
   ],
   "complexityPrework": [
     "Complexity: Prework",
     5901057034
   ],
-  "complexity:Small": [
+  "complexitySmall": [
     "Complexity: Small",
     6684184232
   ],
-  "complexity:Small🐙": [
-    "Complexity: Small🐙",
+  "complexitySmall\ud83d\udc19": [
+    "Complexity: Small\ud83d\udc19",
     5693876660
+  ],
+  "complexityMissing": [
+    "Complexity Missing",
+    5078553256
   ],
   "creatingALabel!": [
     "Creating a label!",
@@ -74,6 +82,10 @@
   "dependencies": [
     "dependencies",
     6995341742
+  ],
+  "dependency": [
+    "Dependency",
+    7006312163
   ],
   "documentation": [
     "documentation",
@@ -144,11 +156,11 @@
     4673567312
   ],
   "makeUpMyOwn": [
-    "make up my own",
+    "Make Up My Own",
     4727399997
   ],
   "moreMoreMore": [
-    "more more more",
+    "More More More",
     6663358266
   ],
   "oneMoreTime": [
@@ -251,40 +263,28 @@
     "Status: Updated",
     5168782436
   ],
-  "stillNeedMoreContext!": [
-    "Still need more context!",
-    6663368467
-  ],
-  "testLabelFor5205": [
-    "Test label for 5205",
-    6667503792
-  ],
   "toUpdate!!!": [
     "To Update !!!",
     6853421953
   ],
-  "⏰ToUpdate!": [
-    "⏰ To Update!",
+  "\u23f0ToUpdate!": [
+    "\u23f0 To Update!",
     5168399668
   ],
-  "⏳Complexity:Huge!": [
-    "⏳  Complexity: Huge!",
+  "\u23f3Complexity:Huge!": [
+    "\u23f3  Complexity: Huge!",
     5590503841
   ],
-  "⏳Size:6Pt": [
-    "⏳ Size: 6 pt",
+  "\u23f3Size:6Pt": [
+    "\u23f3 Size: 6 pt",
     5590498364
   ],
-  "🐧AnotherNewLabel": [
-    "🐧 Another New Label",
+  "\ud83d\udc27AnotherNewLabel": [
+    "\ud83d\udc27 Another New Label",
     6961182184
   ],
-  "😱2WeeksInactive": [
-    "😱 2 weeks inactive",
+  "\ud83d\ude312WeeksInactive": [
+    "\ud83d\ude31 2 weeks inactive",
     5202352984
-  ],
-  "dependency": [
-    "Dependency",
-    7006312163
-  ],
+  ]
 }
