@@ -46,7 +46,7 @@ async function main({ g, c }) {
     keyName = cycleThroughDirectory(data, labelId);
     if (keyName) {
       // If the 'keyName' is found with 'labelId', remove from JSON but flag for review
-      message = `The keyName:  ${keyName}  for labelId: ${labelId} found, but Id no longer valid--> wiping in JSON. This needs review!`;
+      message = `Found keyName:  ${keyName}  for labelId:  ${labelId}  and labelName:  ${labelName},  but Id no longer valid. This needs review!`;
       labelId = 9999999999;
       actionAddOn = ' / id found';
       writeToJsonFile(filepath, data, keyName, labelId, labelName);
@@ -54,10 +54,10 @@ async function main({ g, c }) {
       // If the 'keyName' not found with 'labelId', rerun with 'labelName'
       keyName = cycleThroughDirectory(data, labelName);
       if (keyName) {
-        message = `The labelId: ${labelId} not found, but labelName:  ${labelName}  was- this needs review! No updates to JSON.`;
+        message = `Did not find labelId:  ${labelId},  but found labelName:  ${labelName}  -No updates to JSON. This needs review!`;
         actionAddOn = ' / check name';
       } else {
-        message = `Neither labelId: ${labelId} nor labelName:  ${labelName}  found- this needs review! No updates to JSON.`;
+        message = `Found neither labelId:  ${labelId}  nor labelName:  ${labelName}  -No updates to JSON. This needs review!`;
         actionAddOn = ' / not found';
       }
     }
@@ -68,12 +68,12 @@ async function main({ g, c }) {
     keyName = cycleThroughDirectory(data, labelId);
     // If the 'keyName' is returned, it is assumed that the change is known. Label directory will be updated w/ new 'name'
     if (keyName) {
-      message = `The keyName:  ${keyName}  for labelId: ${labelId} found; labelName:  ${labelName}  will be ${labelAction}.`;
+      message = `Found keyName:  ${keyName}  for labelId:  ${labelId}  and labelName:  ${labelName}  - label will be edited.`;
       actionAddOn = ' / found';
     } else {
       // If the 'labelId' is not found, create a new 'keyName' and flag this label edit for review
       keyName = createKeyName(data, labelName);
-      message = `A keyName for labelId: ${labelId} not found in JSON! Adding new keyName:  ${keyName}  to JSON.`;
+      message = `Did not find keyName for labelId:  ${labelId}  or labelName:  ${labelName}  -Adding label with new keyName:  ${keyName}.`;
       actionAddOn = ' / added';
     }
     writeToJsonFile(filepath, data, keyName, labelId, labelName);
@@ -82,7 +82,7 @@ async function main({ g, c }) {
   // If 'created' then 'keyName' won't exist, create new camelCased 'keyName' so label entry can be added to directory
   if (labelAction === 'created') {
     keyName = createKeyName(data, labelName);
-    message = `A keyName for new labelId: ${labelId} and labelName:  ${labelName}  created, adding  ${keyName}  to JSON.`;
+    message = `Created keyName:  ${keyName}  for new labelId:  ${labelId}  and labelName:  ${labelName}, adding to JSON.`;
     writeToJsonFile(filepath, data, keyName, labelId, labelName);
   }
 
