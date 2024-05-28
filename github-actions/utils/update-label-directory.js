@@ -30,7 +30,7 @@ async function main({ g, c }) {
   
   // If label 'edited' but changes do not include 'name', label directory is not updated and workflow exits
   if (context.payload.action === 'edited' && !context.payload.changes.name) {
-    console.log(`\nThe label edits do not affect JSON; file will not be updated!`);
+    console.log(`\nThe label edits do not affect the JSON file; file will not be updated!`);
     return {};
   } 
 
@@ -46,7 +46,7 @@ async function main({ g, c }) {
     keyName = cycleThroughDirectory(data, labelId);
     if (keyName) {
       // If the 'keyName' is found with 'labelId', remove from JSON but flag for review
-      message = `The keyName: "${keyName}" for labelId: ${labelId} found, but Id no longer valid--> wiping in JSON. This needs review!`;
+      message = `The keyName:  ${keyName}  for labelId: ${labelId} found, but Id no longer valid--> wiping in JSON. This needs review!`;
       labelId = 9999999999;
       actionAddOn = ' / id found';
       writeToJsonFile(filepath, data, keyName, labelId, labelName);
@@ -54,10 +54,10 @@ async function main({ g, c }) {
       // If the 'keyName' not found with 'labelId', rerun with 'labelName'
       keyName = cycleThroughDirectory(data, labelName);
       if (keyName) {
-        message = `The labelId: ${labelId} not found, but labelName: "${labelName}" was- this needs review! No updates to JSON.`;
+        message = `The labelId: ${labelId} not found, but labelName:  ${labelName}  was- this needs review! No updates to JSON.`;
         actionAddOn = ' / check name';
       } else {
-        message = `Neither labelId: ${labelId} nor labelName: "${labelName}" found- this needs review! No updates to JSON.`;
+        message = `Neither labelId: ${labelId} nor labelName:  ${labelName}  found- this needs review! No updates to JSON.`;
         actionAddOn = ' / not found';
       }
     }
@@ -68,12 +68,12 @@ async function main({ g, c }) {
     keyName = cycleThroughDirectory(data, labelId);
     // If the 'keyName' is returned, it is assumed that the change is known. Label directory will be updated w/ new 'name'
     if (keyName) {
-      message = `The keyName: "${keyName}" for labelId: ${labelId} found; "${labelName}" will be ${labelAction}.`;
+      message = `The keyName:  ${keyName}  for labelId: ${labelId} found; labelName:  ${labelName}  will be ${labelAction}.`;
       actionAddOn = ' / found';
     } else {
       // If the 'labelId' is not found, create a new 'keyName' and flag this label edit for review
       keyName = createKeyName(data, labelName);
-      message = `A keyName for labelId: ${labelId} not found in JSON! Adding new keyName: "${keyName}" to JSON.`;
+      message = `A keyName for labelId: ${labelId} not found in JSON! Adding new keyName:  ${keyName}  to JSON.`;
       actionAddOn = ' / added';
     }
     writeToJsonFile(filepath, data, keyName, labelId, labelName);
@@ -82,7 +82,7 @@ async function main({ g, c }) {
   // If 'created' then 'keyName' won't exist, create new camelCased 'keyName' so label entry can be added to directory
   if (labelAction === 'created') {
     keyName = createKeyName(data, labelName);
-    message = `A keyName for new labelId: ${labelId} and labelName: "${labelName}" created, adding "${keyName}" to JSON.`;
+    message = `A keyName for new labelId: ${labelId} and labelName:  ${labelName}  created, adding  ${keyName}  to JSON.`;
     writeToJsonFile(filepath, data, keyName, labelId, labelName);
   }
 
@@ -121,14 +121,14 @@ function createKeyName(data, labelName) {
   if (data[keyName]) {
     keyName += 'COPY';
   }
-  console.log(`A new keyName '${keyName}' has been created.`);
+  console.log(`A new keyName: "${keyName}" has been created.`);
   return keyName;
 }
 
 
 
 function writeToJsonFile(filepath, data, keyName, labelId, labelName) {
-  data[keyName] = [labelId, labelName];                                                                 // Needs Try-catch
+  data[keyName] = [labelName, Number(labelId)];                                                                 // Needs Try-catch
   console.log(`\nWriting label data to directory:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`);
   
   // Write data file in prep for committing changes to label directory
