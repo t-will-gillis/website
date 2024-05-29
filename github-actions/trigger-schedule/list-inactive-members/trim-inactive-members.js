@@ -33,7 +33,8 @@ async function main({ g, c }, { recentContributors, previousContributors, inacti
   console.log('Current members of ' + writeTeam + ':');
   console.log(currentTeamMembers);
 
-  const [removedContributors, cannotRemoveYet] = await removeInactiveMembers(previousContributors, inactiveWithOpenIssue);
+  const previouslyNotified = await readPreviousNotifyList();
+  const [removedContributors, cannotRemoveYet] = await removeInactiveMembers(currentTeamMembers, previousContributors, inactiveWithOpenIssue, previouslyNotifed);
   console.log('-------------------------------------------------------');
   console.log('Removed members from ' + writeTeam + ' inactive since ' + dates[1].slice(0, 10) + ':');
   console.log(removedContributors);
@@ -61,11 +62,9 @@ async function main({ g, c }, { recentContributors, previousContributors, inacti
  * @returns {Array} removedMembers        - List of members that were removed 
  * @returns {Object} cannotRemoveYet      - List of members that cannot be removed due to open issues
  */
-async function removeInactiveMembers(previousContributors, inactiveWithOpenIssue){
+async function removeInactiveMembers(currentTeamMembers, previousContributors, inactiveWithOpenIssue, previouslyNotified){
   const removedMembers = [];
   const cannotRemoveYet = {};
-  const previouslyNotified = await readPreviousNotifyList();
-  const currentTeamMembers = await getTeamMembers(github, context, writeTeam);
   
   // Loop over team members and remove them from the team if they are not in previousContributors list
   for(const username in currentTeamMembers){
