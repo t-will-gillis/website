@@ -34,7 +34,7 @@ async function main({ g, c }, { recentContributors, previousContributors, inacti
   console.log(currentTeamMembers);
 
   const previouslyNotified = await readPreviousNotifyList();
-  const [removedContributors, cannotRemoveYet] = await removeInactiveMembers(currentTeamMembers, previousContributors, inactiveWithOpenIssue, previouslyNotifed);
+  const [removedContributors, cannotRemoveYet] = await removeInactiveMembers(currentTeamMembers, previousContributors, inactiveWithOpenIssue, previouslyNotified);
   console.log('-------------------------------------------------------');
   console.log('Removed members from ' + writeTeam + ' inactive since ' + dates[1].slice(0, 10) + ':');
   console.log(removedContributors);
