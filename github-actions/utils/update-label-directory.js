@@ -47,9 +47,9 @@ async function main({ g, c }) {
     if (keyName) {
       // If the 'keyName' is found with 'labelId', replace 'labelId' with '9999999999' in JSON and flag for review
       message = `Found keyName:  ${keyName}  for labelId:  ${labelId}  and labelName:  ${labelName},  but Id no longer valid. This needs review!`;
-      tempLabelId = 9999999999;
+      labelId = 9999999999;
       actionAddOn = ' / id found';
-      writeToJsonFile(filepath, data, keyName, tempLabelId, labelName);
+      writeToJsonFile(filepath, data, keyName, labelId, labelName);
     } else {
       // If the 'keyName' not found with 'labelId', rerun with 'labelName'
       keyName = cycleThroughDirectory(data, labelName);
