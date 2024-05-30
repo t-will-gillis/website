@@ -49,7 +49,7 @@ async function main({ g, c }) {
   
   // If label 'deleted', check for 'labelId' in label directory and if found return 'keyName' 
   if (labelAction === 'deleted') {
-    keyName = cycleThroughDirectory(data, labelId);
+    keyName = cycleThroughDirectory(data, Number(labelId));
     if (keyName) {
       // If the 'keyName' is found with 'labelId', replace 'labelId' with '9999999999' in JSON and flag for review
       message = `Found keyName:  ${keyName}  for labelId:  ${labelId}  and labelName:  ${labelName},  but Id no longer valid. This needs review!`;
@@ -107,6 +107,11 @@ async function main({ g, c }) {
  */
 function cycleThroughDirectory(data, searchValue) {
   for (let [key, value] of Object.entries(data)) {
+    if (value === 7019661909) {
+      console.log('Found the number 7019661909!');
+    } else if (value === "7019661909") {
+      console.log('Found the string "7019661909"');
+    }
     if (value.includes(searchValue)) {
       keyName = key;
       return keyName;
@@ -130,7 +135,6 @@ function createKeyName(data, labelName) {
   if (data[keyName]) {
     keyName += 'COPY';
   }
-  console.log(`A new keyName: "${keyName}" has been created.`);
   return keyName;
 }
 
