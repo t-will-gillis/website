@@ -1,6 +1,7 @@
 name: Update Label Directory
 
-# This action updates github-actions/utils/_data/label-directory.json
+# This action updates `github-actions/utils/_data/label-directory.json`
+# and the Google Sheets doc `Website Labels 'Source of Truth'` at URL below
 on:
   label:
     types: [edited, created, deleted]
