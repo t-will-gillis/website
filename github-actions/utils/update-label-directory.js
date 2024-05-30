@@ -75,12 +75,12 @@ async function main({ g, c }) {
     keyName = cycleThroughDirectory(data, Number(labelId));
     // If the 'keyName' is returned, it is assumed that the change is known. Label directory will be updated w/ new 'name'
     if (keyName) {
-      message = `Found keyName:  ${keyName}  for labelId:  ${labelId}  and labelName:  ${prevName}  . Changing to labelName:  ${labelName}.`;
+      message = `Found keyName:  ${keyName}  for labelId:  ${labelId}  and labelName:  ${prevName}  -->  ${labelName}.`;
       actionAddOn = ' / found';
     } else {
       // If the 'labelId' is not found, create a new 'keyName' and flag this label edit for review
       keyName = createKeyName(data, labelName);
-      message = `Did not find keyName for labelId:  ${labelId}  or labelName:  ${labelName}  -Adding label with new keyName:  ${keyName}.`;
+      message = `Did not find keyName for labelId:  ${labelId}  or labelName:  ${labelName}  . Adding label with new keyName:  ${keyName}.`;
       actionAddOn = ' / added';
     }
     writeToJsonFile(data, keyName, labelId, labelName);
