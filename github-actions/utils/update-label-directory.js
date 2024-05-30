@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 // Global variables
-var filePath = 'github-actions/utils/_data/label-directory.json';
+var filepath = 'github-actions/utils/_data/label-directory.json';
 var breakLine = `-`.repeat(60);
 var github;
 var context;
