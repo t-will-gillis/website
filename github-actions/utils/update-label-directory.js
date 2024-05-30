@@ -43,8 +43,9 @@ async function main({ g, c }) {
 
   // Initial information to log
   console.log(`${breakLine}\n`);
-  console.log('Label reference info:' + context.payload.label + '\n');
-  console.log(`${breakLine}\n`);
+  console.log(`Label reference info:`);
+  console.log(context.payload.label);
+  console.log(`\n${breakLine}\n`);
   
   // If label 'deleted', check for 'labelId' in label directory and if found return 'keyName' 
   if (labelAction === 'deleted') {
@@ -70,7 +71,7 @@ async function main({ g, c }) {
  
   // If 'edited' check for 'labelId' in label directory and if found return 'keyName' 
   if (labelAction === 'edited' ) {
-    keyName = cycleThroughDirectory(data, labelId);
+    keyName = cycleThroughDirectory(data, Number(labelId));
     // If the 'keyName' is returned, it is assumed that the change is known. Label directory will be updated w/ new 'name'
     if (keyName) {
       message = `Found keyName:  ${keyName}  for labelId:  ${labelId}  and labelName:  ${labelName}  - label will be edited.`;
