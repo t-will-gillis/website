@@ -5,9 +5,12 @@ var github;
 var context;
 
 /*
- * Function triggered by the `update-label-directory.yml`
+ * Function triggered by the `update-label-directory.yml` that  
+ * updates the "Label Object" in `label-directory.json` 
+ *
  * @param {Object} g     - github object from actions/github-script
  * @param {Object} c     - context object from actions/github-script
+ * @returns {Object}
  */
 async function main({ g, c }) {
   
@@ -18,21 +21,18 @@ async function main({ g, c }) {
   var labelName = context.payload.label.name;
   var labelAction = context.payload.action;
 
-  console.log(`-------------------------------------------------------`);
-  console.log(`Label reference info:`);
-  console.log(context.payload.label);
-  console.log(`-------------------------------------------------------`);
-  if(context.payload.action === 'edited') {
-    console.log(`What was changed:`);
-    console.log(context.payload.changes);
-    console.log(`-------------------------------------------------------`);
-  }
+  var breakLine = `-`.repeat(60);
+
   
   // If label 'edited' but changes do not include 'name', label directory is not updated and workflow exits
   if (context.payload.action === 'edited' && !context.payload.changes.name) {
-    console.log(`\nThe label edits do not affect the JSON file; file will not be updated!`);
+    console.log(`${breakLine}\n`);
+    console.log(`What was changed: \n${context.payload.changes}\n`);
+    console.log(`${breakLine}\n`);
+    console.log(`The label edits do not affect the JSON file; file will not be updated!`);
     return {};
   } 
+  
 
   // Otherwise, retrieve label directory 
   const filepath = 'github-actions/utils/_data/label-directory.json';
@@ -41,6 +41,11 @@ async function main({ g, c }) {
   let keyName = '';
   let actionAddOn = '';
 
+  // Initial information to log
+  console.log(`${breakLine}\n`);
+  console.log(`Label reference info: \n${context.payload.label}\n`);
+  console.log(`${breakLine}\n`);
+  
   // If label 'deleted', check for 'labelId' in label directory and if found return 'keyName' 
   if (labelAction === 'deleted') {
     keyName = cycleThroughDirectory(data, labelId);
@@ -63,7 +68,7 @@ async function main({ g, c }) {
     }
   }
  
-  // If 'edited' incl. 'name', check for 'labelId' in label directory and if found return 'keyName' 
+  // If 'edited' check for 'labelId' in label directory and if found return 'keyName' 
   if (labelAction === 'edited' ) {
     keyName = cycleThroughDirectory(data, labelId);
     // If the 'keyName' is returned, it is assumed that the change is known. Label directory will be updated w/ new 'name'
@@ -86,7 +91,7 @@ async function main({ g, c }) {
     writeToJsonFile(filepath, data, keyName, labelId, labelName);
   }
 
-  // Final step is to return labelPacket to workflow
+  // Final step is to return label data packet to workflow
   console.log(message);
   console.log(`\nCreating labelPacket to send to Google Apps Script file`);
   labelAction += actionAddOn;
@@ -94,7 +99,11 @@ async function main({ g, c }) {
 }
 
 
-
+/*
+ *  HELPER FUNCTIONS for main()
+ *
+ *
+ */
 function cycleThroughDirectory(data, searchValue) {
   for (let [key, value] of Object.entries(data)) {
     if (value.includes(searchValue)) {
@@ -104,7 +113,6 @@ function cycleThroughDirectory(data, searchValue) {
   }
   return undefined;
 }
-
 
 function createKeyName(data, labelName) {
   let keyName = '';
@@ -117,15 +125,13 @@ function createKeyName(data, labelName) {
           keyName += labelInterim[i].split(' ').map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase()).join(' ');
       }
   }
-  // If the 'keyName' already exists for some reason, add the word 'COPY' so it does not overwrite existing (and to flag it)
+  // If the 'keyName' already exists for some reason, add the word 'COPY' so it is flagged and does not overwrite existing
   if (data[keyName]) {
     keyName += 'COPY';
   }
   console.log(`A new keyName: "${keyName}" has been created.`);
   return keyName;
 }
-
-
 
 function writeToJsonFile(filepath, data, keyName, labelId, labelName) {
   data[keyName] = [labelName, Number(labelId)];                                                                 // Needs Try-catch
@@ -134,12 +140,9 @@ function writeToJsonFile(filepath, data, keyName, labelId, labelName) {
   // Write data file in prep for committing changes to label directory
   fs.writeFile(filepath, JSON.stringify(data, null, 2), (err) => {
     if (err) throw err;
-    console.log(`-------------------------------------------------------`);
-    console.log(`Changes to \`label-directory.json\` have been staged. Next step will commit changes.`);
+    console.log(`${breakLine}\n`);
+    console.log(`Changes to Label Directory JSON file have been staged. Next step will commit changes.`);
   });  
 }
-
-
-
 
 module.exports = main;
