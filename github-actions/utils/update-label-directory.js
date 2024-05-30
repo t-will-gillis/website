@@ -42,7 +42,7 @@ async function main({ g, c }) {
 
   // Initial information to log
   console.log(`${breakLine}\n`);
-  console.log(`Label reference info: \n${context.payload.label}\n`);
+  console.log(`Label reference info: \n` + context.payload.label + `\n`);
   console.log(`${breakLine}\n`);
   
   // If label 'deleted', check for 'labelId' in label directory and if found return 'keyName' 
