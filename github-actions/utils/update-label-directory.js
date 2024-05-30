@@ -107,9 +107,9 @@ async function main({ g, c }) {
  */
 function cycleThroughDirectory(data, searchValue) {
   for (let [key, value] of Object.entries(data)) {
-    if (value === 7019661909) {
+    if (value.includes(7019661909)) {
       console.log('Found the number 7019661909!');
-    } else if (value === "7019661909") {
+    } else if (value.includes("7019661909")) {
       console.log('Found the string "7019661909"');
     }
     if (value.includes(searchValue)) {
