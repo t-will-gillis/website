@@ -27,7 +27,7 @@ async function main({ g, c }) {
   // If label 'edited' but changes do not include 'name', label directory is not updated and workflow exits
   if (context.payload.action === 'edited' && !context.payload.changes.name) {
     console.log(`${breakLine}\n`);
-    console.log(`What was changed:\n`);
+    console.log(`What was changed:`);
     console.log(context.payload.changes);
     console.log(`\n${breakLine}\n`);
     console.log(`The label edits do not affect the JSON file; file will not be updated!`);
@@ -43,7 +43,7 @@ async function main({ g, c }) {
 
   // Initial information to log
   console.log(`${breakLine}\n`);
-  console.log(`Label reference info: \n` + context.payload.label + `\n`);
+  console.log('Label reference info:' + context.payload.label + '\n');
   console.log(`${breakLine}\n`);
   
   // If label 'deleted', check for 'labelId' in label directory and if found return 'keyName' 
