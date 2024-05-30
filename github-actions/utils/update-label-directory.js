@@ -140,8 +140,13 @@ function createKeyName(data, labelName) {
 }
 
 function writeToJsonFile(data, keyName, labelId, labelName) {
-  data[keyName] = [labelName, Number(labelId)];                                                                 // Needs Try-catch
-  console.log(`\nWriting label data to directory:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`);
+  
+  try {
+    data[keyName] = [labelName, Number(labelId)];
+    console.log(`\nSuccess writing label object to JSON:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`);
+  } catch (error) {
+    console.log(error);
+  }
   
   // Write data file in prep for committing changes to label directory
   fs.writeFile(filepath, JSON.stringify(data, null, 2), (err) => {
