@@ -1,6 +1,8 @@
 const fs = require('fs');
 
 // Global variables
+var filePath = 'github-actions/utils/_data/label-directory.json';
+var breakLine = `-`.repeat(60);
 var github;
 var context;
 
@@ -21,8 +23,6 @@ async function main({ g, c }) {
   var labelName = context.payload.label.name;
   var labelAction = context.payload.action;
 
-  var breakLine = `-`.repeat(60);
-
   
   // If label 'edited' but changes do not include 'name', label directory is not updated and workflow exits
   if (context.payload.action === 'edited' && !context.payload.changes.name) {
@@ -35,9 +35,8 @@ async function main({ g, c }) {
   
 
   // Otherwise, retrieve label directory 
-  const filepath = 'github-actions/utils/_data/label-directory.json';
-  const rawData = fs.readFileSync(filepath, 'utf8');
-  const data = JSON.parse(rawData);
+  var rawData = fs.readFileSync(filepath, 'utf8');
+  var data = JSON.parse(rawData);
   let keyName = '';
   let actionAddOn = '';
 
@@ -54,7 +53,7 @@ async function main({ g, c }) {
       message = `Found keyName:  ${keyName}  for labelId:  ${labelId}  and labelName:  ${labelName},  but Id no longer valid. This needs review!`;
       labelId = 9999999999;
       actionAddOn = ' / id found';
-      writeToJsonFile(filepath, data, keyName, labelId, labelName);
+      writeToJsonFile(data, keyName, labelId, labelName);
     } else {
       // If the 'keyName' not found with 'labelId', rerun with 'labelName'
       keyName = cycleThroughDirectory(data, labelName);
@@ -81,14 +80,14 @@ async function main({ g, c }) {
       message = `Did not find keyName for labelId:  ${labelId}  or labelName:  ${labelName}  -Adding label with new keyName:  ${keyName}.`;
       actionAddOn = ' / added';
     }
-    writeToJsonFile(filepath, data, keyName, labelId, labelName);
+    writeToJsonFile(data, keyName, labelId, labelName);
   }
 
   // If 'created' then 'keyName' won't exist, create new camelCased 'keyName' so label entry can be added to directory
   if (labelAction === 'created') {
     keyName = createKeyName(data, labelName);
     message = `Created keyName:  ${keyName}  for new labelId:  ${labelId}  and labelName:  ${labelName}, adding to JSON.`;
-    writeToJsonFile(filepath, data, keyName, labelId, labelName);
+    writeToJsonFile(data, keyName, labelId, labelName);
   }
 
   // Final step is to return label data packet to workflow
@@ -133,7 +132,7 @@ function createKeyName(data, labelName) {
   return keyName;
 }
 
-function writeToJsonFile(filepath, data, keyName, labelId, labelName) {
+function writeToJsonFile(data, keyName, labelId, labelName) {
   data[keyName] = [labelName, Number(labelId)];                                                                 // Needs Try-catch
   console.log(`\nWriting label data to directory:\n { "${keyName}": [ "${labelId}", "${labelName}" ] }\n`);
   
