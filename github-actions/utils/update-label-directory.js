@@ -71,10 +71,11 @@ async function main({ g, c }) {
  
   // If 'edited' check for 'labelId' in label directory and if found return 'keyName' 
   if (labelAction === 'edited' ) {
+    let prevName = context.payload.changes.name.from;
     keyName = cycleThroughDirectory(data, Number(labelId));
     // If the 'keyName' is returned, it is assumed that the change is known. Label directory will be updated w/ new 'name'
     if (keyName) {
-      message = `Found keyName:  ${keyName}  for labelId:  ${labelId}  and labelName:  ${labelName}  - label will be edited.`;
+      message = `Found keyName:  ${keyName}  for labelId:  ${labelId}  and labelName:  ${prevName}  . Changing to labelName:  ${labelName}.`;
       actionAddOn = ' / found';
     } else {
       // If the 'labelId' is not found, create a new 'keyName' and flag this label edit for review
