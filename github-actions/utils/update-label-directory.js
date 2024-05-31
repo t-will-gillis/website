@@ -52,8 +52,9 @@ async function main({ g, c }) {
     keyName = cycleThroughDirectory(data, Number(labelId));
     if (keyName) {
       // If the 'keyName' is found with 'labelId', replace 'labelId' with '9999999999' in JSON and flag for review
-      message = `Found keyName:  ${keyName}  for labelName:  ${labelName}  using labelId:  ${labelId}  --->  9999999999.  Id no longer valid. This needs review!`;
+      let prevId = labelId;
       labelId = 9999999999;
+      message = `Found keyName:  ${keyName}  for labelName:  ${labelName}  using labelId:  ${prevId}  --->  ${labelId}.  Id no longer valid. This needs review!`;
       actionAddOn = ' / id found';
       console.log(message);
       writeToJsonFile(data, keyName, labelId, labelName);
