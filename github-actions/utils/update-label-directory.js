@@ -52,7 +52,7 @@ async function main({ g, c }) {
     keyName = cycleThroughDirectory(data, Number(labelId));
     if (keyName) {
       // If the 'keyName' is found with 'labelId', replace 'labelId' with '9999999999' in JSON and flag for review
-      message = `Found keyName:  ${keyName}  for labelName:  ${labelName}  using labelId:  ${labelId}  --->  9999999999   . Id no longer valid. This needs review!`;
+      message = `Found keyName:  ${keyName}  for labelName:  ${labelName}  using labelId:  ${labelId}  --->  9999999999.  Id no longer valid. This needs review!`;
       labelId = 9999999999;
       actionAddOn = ' / id found';
       console.log(message);
@@ -61,11 +61,11 @@ async function main({ g, c }) {
       // If the 'keyName' not found with 'labelId', rerun with 'labelName'
       keyName = cycleThroughDirectory(data, labelName);
       if (keyName) {
-        message = `Found a keyName:  ${keyName}  for labelName:  ${labelName}  . However, this DOES NOT MATCH labelId:  ${labelId}  . No updates to JSON. This needs review!`;
+        message = `Found a keyName:  ${keyName}  for labelName:  ${labelName}.  However, this DOES NOT MATCH labelId:  ${labelId}.  No updates to JSON. This needs review!`;
         console.log(message);
         actionAddOn = ' / check name';
       } else {
-        message = `Found neither labelName:  ${labelName}  nor labelId:  ${labelId}   . No updates to JSON. This needs review!`;
+        message = `Found neither labelName:  ${labelName}  nor labelId:  ${labelId}.  No updates to JSON. This needs review!`;
         console.log(message);
         actionAddOn = ' / not found';
       }
@@ -83,7 +83,7 @@ async function main({ g, c }) {
     } else {
       // If the 'labelId' is not found, create a new 'keyName' and flag this label edit for review
       keyName = createInitialKeyName(data, labelName);
-      message = `Did not find keyName:   for labelName:  ${labelName}  using labelId:  ${labelId}  . Adding Label Object with new keyName:  ${keyName}.`;
+      message = `Did not find keyName:   for labelName:  ${labelName}  using labelId:  ${labelId}.  Adding Label Object with new keyName:  ${keyName}.`;
       actionAddOn = ' / added';
     }
     console.log(message);
@@ -93,13 +93,13 @@ async function main({ g, c }) {
   // If 'created' then 'keyName' won't exist, create new camelCased 'keyName' so label entry can be added to directory
   if (labelAction === 'created') {
     keyName = createInitialKeyName(data, labelName);
-    message = `Created initial keyName:  ${keyName}  for labelName:  ${labelName}  and new labelId:  ${labelId}   . Adding Label Object to JSON.`;
+    message = `Created initial keyName:  ${keyName}  for new labelName:  ${labelName}  and new labelId:  ${labelId}.  Adding Label Object to JSON.`;
     console.log(message);
     writeToJsonFile(data, keyName, labelId, labelName);
   }
 
   // Final step is to return label data packet to workflow
-  console.log(`\nCreating  Label Object  to send to Google Apps Script file`);
+  console.log(`\nSending  Label Object  Google Apps Script / Sheets file`);
   labelAction += actionAddOn;
   return { labelAction, keyName, labelName, labelId, message };
 }
@@ -145,7 +145,7 @@ function createInitialKeyName(data, labelName) {
 function writeToJsonFile(data, keyName, labelId, labelName) {
   try {
     data[keyName] = [labelName, Number(labelId)];
-    console.log(`Success writing  Label Object  to JSON:\n   { "${keyName}": [ "${labelName}", "${labelId}" ] }\n`);
+    console.log(`\nSuccess writing  Label Object  to JSON:\n   { "${keyName}": [ "${labelName}", "${labelId}" ] }`);
   } catch (error) {
     console.log(error);
   }
