@@ -128,12 +128,12 @@
     7002098372
   ],
   "gettingTired": [
+    "getting really tired",
     6663363739,
-    "getting really tired"
   ],
   "githubActions": [
-    6995341745,
-    "github_actionz"
+    "github_actionz",    
+    6995341745
   ],
   "goodFirstIssue": [
     "good first issue",
@@ -285,7 +285,7 @@
   ],
   "featureRefactorGhas": [
     "Feature: Refactor GHAs",
-    5613098271,
+    5613098271
   ],
   "coffeeBean": [
     "Coffee bean",
