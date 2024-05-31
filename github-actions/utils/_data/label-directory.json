@@ -95,27 +95,27 @@
     "enhancement",
     4673567309
   ],
-  "feature:Board/GithubMaintenance": [
+  "featureBoard/GithubMaintenance": [
     "Feature: Board/GitHub Maintenance",
     5613098272
   ],
-  "feature:FeatureBranch": [
+  "featureFeatureBranch": [
     "Feature: Feature Branch",
     6882941195
   ],
-  "feature:Onboarding/Contributing.Md": [
+  "featureOnboardingContributingMd": [
     "Feature: Onboarding/Contributing.md",
     5510345900
   ],
-  "feature:RefactorCss": [
+  "featureRefactorCss": [
     "Feature: Refactor CSS",
     4956777098
   ],
-  "feature:RefactorGha": [
+  "featureRefactorGha": [
     "Feature: Refactor GHA",
     5613098271
   ],
-  "feature:RefactorJs/Liquid": [
+  "featureRefactorJsLiquid": [
     "Feature: Refactor JS / Liquid",
     5579192681
   ],
@@ -131,7 +131,7 @@
     6663363739,
     "getting really tired"
   ],
-  "github_actions": [
+  "githubActions": [
     6995341745,
     "github_actionz"
   ],
@@ -163,19 +163,19 @@
     "One more time",
     7001381379
   ],
-  "p-feature:CommunitiesOfPractice": [
+  "pFeatureCommunitiesOfPractice": [
     "P-Feature: Communities of Practice",
     5528460959
   ],
-  "p-feature:ProjectInfoAndPage": [
+  "pFeatureProjectInfoAndPage": [
     "P-Feature: Project Info and Page",
     5579215107
   ],
-  "p-feature:Projects-Check": [
+  "pFeatureProjectsCheck": [
     "p-feature: Projects-check",
     5579195061
   ],
-  "p-feature:Toolkit": [
+  "pFeatureToolkit": [
     "P-Feature: Toolkit",
     5510731811
   ],
@@ -187,7 +187,7 @@
     "question",
     4673567313
   ],
-  "randomNewLabel!": [
+  "randomNewLabel": [
     "Random New Label!",
     6961160817
   ],
@@ -203,27 +203,27 @@
     "Ready for product",
     5693876659
   ],
-  "role:BackEnd/Devops": [
+  "roleBackEndDevops": [
     "role: back end/devOps",
     5579189288
   ],
-  "role:Design": [
+  "roleDesign": [
     "role: design",
     5528507276
   ],
-  "role:DevLeads": [
+  "roleDevLeads": [
     "role: dev leads",
     5893978857
   ],
-  "role:FrontEnd": [
+  "roleFrontEnd": [
     "role: front end",
     5510732689
   ],
-  "role:Product": [
+  "roleProduct": [
     "role: product",
     5528459476
   ],
-  "role:UserResearch": [
+  "roleUserResearch": [
     "role: user research",
     5510347698
   ],
@@ -231,23 +231,23 @@
     "role missing",
     4726805735
   ],
-  "size:0.25Pt": [
+  "size025Pt": [
     "size: 0.25pt",
     5555113989
   ],
-  "size:0.5Pt": [
+  "size05Pt": [
     "size: 0.5pt",
     5510733351
   ],
-  "size:1Pt": [
+  "size1Pt": [
     "size: 1pt",
     4933789193
   ],
-  "size:Missing": [
+  "sizeMissing": [
     "size: missing",
     4726805729
   ],
-  "size:Small": [
+  "sizeSmall": [
     "Size: Small",
     4933791068
   ],
@@ -255,11 +255,11 @@
     "Sojourn",
     7002127963
   ],
-  "status:Updated": [
+  "statusUpdated": [
     "Status: Updated",
     5168782436
   ],
-  "toUpdate!!!": [
+  "toUpdate": [
     "To Update !!!",
     6853421953
   ],
@@ -382,10 +382,6 @@
   "skittles": [
     "Skittles",
     7020753166
-  ],
-  "tamarindo": [
-    "Tamarindo",
-    7020760597
   ],
   "jamaica": [
     "Jamaica",
