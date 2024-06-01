@@ -17,6 +17,10 @@ jobs:
       uses: actions/checkout@v4
       with: 
         token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
+
+    # Run `git pull` to ensure branch up-to-date w/ origin
+    - name: Pull latest changes from origin/gh-pages
+      run: git pull origin gh-pages
         
     # Checks member activity logs for recent and previous contributors 
     - name: Get Contributors
