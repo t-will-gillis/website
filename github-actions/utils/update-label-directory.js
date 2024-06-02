@@ -112,6 +112,7 @@ async function main({ g, c }) {
  *
  */
 function cycleThroughDirectory(data, searchValue) {
+  let keyname = '';
   for (let [key, value] of Object.entries(data)) {
     if (value.includes(searchValue)) {
       keyName = key;
