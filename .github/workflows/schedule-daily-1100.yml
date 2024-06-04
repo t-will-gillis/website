@@ -8,7 +8,7 @@ on:
 jobs:
   github_data:
     runs-on: ubuntu-latest
-    if: github.repository == 'hackforla/website'
+    if: github.repository == 't-will-gillis/website'
     
     steps:
     - name: Checkout repository
