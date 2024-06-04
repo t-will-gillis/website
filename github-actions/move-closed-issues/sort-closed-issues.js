@@ -6,8 +6,8 @@ const obtainLabels = require('../utils/obtain-labels')
  * @returns - returns the appropriate column, which is passed on to the next action
  */
 function main({ context }) {
-  const doneColumn = "Done"
-  const QAColumn = "QA"
+  const doneColumn = "Done";
+  const QAColumn = "QA";
 
   const hardLabels = [
     "Feature: Refactor CSS",
