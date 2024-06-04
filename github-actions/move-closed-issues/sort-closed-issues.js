@@ -7,7 +7,7 @@ const obtainLabels = require('../utils/obtain-labels')
  */
 function main({ context }) {
   const doneColumn = "Done";
-  const qaColumn = "QA";
+  const QAColumn = "QA";
 
   const hardLabels = [
     "Feature: Refactor CSS",
