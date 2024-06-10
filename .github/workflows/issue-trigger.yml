@@ -1,7 +1,7 @@
 name: Issue Trigger
 on:
   issues:
-    types: [opened, transferred, assigned, labeled, unlabeled]
+    types: [transferred, assigned, labeled, unlabeled]
 
 jobs:
   # Adds newly created issues onto project board in the default column 'New Issue Approval' 
