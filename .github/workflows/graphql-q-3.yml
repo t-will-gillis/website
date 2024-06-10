@@ -1,0 +1,49 @@
+name: GraphQL Query 3
+on: 
+  workflow_dispatch:
+
+jobs:
+  Get-Nodes:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Get project data
+        env:
+          GH_TOKEN: ${{ secrets.GRAPHQL }}
+          USER: "t-will-gillis"
+          PROJECT_NUMBER: 5
+
+        run: |
+          gh api graphql -f query='
+            query{
+            node(id: "PVT_kwHOAm6MB84Aiu3X") {
+              ... on ProjectV2 {
+                fields(first: 20) {
+                  nodes {
+                    ... on ProjectV2Field {
+                      id
+                      name
+                    }
+                    ... on ProjectV2IterationField {
+                      id
+                      name
+                      configuration {
+                        iterations {
+                          startDate
+                          id
+                        }
+                      }
+                    }
+                    ... on ProjectV2SingleSelectField {
+                      id
+                      name
+                      options {
+                        id
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }'
