@@ -1,6 +1,6 @@
 ---
-name: Blank Issue Template
-about: 'Standard HackforLA issue template '
+name: NEW Blank Issue Template
+about: 'NEW Standard HackforLA issue template '
 title: ''
 labels: 'Complexity: Missing, Feature Missing, role missing, size: missing'
 assignees: ''
