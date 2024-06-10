@@ -1,0 +1,25 @@
+name: GraphQL Query 2
+on: 
+  workflow_dispatch:
+
+jobs:
+  Get-Nodes:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Get project data
+        env:
+          GH_TOKEN: ${{ secrets.GRAPHQL }}
+          USER: "t-will-gillis"
+          PROJECT_NUMBER: 5
+
+        run: |
+          gh api graphql -f query='
+            query{
+              user(login: "t-will-gillis") {
+                projectsV2(number: 5) {
+                  id
+                }
+              }
+            }'
+    
