@@ -10,13 +10,13 @@ jobs:
       - name: Get project data
         env:
           GH_TOKEN: ${{ secrets.GRAPHQL }}
-          ORGANIZATION: "t-will-gillis"
+          USER: "t-will-gillis"
           PROJECT_NUMBER: 5
 
         run: |
           gh api graphql -f query='
             query($org: String!, $number: Int!) {
-              organization(login: $org){
+              user(login: $org){
                 projectV2(number: $number) {
                   id
                   fields(first:20) {
