@@ -9,7 +9,7 @@ jobs:
 
       - name: Get project data
         env:
-          GH_TOKEN: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
+          GH_TOKEN: ${{ secrets.GRAPHQL }}
           ORGANIZATION: "t-will-gillis"
           PROJECT_NUMBER: 5
 
