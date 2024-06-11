@@ -1,7 +1,8 @@
+# Workflow changed to deployment to disable it
+
 name: Pull Request Trigger
 on:
-  pull_request_target:
-    types: [opened, closed]
+  deployment:
     branches:
       - '*'
 
