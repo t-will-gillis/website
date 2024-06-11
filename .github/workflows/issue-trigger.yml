@@ -6,9 +6,10 @@ on:
 jobs:
   # Adds newly created issues onto project board in the default column 'New Issue Approval' 
   # unless overridden when issue has "LA website bot" in title, then 'Questions / In Review'
-  Add-Issue-To-Project-Board:
-    runs-on: ubuntu-latest
-    # Disable the existing step
+
+  # Disable the following job
+  # Add-Issue-To-Project-Board:
+
 
 
 
