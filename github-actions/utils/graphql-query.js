@@ -5,16 +5,17 @@ const fetch = require('node-fetch');
 
 /*
  * Function that makes a GraphQL *query* to the GitHub API
- * @param{ Object } data          - body of the data query pre-formed prior to funct. call       
+ * @param{ Object } query         - body of the data query, pre-formed prior to funct. call       
  * @param{ String } token         - GitHub token
  * @param( String } message       - optional user agent message
  *
  */
 
 
-function graphQlQuery(data, token, message = '' ) {                   // remove message if not needed?
+function graphQlQuery(query, token) {                 
 
-  const DATA = data;
+  
+  const QUERY = query;
   const GH_TOKEN = token;
   const USER_AGENT_MESSAGE = message;
 
@@ -26,11 +27,13 @@ function graphQlQuery(data, token, message = '' ) {                   // remove 
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'bearer ' + GH_TOKEN,
-        'user-agent': USER_AGENT_MESSAGE,                                   //    << needed? 
       },
     }
-  );
-
+  )
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+  
   const json = await response.json();
   return json;
 
