@@ -3,6 +3,8 @@ const findLinkedIssue = require('../../utils/find-linked-issue');
 const getTimeline = require('../../utils/get-timeline');
 var fs = require("fs");
 const https = require("https");
+
+// unneeded comment
 // Global variables
 var github;
 var context;
