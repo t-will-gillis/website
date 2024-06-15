@@ -15,35 +15,23 @@ jobs:
 
         run: |
           gh api graphql -f query='
-            query{
-            node(id: "PVT_kwHOAm6MB84Aiu3X") {
-              ... on ProjectV2 {
-                fields(first: 20) {
-                  nodes {
-                    ... on ProjectV2Field {
-                      id
-                      name
-                    }
-                    ... on ProjectV2IterationField {
-                      id
-                      name
-                      configuration {
-                        iterations {
-                          startDate
-                          id
+            query {
+              repository(owner:"t-will-gillis", name:"website") {
+                issues(last:20, states:CLOSED) {
+                  edges {
+                    node {
+                      title
+                      url
+                      status
+                      labels(first:5) {
+                        edges {
+                          node {
+                            name
+                          }
                         }
-                      }
-                    }
-                    ... on ProjectV2SingleSelectField {
-                      id
-                      name
-                      options {
-                        id
-                        name
                       }
                     }
                   }
                 }
               }
-            }
-          }'
+            }'
