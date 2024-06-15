@@ -1,4 +1,4 @@
-name: GraphQL Query 3
+name: GraphQL Chek PR Status
 on: 
   workflow_dispatch:
 
