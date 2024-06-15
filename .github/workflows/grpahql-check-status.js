@@ -1,4 +1,4 @@
-name: GraphQL Chek PR Status
+name: GraphQL Check Status
 on: 
   workflow_dispatch:
 
