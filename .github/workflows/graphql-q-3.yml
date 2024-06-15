@@ -17,12 +17,12 @@ jobs:
           gh api graphql -f query='
             query {
               repository(owner:"t-will-gillis", name:"website") {
-                issues(last:20, states:CLOSED) {
+                issues(last:20) {
                   edges {
                     node {
                       title
                       url
-                      status
+            
                       labels(first:5) {
                         edges {
                           node {
