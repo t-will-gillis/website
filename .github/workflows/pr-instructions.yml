@@ -4,6 +4,7 @@ on:
     types: [opened]
     branches:
       - 'gh-pages'
+      - 'check-pr-6971'
       - 'feature-homepage-launch'
 
 jobs:
