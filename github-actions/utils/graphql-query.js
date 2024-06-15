@@ -10,20 +10,16 @@ const fetch = require('node-fetch');
  * @param( String } message       - optional user agent message
  *
  */
-
-
 function graphQlQuery(query, token) {                 
 
-  
   const QUERY = query;
   const GH_TOKEN = token;
-  const USER_AGENT_MESSAGE = message;
 
   const response = await fetch(
     'https://api.github.com/graphql',
     {
       method: 'POST',
-      body: DATA,
+      body: QUERY,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'bearer ' + GH_TOKEN,
@@ -34,34 +30,8 @@ function graphQlQuery(query, token) {
   .then(data => console.log(data))
   .catch(error => console.error(error));
   
-  const json = await response.json();
-  return json;
-
+  return response;
   
 }
-                       
-  
-
- /* 
-  const req = https.request(options, (res) => {
-    let data = '';
-    // console.log(`statusCode: ${res}`);
-  
-    res.on('data', (d) => {
-      data += d;
-    });
-    res.on('end', () => {
-      console.log(`GraphQL output: ${data}`);
-    });
-  });
-
-  req.on('error', (error) => {
-    console.error(error);
-  });
-
-  req.write(mutation);
-  req.end();
-}
-*/
 
 module.exports = graphQlQuery;
