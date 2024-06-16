@@ -7,8 +7,14 @@ on:
       - '*'
 
 jobs:
+ # Run an echo to confirm that the action was triggered
+  Hello-World:
+    runs-on: ubuntu-latest
+    steps:
+     - run: echo "🍺 This job was automatically triggered by a ${{ github.event_name }} event."
+     
   Add-Comment-To-Prework-Issue:
-    if: ${{ github.event_name == 'pull_request' && (github.event.action == 'opened' || github.event.action == 'closed')}}
+    if: ${{ (github.event.action == 'opened' || github.event.action == 'closed') }}
     permissions:
       issues: write
     uses: ./.github/workflows/prework-issue-comment-reusable-workflow.yaml
