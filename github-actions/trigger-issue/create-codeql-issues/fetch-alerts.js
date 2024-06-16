@@ -1,7 +1,7 @@
 // Global variables
 var github;
 var context;
-
+// nonsense
 /**
  * Fetches a list of open CodeQL alerts from the GitHub API.
  * @param {Object} params - The parameters for the fetch operation.
