@@ -1,0 +1,12 @@
+name: Pull Request Review Trigger
+on:
+  pull_request_review:
+    types:
+      - submitted
+jobs:
+  Add-Comment-To-Prework-Issue:
+    if: ${{ github.event_name == 'pull_request_review' && github.event.action == 'submitted'}}
+    permissions:
+      issues: write
+    uses: ./.github/workflows/prework-issue-comment-reusable-workflow.yaml    
+    secrets: inherit
