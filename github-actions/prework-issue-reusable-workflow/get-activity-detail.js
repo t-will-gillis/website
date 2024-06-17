@@ -20,9 +20,9 @@ async function main({ g, c }) {
       return await getIssueCommentEventType(context)
     case "issues":
       return await getIssueEventType(context)
-    case "pull_request":
+    case "pull_request_trigger":                                                 // added by WG
       return await getPullRequestEventType(context)
-    case "pull_request_review":
+    case "pull_request_review": 
       return await getPullRequestReviewEventType(context)
     case "pull_request_review_comment":
       return await getPullRequestReviewCommentEventType(context)
