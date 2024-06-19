@@ -14,5 +14,8 @@ async function main({ g, c }) {
     }
   }`);
 
+  console.log('test');
+  console.log(viewer);
+
 
 module.exports = main;
