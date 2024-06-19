@@ -67,7 +67,7 @@ async function main({ g, c }) {
   let edges = raw_data.repository.issues.edges;
 
   for (let edge in edges) {
-    console.log(edge.node.title);
+    console.log(edge["node"]["title"]);
   }
   return results;
     
