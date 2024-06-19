@@ -1,2 +1,19 @@
 name: Graph QL Trigger
 
+on:
+  workflow_dispatch:
+
+jobs:
+  Setup-GraphQL-Query:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4    
+      - name: Start Query
+        id: start-query
+
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const script = require('./github-actions/utils/sample_query1.js')
+            script({g: github, c: context})
