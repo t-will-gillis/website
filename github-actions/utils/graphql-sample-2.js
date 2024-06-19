@@ -7,6 +7,7 @@ async function main({ g, c }) {
   context = c
 
   let login = context.repo.owner;
+  console.log(`Login = {login}`);
   
   const {
     viewer: { login },
