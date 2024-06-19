@@ -65,9 +65,15 @@ async function main({ g, c }) {
     repo: "website",
     });
   let final_results = init_results.repository.issues.edges;
-  console.log("attempt using 'init_results.repository.issues.edges'");
+  
+  console.log("attempt using:");
+  console.log("  let final_results = 'init_results.repository.issues.edges'");
+  console.log("  for (let result in final_results) {");
+  console.log("      console.log(final_results[result])");
+  console.log("  }");
+  
   for (let result in final_results) {
-    console.log(result);
+    console.log(final_results[result]);
   }
   return init_results;
     
