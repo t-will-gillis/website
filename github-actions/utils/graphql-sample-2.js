@@ -19,7 +19,9 @@ async function main({ g, c }) {
   console.log('test');
   console.log(`viewer = ${viewer}`);
   */
+
   
+  /*
   const { lastIssues } = await github.graphql(
     `
       query lastIssues($owner: String!, $repo: String!, $num: Int = 3) {
@@ -39,8 +41,33 @@ async function main({ g, c }) {
       repo: "website",
     },
   );
-
+  
   console.log(lastIssues);
+  */
+
+  
+  let results = await github.graphql(query, {
+    owner: "t-will-gillis",
+    repo: "website",
+    });
+  
+  const query = `
+    query lastIssues($owner: String!, $repo: String!, $num: Int = 3) {
+      repository(owner: $owner, name: $repo) {
+        issues(last: $num) {
+          edges {
+            node {
+              title
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  console.log(results);
+  return results;
+    
 }
 
 module.exports = main;
