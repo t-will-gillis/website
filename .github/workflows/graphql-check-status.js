@@ -6,7 +6,6 @@ jobs:
   Get-Nodes:
     runs-on: ubuntu-latest
     steps:
-
       - name: Get project data
         env:
           GH_TOKEN: ${{ secrets.GRAPHQL }}
@@ -43,5 +42,5 @@ jobs:
                   }
                 }
               }
-        }
+        
             }'
