@@ -48,7 +48,7 @@ async function main({ g, c }) {
 
   const query = `
     query lastIssues($owner: String!, $repo: String!, $num: Int = 3) {
-      repository(owner: $owner, name: $repo) {
+      repository (owner: $owner, name: $repo) {
         issues(last: $num) {
           edges {
             node {
@@ -64,7 +64,7 @@ async function main({ g, c }) {
     owner: context.repo.owner,
     repo: context.repo.repo,
     });
-  let results = raw_data.repository.issues.edges[0];
+  let results = raw_data.repository.issues.edges[0].node.title;
   
 
   
