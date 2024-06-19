@@ -2,11 +2,14 @@
 var github
 var context
 
-
-const {
-  viewer: { login },
-} = await github.graphql(`{
-  viewer {
-    login
-  }
-}`);
+async function main({ g, c }) {
+  github = g
+  context = c
+  
+  const {
+    viewer: { login },
+  } = await github.graphql(`{
+    viewer {
+      login
+    }
+  }`);
