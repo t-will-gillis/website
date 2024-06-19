@@ -60,12 +60,14 @@ async function main({ g, c }) {
     }
   `;
 
-  let results = await github.graphql(query, {
+  let init_results = await github.graphql(query, {
     owner: "t-will-gillis",
     repo: "website",
     });
-
-  console.log(results);
+  let final_results = init_results.repository.issues.edges;
+  for (let result in final_results) {
+    console.log(result);
+  }
   return results;
     
 }
