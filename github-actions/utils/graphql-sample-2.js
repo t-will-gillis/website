@@ -13,3 +13,6 @@ async function main({ g, c }) {
       login
     }
   }`);
+
+
+module.exports = main;
