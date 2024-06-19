@@ -64,7 +64,7 @@ async function main({ g, c }) {
     owner: context.repo.owner,
     repo: context.repo.repo,
     });
-  let results = raw_data.repository.issues.edges[0].node.title;
+  let results = raw_data.repository.issues.edges.node[0];
   
 
   
