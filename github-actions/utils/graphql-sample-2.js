@@ -39,6 +39,8 @@ async function main({ g, c }) {
       repo: "website",
     },
   );
+
+  console.log(lastIssues);
 }
 
 module.exports = main;
