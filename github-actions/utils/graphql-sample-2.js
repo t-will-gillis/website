@@ -64,7 +64,8 @@ async function main({ g, c }) {
     owner: "t-will-gillis",
     repo: "website",
     });
-  let final_results = init_results.repository.issues.edges.node;
+  let final_results = init_results.repository.issues.edges;
+  console.log("attempt using 'init_results.repository.issues.edges'");
   for (let result in final_results) {
     console.log(result);
   }
