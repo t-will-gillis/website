@@ -67,7 +67,8 @@ async function main({ g, c }) {
   let edges = raw_data.repository.issues.edges;
 
   for (let i = 0; i < edges.length; i++) {
-    console.log(edges[i].node);
+    result = edges[i].node.title;
+    console.log(`Issue title: ${result}`);
   } 
 
     
