@@ -32,9 +32,8 @@ async function main({ g, c }) {
   for (let i = 0; i < edges.length; i++) {
     result = edges[i].node.title;
     console.log(`Issue title: ${result}`);
-  } 
+  }
 
-    
 }
 
 module.exports = main;
