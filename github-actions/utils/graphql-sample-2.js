@@ -16,7 +16,7 @@ async function main({ g, c }) {
   }`);
 
   console.log('test');
-  console.log(`viewer = {viewer}`);
+  console.log(`viewer = ${viewer}`);
 }
 
 module.exports = main;
