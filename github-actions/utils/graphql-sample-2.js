@@ -64,13 +64,10 @@ async function main({ g, c }) {
     owner: context.repo.owner,
     repo: context.repo.repo,
     });
-  let int_data = raw_data.repository.issues.edges;
-  let results = JSON.parse(int_data)
-  console.log(results);
+  let edges = raw_data.repository.issues.edges;
 
-  
-  for (let result in results) {
-    console.log(result);
+  for (let edge in edges) {
+    console.log(edge.node.title);
   }
   return results;
     
