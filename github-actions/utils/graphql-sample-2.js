@@ -60,22 +60,18 @@ async function main({ g, c }) {
     }
   `;
 
-  let init_results = await github.graphql(query, {
-    owner: "t-will-gillis",
-    repo: "website",
+  let raw_data = await github.graphql(query, {
+    owner: context.repo.owner,
+    repo: context.repo.repo,
     });
-  let final_results = init_results.repository.issues.edges;
+  let results = raw_data.repository.issues.edges[0];
   
-  console.log("attempt using:");
-  console.log("  let final_results = 'init_results.repository.issues.edges'");
-  console.log("  for (let result in final_results) {");
-  console.log("      console.log(final_results[result])");
-  console.log("  }");
+
   
-  for (let result in final_results) {
-    console.log(final_results[result]);
+  for (let result in results) {
+    console.log(result);
   }
-  return init_results;
+  return results;
     
 }
 
