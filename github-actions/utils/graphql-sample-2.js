@@ -9,11 +9,12 @@ async function main({ g, c }) {
  
   const {
     viewer: { login },
-  } = await github.graphql(`{
-    viewer {
-      login
-    }
-  }`);
+  } = await github.graphql(`
+    query {
+      viewer {
+        login
+      }
+    }`);
 
   console.log('test');
   console.log(`viewer = ${viewer}`);
