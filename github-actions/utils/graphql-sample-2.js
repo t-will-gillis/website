@@ -5,6 +5,8 @@ var context
 async function main({ g, c }) {
   github = g
   context = c
+
+  let login = context.repo.owner;
   
   const {
     viewer: { login },
