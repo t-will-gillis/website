@@ -64,8 +64,9 @@ async function main({ g, c }) {
     owner: context.repo.owner,
     repo: context.repo.repo,
     });
-  let results = raw_data.repository.issues.edges.node;
-  
+  let int_data = raw_data.repository.issues.edges;
+  let results = JSON.parse(int_data)
+  console.log(results);
 
   
   for (let result in results) {
