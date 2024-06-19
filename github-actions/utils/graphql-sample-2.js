@@ -45,12 +45,7 @@ async function main({ g, c }) {
   console.log(lastIssues);
   */
 
-  
-  let results = await github.graphql(query, {
-    owner: "t-will-gillis",
-    repo: "website",
-    });
-  
+
   const query = `
     query lastIssues($owner: String!, $repo: String!, $num: Int = 3) {
       repository(owner: $owner, name: $repo) {
@@ -64,6 +59,11 @@ async function main({ g, c }) {
       }
     }
   `;
+
+  let results = await github.graphql(query, {
+    owner: "t-will-gillis",
+    repo: "website",
+    });
 
   console.log(results);
   return results;
