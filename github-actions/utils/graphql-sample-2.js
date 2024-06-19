@@ -66,9 +66,9 @@ async function main({ g, c }) {
     });
   let final_results = init_results.repository.issues.edges;
   for (let result in final_results) {
-    console.log(result);
+    console.log(final_results[result]);
   }
-  return results;
+  return init_results;
     
 }
 
