@@ -10,7 +10,7 @@ async function main({ g, c }) {
 
 
   const query = `
-    query lastIssues($owner: String!, $repo: String!, $num: Int = 3) {
+    query lastIssues($owner: String!, $repo: String!, $num: Int = 10) {
       repository (owner: $owner, name: $repo) {
         issues(last: $num) {
           edges {
