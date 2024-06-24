@@ -9,21 +9,23 @@ async function main({ g, c }) {
 
   const { allIssues } = await github.graphql(
     `
-      query allIssues($owner: String!, $repo: String!, $num: Int = 86) {
-        repository(owner: $owner, name: $repo) {
-          items(last: 10) {
-            pageInfo {
-              hasNextPage
-            }
-            nodes {
-              statusField: fieldValueByName(name: "Status") {
-                __typename
-                ...statusFieldDetails
-              }
-              content {
-                __typename
-                ... on Issue {
-                  ...issueDetails
+      query {
+        organization(owner:"hackforla"){
+          projectV2(id:"PVT_kwDOALGKNs4Ajuck"){
+            items(first:10 ){
+              pageInfo{ hasNextPage }
+              nodes{
+                fieldValueByName(name:"Status"){
+                  __typename
+                  ... on ProjectV2ItemFieldSingleSelectValue{
+                    name
+                  }
+                }
+                content {
+                  __typename
+                  ... on Issue {
+                    ...issueDetails
+                  }
                 }
               }
             }
