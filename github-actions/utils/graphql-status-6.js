@@ -9,23 +9,21 @@ async function main({ g, c }) {
 
   const { allIssues } = await github.graphql(
     `
-      query {
-        organization(login: "hackforla") {
-          projectV2(number:86) {
-            items(last: 10) {
-              pageInfo {
-                hasNextPage
+      query allIssues($owner: String!, $repo: String!, $num: Int = 86) {
+        repository(owner: $owner, name: $repo) {
+          items(last: 10) {
+            pageInfo {
+              hasNextPage
+            }
+            nodes {
+              statusField: fieldValueByName(name: "Status") {
+                __typename
+                ...statusFieldDetails
               }
-              nodes {
-                statusField: fieldValueByName(name: "Status") {
-                  __typename
-                  ...statusFieldDetails
-                }
-                content {
-                  __typename
-                  ... on Issue {
-                    ...issueDetails
-                  }
+              content {
+                __typename
+                ... on Issue {
+                  ...issueDetails
                 }
               }
             }
@@ -42,7 +40,11 @@ async function main({ g, c }) {
       fragment statusFieldDetails on ProjectV2ItemFieldSingleSelectValue {
         name
       }
-    `
+    `,
+      {
+        owner: "hackforla",
+        repo: "website",
+      }
     );
   
   console.log(allIssues);
