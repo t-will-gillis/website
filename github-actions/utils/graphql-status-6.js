@@ -46,8 +46,11 @@ async function main({ g, c }) {
         repo: "website",
       }
     );
-  
-  console.log(allIssues);
+  console.log(`line 49`);
+  console.log(JSON.parse(allIssues));
+  console.log(`line 51`);
+  console.log(allIssues.data);
+  console.log(`line 53`);
 }
 
 
