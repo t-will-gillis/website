@@ -10,9 +10,9 @@ async function main({ g, c }) {
   const { allIssues } = await github.graphql(
     `
       query {
-        organization(login:"hackforla"){
-          projectV2(number:86){
-            items(first:10 ){
+        organization(login:"hackforla") {
+          projectV2(number:"86") {
+            items(first:10 ) {
               pageInfo{ hasNextPage }
               nodes{
                 statusField: fieldValueByName(name:"Status") {
