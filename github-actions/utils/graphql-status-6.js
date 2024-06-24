@@ -12,40 +12,41 @@ async function main({ g, c }) {
 
 const { allIssues } = await github.graphql(
   `
-  query {
-    user(login: "t-will-gillis") {
-      projectV2(number:5) {
-        items(last: 100) {
-          pageInfo {
-            hasNextPage
-          }
-          nodes {
-            statusField: fieldValueByName(name: "Status") {
-              __typename
-              ...statusFieldDetails
+    query {
+      user(login: "t-will-gillis") {
+        projectV2(number:5) {
+          items(last: 100) {
+            pageInfo {
+              hasNextPage
             }
-            content {
-              __typename
-              ... on Issue {
-                ...issueDetails
+            nodes {
+              statusField: fieldValueByName(name: "Status") {
+                __typename
+                ...statusFieldDetails
+              }
+              content {
+                __typename
+                ... on Issue {
+                  ...issueDetails
+                }
               }
             }
           }
         }
       }
     }
-  }
+    
+    fragment issueDetails on Issue {
+      number
+      title
+      id
+    }
   
-  fragment issueDetails on Issue {
-    number
-    title
-    id
-  }
-
-  fragment statusFieldDetails on ProjectV2ItemFieldSingleSelectValue {
-    name
-  }
-  `;
+    fragment statusFieldDetails on ProjectV2ItemFieldSingleSelectValue {
+      name
+    }
+  `
+  );
 
 console.log(allIssues);
 
