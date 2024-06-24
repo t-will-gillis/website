@@ -11,7 +11,7 @@ async function main({ g, c }) {
     `
       query {
         organization(login:"hackforla") {
-          projectV2(number:"86") {
+          projectV2(number:86) {
             items(first:10 ) {
               pageInfo{ hasNextPage }
               nodes{
