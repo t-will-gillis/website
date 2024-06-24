@@ -10,16 +10,14 @@ async function main({ g, c }) {
   const { allIssues } = await github.graphql(
     `
       query {
-        organization(owner:"hackforla"){
-          projectV2(id:"PVT_kwDOALGKNs4Ajuck"){
+        organization(login:"hackforla"){
+          projectV2(number:86){
             items(first:10 ){
               pageInfo{ hasNextPage }
               nodes{
-                fieldValueByName(name:"Status"){
+                statusField: fieldValueByName(name:"Status") {
                   __typename
-                  ... on ProjectV2ItemFieldSingleSelectValue{
-                    name
-                  }
+                  ... statusFieldDetails
                 }
                 content {
                   __typename
