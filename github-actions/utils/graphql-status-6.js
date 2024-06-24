@@ -1,5 +1,3 @@
-// Example query to return status of issues
-const fetch = require('node-fetch');
 
 // Global variables
 var github
