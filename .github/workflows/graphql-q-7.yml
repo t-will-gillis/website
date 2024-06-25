@@ -1,0 +1,32 @@
+name: GraphQL Query 7
+
+on:
+  workflow_dispatch:
+
+jobs:
+  query:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run GraphQL query
+        env:
+          GITHUB_TOKEN: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
+        run: |
+          echo "Running GraphQL query"
+          QUERY='
+          {
+            viewer {
+              login
+            }
+          }'
+          curl -H "Authorization: bearer $GITHUB_TOKEN" -X POST -d "{\"query\": \"$QUERY\"}" https://api.github.com/graphql
