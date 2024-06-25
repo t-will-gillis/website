@@ -16,8 +16,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
         run: |
           echo "Running GraphQL query"
-          QUERY='
-            query {
+          QUERY=$(cat <<'EOF'
+          {
+            "query": "query {
               repository(owner:"t-will-gillis", name:"website") {
                 projectV2(number:5){
                   items(first:10 ){
@@ -42,6 +43,10 @@ jobs:
                   }
                 }
               }
-            }
-            '
-          curl -H "Authorization: bearer $GITHUB_TOKEN" -X POST -d "{\"query\": \"$QUERY\"}" https://api.github.com/graphql
+            }"
+          }
+          EOF
+          )
+          RESPONSE=$(curl -s -H "Authorization: bearer $GITHUB_TOKEN" -X POST -d "$QUERY" https://api.github.com/graphql)
+          echo "Response: $RESPONSE"
+         
