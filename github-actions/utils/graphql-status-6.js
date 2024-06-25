@@ -13,11 +13,11 @@ async function main({ g, c }) {
         organization(login:"hackforla") {
           projectV2(number:86) {
             items(first:10 ) {
-              pageInfo{ hasNextPage }
+              pageInfo { hasNextPage }
               nodes{
                 statusField: fieldValueByName(name:"Status") {
                   __typename
-                  ... statusFieldDetails
+                  ...statusFieldDetails
                 }
                 content {
                   __typename
@@ -40,12 +40,9 @@ async function main({ g, c }) {
       fragment statusFieldDetails on ProjectV2ItemFieldSingleSelectValue {
         name
       }
-    `,
-      {
-        owner: "hackforla",
-        repo: "website",
-      }
-    );
+    `
+  );
+  
   console.log(`line 49`);
   console.log(JSON.parse(allIssues));
   console.log(`line 51`);
