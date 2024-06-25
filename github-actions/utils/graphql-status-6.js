@@ -10,35 +10,30 @@ async function main({ g, c }) {
   const { allIssues } = await github.graphql(
     `
       query {
-        organization(login:"hackforla") {
-          projectV2(number:86) {
-            items(first:10 ) {
-              pageInfo { hasNextPage }
+        organization(login:"hackforla"){
+          projectV2(number:86){
+            items(first:10 ){
+              pageInfo{ hasNextPage }
               nodes{
-                statusField: fieldValueByName(name:"Status") {
+                fieldValueByName(name:"Status"){
                   __typename
-                  ...statusFieldDetails
+                  ... on ProjectV2ItemFieldSingleSelectValue{
+                    id
+                    name
+                  }
                 }
-                content {
+                content{
                   __typename
-                  ... on Issue {
-                    ...issueDetails
+                  ... on Issue{
+                    number
+                    title
+                    id
                   }
                 }
               }
             }
           }
         }
-      }
-      
-      fragment issueDetails on Issue {
-        number
-        title
-        id
-      }
-    
-      fragment statusFieldDetails on ProjectV2ItemFieldSingleSelectValue {
-        name
       }
     `
   );
