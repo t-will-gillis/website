@@ -67,7 +67,8 @@ async function main({ g, c }) {
   );
 
   console.log(lastIssues);
-}
+
+
 
 /*
 const lotsaData = await github.graphql(
