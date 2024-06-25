@@ -10,8 +10,8 @@ async function main({ g, c }) {
   const { allIssues } = await github.graphql(
     `
       query {
-        organization(login:"hackforla"){
-          projectV2(number:86){
+        user(login:"t-will-gillis"){
+          projectV2(number:5){
             items(first:10 ){
               pageInfo{ hasNextPage }
               nodes{
