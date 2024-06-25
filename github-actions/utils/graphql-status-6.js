@@ -7,30 +7,33 @@ async function main({ g, c }) {
   github = g
   context = c
 
-  /*
+  
+  const {
+    viewer: { login },
+  } = await github.graphql(`{
+    viewer {
+      login
+    }
+  }`);
+  
+  console.log(login);
+
   const { allIssues } = await github.graphql(
     `
-      query {
-        user(login:"t-will-gillis"){
-          projectV2(number:5){
-            items(first:10 ){
-              pageInfo{ hasNextPage }
-              nodes{
-                fieldValueByName(name:"Status"){
+      query allIssues{
+        organization(login:"hackforla") {
+          projectV2(number: 86) {
+           field(name:"Status") { 
+              ... on ProjectV2SingleSelectField { 	
+              id options{ 
                   __typename
-                  ... on ProjectV2ItemFieldSingleSelectValue{
-                    id
+                  id 
+                  name
+                  ... on ProjectV2SingleSelectFieldOption {
                     name
+                    description
                   }
-                }
-                content{
-                  __typename
-                  ... on Issue{
-                    number
-                    title
-                    id
-                  }
-                }
+                } 
               }
             }
           }
@@ -44,7 +47,8 @@ async function main({ g, c }) {
   console.log(`line 51`);
   console.log(allIssues.data);
   console.log(`line 53`);
-  */
+
+  
   /*
   const { lastIssues } = await github.graphql(
     `
@@ -73,7 +77,7 @@ async function main({ g, c }) {
 
 const lotsaData = await github.graphql(
   `
-    query {
+    query lotsaData{
       repository(owner:"t-will-gillis", name:"website") {
         projectV2(number:5){
           items(first:10 ){
@@ -105,16 +109,7 @@ const lotsaData = await github.graphql(
   console.log(`line 109`);
   console.log(JSON.parse(lotsaData.data));
 
-  /*
-  const {
-    viewer: { login },
-  } = await github.graphql(`{
-    viewer {
-      login
-    }
-  }`);
-  console.log(login);
-  */
+
 }
 
 module.exports = main;
