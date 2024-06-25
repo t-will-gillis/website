@@ -7,6 +7,7 @@ async function main({ g, c }) {
   github = g
   context = c
 
+  /*
   const { allIssues } = await github.graphql(
     `
       query {
@@ -43,6 +44,29 @@ async function main({ g, c }) {
   console.log(`line 51`);
   console.log(allIssues.data);
   console.log(`line 53`);
+  */
+
+  const { lastIssues } = await github.graphql(
+    `
+      query lastIssues($owner: String!, $repo: String!, $num: Int = 3) {
+        repository(owner: $owner, name: $repo) {
+          issues(last: $num) {
+            edges {
+              node {
+                title
+              }
+            }
+          }
+        }
+      }
+    `,
+    {
+      owner: "t-will-gillis",
+      repo: "website",
+    },
+  );
+
+  console.log(lastIssues);
 }
 
 
