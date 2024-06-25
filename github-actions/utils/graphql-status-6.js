@@ -45,7 +45,7 @@ async function main({ g, c }) {
   console.log(allIssues.data);
   console.log(`line 53`);
   */
-  /*
+
   const { lastIssues } = await github.graphql(
     `
       query lastIssues($owner: String!, $repo: String!, $num: Int = 3) {
@@ -68,7 +68,7 @@ async function main({ g, c }) {
 
   console.log(lastIssues);
 }
-*/
+
 /*
 const lotsaData = await github.graphql(
   `
