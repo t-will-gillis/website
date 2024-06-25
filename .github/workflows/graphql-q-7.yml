@@ -17,9 +17,31 @@ jobs:
         run: |
           echo "Running GraphQL query"
           QUERY='
-          {
-            viewer {
-              login
+            query {
+              repository(owner:"t-will-gillis", name:"website") {
+                projectV2(number:5){
+                  items(first:10 ){
+                    pageInfo{ hasNextPage }
+                    nodes{
+                      fieldValueByName(name:"Status"){
+                        __typename
+                        ... on ProjectV2ItemFieldSingleSelectValue{
+                          id
+                          name
+                        }
+                      }
+                      content{
+                        __typename
+                        ... on Issue{
+                          number
+                          title
+                          id
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
-          }'
+            '
           curl -H "Authorization: bearer $GITHUB_TOKEN" -X POST -d "{\"query\": \"$QUERY\"}" https://api.github.com/graphql
