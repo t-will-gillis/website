@@ -70,7 +70,7 @@ async function main({ g, c }) {
 }
 */
 
-const { lotsaData } = await github.graphql(
+const lotsaData = await github.graphql(
   `
     query($owner:String!, $name:String!, $number:Int!) {
       repository(owner:$owner, name:$name) {
