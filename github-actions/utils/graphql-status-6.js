@@ -104,6 +104,7 @@ const lotsaData = await github.graphql(
   console.log(`line 109`);
   console.log(JSON.parse(lotsaData.data));
   */
+  /*
   const {
     viewer: { login },
   } = await github.graphql(`{
@@ -112,6 +113,7 @@ const lotsaData = await github.graphql(
     }
   }`);
   console.log(login);
+  */
 }
 
 module.exports = main;
