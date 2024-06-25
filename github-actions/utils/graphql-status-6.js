@@ -111,6 +111,7 @@ const lotsaData = await github.graphql(
       login
     }
   }`);
+  console.log(viewer);
 }
 
 module.exports = main;
