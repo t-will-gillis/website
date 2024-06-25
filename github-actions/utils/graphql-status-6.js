@@ -69,7 +69,7 @@ async function main({ g, c }) {
   console.log(lastIssues);
 }
 */
-
+/*
 const lotsaData = await github.graphql(
   `
     query {
@@ -103,7 +103,14 @@ const lotsaData = await github.graphql(
 
   console.log(`line 109`);
   console.log(JSON.parse(lotsaData.data));
-
+  */
+  const {
+    viewer: { login },
+  } = await octokit.graphql(`{
+    viewer {
+      login
+    }
+  }`);
 }
 
 module.exports = main;
