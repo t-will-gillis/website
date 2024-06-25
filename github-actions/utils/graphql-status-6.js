@@ -45,7 +45,7 @@ async function main({ g, c }) {
   console.log(allIssues.data);
   console.log(`line 53`);
   */
-
+  /*
   const { lastIssues } = await github.graphql(
     `
       query lastIssues($owner: String!, $repo: String!, $num: Int = 3) {
@@ -68,6 +68,45 @@ async function main({ g, c }) {
 
   console.log(lastIssues);
 }
+*/
 
+const { lotsaData } = await github.graphql(
+  `
+    query($owner:String!, $name:String!, $number:Int!) {
+      repository(owner:$owner, name:$name) {
+        projectV2(number:$number){
+          items(first:10 ){
+            pageInfo{ hasNextPage }
+            nodes{
+              fieldValueByName(name:"Status"){
+                __typename
+                ... on ProjectV2ItemFieldSingleSelectValue{
+                  id
+                  name
+                }
+              }
+              content{
+                __typename
+                ... on Issue{
+                  number
+                  title
+                  id
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    `,
+    {
+      owner: "t-will-gillis",
+      name: "website",
+      number: 5
+    },
+  );
 
+  console.log(`line 109`);
+  console.log(JSON.parse(lotsaData.data));
+  
 module.exports = main;
