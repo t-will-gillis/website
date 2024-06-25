@@ -72,9 +72,9 @@ async function main({ g, c }) {
 
 const lotsaData = await github.graphql(
   `
-    query($owner:String!, $name:String!, $number:Int!) {
-      repository(owner:$owner, name:$name) {
-        projectV2(number:$number){
+    query {
+      repository(owner:"t-will-gillis", name:"website") {
+        projectV2(number:5){
           items(first:10 ){
             pageInfo{ hasNextPage }
             nodes{
@@ -98,12 +98,7 @@ const lotsaData = await github.graphql(
         }
       }
     }
-    `,
-    {
-      owner: "t-will-gillis",
-      name: "website",
-      number: 5
-    },
+    `
   );
 
   console.log(`line 109`);
