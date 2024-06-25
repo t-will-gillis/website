@@ -106,7 +106,7 @@ const lotsaData = await github.graphql(
   */
   const {
     viewer: { login },
-  } = await octokit.graphql(`{
+  } = await github.graphql(`{
     viewer {
       login
     }
