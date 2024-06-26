@@ -1,7 +1,7 @@
 # This is the main codeql.yml file which scans for CodeQL alerts.
 # Most of the code is in .github/workflows/codeql-scan-job.yml
 name: "CodeQL Scan"
-
+# nonsense
 on:
   push:
     branches: [ 'gh-pages' ]
