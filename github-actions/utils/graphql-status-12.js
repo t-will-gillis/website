@@ -40,10 +40,11 @@ async function main({ g, c }) {
     // owner: context.repo.owner,
     repo: context.repo.repo,
     projectNumber: 86,
+    num: 100,
   };
     
   try {
-    const result = await github.graphql(query, variables);
+    const result = await github.graphql.paginate(query, variables);
 
     // Parse the returned data
     const items = result.repository.projectV2.items.nodes.map(node => ({
@@ -60,8 +61,6 @@ async function main({ g, c }) {
 
     console.log('Parsed Items:', items);
 
-    // Set output for use in other workflow steps
-    context.setOutput('items', JSON.stringify(items));
   } catch (error) {
     console.error('Error executing GraphQL query:', error);
   }
