@@ -45,7 +45,7 @@ async function main({ g, c }) {
 
   try {
     const result = await github.graphql(query, variables);
-    console.log(result);
+    console.log(JSON.parse(result.data));
   } catch (error) {
     console.error('Error executing GraphQL query:', error);
   }
