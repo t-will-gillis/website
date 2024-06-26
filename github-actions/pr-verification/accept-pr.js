@@ -17,7 +17,7 @@ async function main({ g, c }) {
   const team = 'website-write';
 
   if (!checkTeamMembership(github, prAuthor, team)) {
-    console.log(`${githubUsername} is not a member of ${team}- closing PR with comment`);
+    console.log(`${prAuthor} is not a member of ${team}- closing PR with comment`);
     await github.rest.pulls.update({
         owner : 't-will-gillis',
         // owner: context.repo.owner,
@@ -28,7 +28,7 @@ async function main({ g, c }) {
     let comment = 'You must be a member of the HFLA website team in order to create pull requests. Please see our page on how to join us as a member at HFLA: https://www.hackforla.org/getting-started. If you have been though onboarding, and feel you have received this message in error, please message us in the #hfla-site team Slack channel with the link to this PR.';
     postIssueComment(prNumber, comment, github, context);
   } else {
-    console.log(`${githubUsername} is a member of ${team}- proceeding with PR`);
+    console.log(`${prAuthor} is a member of ${team}- proceeding with PR`);
   }
 }
 
