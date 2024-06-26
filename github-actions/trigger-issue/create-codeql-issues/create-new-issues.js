@@ -3,7 +3,7 @@ const fs = require('fs');
 // Global variables
 var github;
 var context;
-
+// nonsense
 /**
  * Creates new GitHub issues for each alert that doesn't have an existing issue.
  * @param {Object} options - The options object.
