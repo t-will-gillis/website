@@ -17,5 +17,5 @@ jobs:
         with:
           github-token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
           script: |
-            const script = require('./github-actions/utils/graphql-status-6.js')
+            const script = require('./github-actions/utils/graphql-status-11.js')
             script({g: github, c: context})
