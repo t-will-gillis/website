@@ -1,4 +1,4 @@
-name: GraphQL Query 8
+name: GraphQL- Get Status Fields
 on: 
   workflow_dispatch:
 
