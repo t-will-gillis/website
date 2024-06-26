@@ -15,7 +15,7 @@ async function main({ g, c }) {
   const prAuthor = context.payload.sender.login;
   const prNumber = context.payload.number;
   const team = 'website-write';
-
+  console.log(!checkTeamMembership(github, prAuthor, team));
   if (!checkTeamMembership(github, prAuthor, team)) {
     console.log(`${prAuthor} is not a member of ${team}- closing PR with comment`);
     await github.rest.pulls.update({
