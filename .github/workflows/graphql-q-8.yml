@@ -15,9 +15,9 @@ jobs:
 
         run: |
           gh api graphql -f query='
-            query findStatusSubfieldIds($login:String!, $number:Int!) {
-              organization(login:$login) {
-                projectV2(number:$number) {
+            query findStatusSubfieldIds {
+              organization(login:"hackforla") {
+                projectV2(number:86) {
                  field(name:"Status") { 
                     ... on ProjectV2SingleSelectField { 	
                     id
@@ -30,9 +30,5 @@ jobs:
                   }
                 }
               }
-            }',
-            {
-              login: "hackforla",
-              number:86
-            }
+            }'
                         
