@@ -1,4 +1,4 @@
-name: GraphQL- Get Issues
+name: GraphQL- Get Status Fields 2
 on: 
   workflow_dispatch:
 
