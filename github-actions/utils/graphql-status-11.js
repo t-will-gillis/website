@@ -45,7 +45,26 @@ async function main({ g, c }) {
 
   try {
     const result = await github.graphql(query, variables);
-    console.log(JSON.parse(result["organization"]["projectv2"]));
+
+    const statusField = result.organization.projectV2.field;
+    const fieldId = statusField.id;
+    const fieldName = statusField.name;
+    const options = statusField.options.map(option => ({
+      id: option.id,
+      name: option.name
+    }));
+
+    console.log(`Field ID: ${fieldId}`);
+    console.log(`Field Name: ${fieldName}`);
+    console.log('Options:', options);
+
+    // Do something with the parsed data
+    // For example, you could set output variables for other steps in the workflow
+    console.log('Setting outputs...');
+    c.setOutput('field_id', fieldId);
+    c.setOutput('field_name', fieldName);
+    c.setOutput('options', JSON.stringify(options));
+
   } catch (error) {
     console.error('Error executing GraphQL query:', error);
   }
