@@ -19,3 +19,6 @@ async function main({ g, c }) {
   console.log(`PR Author2: ${prAuthor2}`);
   console.log(`PR Number: ${prNumber}`);
 }
+
+
+module.exports = main;
