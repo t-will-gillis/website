@@ -69,7 +69,7 @@ async function main({ g, c }) {
 
 
   
-  const query = `
+  const query2 = `
     query findStatusSubfieldIds($login: String!, $projectNumber: Int!) {
       organization(login: $login) {
         projectV2(number: $projectNumber) {
@@ -94,7 +94,7 @@ async function main({ g, c }) {
   };
 
   try {
-    const result = await github.graphql(query, variables);
+    const result = await github.graphql(query2, variables);
 
     const statusField = result.organization.projectV2.field;
     const fieldId = statusField.id;
