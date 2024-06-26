@@ -10,14 +10,12 @@ jobs:
       - name: Get project data
         env:
           GH_TOKEN: ${{ secrets.GRAPHQL }}
-          USER: "hackforla"
-          PROJECT_NUMBER: 86
 
         run: |
           gh api graphql -f query='
             query findStatusSubfieldIds {
-              organization(login:$USER) {
-                projectV2(number:$PROJECT_NUMBER) {
+              organization(login:"hackforla") {
+                projectV2(number:86) {
                  field(name:"Status") { 
                     ... on ProjectV2SingleSelectField { 	
                     id
