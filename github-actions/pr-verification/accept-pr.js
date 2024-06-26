@@ -16,13 +16,8 @@ async function main({ g, c }) {
   const prNumber = context.payload.number;
   const team = 'website-write';
 
-  console.log(`Owner: ${context.repo.owner}`);
-  console.log(`Repo: ${context.repo.repo}`);
-  console.log(`PR Author: ${prAuthor}`);
-  console.log(`PR Number: ${prNumber}`);
-
   if (!checkTeamMembership(github, prAuthor, team)) {
-    await github.rest.issues.update({
+    await github.rest.pulls.update({
         owner : 't-will-gillis',
         // owner: context.repo.owner,
         repo: context.repo.repo,
