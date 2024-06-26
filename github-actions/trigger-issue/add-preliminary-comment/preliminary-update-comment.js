@@ -3,7 +3,7 @@ const fs = require("fs");
 const postComment = require('../../utils/post-issue-comment');
 const formatComment = require('../../utils/format-comment');
 const getTimeline = require('../../utils/get-timeline');
-
+// nonsense
 // Global variables
 var github;
 var context;
