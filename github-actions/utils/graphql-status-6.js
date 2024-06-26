@@ -70,6 +70,7 @@ async function main({ g, c }) {
   );
 
   console.log(lastIssues);
+  console.log(JSON.parse(lastIssues));
 
 
 
