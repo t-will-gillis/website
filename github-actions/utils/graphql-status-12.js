@@ -43,7 +43,7 @@ async function main({ g, c }) {
   };
     
   try {
-    const result = await github.graphql.paginate(query, variables);
+    const result = await github.graphql(query, variables);
 
     // Parse the returned data
     const items = result.repository.projectV2.items.nodes.map(node => ({
