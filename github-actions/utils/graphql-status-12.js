@@ -36,10 +36,10 @@ async function main({ g, c }) {
   `;
 
   const variables = {
-    owner = "hackforla",
-    // owner = context.repo.owner,
-    repo = context.repo.repo,
-    projectNumber = 86,
+    owner: "hackforla",
+    // owner: context.repo.owner,
+    repo: context.repo.repo,
+    projectNumber: 86,
   };
     
   try {
