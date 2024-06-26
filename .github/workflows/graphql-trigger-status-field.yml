@@ -15,7 +15,7 @@ jobs:
         id: start-query
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
+          github-token: ${{ secrets.GRAPHQL }}
           script: |
             const script = require('./github-actions/utils/graphql-status-11.js')
             script({g: github, c: context})
