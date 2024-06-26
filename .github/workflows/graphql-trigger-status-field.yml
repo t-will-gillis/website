@@ -17,5 +17,5 @@ jobs:
         with:
           github-token: ${{ secrets.GRAPHQL }}
           script: |
-            const script = require('./github-actions/utils/graphql-status-11.js')
+            const script = require('./github-actions/utils/graphql-status-12.js')
             script({g: github, c: context})
