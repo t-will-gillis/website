@@ -1,0 +1,41 @@
+name: GraphQL- Get Status Fields 3
+on: 
+  workflow_dispatch:
+
+jobs:
+  Get-Nodes:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Get project data
+        env:
+          GH_TOKEN: ${{ secrets.GRAPHQL }}
+
+        run: |
+          gh api graphql -f query='
+            query findIssuesAndSubfields($owner: String!, $repo: String!, $projectNumber: Int!, $num: Int=25, $cursor: String) {
+              repository(owner: $owner, name: $repo) {
+                projectV2(number: $projectNumber) {
+                  items(first: $num, after: $cursor) {
+                    nodes{
+                      fieldValueByName(name:"Status") {
+                        __typename
+                        ... on ProjectV2ItemFieldSingleSelectValue {
+                          id
+                          name
+                        }
+                      }
+                      content{
+                        __typename
+                        ... on Issue {
+                          number
+                          title
+                          id
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ` -F owner="hackforla" -F nprojectNmber=86 -F num=100      
