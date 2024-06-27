@@ -38,4 +38,4 @@ jobs:
                 }
               }
             }
-          ' -F owner="hackforla" -F nprojectNmber=86 -F num=100      
+          ' -F owner="hackforla" -F repo="website" -F projectNumber=86 -F num=100      
