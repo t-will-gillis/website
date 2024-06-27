@@ -19,14 +19,12 @@ jobs:
                   items(first: $num, after: $cursor) {
                     nodes{
                       fieldValueByName(name:"Status") {
-                        __typename
                         ... on ProjectV2ItemFieldSingleSelectValue {
-                          id
+                          optionId
                           name
                         }
                       }
                       content{
-                        __typename
                         ... on Issue {
                           number
                           title
