@@ -85,8 +85,7 @@ async function main({ g, c }, { shouldPost, issueNum }) {
       await mutateIssueStatus(github, context, itemInfo.id, statusValues.get(New_Issue_Approval));
       console.log('.... change issue status to "New Issue Approval"');
     } else {
-      // Otherwise, post the normal comment
-      console.log(`Developer assignment to this issue: OK- proceeding with "Preliminary Update Comment"`);
+      // Otherwise, proceed with checks for 
       const comment = await createComment("preliminary-update.md");
       await postComment(issueNum, comment, github, context);
     }
