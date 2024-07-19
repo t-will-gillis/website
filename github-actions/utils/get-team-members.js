@@ -13,7 +13,8 @@ async function getTeamMembers(github, context, team){
   // Get all members of team. Note: if total members exceed 100, we need to 'flip' pages 
   while(true){
     const teamMembers = await github.request('GET /orgs/{org}/teams/{team_slug}/members', {
-      org: context.repo.owner,
+      // org: context.repo.owner,
+      org: 'hackforla',
       team_slug: team,
       per_page: 100,
       page: pageNum
