@@ -4,6 +4,8 @@ const postComment = require('../../utils/post-issue-comment');
 const formatComment = require('../../utils/format-comment');
 const getTimeline = require('../../utils/get-timeline');
 const getTeamMembers = require('../../utils/get-team-members');
+const queryIssueInfo = require('../../utils/query-issue-info');
+const mutateIssueStatus = require('../../utils/mutate-issue-status');
 
 // Global variables
 let github;
@@ -76,8 +78,8 @@ async function main({ g, c }, { shouldPost, issueNum }) {
       await addLabel(READY_FOR_DEV_LABEL); // Add 'ready for dev lead' label
 
       // Update item's status to "New Issue Approval"
-      const itemInfo = await getItemInfo();
-      await updateItemStatus(itemInfo.id, statusValues.get(New_Issue_Approval));
+      const itemInfo = await queryIssueInfo(context);
+      await mutateIssueStatus(itemInfo.id, statusValues.get(New_Issue_Approval));
     } else {
       // Otherwise, post the normal comment
       console.log(`Issue assignment to developer OK- proceeding with "Preliminary Update Comment"`);
@@ -131,10 +133,10 @@ async function assignedToAnotherIssue() {
       const isPreWork = issue.labels.some(label => label.name === "Complexity: Prework");
 
       // Check if it exists in "Emergent Request" Status
-      const inEmergentRequestStatus = (await getItemInfo()).statusName === Emergent_Requests;
+      const inEmergentRequestStatus = (await queryIssueInfo(context)).statusName === Emergent_Requests;
     
       // Check if it exists in "New Issue Approval" Status
-      const inNewIssueApprovalStatus = (await getItemInfo()).statusName === New_Issue_Approval;
+      const inNewIssueApprovalStatus = (await queryIssueInfo(context)).statusName === New_Issue_Approval;
     
       // Include the issue only if none of the conditions are met
       if(!(isAgendaIssue || isPreWork || inEmergentRequestStatus || inNewIssueApprovalStatus))
@@ -172,7 +174,7 @@ async function unAssignDev() {
  */
 async function createComment(fileName) {
   try {
-    const { statusName } = await getItemInfo();
+    const { statusName } = await queryIssueInfo(context);
 
     const isPrework = context.payload.issue.labels.some((label) => label.name === 'Complexity: Prework');
     const isDraft = context.payload.issue.labels.some((label) => label.name === 'Draft');
@@ -243,10 +245,13 @@ async function getLatestAssignee() {
   }
 }
 
+
+
 /**
  * @description - Get item info using its issue number
  * @returns {Object} - An object containing the item ID and its status name
  */
+/*
 async function getItemInfo() {
 
   const ISSUE_NUMBER = context.payload.issue.number;
@@ -296,12 +301,14 @@ async function getItemInfo() {
     throw new Error("Error updating item's status: " + error);
   }
 }
+*/
 
 /**
  * @description - Update item to a new status
  * @param {String} itemId - The ID of the item to be updated
  * @param {String} newStatusValue - The new status value to be assigned to the item
  */
+/*
 async function updateItemStatus(itemId, newStatusValue) {
   try {
     const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $value: String!) {
@@ -331,5 +338,6 @@ async function updateItemStatus(itemId, newStatusValue) {
     throw new Error("Error in updateItemStatus function: " + error);
   }
 }
+*/
 
 module.exports = main;
