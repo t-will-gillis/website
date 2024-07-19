@@ -1,4 +1,4 @@
-yIs/**
+/**
  * @description - Get item info using its issue number
  * @params {Object} context  - Context of the function calling getItemInfo()
  * @returns {Object}         - An object containing the item ID and its status name
