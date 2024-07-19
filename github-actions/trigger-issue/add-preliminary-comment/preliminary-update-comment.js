@@ -69,20 +69,24 @@ async function main({ g, c }, { shouldPost, issueNum }) {
 
     // If developer is not in Admin or Merge Teams, and is assigned to another issue/s, do the following:
     if(!isAdminOrMerge && isAssignedToAnotherIssues) {
-      console.log(`Developer ${assignee} is assigned to multiple issues but is not on the Admin or Merge team.`);
-      console.log(`  Going to comment & move issue to "New Issue Approval", unassign the developer, and flag dev leads`);
+      console.log(`Developer ${assignee} is assigned to multiple issues but isn't on Admin or Merge team. Going to...`);
       const comment = await createComment("multiple-issue-reminder.md");
       await postComment(issueNum, comment, github, context);
-
+      console.log('. add `multiple-issue-reminder.md` comment to issue');
+      
       await unAssignDev(); // Unassign the developer
+      console.log('.. remove the developer from the issue assignment');
+      
       await addLabel(READY_FOR_DEV_LABEL); // Add 'ready for dev lead' label
+      console.log('... add `ready for dev lead` label to issue');
 
       // Update item's status to "New Issue Approval"
       const itemInfo = await queryIssueInfo(github, context);
       await mutateIssueStatus(github, context, itemInfo.id, statusValues.get(New_Issue_Approval));
+      console.log('.... change issue status to "New Issue Approval");
     } else {
       // Otherwise, post the normal comment
-      console.log(`Issue assignment to developer OK- proceeding with "Preliminary Update Comment"`);
+      console.log(`Developer assignment to this issue: OK- proceeding with "Preliminary Update Comment"`);
       const comment = await createComment("preliminary-update.md");
       await postComment(issueNum, comment, github, context);
     }
