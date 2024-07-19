@@ -67,8 +67,8 @@ async function main({ g, c }, { shouldPost, issueNum }) {
 
     // If developer is not in Admin or Merge Teams, and is assigned to another issue/s, do the following:
     if(!isAdminOrMerge && isAssignedToAnotherIssues) {
-      console.log(`Member ${assignee} is assigned to multiple issues but is not on the Admin or Merge team.`);
-      console.log(`  Going to comment on issue, unassign the developer, move issue to "New Issue Approval", and flag dev leads`);
+      console.log(`Developer ${assignee} is assigned to multiple issues but is not on the Admin or Merge team.`);
+      console.log(`  Going to comment & move issue to "New Issue Approval", unassign the developer, and flag dev leads`);
       const comment = await createComment("multiple-issue-reminder.md");
       await postComment(issueNum, comment, github, context);
 
@@ -102,11 +102,7 @@ async function memberOfAdminOrMergeTeam() {
     const websiteMergeMembers = await getTeamMembers(github, context, "website-merge");
   
     // Return true if developer is a member of the Admin or Merge Teams
-    console.log('line 105');
-    const onAdminOrMergeTeam = (assignee in websiteAdminsMembers || assignee in websiteMergeMembers);
-    console.log(`line 107, ${onAdminOrMergeTeam}`);
-    console.log(`Assignee ${assignee} is a member of Admin and/or Merge Team: ${onAdminOrMergeTeam}`);
-    return(onAdminOrMergeTeam);
+    return(assignee in websiteAdminsMembers || assignee in websiteMergeMembers);
   } catch(error) {
     throw new Error("Error getting membership status: " + error);
   }
@@ -146,7 +142,6 @@ async function assignedToAnotherIssue() {
     }
   
     // If developer is assigned to another issue/s, return true 
-    console.log(`Assignee ${assignee} is assigned to other open issue/s `);
     return otherIssues.length > 1;
   } catch(error) {
     throw new Error("Error getting other issues: " + error);
