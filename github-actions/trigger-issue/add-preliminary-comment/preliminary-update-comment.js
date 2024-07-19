@@ -290,7 +290,7 @@ async function getItemInfo() {
     // Iterate through the field values of the first project item
     // and find the node that contains the 'name' property, then get its 'name' value
     const statusName = projectItems[0].fieldValues.nodes.find(item => item.hasOwnProperty('name')).name;
-    console.log(`Success! For Issue #${ISSUE_NUMBER}, found id = '${id}' and status = '${status}'`);
+    console.log(`Success! For Issue #${ISSUE_NUMBER}, found id = '${id}' and status = '${statusName}'`);
     return { id, statusName };
   } catch(error) {
     throw new Error("Error updating item's status: " + error);
