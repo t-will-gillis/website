@@ -248,33 +248,36 @@ async function getLatestAssignee() {
  * @returns {Object} - An object containing the item ID and its status name
  */
 async function getItemInfo() {
-  try {
-    const query = `query($owner: String!, $repo: String!, $issueNum: Int!) {
-      repository(owner: $owner, name: $repo) {
-        issue(number: $issueNum) {
-          id
-          projectItems(first: 100) {
-            nodes {
-              id
-              fieldValues(first: 100) {
-                nodes {
-                  ... on ProjectV2ItemFieldSingleSelectValue {
-                    name
-                  }
+
+  const ISSUE_NUMBER = context.payload.issue.number;
+
+  const query = `query($owner: String!, $repo: String!, $issueNum: Int!) {
+    repository(owner: $owner, name: $repo) {
+      issue(number: $issueNum) {
+        id
+        projectItems(first: 100) {
+          nodes {
+            id
+            fieldValues(first: 100) {
+              nodes {
+                ... on ProjectV2ItemFieldSingleSelectValue {
+                  name
                 }
               }
             }
           }
         }
       }
-    }`;
+    }
+  }`;
 
-    const variables = {
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      issueNum: context.payload.issue.number
-    };
+  const variables = {
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    issueNum: ISSUE_NUMBER
+  };
 
+  try {
     const response = await github.graphql(query, variables);
 
     // Extract the list of project items associated with the issue
