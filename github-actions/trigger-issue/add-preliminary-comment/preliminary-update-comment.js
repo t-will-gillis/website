@@ -72,18 +72,18 @@ async function main({ g, c }, { shouldPost, issueNum }) {
       console.log(`Developer ${assignee} is assigned to multiple issues but isn't on Admin or Merge team. Going to...`);
       const comment = await createComment("multiple-issue-reminder.md");
       await postComment(issueNum, comment, github, context);
-      console.log('. add `multiple-issue-reminder.md` comment to issue');
+      console.log(' - add `multiple-issue-reminder.md` comment to issue');
       
       await unAssignDev(); // Unassign the developer
-      console.log('.. remove the developer from the issue assignment');
+      console.log(' - remove the developer from the issue assignment');
       
       await addLabel(READY_FOR_DEV_LABEL); // Add 'ready for dev lead' label
-      console.log('... add `ready for dev lead` label to issue');
+      console.log(' - add `ready for dev lead` label to issue');
 
       // Update item's status to "New Issue Approval"
       const itemInfo = await queryIssueInfo(github, context);
       await mutateIssueStatus(github, context, itemInfo.id, statusValues.get(New_Issue_Approval));
-      console.log('.... change issue status to "New Issue Approval"');
+      console.log(' - change issue status to "New Issue Approval"');
     } else {
       // Otherwise, proceed with checks for 
       const comment = await createComment("preliminary-update.md");
