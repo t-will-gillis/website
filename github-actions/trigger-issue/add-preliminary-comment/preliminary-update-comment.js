@@ -79,7 +79,7 @@ async function main({ g, c }, { shouldPost, issueNum }) {
 
       // Update item's status to "New Issue Approval"
       const itemInfo = await queryIssueInfo(github, context);
-      await mutateIssueStatus(itemInfo.id, statusValues.get(New_Issue_Approval));
+      await mutateIssueStatus(github, context, itemInfo.id, statusValues.get(New_Issue_Approval));
     } else {
       // Otherwise, post the normal comment
       console.log(`Issue assignment to developer OK- proceeding with "Preliminary Update Comment"`);
