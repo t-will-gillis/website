@@ -36,7 +36,6 @@ async function mutateIssueStatus(github, context, itemId, newStatusValue) {
   
   try {
     await github.graphql(mutation, variables);
-    console.log(`Successfully changed issue's status to ${newStatusValue}`);
   } catch(error) {
     throw new Error("Error in mutateItemStatus() function: " + error);
   } 
