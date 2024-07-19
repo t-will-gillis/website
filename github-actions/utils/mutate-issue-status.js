@@ -4,7 +4,7 @@
  * @param {String} newStatusValue  -  GraphQL Id value for the Status' field that the issue is moving to
  * 
  */
-async function mutateIssueStatus(itemId, newStatusValue) {
+async function mutateIssueStatus(github, context, itemId, newStatusValue) {
   
   // Defaults for HfLA Website
   WEBSITE_PROJECT_ID = "PVT_kwDOALGKNs4Ajuck";
