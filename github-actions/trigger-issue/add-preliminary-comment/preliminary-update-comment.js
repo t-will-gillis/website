@@ -231,7 +231,6 @@ async function addLabel(labelName) {
 async function getLatestAssignee() {
   try {
     let issueAssignee = context.payload.issue.assignee.login;
-
     const eventdescriptions = await getTimeline(context.payload.issue.number, github, context);
     
     // Find out the latest developer assigned to the issue
@@ -241,106 +240,10 @@ async function getLatestAssignee() {
         break;
       }
     }
-
     return issueAssignee;
   } catch(error) {
     throw new Error("Error getting last assignee: " + error);
   }
 }
-
-
-
-/**
- * @description - Get item info using its issue number
- * @returns {Object} - An object containing the item ID and its status name
- */
-/*
-async function getItemInfo() {
-
-  const ISSUE_NUMBER = context.payload.issue.number;
-
-  const query = `query($owner: String!, $repo: String!, $issueNum: Int!) {
-    repository(owner: $owner, name: $repo) {
-      issue(number: $issueNum) {
-        id
-        projectItems(first: 100) {
-          nodes {
-            id
-            fieldValues(first: 100) {
-              nodes {
-                ... on ProjectV2ItemFieldSingleSelectValue {
-                  name
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }`;
-
-  const variables = {
-    owner: context.repo.owner,
-    repo: context.repo.repo,
-    issueNum: ISSUE_NUMBER
-  };
-
-  try {
-    const response = await github.graphql(query, variables);
-
-    // Extract the list of project items associated with the issue
-    const projectItems = response.repository.issue.projectItems.nodes;
-    
-    // Since there is always one item associated with the issue,
-    // directly get the item's ID from the first index
-    const id = projectItems[0].id;
-
-    // Iterate through the field values of the first project item
-    // and find the node that contains the 'name' property, then get its 'name' value
-    const statusName = projectItems[0].fieldValues.nodes.find(item => item.hasOwnProperty('name')).name;
-    console.log(`Success! For Issue #${ISSUE_NUMBER}, found id = '${id}' and status = '${statusName}'`);
-    return { id, statusName };
-  } catch(error) {
-    throw new Error("Error updating item's status: " + error);
-  }
-}
-*/
-
-/**
- * @description - Update item to a new status
- * @param {String} itemId - The ID of the item to be updated
- * @param {String} newStatusValue - The new status value to be assigned to the item
- */
-/*
-async function updateItemStatus(itemId, newStatusValue) {
-  try {
-    const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $value: String!) {
-      updateProjectV2ItemFieldValue(input: {
-        projectId: $projectId,
-        itemId: $itemId,
-        fieldId: $fieldId,
-        value: {
-          singleSelectOptionId: $value
-        }
-      }) {
-        projectV2Item {
-          id
-        }
-      }
-    }`;
-
-    const variables = {
-      projectId: PROJECT_ID,
-      itemId: itemId,
-      fieldId: STATUS_FIELD_ID,
-      value: newStatusValue
-    };
-
-    await github.graphql(mutation, variables);
-  } catch(error) {
-    throw new Error("Error in updateItemStatus function: " + error);
-  }
-}
-*/
 
 module.exports = main;
