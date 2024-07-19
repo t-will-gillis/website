@@ -102,7 +102,9 @@ async function memberOfAdminOrMergeTeam() {
     const websiteMergeMembers = await getTeamMembers(github, context, "website-merge");
   
     // Return true if developer is a member of the Admin or Merge Teams
+    console.log('line 105');
     const onAdminOrMergeTeam = (assignee in websiteAdminsMembers || assignee in websiteMergeMembers);
+    console.log(`line 107, ${onAdminOrMergeTeam}`);
     console.log(`Assignee ${assignee} is a member of Admin and/or Merge Team: ${onAdminOrMergeTeam}`);
     return(onAdminOrMergeTeam);
   } catch(error) {
