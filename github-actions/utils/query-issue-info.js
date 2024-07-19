@@ -1,9 +1,9 @@
-/**
+yIs/**
  * @description - Get item info using its issue number
  * @params {Object} context  - Context of the function calling getItemInfo()
  * @returns {Object}         - An object containing the item ID and its status name
  */
-async function queryIssueInfo(context) {
+async function queryIssueInfo(github, context) {
 
   // const { owner, repo } = context.repo;
   ISSUE_NUMBER = context.payload.issue.number;
