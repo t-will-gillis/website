@@ -10,23 +10,30 @@ let github;
 let context;
 let assignee;
 
-const PROJECT_ID = "PVT_kwDOALGKNs4Ajuck";
 
-// The field containing all statuses
-const STATUS_FIELD_ID = "PVTSSF_lADOALGKNs4AjuckzgcCutQ";
+// The project id and field containing all statuses 
+// const PROJECT_ID = "PVT_kwDOALGKNs4Ajuck";
+// const STATUS_FIELD_ID = "PVTSSF_lADOALGKNs4AjuckzgcCutQ";
+const PROJECT_ID = "PVT_kwHOAm6MB84Aiu3X";                        // for TWG
+const STATUS_FIELD_ID = "PVTSSF_lAHOAm6MB84Aiu3XzgbNC9E";
 
 const Emergent_Requests = "Emergent Requests";
 const New_Issue_Approval = "New Issue Approval";
 const Prioritized_Backlog = "Prioritized backlog";
 const In_Progress = "In progress (actively working)";
 
+// const statusValues = new Map([
+//   [Emergent_Requests, "d468e876"],
+//   [New_Issue_Approval, "83187325"],
+//   [Prioritized_Backlog, "434304a8"],
+//   [In_Progress, "9a878e9c"],
+// ]);
 const statusValues = new Map([
-  [Emergent_Requests, "d468e876"],
-  [New_Issue_Approval, "83187325"],
-  [Prioritized_Backlog, "434304a8"],
-  [In_Progress, "9a878e9c"],
+  [Emergent_Requests, "8749a929"],    // for TWG
+  [New_Issue_Approval, "31082c42"],
+  [Prioritized_Backlog, "3d615590"],
+  [In_Progress, "4be08c01"],
 ]);
-
 const READY_FOR_DEV_LABEL = "ready for dev lead";
 
 /**
