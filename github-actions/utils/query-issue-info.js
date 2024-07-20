@@ -8,9 +8,9 @@ async function queryIssueInfo(issueNum, github, context) {
   // const { owner, repo } = context.repo;
   // let issueNum = context.payload.issue.number;
   
-  console.log(context.repo.owner);
-  console.log(context.repo.repo);
-  console.log(issueNum);
+  // console.log(context.repo.owner);
+  // console.log(context.repo.repo);
+  // console.log(issueNum);
   
   const query = `query($owner: String!, $repo: String!, $issueNum: Int!) {
     repository(owner: $owner, name: $repo) {
@@ -67,9 +67,9 @@ async function queryIssueInfo(issueNum, github, context) {
   console.log('here ffffff');
   console.log(projectItems.length);
   console.log(projectItems);
-  for (item in projectItems) {
-    console.log(item);
-  }
+  // for (item in projectItems) {
+  //   console.log(item);
+  // }
  
   // Since there is always one item associated with the issue,
   // directly get the item's ID from the first index
@@ -78,7 +78,7 @@ async function queryIssueInfo(issueNum, github, context) {
   // Iterate through the field values of the first project item
   // and find the node that contains the 'name' property, then get its 'name' value
   const statusName = projectItems[0].fieldValues.nodes.find(item => item.hasOwnProperty('name')).name;
-  console.log(`status ${statusName}`);
+  console.log(`status: ${statusName}`);
   // console.log(`Success! For Issue #${ISSUE_NUMBER}, found id = '${id}' and status = '${statusName}'`);
   return { id, statusName };
   
