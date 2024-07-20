@@ -7,6 +7,8 @@ async function queryIssueInfo(issueNum, github, context) {
 
   // const { owner, repo } = context.repo;
   // let issueNum = context.payload.issue.number;
+  console.log(`    number: ${issueNum}`);
+  console.log(typeof(issueNum));
   
   const query = `query($owner: String!, $repo: String!, $issueNum: Int!) {
     repository(owner: $owner, name: $repo) {
