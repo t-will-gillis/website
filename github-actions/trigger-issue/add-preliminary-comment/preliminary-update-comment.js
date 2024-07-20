@@ -128,7 +128,7 @@ async function assignedToAnotherIssue() {
     })).data;
 
     const otherIssues = [];
-
+    let issueNum = context.payload.issue.number;
     for(const issue of issues) {
       // Check if assignee's other issue is an "Agenda" issue
       const isAgendaIssue = issue.labels.some(label => label.name === "feature: agenda");
@@ -137,10 +137,10 @@ async function assignedToAnotherIssue() {
       const isPreWork = issue.labels.some(label => label.name === "Complexity: Prework");
 
       // ...or has "Emergent Request" Status
-      const inEmergentRequestStatus = (await queryIssueInfo(issue.number, github, context)).statusName === Emergent_Requests;
+      const inEmergentRequestStatus = (await queryIssueInfo(issueNum, github, context)).statusName === Emergent_Requests;
     
       // ...or has "New Issue Approval" Status
-      const inNewIssueApprovalStatus = (await queryIssueInfo(issue.number, github, context)).statusName === New_Issue_Approval;
+      const inNewIssueApprovalStatus = (await queryIssueInfo(issueNum, github, context)).statusName === New_Issue_Approval;
     
       // Include the assignee's other issue only if none of the conditions are met
       if(!(isAgendaIssue || isPreWork || inEmergentRequestStatus || inNewIssueApprovalStatus))
