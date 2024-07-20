@@ -95,7 +95,7 @@ async function getIssueNumsFromRepo() {
     const issueData = await github.request('GET /repos/{owner}/{repo}/issues', {
       owner: context.repo.owner,
       repo: context.repo.repo,
-      assignee: *,
+      assignee: '*',
       per_page: 100,
       page: pageNum,
     });
