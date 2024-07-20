@@ -11,6 +11,7 @@ const mutateIssueStatus = require('../../utils/mutate-issue-status');
 let github;
 let context;
 let assignee;
+let issueNum;
 
 
 // The project id and field containing all statuses 
@@ -58,6 +59,7 @@ async function main({ g, c }, { shouldPost, issueNum }) {
       return;
     }
 
+    issueNum = issueNum;
     github = g;
     context = c;
     // Get the latest developer in case there are multiple assignees
