@@ -65,6 +65,8 @@ async function queryIssueInfo(issueNum, github, context) {
   // Extract the list of project items associated with the issue
   const projectItems = response.repository.issue.projectItems.nodes;
   console.log('here ffffff');
+  console.log(projectItems.length);
+  console.log(projectItems);
   for (item in projectItems) {
     console.log(item);
   }
