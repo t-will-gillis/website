@@ -61,7 +61,7 @@ async function main({ g, c }, { shouldPost, issueNum }) {
 
     issueNum = issueNum;
     console.log(`number: ${issueNum}`);
-    console.log(typeOf(issueNum));
+    console.log(typeof(issueNum));
     github = g;
     context = c;
     // Get the latest developer in case there are multiple assignees
