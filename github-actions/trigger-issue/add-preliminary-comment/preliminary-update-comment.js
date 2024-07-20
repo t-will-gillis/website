@@ -11,7 +11,7 @@ const mutateIssueStatus = require('../../utils/mutate-issue-status');
 let github;
 let context;
 let assignee;
-let issueNum;
+var issueNum;
 
 
 // The project id and field containing all statuses 
