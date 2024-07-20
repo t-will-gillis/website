@@ -19,7 +19,7 @@ async function queryIssueInfo(issueNum, github, context) {
         projectItems(first: 1) {
           nodes {
             id
-            fieldValues(first: 5) {
+            fieldValues(first: 10) {
               nodes {
                 ... on ProjectV2ItemFieldSingleSelectValue {
                   name
