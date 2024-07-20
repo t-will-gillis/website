@@ -18,7 +18,6 @@ async function queryIssueInfo(issueNum, github, context) {
               nodes {
                 ... on ProjectV2ItemFieldSingleSelectValue {
                   name
-                  id
                 }
               }
             }
@@ -39,7 +38,7 @@ async function queryIssueInfo(issueNum, github, context) {
 
     // Extract the list of project items associated with the issue
     const projectItems = response.repository.issue.projectItems.nodes;
-    console.log(projectItems[0]);
+    
     // Since there is always one item associated with the issue,
     // directly get the item's ID from the first index
     const id = projectItems[0].id;
