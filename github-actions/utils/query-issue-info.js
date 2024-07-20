@@ -64,13 +64,14 @@ async function queryIssueInfo(issueNum, github, context) {
   console.log(response);
   // Extract the list of project items associated with the issue
   const projectItems = response.repository.issue.projectItems.nodes;
+  console.log('here ffffff');
   for (item in projectItems) {
     console.log(item);
   }
  
   // Since there is always one item associated with the issue,
   // directly get the item's ID from the first index
-  const id = projectItems[0].id;
+  // const id = projectItems[0].id;
   
   // Iterate through the field values of the first project item
   // and find the node that contains the 'name' property, then get its 'name' value
