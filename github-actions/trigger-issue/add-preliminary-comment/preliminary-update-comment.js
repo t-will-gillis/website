@@ -83,7 +83,6 @@ async function main({ g, c }, { shouldPost, issueNum }) {
       console.log(' - add `ready for dev lead` label to issue');
 
       // Update item's status to "New Issue Approval"
-      console.log(`line 86 number: ${issueNum}`);
       const itemInfo = await queryIssueInfo(issueNum, github, context);
       await mutateIssueStatus(github, context, itemInfo.id, statusValues.get(New_Issue_Approval));
       console.log(' - change issue status to "New Issue Approval"');
@@ -122,31 +121,28 @@ async function memberOfAdminOrMergeTeam() {
  */
 async function assignedToAnotherIssue() {
   try {
-    const issues = (await github.rest.issues.listForRepo({
+    const issues = await github.rest.issues.listForRepo({
       owner: context.repo.owner,
       repo: context.repo.repo,
       assignee: assignee,
-      state: "open", // Only fetch opened issues                                      // default is 'open', not needed
-    })).data;
+    }).data;
 
     const otherIssues = [];
 
     for(const issue of issues) {
-      issueNum = issue.number;
-      console.log(`line 136 number: ${issueNum}`);
-      // Check is it's an "Agenda" issue
+      // Check if assignee's other issue is an "Agenda" issue
       const isAgendaIssue = issue.labels.some(label => label.name === "feature: agenda");
 
-      // Check if it's a "Prework" issue
+      // ...or a "Prework" issue
       const isPreWork = issue.labels.some(label => label.name === "Complexity: Prework");
 
-      // Check if it exists in "Emergent Request" Status
+      // ...or has "Emergent Request" Status
       const inEmergentRequestStatus = (await queryIssueInfo(issue.number, github, context)).statusName === Emergent_Requests;
     
-      // Check if it exists in "New Issue Approval" Status
+      // ...or has "New Issue Approval" Status
       const inNewIssueApprovalStatus = (await queryIssueInfo(issue.number, github, context)).statusName === New_Issue_Approval;
     
-      // Include the issue only if none of the conditions are met
+      // Include the assignee's other issue only if none of the conditions are met
       if(!(isAgendaIssue || isPreWork || inEmergentRequestStatus || inNewIssueApprovalStatus))
         otherIssues.push(issue);
     }
