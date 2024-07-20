@@ -3,6 +3,7 @@ const fs = require("fs");
 const https = require("https");
 const findLinkedIssue = require('../../utils/find-linked-issue');
 const getTimeline = require('../../utils/get-timeline');
+const queryIssueInfo = require('../../utils/query-issue-info');
 
 // Global variables
 var github;
@@ -46,15 +47,8 @@ async function main({ g, c }, pbt) {
   const issueNums = await getIssueNumsFromRepo();       // Revised for Projects Beta migration
 
   for await (let issueNum of issueNums) {
+    // Check issue timeline, then add / remove labels and post comment if the issue's timeline indicates the issue is inactive, to be updated or up to date
     const timeline = await getTimeline(issueNum, github, context);
-    const assignees = await getAssignees(issueNum);
-    // Error catching 
-    if (assignees.length === 0) {
-      console.log(`Issue #${issueNum}: Assignee not found, skipping`);
-      continue;
-    }
-    return;
-    // Add and remove labels as well as post comment if the issue's timeline indicates the issue is inactive, to be updated or up to date accordingly
     const responseObject = await isTimelineOutdated(timeline, issueNum, assignees);
 
     if (responseObject.result === true && responseObject.labels === toUpdateLabel) {   // 7-day outdated, add 'To Update !' label
@@ -80,10 +74,9 @@ async function main({ g, c }, pbt) {
 
 
 /**
- * Function that find issue numbers for all open issues in the repo, 
- * excluding issues that are labeled `Draft`, `ER`, `Epic`, `Dependency`
+ * Finds issue numbers for all open & assigned issues, excluding issues labeled `Draft`, `ER`, `Epic`, `Dependency` 
  *
- * @Returns{Array} issueNums   - an Array of issue numbers
+ * @Returns{Array} issueNums   - an array of open and assigned issue numbers
  */
 async function getIssueNumsFromRepo() {
   const labelsToExclude = ['Draft', 'ER', 'Epic', 'Dependency'];
@@ -92,6 +85,7 @@ async function getIssueNumsFromRepo() {
   let result = [];
   
   while (true) {
+    // https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#list-repository-issues
     const issueData = await github.request('GET /repos/{owner}/{repo}/issues', {
       owner: context.repo.owner,
       repo: context.repo.repo,
@@ -107,18 +101,20 @@ async function getIssueNumsFromRepo() {
       pageNum++;
     }
   }
-  let lenRes = result.length;
-  console.log(`number of issues: ${lenRes}`);
+
+  // Sift list to exclude issues with the excluded labels
   for (let issueNum of result) {
     if (issueNum.number) {
       let issueLabels = [];
       for (let label of issueNum.labels) {
         issueLabels.push(label.name);
       }
-      if (!issueLabels.some(item => labelsToExclude.includes(item))) {
-        issueNums.push(issueNum.number);
-      } else {
+      if (issueLabels.some(item => labelsToExclude.includes(item))) {
         console.log(`Excluding Issue #${issueNum.number} because of label`);
+      } else {
+        statusName = queryIssueInfo(issueNum, github, context);
+        console.log(`Status Name = ${statusName}`);
+        issueNums.push(issueNum.number);
       }
     }
   }
