@@ -58,12 +58,10 @@ async function main({ g, c }, { shouldPost, issueNum }) {
       return;
     }
 
-
-    console.log(`number: ${issueNum}`);
-    console.log(typeof(issueNum));
     github = g;
     context = c;
     issueNum = issueNum;
+    
     // Get the latest developer in case there are multiple assignees
     assignee = await getLatestAssignee();
 
@@ -130,6 +128,7 @@ async function assignedToAnotherIssue() {
       assignee: assignee,
       state: "open", // Only fetch opened issues
     })).data;
+    issueNum = context.payload.issue.number;
     console.log(`line 133 number: ${issueNum}`);
     const otherIssues = [];
 
