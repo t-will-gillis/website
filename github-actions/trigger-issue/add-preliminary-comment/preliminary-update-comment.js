@@ -121,11 +121,11 @@ async function memberOfAdminOrMergeTeam() {
  */
 async function assignedToAnotherIssue() {
   try {
-    const issues = await github.rest.issues.listForRepo({
+    const issues = (await github.rest.issues.listForRepo({
       owner: context.repo.owner,
       repo: context.repo.repo,
       assignee: assignee,
-    }).data;
+    })).data;
 
     const otherIssues = [];
 
