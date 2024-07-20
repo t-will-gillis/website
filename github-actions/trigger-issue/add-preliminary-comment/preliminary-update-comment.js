@@ -130,7 +130,7 @@ async function assignedToAnotherIssue() {
       assignee: assignee,
       state: "open", // Only fetch opened issues
     })).data;
-
+    console.log(`line 133 number: ${issueNum}`);
     const otherIssues = [];
 
     for(const issue of issues) {
