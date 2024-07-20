@@ -63,9 +63,11 @@ async function queryIssueInfo(issueNum, github, context) {
   const response = await github.graphql(query, variables);
   console.log(response);
   // Extract the list of project items associated with the issue
-  // const projectItems = response.repository.issue.projectItems.nodes;
-  const projectItems = response.repository.issue.projectItems;
-  console.log(projectItems);
+  const projectItems = response.repository.issue.projectItems.nodes;
+  for (item in projectItems) {
+    console.log(item);
+  }
+ 
   // Since there is always one item associated with the issue,
   // directly get the item's ID from the first index
   const id = projectItems[0].id;
