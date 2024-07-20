@@ -37,7 +37,7 @@ async function queryIssueInfo(issueNum, github, context) {
     repo: context.repo.repo,
     issueNum: issueNum
   };
-/*
+
   try { 
     const response = await github.graphql(query, variables);
     console.log(response);
@@ -58,8 +58,8 @@ async function queryIssueInfo(issueNum, github, context) {
     throw new Error(`Error finding Issue #${issueNum} id and status; error = ${error}`);
   }
 
-*/
-  
+
+ /* 
   const response = await github.graphql(query, variables);
   console.log(response);
   // Extract the list of project items associated with the issue
@@ -81,7 +81,7 @@ async function queryIssueInfo(issueNum, github, context) {
   console.log(`status: ${statusName}`);
   // console.log(`Success! For Issue #${ISSUE_NUMBER}, found id = '${id}' and status = '${statusName}'`);
   return { id, statusName };
-  
+  */
 }
 
 module.exports = queryIssueInfo;
