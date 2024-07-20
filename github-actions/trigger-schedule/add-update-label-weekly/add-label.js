@@ -53,7 +53,7 @@ async function main({ g, c }, pbt) {
       console.log(`Issue #${issueNum}: Assignee not found, skipping`);
       continue;
     }
-
+    return;
     // Add and remove labels as well as post comment if the issue's timeline indicates the issue is inactive, to be updated or up to date accordingly
     const responseObject = await isTimelineOutdated(timeline, issueNum, assignees);
 
