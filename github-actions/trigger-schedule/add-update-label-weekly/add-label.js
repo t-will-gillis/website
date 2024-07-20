@@ -80,12 +80,13 @@ async function main({ g, c }, pbt) {
 
 
 /**
- * Function that returns issue numbers of all issues in a repo
+ * Function that find issue numbers for all open issues in the repo, 
+ * excluding issues that are labeled `Draft`, `ER`, `Epic`, `Dependency`
  *
- * @returns an Array of issue numbers
+ * @Returns{Array} issueNums   - an Array of issue numbers
  */
 async function getIssueNumsFromRepo() {
-  const labelsToExclude = ['Draft', 'ER', 'Epic'];
+  const labelsToExclude = ['Draft', 'ER', 'Epic', 'Dependency'];
   let issueNums = [];
   let pageNum = 1;
   let result = [];
