@@ -126,13 +126,14 @@ async function assignedToAnotherIssue() {
       owner: context.repo.owner,
       repo: context.repo.repo,
       assignee: assignee,
-      state: "open", // Only fetch opened issues
+      state: "open", // Only fetch opened issues                                      // default is 'open', not needed
     })).data;
-    issueNum = context.payload.issue.number;
-    console.log(`line 133 number: ${issueNum}`);
+
     const otherIssues = [];
 
     for(const issue of issues) {
+      issueNum = issue.number;
+      console.log(`line 136 number: ${issueNum}`);
       // Check is it's an "Agenda" issue
       const isAgendaIssue = issue.labels.some(label => label.name === "feature: agenda");
 
@@ -140,10 +141,10 @@ async function assignedToAnotherIssue() {
       const isPreWork = issue.labels.some(label => label.name === "Complexity: Prework");
 
       // Check if it exists in "Emergent Request" Status
-      const inEmergentRequestStatus = (await queryIssueInfo(issueNum, github, context)).statusName === Emergent_Requests;
+      const inEmergentRequestStatus = (await queryIssueInfo(issue.number, github, context)).statusName === Emergent_Requests;
     
       // Check if it exists in "New Issue Approval" Status
-      const inNewIssueApprovalStatus = (await queryIssueInfo(issueNum, github, context)).statusName === New_Issue_Approval;
+      const inNewIssueApprovalStatus = (await queryIssueInfo(issue.number, github, context)).statusName === New_Issue_Approval;
     
       // Include the issue only if none of the conditions are met
       if(!(isAgendaIssue || isPreWork || inEmergentRequestStatus || inNewIssueApprovalStatus))
