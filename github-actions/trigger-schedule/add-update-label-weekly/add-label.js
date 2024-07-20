@@ -106,7 +106,8 @@ async function getIssueNumsFromRepo() {
       pageNum++;
     }
   }
-  
+  let lenRes = result.length;
+  console.log(`number of issues: ${lenRes}`);
   for (let issueNum of result) {
     if (issueNum.number) {
       let issueLabels = [];
