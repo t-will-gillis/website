@@ -3,10 +3,9 @@
  * @params {Object} context  - Context of the function calling getItemInfo()
  * @returns {Object}         - An object containing the item ID and its status name
  */
-async function queryIssueInfo(github, context) {
+async function queryIssueInfo(issueNum, github, context) {
 
   // const { owner, repo } = context.repo;
-  ISSUE_NUMBER = context.payload.issue.number;
   
   const query = `query($owner: String!, $repo: String!, $issueNum: Int!) {
     repository(owner: $owner, name: $repo) {
@@ -31,7 +30,7 @@ async function queryIssueInfo(github, context) {
   const variables = {
     owner: context.repo.owner,
     repo: context.repo.repo,
-    issueNum: ISSUE_NUMBER
+    issueNum: issueNum
   };
 
   try { 
