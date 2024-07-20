@@ -8,11 +8,10 @@ const queryIssueInfo = require('../../utils/query-issue-info');
 const mutateIssueStatus = require('../../utils/mutate-issue-status');
 
 // Global variables
-let github;
-let context;
+var github;
+var context;
 let assignee;
 var issueNum;
-
 
 // The project id and field containing all statuses 
 // const PROJECT_ID = "PVT_kwDOALGKNs4Ajuck";
@@ -59,11 +58,12 @@ async function main({ g, c }, { shouldPost, issueNum }) {
       return;
     }
 
-    issueNum = issueNum;
+
     console.log(`number: ${issueNum}`);
     console.log(typeof(issueNum));
     github = g;
     context = c;
+    issueNum = issueNum;
     // Get the latest developer in case there are multiple assignees
     assignee = await getLatestAssignee();
 
@@ -85,6 +85,7 @@ async function main({ g, c }, { shouldPost, issueNum }) {
       console.log(' - add `ready for dev lead` label to issue');
 
       // Update item's status to "New Issue Approval"
+      console.log(`line 86 number: ${issueNum}`);
       const itemInfo = await queryIssueInfo(issueNum, github, context);
       await mutateIssueStatus(github, context, itemInfo.id, statusValues.get(New_Issue_Approval));
       console.log(' - change issue status to "New Issue Approval"');
