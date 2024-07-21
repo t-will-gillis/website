@@ -7,12 +7,10 @@
  */
 async function getIssueId(github, context, issueNum) {
 
-  const { owner, repo } = github.context
-
   // Ref: https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#get-an-issue
   const issueResults = await github.request('GET /repos/{owner}/{repo}/issues/{issue_number}', {
-    owner: owner,
-    repo: repo,
+    owner: context.repo.owner,
+    repo: context.repo.repo,
     issue_number: issueNum
   });
 
