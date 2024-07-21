@@ -36,23 +36,23 @@ async function queryIssueInfo(github, context) {
 
   try { 
     const response = await github.graphql(query, variables);
-    console.log(response);
+    console.log(`issueNum: ${issueNum}`);
     
     // Extract the list of project items associated with the issue
     const projectItems = response.repository.issue.projectItems.nodes;
-    console.log(`projectItems: ${projectItems}`);
+    // console.log(`projectItems: ${projectItems}`);  DELETE
     
     // Since there is always one item associated with the issue,
     // directly get the item's ID from the first index
     const id = projectItems[0].id;
-    console.log(`id: ${id}`);
+    // console.log(`id: ${id}`);      DELETE
     
     // Iterate through the field values of the first project item
     // and find the node that contains the 'name' property, then get its 'name' value
     const statusName = projectItems[0].fieldValues.nodes.find(item => item.hasOwnProperty('name')).name;
     console.log(`status: ${statusName}`);
     
-    // console.log(`Success! For Issue #${ISSUE_NUMBER}, found id = '${id}' and status = '${statusName}'`);
+    // console.log(`Success! For Issue #${ISSUE_NUMBER}, found id = '${id}' and status = '${statusName}'`);   DELETE
     return { id, statusName };
   } catch(error) {
     throw new Error(`Error finding Issue #${issueNum} id and status; error = ${error}`);
