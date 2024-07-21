@@ -1,6 +1,6 @@
 // Module imports
 const statusFieldIds = require('../../utils/_data/status-field-ids');
-const queryIssueInfo = require('../../utils/query-issue-info');
+const getIssueId = require('../../utils/get-issue-id');
 const mutateIssueStatus = require('../../utils/mutate-issue-status');
 
 // Constant variables
@@ -34,10 +34,10 @@ async function main({ g, c }) {
   // for SPECIAL_CASE noted above
   if (issueTitle.includes('Hack for LA website bot')) {
     labelsToAdd = SPECIAL_CASE;
-    const { id } = queryIssueInfo(github, context, issueNum);
-    console.log(id);
+    const itemId = getIssueId(github, context, issueNum);
+    console.log(itemId);
     const newStatusValue = statusFieldIds("Questions_In_Review");
-    mutateIssueStatus(github, context, id, newStatusValue);
+    mutateIssueStatus(github, context, itemId, newStatusValue);
   }
 
   if (labelsToAdd.length === 0) {
