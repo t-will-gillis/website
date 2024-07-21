@@ -34,9 +34,10 @@ async function main({ g, c }) {
   // for SPECIAL_CASE noted above
   if (issueTitle.includes('Hack for LA website bot')) {
     labelsToAdd = SPECIAL_CASE;
-    const { itemId } = queryIssueInfo(github, context, issueNum);
+    const { id } = queryIssueInfo(github, context, issueNum);
+    console.log(id);
     const newStatusValue = statusFieldIds("Questions_In_Review");
-    mutateIssueStatus(github, context, itemId, newStatusValue);
+    mutateIssueStatus(github, context, id, newStatusValue);
   }
 
   if (labelsToAdd.length === 0) {
