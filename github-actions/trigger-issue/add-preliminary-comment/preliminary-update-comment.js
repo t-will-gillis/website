@@ -83,7 +83,6 @@ async function main({ g, c }, { shouldPost, issueNum }) {
       console.log(' - add `ready for dev lead` label to issue');
 
       // Update item's status to "New Issue Approval"
-      console.log('last before change status');
       const itemInfo = await queryIssueInfo(github, context, issueNum);
       await mutateIssueStatus(github, context, itemInfo.id, statusValues.get(New_Issue_Approval));
       console.log(' - change issue status to "New Issue Approval"');
@@ -138,11 +137,9 @@ async function assignedToAnotherIssue() {
       const isPreWork = issue.labels.some(label => label.name === "Complexity: Prework");
 
       // ...or has "Emergent Request" Status
-      console.log('checking ER');
       const inEmergentRequestStatus = (await queryIssueInfo(github, context, issueNum)).statusName === Emergent_Requests;
     
       // ...or has "New Issue Approval" Status
-      console.log('checking NIA');
       const inNewIssueApprovalStatus = (await queryIssueInfo(github, context, issueNum)).statusName === New_Issue_Approval;
     
       // Include the assignee's other issue only if none of the conditions are met
@@ -181,7 +178,6 @@ async function unAssignDev() {
  */
 async function createComment(fileName, issueNum) {
   try {
-    console.log('before commenting');
     const { statusName } = await queryIssueInfo(github, context, issueNum);
 
     const isPrework = context.payload.issue.labels.some((label) => label.name === 'Complexity: Prework');
