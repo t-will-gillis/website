@@ -1,8 +1,7 @@
 // Module imports
 const statusFieldIds = require('../../utils/_data/status-field-ids');
-// const getIssueId = require('../../utils/get-issue-id');
-const mutateIssueStatus = require('../../utils/mutate-issue-status');
 const queryIssueInfo = require('../../utils/query-issue-info');
+const mutateIssueStatus = require('../../utils/mutate-issue-status');
 
 // Constant variables
 const REQUIRED_LABELS = ['Complexity', 'role', 'Feature', 'size']
@@ -35,7 +34,6 @@ async function main({ g, c }) {
   // for SPECIAL_CASE noted above
   if (issueTitle.includes('Hack for LA website bot')) {
     labelsToAdd = SPECIAL_CASE;
-    // const itemId = await getIssueId(github, context, issueNum);
     const itemId = await queryIssueInfo(github, context, issueNum).id;
     console.log(`issue: ${issueNum}`);
     console.log(`itemId: ${itemId}`);
