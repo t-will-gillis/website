@@ -137,11 +137,11 @@ async function assignedToAnotherIssue() {
       const isPreWork = issue.labels.some(label => label.name === "Complexity: Prework");
 
       // ...or has "Emergent Request" Status
-      console.log('checking ER`);
+      console.log('checking ER');
       const inEmergentRequestStatus = (await queryIssueInfo(github, context)).statusName === Emergent_Requests;
     
       // ...or has "New Issue Approval" Status
-      console.log('checking NIA`);
+      console.log('checking NIA');
       const inNewIssueApprovalStatus = (await queryIssueInfo(github, context)).statusName === New_Issue_Approval;
     
       // Include the assignee's other issue only if none of the conditions are met
