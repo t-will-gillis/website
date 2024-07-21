@@ -72,7 +72,7 @@ async function main({ g, c }, { shouldPost, issueNum }) {
     // If developer is not in Admin or Merge Teams, and is assigned to another issue/s, do the following:
     if(!isAdminOrMerge && isAssignedToAnotherIssue) {
       console.log(`Developer ${assignee} is assigned to multiple issues but isn't on Admin or Merge team. Going to...`);
-      const comment = await createComment("multiple-issue-reminder.md");
+      const comment = await createComment("multiple-issue-reminder.md", issueNum);
       await postComment(issueNum, comment, github, context);
       console.log(' - add `multiple-issue-reminder.md` comment to issue');
       
