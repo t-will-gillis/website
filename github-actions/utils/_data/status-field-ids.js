@@ -67,7 +67,7 @@ function statusFieldIds(statusField) {
     ]);
 
     statusId = statusValues.get(statusField);
-    console.log(`statusId: ${statusId}`):
+    console.log(`statusId: ${statusId}`);
     return statusId;
 }
 
