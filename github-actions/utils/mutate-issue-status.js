@@ -7,8 +7,10 @@
 async function mutateIssueStatus(github, context, itemId, newStatusValue) {
 
   // Defaults for HfLA Website Project 86
-  const WEBSITE_PROJECT_ID = "PVT_kwDOALGKNs4Ajuck";
-  const STATUS_FIELD_ID = "PVTSSF_lADOALGKNs4AjuckzgcCutQ";
+  // const WEBSITE_PROJECT_ID = "PVT_kwDOALGKNs4Ajuck";
+  // const STATUS_FIELD_ID = "PVTSSF_lADOALGKNs4AjuckzgcCutQ";
+  const WEBSITE_PROJECT_ID = "PVT_kwHOAm6MB84Aiu3X";                        // for TWG
+  const STATUS_FIELD_ID = "PVTSSF_lAHOAm6MB84Aiu3XzgbNC9E";
 
   const mutation = `mutation($projectId: ID!, $fieldId: ID!, $itemId: ID!, $value: String!) {
     updateProjectV2ItemFieldValue(input: {
