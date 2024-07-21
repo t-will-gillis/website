@@ -31,12 +31,10 @@ async function main({ g, c }) {
   const filteredLabels = filterLabels(labels)
   let labelsToAdd = checkLabels(filteredLabels)
 
-  // for SPECIAL_CASE noted above
+  // for SPECIAL_CASE noted above, change issue status to "Questions / In Review"
   if (issueTitle.includes('Hack for LA website bot')) {
     labelsToAdd = SPECIAL_CASE;
     const itemId = (await queryIssueInfo(github, context, issueNum)).id;
-    console.log(`issue: ${issueNum}`);
-    console.log(`itemId: ${itemId}`);
     const newStatusValue = statusFieldIds("Questions_In_Review");
     mutateIssueStatus(github, context, itemId, newStatusValue);
   }
