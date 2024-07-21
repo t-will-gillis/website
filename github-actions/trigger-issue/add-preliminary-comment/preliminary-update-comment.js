@@ -89,7 +89,7 @@ async function main({ g, c }, { shouldPost, issueNum }) {
       console.log(' - change issue status to "New Issue Approval"');
     } else {
       // Otherwise, proceed with checks 
-      const comment = await createComment("preliminary-update.md");
+      const comment = await createComment("preliminary-update.md", issueNum);
       await postComment(issueNum, comment, github, context);
     }
   } catch(error) {
@@ -179,7 +179,7 @@ async function unAssignDev() {
  * @param {String} fileName - the file name of the used template
  * @returns {String} - return formatted comment
  */
-async function createComment(fileName) {
+async function createComment(fileName, issueNum) {
   try {
     console.log('before commenting');
     const { statusName } = await queryIssueInfo(github, context, issueNum);
