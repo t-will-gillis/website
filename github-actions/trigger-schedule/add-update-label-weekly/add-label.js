@@ -121,12 +121,11 @@ async function getIssueNumsFromRepo() {
       if (issueLabels.some(item => labelsToExclude.includes(item))) {
         console.log(`Excluding Issue #${issueNum.number} because of label`);
       } else {
-        console.log(context.repo.owner);
-        console.log(context.repo.repo);
-        console.log(issueNum.number);
         let statusName = (await queryIssueInfo(github, context, issueNum.number)).statusName;
-        console.log(`Status name = ${statusName}`);
-        issueNums.push(issueNum.number);
+        if (statusName === "In progress (actively working)") {
+          issueNums.push(issueNum.number);
+        } else {
+          console.log(`Excluding Issue #${issueNum.number} because of status`);
       }
     }
   }
