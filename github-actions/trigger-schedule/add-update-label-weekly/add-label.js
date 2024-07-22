@@ -111,25 +111,6 @@ async function getIssueNumsFromRepo() {
     }
   }
 
-  /*
-  // Sift list to exclude issues with the excluded labels
-  for (let issueNum of result) {
-    if (issueNum.number) {
-      let issueLabels = [];
-      for (let label of issueNum.labels) {
-        issueLabels.push(label.name);
-      }
-      if (!issueLabels.some(item => labelsToExclude.includes(item))) {
-        const { statusName } = await queryIssueInfo(github, context, issueNum.number);
-        if (statusName === "In progress (actively working)") {
-          issueNums.push(issueNum.number);
-        } 
-      }
-    }
-  }
-  */
-
-
   // Filter results; we only want issues in "In progress (actively working)" 
   for (let { number, labels } of result) {
     if (!number) continue;
