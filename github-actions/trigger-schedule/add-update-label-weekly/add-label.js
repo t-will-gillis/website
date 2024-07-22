@@ -121,7 +121,6 @@ async function getIssueNumsFromRepo() {
       if (issueLabels.some(item => labelsToExclude.includes(item))) {
         console.log(`Excluding Issue #${issueNum.number} because of label`);
       } else {
-        console.log('mmmmm');
         console.log(context.repo.owner);
         console.log(context.repo.repo);
         console.log(issueNum.number);
