@@ -110,7 +110,8 @@ async function getIssueNumsFromRepo() {
       pageNum++;
     }
   }
-  
+
+  /*
   // Sift list to exclude issues with the excluded labels
   for (let issueNum of result) {
     if (issueNum.number) {
@@ -118,18 +119,32 @@ async function getIssueNumsFromRepo() {
       for (let label of issueNum.labels) {
         issueLabels.push(label.name);
       }
-      if (issueLabels.some(item => labelsToExclude.includes(item))) {
-        console.log(`Excluding Issue #${issueNum.number} because of label`);
-      } else {
-        let statusName = (await queryIssueInfo(github, context, issueNum.number)).statusName;
+      if (!issueLabels.some(item => labelsToExclude.includes(item))) {
+        const { statusName } = await queryIssueInfo(github, context, issueNum.number);
         if (statusName === "In progress (actively working)") {
           issueNums.push(issueNum.number);
-        } else {
-          console.log(`Excluding Issue #${issueNum.number} because of status`);
-        }
+        } 
       }
     }
   }
+  */
+
+
+  // Filter results; we only want issues in "In progress (actively working)" 
+  for (let { number, labels } of result) {
+    if (!number) continue;
+
+    // Exclude any issues that have excluded labels
+    const issueLabels = labels.map(label => label.name);
+    if (issueLabels.some(item => labelsToExclude.includes(item))) continue;
+
+    // For remaining issues, check if status === "In progress (actively working)"
+    const { statusName } = await queryIssueInfo(github, context, number);
+    if (statusName === "In progress (actively working)") {
+      issueNums.push(number);
+    }
+  }
+  
   return issueNums;
 }
 
