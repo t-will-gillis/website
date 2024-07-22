@@ -10,7 +10,7 @@ async function queryIssueInfo(github, context, issueNum) {
     repository(owner: $owner, name: $repo) {
       issue(number: $issueNum) {
         id
-        projectItems(first: 1) {
+        projectItems(first: 10) {
           nodes {
             id
             fieldValues(first: 10) {
