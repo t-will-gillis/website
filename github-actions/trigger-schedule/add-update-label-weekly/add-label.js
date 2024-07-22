@@ -126,6 +126,7 @@ async function getIssueNumsFromRepo() {
           issueNums.push(issueNum.number);
         } else {
           console.log(`Excluding Issue #${issueNum.number} because of status`);
+        }
       }
     }
   }
