@@ -14,7 +14,7 @@ async function main({ g, c }) {
   const prBody = context.payload.pull_request.body;
   const prNumber = context.payload.pull_request.number;
   const prOwner = context.payload.pull_request.user.login;
-  const regex = /(?<!Example:\s*)(close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved)\s+#(\d+)/i;
+  const regex = /(?!<!--)(?:close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved)\s*#(\d+)(?![^<]*-->)/gi;
   const match = prBody.match(regex);
   let prComment;
 
