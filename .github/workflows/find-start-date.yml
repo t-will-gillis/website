@@ -25,7 +25,7 @@ jobs:
               repo: REPO
             });
             const START_DATE = results.data.created_at
-            console.log(`The repo for project ${REPO} created on ${START_DATE}`);
+            console.log(`The repo for project "${REPO}" created on: ${START_DATE.slice(0,10)}`);
 
             
             
