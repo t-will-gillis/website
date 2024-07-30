@@ -1,3 +1,5 @@
+# https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#get-a-repository
+# Example workflow to query REST API to find start date given a repo's name
 name: Find Start Date
 
 on:
@@ -22,11 +24,8 @@ jobs:
               owner: OWNER,
               repo: REPO
             });
-            console.log(results.data.created_at);
-            return results.data.created_at
-              
-      - name: Print Results
-        run: |
-          echo ${{ steps.retrieve-repo.outputs.result }}
+            const START_DATE = results.data.created_at
+            console.log(`The repo for project ${REPO} created on ${START_DATE}`);
+
             
             
