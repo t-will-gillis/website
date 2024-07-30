@@ -8,15 +8,11 @@ on:
 jobs:
   Find_Start_Date:
     runs-on: ubuntu-latest
-    # optional line
-    if: github.repository == 't-will-gillis/website'
-
     steps:
       - name: Retrieve Repo
         id: retrieve-repo
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
           script: |
             const OWNER = 'hackforla';
             const REPO = 'website';
