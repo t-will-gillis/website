@@ -18,10 +18,11 @@ jobs:
           script: |
             const OWNER = 'hackforla'
             const REPO = 'website'
-            results = await github.request('GET /repos/{owner}/{repo}', {
+            return results = await github.request('GET /repos/{owner}/{repo}', {
               owner: OWNER,
               repo: REPO
             })
+      
             
       - name: Print Results
         run: |
