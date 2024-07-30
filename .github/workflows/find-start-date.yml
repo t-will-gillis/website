@@ -16,12 +16,14 @@ jobs:
         with:
           github-token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
           script: |
-            const OWNER = 'hackforla'
-            const REPO = 'website'
-            return results = await github.request('GET /repos/{owner}/{repo}', {
+            const OWNER = 'hackforla';
+            const REPO = 'website';
+            results = await github.request('GET /repos/{owner}/{repo}', {
               owner: OWNER,
               repo: REPO
-            })
+            });
+            return results.data.created_at
+            
       
             
       - name: Print Results
