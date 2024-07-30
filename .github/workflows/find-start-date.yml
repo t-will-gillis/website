@@ -22,10 +22,9 @@ jobs:
               owner: OWNER,
               repo: REPO
             });
+            console.log(results.data.created_at);
             return results.data.created_at
-            
-      
-            
+              
       - name: Print Results
         run: |
           echo ${{ steps.retrieve-repo.outputs.result }}
