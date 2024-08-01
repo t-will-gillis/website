@@ -11,13 +11,13 @@ async function main({github,context}) {
     else {
         try {
             await github.rest.issues.update({
-                owner : 'hackforla',
+                owner : 't-will-gillis',    // twg edits
                 repo : 'website',
                 issue_number : prNumber,
                 state : 'closed'
             });
             await github.rest.issues.createComment({
-                owner : 'hackforla',
+                owner : 't-will-gillis',     // twg edits
                 repo : 'website',
                 issue_number : prNumber,
                 body : commentContent
