@@ -12,7 +12,7 @@ docs on printing context information into the log.
 */
 
 async function isMemberOfTeam(github, githubUsername, team) {
-    console.log(githubUsername, team);
+    console.log(`Checking if ${githubUsername} is member of ${team} team`);
     try {
         await github.rest.teams.getMembershipForUserInOrg({
             org : 'hackforla',
