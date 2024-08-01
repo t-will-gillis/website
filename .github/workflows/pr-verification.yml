@@ -2,8 +2,7 @@ name: Pull Request Verification
 on:
   pull_request:
     types: [opened]
-    branches:
-      - 'gh-pages'
+
 
 jobs:
   Check-Team-Membership:
