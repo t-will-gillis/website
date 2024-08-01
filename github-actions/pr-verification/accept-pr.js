@@ -1,5 +1,5 @@
 // Import modules
-const fs = require('fs');
+// const fs = require('fs');
 const checkTeamMembership = require('../utils/check-team-membership');
 const postIssueComment = require('../utils/post-issue-comment');
 
