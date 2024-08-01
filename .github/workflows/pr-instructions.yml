@@ -3,8 +3,7 @@ on:
   pull_request:
     types: [opened]
     branches:
-      - 'gh-pages'
-      - 'feature-homepage-launch'
+      - '*'
 
 jobs:
   Add-Pull-Request-Instructions:
