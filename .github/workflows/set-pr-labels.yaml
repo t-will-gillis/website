@@ -4,8 +4,9 @@ on:
   pull_request:
     types: [opened, edited]
     branches:
-      - 'gh-pages'
-      - 'feature-homepage-launch'
+      - '*'
+
+      
 
 jobs:
   generate-labels-artifact:
