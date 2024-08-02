@@ -3,7 +3,7 @@ const fs = require("fs");
 const { Octokit } = require("@octokit/rest");
 const trueContributorsMixin = require("true-github-contributors");
 const _ = require('lodash');
-
+// junk comment
 // Record the time this script started running so it can be stored later
 const dateRan = new Date();
 // Hard coded list of untagged repos we would like to fetch data on
