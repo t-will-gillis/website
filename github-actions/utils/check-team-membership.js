@@ -15,12 +15,14 @@ async function isMemberOfTeam(github, githubUsername, team)
 {
     try {
         await github.rest.teams.getMembershipForUserInOrg({
-            org : 'hackforla',
+            org : 'hackforla',    // replace with context.repo.org 
             team_slug : team,
             username : githubUsername
         });
+        console.log(`Found '${githubUserName}' on team`);
         return true;
     } catch (verificationError) {
+        console.log(`Status: ${verificationError.status}`);
         if (verificationError.status == 404) {
             return false;
         }
