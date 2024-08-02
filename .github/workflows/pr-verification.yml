@@ -14,5 +14,4 @@ jobs:
           script: |
             const script = require('./github-actions/trigger-pr-target/verify-pr.js');
             script({ github, context });
-            # const verifyPR = require('./github-actions/trigger-pr-target/verify-pr.js');
-            # verifyPR({github, context});
+
