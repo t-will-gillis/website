@@ -20,6 +20,7 @@ async function isMemberOfTeam(github, githubUsername, team) {
             team_slug : team,
             username : githubUsername
         });
+        console.log(`returning true on next line`);
         return true;
     } catch (verificationError) {
         console.log(`yippers: ${verificationError.status}`);
