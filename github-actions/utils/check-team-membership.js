@@ -22,8 +22,9 @@ async function isMemberOfTeam(github, githubUsername, team) {
         });
         return true;
     } catch (verificationError) {
-        console.log(verificationError);
+        console.log(`yippers: ${verificationError.status}`);
         if (verificationError.status == 404) {
+            console.log('found the 404');
             return false;
         }
         else {
