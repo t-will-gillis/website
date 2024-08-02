@@ -1,5 +1,5 @@
 const obtainLabels = require('../utils/obtain-labels')
-
+// junk comment
 /**
  * Check the labels of an issue, and return the 'status' the issue should be sorted into when closed
  * @param {Object} context - context object from actions/github-script
