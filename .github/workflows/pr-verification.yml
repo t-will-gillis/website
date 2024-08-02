@@ -12,5 +12,7 @@ jobs:
         with:
           github-token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
           script: |
-            const verifyPR = require('./github-actions/trigger-pr-target/verify-pr.js');
-            verifyPR({github, context});
+            const script = require('./github-actions/trigger-pr-target/verify-pr.js');
+            script({ github, context });
+            # const verifyPR = require('./github-actions/trigger-pr-target/verify-pr.js');
+            # verifyPR({github, context});
