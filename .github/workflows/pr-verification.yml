@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          github-token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
+          token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
           
       # Verify membership
       - name: Verify membership
