@@ -1,6 +1,6 @@
 name: Pull Request Verification
 on:
-  pull_request:
+  pull_request_target:
     types: [opened]
 
 jobs:
@@ -12,5 +12,5 @@ jobs:
         with:
           github-token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
           script: |
-            const script = require('./github-actions/trigger-pr-target/verify-pr.js') 
-            script({ github, context }) 
+            const verifyPR = require('./github-actions/trigger-pr-target/verify-pr.js');
+            verifyPR({github, context});
