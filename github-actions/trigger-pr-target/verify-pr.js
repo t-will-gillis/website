@@ -5,10 +5,12 @@ async function main({github,context}) {
     const prAuthor = context.payload.sender.login;
     const prNumber = context.payload.number;
     const isMember = await isMemberOfTeam(github, prAuthor, 'website-write');
+    console.log(`'${prAuthor}' is a member of 'website-write' ${isMember}`); 
     if (isMember) {    
         console.log('Successfully verified!');
     }
     else {
+        console.log(`'${prAuthor}' not a member; closing`);
         try {
             await github.rest.issues.update({
                 owner : 't-will-gillis',    // twg edits
