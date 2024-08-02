@@ -15,8 +15,9 @@ async function main({ g, c }) {
   const prAuthor = context.payload.sender.login;
   const prNumber = context.payload.number;
   const team = 'website-write';
-
-  if (!checkTeamMembership(github, prAuthor, team)) {
+  const team_check = checkTeamMembership(github, prAuthor, team);
+  console.log(`just checked team status: ${team_check}`);
+  if (!team_check) {
     console.log(`${prAuthor} is not a member of ${team}- closing PR with comment`);
     await github.rest.pulls.update({
         owner : 't-will-gillis',
