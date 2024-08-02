@@ -4,6 +4,7 @@ const commentContent = 'You must be a member of the HFLA website team in order t
 async function main({ github,context }) {
     const prAuthor = context.payload.sender.login;
     const prNumber = context.payload.number;
+    const isMember = await isMemberOfTeam(github, prAuthor, 'website-write');
     if (isMember) {    
         console.log('Successfully verified!');
     }
