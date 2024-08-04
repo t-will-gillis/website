@@ -6,8 +6,13 @@ on:
 jobs:
   Check-Team-Membership:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      
     steps:
       - uses: actions/checkout@v4
+
+          
         
       - name: Verify PR
         id: verify-pr
