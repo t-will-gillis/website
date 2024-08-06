@@ -22,7 +22,7 @@ async function main({ g, c }) {
     console.log('PR does not have a properly linked issue. Posting comment...');
     prComment = `@${prOwner}, this Pull Request is not linked to a valid issue. Please provide a valid linked issue above in the format of 'Fixes #' + issue number, for example 'Fixes #9876'`;
   }
-
+  console.log(match);
   else {
     let [ , keyword, linkNumber ] = match;
     console.log('Found a keyword: \'' + keyword + '\'. Checking for legitimate linked issue...');
