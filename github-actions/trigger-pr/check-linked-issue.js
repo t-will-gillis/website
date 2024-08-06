@@ -9,7 +9,7 @@ var context;
 async function main({ g, c }) {
   github = g;
   context = c;
-
+  // junk
   // Retrieve body of context.payload and search for GitHub keywords
   const prBody = context.payload.pull_request.body;
   const prNumber = context.payload.pull_request.number;
