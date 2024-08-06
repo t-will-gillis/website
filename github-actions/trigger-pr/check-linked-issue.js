@@ -10,7 +10,8 @@ async function main({ g, c }) {
   github = g;
   context = c;
 
-  // Retrieve body of context.payload and search for GitHub keywords
+  // Retrieve body of context.payload and search for GitHub keywords followed by 
+  // '#' + number. Exclude any matches that are in a comment within the PR body
   const prBody = context.payload.pull_request.body;
   const prNumber = context.payload.pull_request.number;
   const prOwner = context.payload.pull_request.user.login;
@@ -21,12 +22,12 @@ async function main({ g, c }) {
 
   if (!match) {
     console.log('PR does not have a properly linked issue. Posting comment...');
-    prComment = `@${prOwner}, this Pull Request is not linked to a valid issue. Please provide a valid linked issue above in the format of 'Fixes #' + issue number, for example 'Fixes #9876'`;
+    prComment = `@${prOwner}, this Pull Request is not linked to a valid issue. Above on the first line of your PR, please link a valid issue using the format of 'Fixes #' + issue number, for example 'Fixes #9876'`;
   }
   
   else {
-    console.log(match);
-    let [ , keyword, linkNumber ] = match;
+    console.log(match[0]);
+    let [ keyword, linkNumber ] = match[0].replaceAll('#','').split(' ');
     console.log('Found a keyword: \'' + keyword + '\'. Checking for legitimate linked issue...');
 
     // Check if the linked issue exists in repo
