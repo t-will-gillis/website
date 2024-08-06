@@ -1,5 +1,4 @@
 // Import modules
-const fs = require('fs');
 const postIssueComment = require('../utils/post-issue-comment');
 
 // Global variables
@@ -32,7 +31,7 @@ async function main({ g, c }) {
 
     // Check if the linked issue exists in repo
     try {
-      const response = await github.rest.issues.get({
+      await github.rest.issues.get({
         owner: context.repo.owner,
         repo: context.repo.repo,
         issue_number: linkNumber,
