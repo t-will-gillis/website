@@ -18,7 +18,7 @@ async function main({ g, c }) {
   const match = prBody.match(regex);
   
   let prComment;
-
+  // lllll
   if (!match) {
     console.log('PR does not have a properly linked issue. Posting comment...');
     prComment = `@${prOwner}, this Pull Request is not linked to a valid issue. Please provide a valid linked issue above in the format of 'Fixes #' + issue number, for example 'Fixes #9876'`;
