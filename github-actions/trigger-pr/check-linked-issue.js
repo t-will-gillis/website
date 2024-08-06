@@ -16,14 +16,16 @@ async function main({ g, c }) {
   const prOwner = context.payload.pull_request.user.login;
   const regex = /(?!<!--)(?:close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved)\s*#(\d+)(?![^<]*-->)/gi;
   const match = prBody.match(regex);
+  
   let prComment;
 
   if (!match) {
     console.log('PR does not have a properly linked issue. Posting comment...');
     prComment = `@${prOwner}, this Pull Request is not linked to a valid issue. Please provide a valid linked issue above in the format of 'Fixes #' + issue number, for example 'Fixes #9876'`;
   }
-  console.log(match);
+  
   else {
+    console.log(match);
     let [ , keyword, linkNumber ] = match;
     console.log('Found a keyword: \'' + keyword + '\'. Checking for legitimate linked issue...');
 
