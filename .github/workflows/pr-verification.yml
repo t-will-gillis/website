@@ -1,4 +1,4 @@
-name: Pull Request Verification
+name: Pull Request Verification 2
 on:
   pull_request:
     types: [opened]
@@ -15,7 +15,7 @@ jobs:
         id: verify-membership
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
+
           script: |
             const script = require('./github-actions/utils/check-team-membership.js');
             membershipStatus = script({ github, context });
