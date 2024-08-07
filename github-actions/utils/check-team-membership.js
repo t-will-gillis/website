@@ -19,9 +19,9 @@ async function isMemberOfTeam(github, context) {
     
     try {
         await github.rest.teams.getMembershipForUserInOrg({
-            org : 'hackforla',
-            team_slug : team,
-            username : username
+            org: 'hackforla',
+            team_slug: team,
+            username: username
         });
         console.log(`Found '${username}' on team`);
         return true;
