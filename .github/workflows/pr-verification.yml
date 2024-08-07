@@ -21,7 +21,7 @@ jobs:
           github-token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
           script: |
             const script = require('./github-actions/utils/check-team-membership.js');
-            membershipStatus = script({ github, context }, TEAM, PRAUTHOR );
+            membershipStatus = script({ github, context }, env.TEAM, env.PRAUTHOR );
             return membershipStatus
 
       # If PR author not a team member, comment and close PR
