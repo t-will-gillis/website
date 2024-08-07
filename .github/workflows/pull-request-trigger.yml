@@ -3,7 +3,7 @@ on:
   pull_request_target:
     types: [opened, closed]
     branches:
-      - '*'
+      - 'gh-pages'
 
 jobs:
   # Placeholder action: Delete when new jobs added 
