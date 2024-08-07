@@ -10,18 +10,21 @@ Lack of permission will result in a 403 error.
 docs on printing context information into the log.
 */
 
-async function isMemberOfTeam(github, githubUsername, team)
-{
+async function isMemberOfTeam(github, context, team) {
+
+    // const org = ;
+    const username = context.payload.sender.login;
+    
     try {
         await github.rest.teams.getMembershipForUserInOrg({
             org : 'hackforla',
             team_slug : team,
-            username : githubUsername
+            username : username
         });
-        console.log(`Found '${githubUsername}' on team`);
+        console.log(`Found '${username}' on team`);
         return true;
     } catch (verificationError) {
-        console.log(`Status: ${verificationError.status}`);
+        console.log(`Status: ${verificationError.status}- '${username}' not found on team`);
         if (verificationError.status == 404) {
             return false;
         }
