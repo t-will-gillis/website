@@ -3,7 +3,7 @@ on:
   pull_request_target:
     types: [opened]
     branches:
-      - 'gh-pages'
+      - '*'
 
 jobs:
   Check-Team-Membership:
