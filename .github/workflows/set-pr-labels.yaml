@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, edited]
     branches:
-      - '*'
+      - 'gh-pages'
 
 jobs:
   generate-labels-artifact:
