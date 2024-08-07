@@ -21,9 +21,10 @@ jobs:
               team_slug: 'website-write',
               username: prAuthor
               });
-              console.log('Successfully verified!')
+               console.log(`PR author '${prAuthor}' successfully verified!`)
             } catch (verificationError) {
               if (verificationError.status==404) {
+                console.log(`PR author '${prAuthor}' not a team member- closing PR.`)
                 await github.request('PATCH /repos/{owner}/{repo}/pulls/{pull_number}', {
                   owner : 't-will-gillis',
                   repo : 'website',
