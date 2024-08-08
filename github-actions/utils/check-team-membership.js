@@ -16,12 +16,7 @@ async function isMemberOfTeam({ github, context }) {
     const username = 't-will-gillis-dummy';
     const team = 'website-write';
     console.log(context.repo);
-    // console.log('here');
-    // const result = await github.request('GET /orgs/{org}/teams/{team_slug}/memberships/{username}', {
-    //     org: 'hackforla',
-    //     team_slug: team,
-    //     username: username
-    // });
+
     try {
         await github.rest.teams.getMembershipForUserInOrg({
             org : 'hackforla',
