@@ -22,13 +22,15 @@ jobs:
             const TEAM = 'website-write';
             const script = require('./github-actions/utils/check-team-membership.js');
             return script({ github, context }, PR_AUTHOR, TEAM );
-        
-      # If PR author not a team member, comment and close PR
-      - if: ${{ steps.verify-membership.outputs.result == 'false' }}
-        name: Comment and Close PR
-        id: comment-and-close-pr
-        uses: actions/github-script@v7
+
+      # Create an artifact with the message
+      - name: Create Artifacts
+        run: |
+          mkdir -p addingMemberInfo/artifact
+          echo ${{ steps.verify-membership.outputs.result }} > addingMemberInfo/artifact/artifact.txt
+      
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
         with:
-          script: |
-            const script = require('./github-actions/trigger-pr-target/verify-pr.js');
-            script({ github, context })
+          name: adding-verify-membership-artifact
+          path: addingMemberInfo/artifact/
