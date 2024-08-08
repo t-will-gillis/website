@@ -24,7 +24,7 @@ jobs:
         run: echo "this was the result ${{ steps.verify-membership.outputs.result }}"
         
       # If PR author not a team member, comment and close PR
-      - if: ${{ steps.verify-membership.outputs.result == false }}
+      - if: ${{ steps.verify-membership.outputs.result == 'false' }}
         name: Comment and Close PR
         id: comment-and-close-pr
         uses: actions/github-script@v7
