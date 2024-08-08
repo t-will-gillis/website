@@ -14,15 +14,12 @@ jobs:
       # Check if PR author is team member
       - name: Verify membership
         id: verify-membership
-        uses: actions/github-script@v7
-        env:
-          PR_AUTHOR: ${{ context.payload.sender.login }}
-          TEAM: 'website-write'        
+        uses: actions/github-script@v7     
         with:
           github-token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
           script: |
-            const PR_AUTHOR = process.env.PR_AUTHOR;
-            const TEAM = process.env.TEAM;
+            const PR_AUTHOR = context.payload.sender.login;
+            const TEAM = 'website-write';
             const script = require('./github-actions/utils/check-team-membership.js');
             return script({ github, context }, PR_AUTHOR, TEAM );
         
