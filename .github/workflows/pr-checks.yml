@@ -19,9 +19,10 @@ jobs:
           github-token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
           script: |
             const PR_AUTHOR = context.payload.sender.login;
+            const PR_NUMBER = context.payload.number;
             const TEAM = 'website-write';
             const script = require('./github-actions/utils/check-team-membership.js');
-            return script({ github, context }, PR_AUTHOR, TEAM );
+            return { PR_NUMBER, script({ github, context }, PR_AUTHOR, TEAM ) };
 
       # Create an artifact with the message
       - name: Create Artifacts
