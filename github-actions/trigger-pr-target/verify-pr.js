@@ -8,7 +8,7 @@ async function main({ github, context }) {
       on how to join us as a member at HFLA: https://www.hackforla.org/getting-started. If you have been \
       though onboarding and feel this message was sent in error, please message us in the #hfla-site team \
       Slack channel with the link to this PR.";
-
+  console.log(`current owner: ${context.repo.owner}`);
   try {
     await github.rest.issues.update({
       owner: "t-will-gillis",
@@ -23,7 +23,7 @@ async function main({ github, context }) {
       body: commentContent,
     });
   } catch (closeCommentError) {
-    throw closeCommentError;
+      throw closeCommentError;
   }
 }
 
