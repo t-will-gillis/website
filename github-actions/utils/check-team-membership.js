@@ -17,11 +17,16 @@ async function isMemberOfTeam(github, context) {
     const team = 'website-write';
     // console.log(context.repo);
     console.log('here');
-    const status = github.rest.teams.getMembershipForUserInOrg({
+    const status = await github.request('GET /orgs/{org}/teams/{team_slug}/memberships/{username}', {
         org: 'hackforla',
         team_slug: team,
         username: username
     });
+    // const status = github.rest.teams.getMembershipForUserInOrg({
+    //     org: 'hackforla',
+    //     team_slug: team,
+    //     username: username
+    // });
     console.log(status);
     //     console.log(`Found '${username}' on team`);
     //     return true;
