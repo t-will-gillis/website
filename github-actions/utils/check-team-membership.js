@@ -17,23 +17,23 @@ async function isMemberOfTeam(github, context) {
     const team = 'website-write';
     // console.log(context.repo);
     
-    try {
-        await github.rest.teams.getMembershipForUserInOrg({
-            org: 'hackforla',
-            team_slug: team,
-            username: username
-        });
-        console.log(`Found '${username}' on team`);
-        return true;
-    } catch (verificationError) {
-        console.log(`Status: ${verificationError.status}- '${username}' not found on team`);
-        if (verificationError.status == 404) {
-            return false;
-        }
-        else {
-            throw verificationError;
-        }
-    }
+    const status = await github.rest.teams.getMembershipForUserInOrg({
+        org: 'hackforla',
+        team_slug: team,
+        username: username
+    });
+    console.log(status);
+    //     console.log(`Found '${username}' on team`);
+    //     return true;
+    // } catch (verificationError) {
+    //     console.log(`Status: ${verificationError.status}- '${username}' not found on team`);
+    //     if (verificationError.status == 404) {
+    //         return false;
+    //     }
+    //     else {
+    //         throw verificationError;
+    //     }
+    // }
 }
 
 module.exports = isMemberOfTeam;
