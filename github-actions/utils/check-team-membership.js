@@ -15,31 +15,30 @@ async function isMemberOfTeam({ github, context }) {
     // const org = ;
     const username = 't-will-gillis-dummy';
     const team = 'website-write';
-    // console.log(context.repo);
-    console.log('here');
-    const result = await github.request('GET /orgs/{org}/teams/{team_slug}/memberships/{username}', {
-        org: 'hackforla',
-        team_slug: team,
-        username: username
-    });
-    // const status = github.rest.teams.getMembershipForUserInOrg({
+    console.log(context.repo);
+    // console.log('here');
+    // const result = await github.request('GET /orgs/{org}/teams/{team_slug}/memberships/{username}', {
     //     org: 'hackforla',
     //     team_slug: team,
     //     username: username
     // });
-    console.log(result);
-    console.log(result.status);
-    //     console.log(`Found '${username}' on team`);
-    //     return true;
-    // } catch (verificationError) {
-    //     console.log(`Status: ${verificationError.status}- '${username}' not found on team`);
-    //     if (verificationError.status == 404) {
-    //         return false;
-    //     }
-    //     else {
-    //         throw verificationError;
-    //     }
-    // }
+    try {
+        await github.rest.teams.getMembershipForUserInOrg({
+            org : 'hackforla',
+            team_slug : team,
+            username : username
+        });
+        console.log(`PR author '${username}' found on team '${team}'`);
+        return true;
+    } catch (verificationError) {
+        if (verificationError.status == 404) {
+            console.log(`PR author '${username}' was not found on team '${team}'`);
+            return false;
+        }
+        else {
+            throw verificationError;
+        }
+    }
 }
 
 module.exports = isMemberOfTeam;
