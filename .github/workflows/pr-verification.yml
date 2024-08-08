@@ -16,7 +16,7 @@ jobs:
         with:
           github-token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
           script: |
-            const script = require('./github-actions/utils/check-team-membership.js');
+            const script = require('./github-actions/trigger-pr-target/check-team-member.js');
             membershipStatus = script({ github, context });
             return membershipStatus
 
