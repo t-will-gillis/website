@@ -10,14 +10,14 @@ async function main({ github, context }) {
       Slack channel with the link to this PR.";
   console.log(`current owner: ${context.repo.owner}`);
   try {
-    await github.rest.issues.update({
-      owner: "t-will-gillis",
+    await github.rest.pulls.update({
+      owner: context.repo.owner,
       repo: context.payload.repo,
-      issue_number: prNumber,
+      pull_number: prNumber,
       state: "closed",
     });
     await github.rest.issues.createComment({
-      owner: "t-will-gillis",
+      owner: context.repo.owner,
       repo: context.payload.repo,
       issue_number: prNumber,
       body: commentContent,
