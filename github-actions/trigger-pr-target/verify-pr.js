@@ -1,11 +1,11 @@
 
 
-async function main({ github, context }, result) {
+async function main({ github, context }, { prNumber, result }) {
 
   if (result == 'true') {
     return;
   }
-  const prNumber = context.payload.number;
+  
   const commentContent =
     "You must be a member of the HFLA website team in order to create pull requests. Please see our page \
       on how to join us as a member at HFLA: https://www.hackforla.org/getting-started. If you have been \
