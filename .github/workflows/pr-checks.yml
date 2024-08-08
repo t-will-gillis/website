@@ -1,5 +1,7 @@
 name: Check Member
 on: 
+  pull_request_target:
+    types: [opened]
   workflow_dispatch:
 
 jobs: 
@@ -17,11 +19,7 @@ jobs:
           github-token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
           script: |
             const script = require('./github-actions/utils/check-team-membership.js');
-            results = script({ github, context });
-            return results
-
-      - name: Echo it
-        run: echo "this was the result ${{ steps.verify-membership.outputs.result }}"
+            return script({ github, context });
         
       # If PR author not a team member, comment and close PR
       - if: ${{ steps.verify-membership.outputs.result == 'false' }}
@@ -31,4 +29,4 @@ jobs:
         with:
           script: |
             const script = require('./github-actions/trigger-pr-target/verify-pr.js');
-            script({ g: github, c: context })
+            script({ github, context })
