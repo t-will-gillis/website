@@ -16,7 +16,7 @@ function isMemberOfTeam(github, context) {
     const username = 't-will-gillis';
     const team = 'website-write';
     // console.log(context.repo);
-    
+    console.log('here');
     const status = await github.rest.teams.getMembershipForUserInOrg({
         org: 'hackforla',
         team_slug: team,
