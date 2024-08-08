@@ -17,11 +17,11 @@ jobs:
           github-token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
           script: |
             const script = require('./github-actions/trigger-pr-target/check-team-member.js');
-            membershipStatus = script({ github, context });
-            return membershipStatus
+            results = script({ github, context });
+            return results
 
       # If PR author not a team member, comment and close PR
-      - if: ${{ steps.verify-membership.outputs.result == 'false' }}
+      - if: ${{ steps.verify-membership.outputs.result == false }}
         name: Comment and Close PR
         id: comment-and-close-pr
         uses: actions/github-script@v7
