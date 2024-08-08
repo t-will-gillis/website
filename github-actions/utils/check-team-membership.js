@@ -10,7 +10,7 @@ Lack of permission will result in a 403 error.
 docs on printing context information into the log.
 */
 
-function isMemberOfTeam(github, context) {
+async function isMemberOfTeam(github, context) {
 
     // const org = ;
     const username = 't-will-gillis';
