@@ -1,0 +1,31 @@
+name: Check Member
+on: 
+  workflow_dispatch:
+
+jobs: 
+  Check-Team-Membership:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # Check if PR author is team member
+      - name: Verify membership
+        id: verify-membership
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
+          script: |
+            const script = require('./github-actions/utils/check-team-membership.js');
+            membershipStatus = script({ github, context });
+            return membershipStatus
+
+      # If PR author not a team member, comment and close PR
+      - if: ${{ steps.verify-membership.outputs.result == 'true' }}
+        name: Comment and Close PR
+        id: comment-and-close-pr
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const script = require('./github-actions/trigger-pr-target/verify-pr.js');
+            script({ g: github, c: context })
