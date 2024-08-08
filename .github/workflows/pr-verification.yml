@@ -1,4 +1,4 @@
-name: Check Member
+name: PR Verification
 on: 
   workflow_dispatch:
 
