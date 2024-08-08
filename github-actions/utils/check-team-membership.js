@@ -10,12 +10,9 @@ Lack of permission will result in a 403 error.
 docs on printing context information into the log.
 */
 
-async function isMemberOfTeam({ github, context }) {
+async function isMemberOfTeam({ github, context }, username, team) {
 
-    // const org = ;
-    const username = 't-will-gillis';
-    const team = 'website-write';
-    console.log(context.payload);
+    console.log(context.payload.sender.login);
 
     try {
         await github.rest.teams.getMembershipForUserInOrg({
@@ -23,11 +20,11 @@ async function isMemberOfTeam({ github, context }) {
             team_slug : team,
             username : username
         });
-        console.log(`PR author '${username}' found on team '${team}'`);
+        console.log(`User '${username}' found on team '${team}'`);
         return true;
     } catch (verificationError) {
         if (verificationError.status == 404) {
-            console.log(`PR author '${username}' was not found on team '${team}'`);
+            console.log(`User '${username}' was not found on team '${team}'`);
             return false;
         }
         else {
