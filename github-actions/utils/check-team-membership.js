@@ -13,11 +13,11 @@ docs on printing context information into the log.
 async function isMemberOfTeam({ github, context }) {
 
     // const org = ;
-    const username = 't-will-gillis';
+    const username = 't-will-gillis-dummy';
     const team = 'website-write';
     // console.log(context.repo);
     console.log('here');
-    const status = await github.request('GET /orgs/{org}/teams/{team_slug}/memberships/{username}', {
+    const result = await github.request('GET /orgs/{org}/teams/{team_slug}/memberships/{username}', {
         org: 'hackforla',
         team_slug: team,
         username: username
@@ -27,7 +27,8 @@ async function isMemberOfTeam({ github, context }) {
     //     team_slug: team,
     //     username: username
     // });
-    console.log(status);
+    console.log(result);
+    console.log(result.status);
     //     console.log(`Found '${username}' on team`);
     //     return true;
     // } catch (verificationError) {
