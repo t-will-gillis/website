@@ -9,15 +9,18 @@ async function main({github,context}) {
         console.log('Successfully verified!');
     }
     else {
+        console.log(`User was not verified, commenting and closing issue`);
         try {
             await github.rest.issues.update({
-                owner : 'hackforla',
+                // owner : 'hackforla',
+                owner: 't-will-gillis',
                 repo : 'website',
                 issue_number : prNumber,
                 state : 'closed'
             });
             await github.rest.issues.createComment({
-                owner : 'hackforla',
+                // owner : 'hackforla',
+                owner: 't-will-gillis',
                 repo : 'website',
                 issue_number : prNumber,
                 body : commentContent
