@@ -22,7 +22,7 @@ jobs:
             const PR_NUMBER = context.payload.number;
             const TEAM = 'website-write';
             const script = require('./github-actions/utils/check-team-membership.js');
-            const results = script({ github, context }, PR_AUTHOR, TEAM);
+            const results = await script({ github, context }, PR_AUTHOR, TEAM);
             console.log(results);
             console.log(PR_NUMBER);
             return {pr_number: PR_NUMBER, results: results};
