@@ -42,6 +42,7 @@ jobs:
             const fs = require('fs')
             const artifact = fs.readFileSync('artifact.txt')
             const artifactJSON = JSON.parse(artifact)
+            
             return artifactJSON
       
       - uses: actions/checkout@v4
