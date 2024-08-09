@@ -41,8 +41,8 @@ jobs:
             // Retrieve pull request and issue number from downloaded artifact
             const fs = require('fs')
             const artifact = fs.readFileSync('artifact.txt')
-            console.log(artifact);
-            return artifact
+            const artifactJSON = JSON.parse(artifact)
+            return artifactJSON
       
       - uses: actions/checkout@v4
       # Create the message to post
