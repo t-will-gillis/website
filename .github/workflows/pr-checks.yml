@@ -23,9 +23,7 @@ jobs:
             const TEAM = 'website-write';
             const script = require('./github-actions/utils/check-team-membership.js');
             const results = await script({ github, context }, PR_AUTHOR, TEAM);
-            console.log(results);
-            console.log(PR_NUMBER);
-            return {pr_number: PR_NUMBER, results: results};
+            return {'pr_number': PR_NUMBER, 'results': results};
 
       # Create an artifact with the message
       - name: Create Artifacts
