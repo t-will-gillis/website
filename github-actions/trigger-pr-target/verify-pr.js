@@ -1,7 +1,7 @@
 
 
 async function main({ github, context }, { prNumber, result }) {
-
+  console.log(prNumber, result);
   if (result == 'true') {
     return;
   }
