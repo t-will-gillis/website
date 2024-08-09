@@ -42,7 +42,6 @@ jobs:
             const fs = require('fs')
             const artifact = fs.readFileSync('artifact.txt')
             const artifactJSON = JSON.parse(artifact)
-            
             return artifactJSON
       
       - uses: actions/checkout@v4
@@ -52,7 +51,6 @@ jobs:
         with:
           script: |
             const artifact = ${{ steps.artifact.outputs.result }};
-            console.log(artifact);
             const script = require('./github-actions/trigger-pr-target/verify-pr.js');
             script({g: github, c: context}, artifact)
 
