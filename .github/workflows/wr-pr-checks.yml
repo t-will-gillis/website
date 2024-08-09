@@ -51,6 +51,7 @@ jobs:
         with:
           script: |
             const artifact = ${{ steps.artifact.outputs.result }};
+            console.log(artifact);
             const script = require('./github-actions/trigger-pr-target/verify-pr.js');
             script({g: github, c: context}, artifact)
 
