@@ -4,6 +4,7 @@ on:
   pull_request:
     types: [opened, edited]
     branches:
+      - 'new-pr-template'
       - 'gh-pages'
       - 'feature-homepage-launch'
 
