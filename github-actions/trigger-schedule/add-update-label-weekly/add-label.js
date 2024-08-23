@@ -39,11 +39,10 @@ var projectBoardToken;
  * @param {Object} c                   - context object from actions/github-script
  * @param {String} projectBoardToken   - the Personal Access Token for the action
  */
-async function main({ g, c }, pbt) {
+async function main({ g, c }) {
   github = g;
   context = c;
-  projectBoardToken = pbt;
-  
+
   // Retrieve all issue numbers from a repo
   const issueNums = await getIssueNumsFromRepo();       // Revised for Projects Beta migration
 
@@ -357,7 +356,7 @@ function isCommentByBot(data) {
 // asynchronously minimize all the comments that are outdated (> 1 week old)
 async function minimizeComments(comment_node_ids) {
   for (const node_id of comment_node_ids) {
-    await new Promise((resolve) => { setTimeout(resolve, 1000); }); // wait for 1000ms before doing the GraphQL mutation
+    await new Promise((resolve) => { setTimeout(resolve, 500); }); // wait for 1000ms before doing the GraphQL mutation
     await minimizeIssueComment(github, context, node_id);
   }
 }

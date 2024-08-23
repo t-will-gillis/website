@@ -29,7 +29,7 @@ async function queryIssueInfo(github, context, issueNum) {
   const variables = {
     owner: context.repo.owner,
     repo: context.repo.repo,
-    issueNum: issueNum
+    issueNum: 8888
   };
 
   try { 
@@ -48,6 +48,7 @@ async function queryIssueInfo(github, context, issueNum) {
 
     return { id, statusName };
   } catch(error) {
+    console.log(`response is ${response}`);
     throw new Error(`Error finding Issue #${issueNum} id and status; error = ${error}`);
   }
 }
