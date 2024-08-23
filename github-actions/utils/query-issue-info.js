@@ -50,7 +50,7 @@ async function queryIssueInfo(github, context, issueNum) {
   } catch(error) {
     console.log(`Error with issue #${issueNum}`);
     console.error(statusName);
-    continue;
+
     // throw new Error(`Error finding Issue #${issueNum} id and status; error = ${error}`);
   }
 }
