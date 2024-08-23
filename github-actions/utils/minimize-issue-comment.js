@@ -9,7 +9,7 @@ async function minimizeIssueComment(github, context, nodeId) {
   const mutation = `mutation($reason: String!, $nodeId: ID!) {
     minimizeComment(input: {
       classifier: $reason, 
-      subjectId: $nodeid
+      subjectId: $nodeId
     }) {
       clientMutationId
       minimizedComment {
