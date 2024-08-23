@@ -1,16 +1,12 @@
 /**
- * Minimize issue comment given the comment's node Id
- * @param {String} nodeId         -  GraphQL node Id for the comment
- * 
- * 
+ * Minimize issue comment as OUTDATED given the comment's node Id
+ * @param {String} nodeId   -  GraphQL node Id of the comment
+ *
+ *
  */
 async function minimizeIssueComment(github, context, nodeId) {
-
-  const mutation = `mutation($reason: String!, $nodeId: ID!) {
-    minimizeComment(input: {
-      classifier: $reason, 
-      subjectId: $nodeId
-    }) {
+  const mutation = `mutation($nodeId: ID!) {
+    minimizeComment(input: {classifier: OUTDATED, subjectId: $nodeId}) {
       clientMutationId
       minimizedComment {
         isMinimized
@@ -20,15 +16,14 @@ async function minimizeIssueComment(github, context, nodeId) {
   }`;
 
   const variables = {
-    reason: 'OUTDATED',
-    nodeId: nodeId
+    nodeId: nodeId,
   };
 
   try {
     await github.graphql(mutation, variables);
-  } catch(error) {
+  } catch (error) {
     throw new Error(`Error in minimizeIssueComment() function: ${error}`);
-  } 
+  }
 }
 
 module.exports = minimizeIssueComment;
