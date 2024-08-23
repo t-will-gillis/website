@@ -4,6 +4,7 @@ const https = require("https");
 const queryIssueInfo = require("../../utils/query-issue-info");
 const findLinkedIssue = require('../../utils/find-linked-issue');
 const getTimeline = require('../../utils/get-timeline');
+const minimizeIssueComment = require("../../utils/minimize-issue-comment.js");
 
 // Global variables
 var github;
@@ -357,10 +358,10 @@ function isCommentByBot(data) {
 async function minimizeComments(comment_node_ids) {
   for (const node_id of comment_node_ids) {
     await new Promise((resolve) => { setTimeout(resolve, 1000); }); // wait for 1000ms before doing the GraphQL mutation
-    await minimizeComment(node_id);
+    await minimizeIssueComment(github, context, node_id);
   }
 }
-
+/*
 async function minimizeComment(node_id) {
   const mutation = JSON.stringify({
     query: `mutation HideOutdatedComment($nodeid: ID!){ 
@@ -411,5 +412,6 @@ async function minimizeComment(node_id) {
   req.write(mutation);
   req.end();
 }
+*/
 
 module.exports = main;
