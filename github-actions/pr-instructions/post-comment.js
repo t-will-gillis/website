@@ -1,6 +1,6 @@
 // Import modules
 const postComment = require('../utils/post-issue-comment')
-
+// junk
 // Global variables
 var github;
 var context;
