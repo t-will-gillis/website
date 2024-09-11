@@ -8,5 +8,5 @@
   const labels = labelsObject.map((label) => label.name);
   return labels;
 }
-
+// 
 module.exports = obtainLabels;
