@@ -9,7 +9,7 @@ async function getTeamMembers(github, context, team){
 
   let pageNum = 1;
   let teamResults = [];
-
+//
   // Get all members of team. Note: if total members exceed 100, we need to 'flip' pages 
   while(true){
     const teamMembers = await github.request('GET /orgs/{org}/teams/{team_slug}/members', {
