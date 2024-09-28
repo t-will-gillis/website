@@ -29,7 +29,7 @@ async function main({ g, c }) {
   let filepath = "https://github.com/hackforla/website/tree/gh-pages/github-actions"+filepaths[0]+workflow_files[0];
   let workflow_file = workflow_files[0];
   let label_list = "";
-  for (let item in label_lists[0]) {
+  for (let item of label_lists[0]) {
     label_list += "`"+item+"`, "
   }
   // Create a new issue in repo, return the issue id for later: creating the project card linked to this issue
