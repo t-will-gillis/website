@@ -26,9 +26,12 @@ async function main({ g, c }) {
     console.log(label_lists[i]);
   }
 */
-  let filepath = "https://github.com/t-will-gillis/website/tree/generate-issues/github-actions"+filepaths[0]+workflow_files[0];
-  let workflow_file = workflow_files[0]
-  let label_list = label_lists[0]
+  let filepath = "https://github.com/hackforla/website/tree/gh-pages/github-actions"+filepaths[0]+workflow_files[0];
+  let workflow_file = workflow_files[0];
+  let label_list = "";
+  for (let item in label_lists[0]) {
+    label_list += "`"+item+"`, "
+  }
   // Create a new issue in repo, return the issue id for later: creating the project card linked to this issue
   // const issue = await createIssue(owner, repo, filepath, workflow_file, label_list);
 
