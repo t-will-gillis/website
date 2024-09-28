@@ -30,8 +30,8 @@ async function main({ g, c }) {
 
     let title = issueObject['title'];
     let labels = issueObject['labels'];
-    let milestone = 8;
-    let assignees = 't-will-gillis';
+    let milestone = parseInt(issueObject['milestone']);
+    let assignees = issueObject['assignees'];
     let body = issueObject['body'];
 
     // Replace variables in issue template body
