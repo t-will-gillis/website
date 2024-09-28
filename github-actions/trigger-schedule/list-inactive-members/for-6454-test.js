@@ -19,14 +19,14 @@ async function main({ g, c }) {
   let filepaths = ["/move-closed-issues/","/trigger-issue/add-missing-labels/","/trigger-issue/add-missing-labels/","/trigger-issue/add-preliminary-comment/","/trigger-issue/add-preliminary-comment/","/trigger-issue/add-preliminary-comment/","/trigger-issue/create-codeql-issues/","/trigger-schedule/add-update-label-weekly/"];
   let workflow_files = ["sort-closed-issues.js","check-labels.js","post-labels-comments.js","check-label-preliminary-update","preliminary-update-comment.js","check-complexity-eligibility.js","create-new-issues.js","add-label.js"];
   let label_lists = [['Feature: Refactor CSS', 'Feature: Refactor HTML', 'Feature: Refactor JS / Liquid', 'Feature: Refactor GHA', 'role: back end/devOps', 'Feature: Analytics', 'role: front end'],['Complexity: Missing', 'role missing', 'Feature Missing', 'size: missing', 'good first issue', 'ready for dev lead', 'Feature: Administrative', 'size: 0.25pt', 'Complexity: Small', 'role: dev leads'],['Complexity: Missing', 'role missing', 'Feature Missing', 'size: missing'],['role: front end', 'role: back end/devOps', 'role: design', 'role: user research'],['Ready for Prioritization', 'feature: agenda', 'Complexity: Prework', 'Draft'],['ER', 'epic', 'role: front end', 'role: back end/devOps', 'good first issue', 'Complexity: Small', 'Complexity: Medium'],['ready for dev lead'],['Status: Updated', 'To Update !', '2 weeks inactive']];
-
+/*
   for (let i = 0; i < filepaths.length; i++) {
     console.log(filepaths[i]);
     console.log(workflow_files[i]);
     console.log(label_lists[i]);
   }
-
-  let filepath = filepaths[0]
+*/
+  let filepath = "https://github.com/t-will-gillis/website/tree/generate-issues/github-actions"+filepaths[0]+workflow_files[0];
   let workflow_file = workflow_files[0]
   let label_list = label_lists[0]
   // Create a new issue in repo, return the issue id for later: creating the project card linked to this issue
@@ -48,6 +48,7 @@ async function main({ g, c }) {
     let body = issueObject['body'];
 
     // Replace variables in issue template body
+    title = title.replace('${workflow_file}', workflow_file);
     body = body.replaceAll('${workflow_file}', workflow_file);
     body = body.replaceAll('${filepath}', filepath);
     body = body.replaceAll('${label_list}', label_list);
