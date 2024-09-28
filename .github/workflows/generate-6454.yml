@@ -20,5 +20,5 @@ jobs:
       with:
         github-token: ${{ secrets.HACKFORLA_BOT_PA_TOKEN }}
         script: |
-          const script = require('./github-actions/trigger-schedule/list-inactive-members/for-6454.js')
+          const script = require('./github-actions/trigger-schedule/list-inactive-members/for-6454-test.js')
           script({g: github, c: context})
