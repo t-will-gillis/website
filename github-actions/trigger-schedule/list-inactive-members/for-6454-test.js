@@ -14,24 +14,7 @@ async function main({ g, c }) {
   const repo = context.repo.repo;
 
 
-
-
-  let filepaths = ["/move-closed-issues/","/trigger-issue/add-missing-labels/","/trigger-issue/add-missing-labels/","/trigger-issue/add-preliminary-comment/","/trigger-issue/add-preliminary-comment/","/trigger-issue/add-preliminary-comment/","/trigger-issue/create-codeql-issues/","/trigger-schedule/add-update-label-weekly/"];
-  let workflow_files = ["sort-closed-issues.js","check-labels.js","post-labels-comments.js","check-label-preliminary-update","preliminary-update-comment.js","check-complexity-eligibility.js","create-new-issues.js","add-label.js"];
-  let label_lists = [['Feature: Refactor CSS', 'Feature: Refactor HTML', 'Feature: Refactor JS / Liquid', 'Feature: Refactor GHA', 'role: back end/devOps', 'Feature: Analytics', 'role: front end'],['Complexity: Missing', 'role missing', 'Feature Missing', 'size: missing', 'good first issue', 'ready for dev lead', 'Feature: Administrative', 'size: 0.25pt', 'Complexity: Small', 'role: dev leads'],['Complexity: Missing', 'role missing', 'Feature Missing', 'size: missing'],['role: front end', 'role: back end/devOps', 'role: design', 'role: user research'],['Ready for Prioritization', 'feature: agenda', 'Complexity: Prework', 'Draft'],['ER', 'epic', 'role: front end', 'role: back end/devOps', 'good first issue', 'Complexity: Small', 'Complexity: Medium'],['ready for dev lead'],['Status: Updated', 'To Update !', '2 weeks inactive']];
-/*
-  for (let i = 0; i < filepaths.length; i++) {
-    console.log(filepaths[i]);
-    console.log(workflow_files[i]);
-    console.log(label_lists[i]);
-  }
-*/
-  let filepath = "https://github.com/hackforla/website/tree/gh-pages/github-actions"+filepaths[0]+workflow_files[0];
-  let workflow_file = workflow_files[0];
-  let label_list = "";
-  for (let item of label_lists[0]) {
-    label_list += "`"+item+"`, "
-  }
+  
   // Create a new issue in repo, return the issue id for later: creating the project card linked to this issue
   // const issue = await createIssue(owner, repo, filepath, workflow_file, label_list);
 
@@ -47,7 +30,8 @@ async function main({ g, c }) {
 
     let title = issueObject['title'];
     let labels = issueObject['labels'];
-    let milestone = parseInt(issueObject['milestone']);
+    let milestone = 8;
+    let assignees = 't-will-gillis';
     let body = issueObject['body'];
 
     // Replace variables in issue template body
@@ -63,13 +47,27 @@ async function main({ g, c }) {
       title,
       body,
       labels,
-      // milestone,
+      assignees,
+      milestone,
     });
     console.log('Created issue ');
     return issue.data;
   };
 
-  createIssue('t-will-gillis', 'website', filepath, workflow_file, label_list);
+
+  let filepaths = ["/move-closed-issues/","/trigger-issue/add-missing-labels/","/trigger-issue/add-missing-labels/","/trigger-issue/add-preliminary-comment/","/trigger-issue/add-preliminary-comment/","/trigger-issue/add-preliminary-comment/","/trigger-issue/create-codeql-issues/","/trigger-schedule/add-update-label-weekly/"];
+  let workflow_files = ["sort-closed-issues.js","check-labels.js","post-labels-comments.js","check-label-preliminary-update","preliminary-update-comment.js","check-complexity-eligibility.js","create-new-issues.js","add-label.js"];
+  let label_lists = [['Feature: Refactor CSS', 'Feature: Refactor HTML', 'Feature: Refactor JS / Liquid', 'Feature: Refactor GHA', 'role: back end/devOps', 'Feature: Analytics', 'role: front end'],['Complexity: Missing', 'role missing', 'Feature Missing', 'size: missing', 'good first issue', 'ready for dev lead', 'Feature: Administrative', 'size: 0.25pt', 'Complexity: Small', 'role: dev leads'],['Complexity: Missing', 'role missing', 'Feature Missing', 'size: missing'],['role: front end', 'role: back end/devOps', 'role: design', 'role: user research'],['Ready for Prioritization', 'feature: agenda', 'Complexity: Prework', 'Draft'],['ER', 'epic', 'role: front end', 'role: back end/devOps', 'good first issue', 'Complexity: Small', 'Complexity: Medium'],['ready for dev lead'],['Status: Updated', 'To Update !', '2 weeks inactive']];
+
+  for (let i = 0; i < filepaths.length; i++) {
+    let filepath = "https://github.com/hackforla/website/tree/gh-pages/github-actions"+filepaths[i]+workflow_files[i];
+    let workflow_file = workflow_files[i];
+    let label_list = "";
+    for (let item of label_lists[0]) {
+      label_list += "`"+item+"`, "
+    }
+    await createIssue('hackforla', 'website', filepath, workflow_file, label_list);
+  }
 
 };
 
