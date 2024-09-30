@@ -4,7 +4,7 @@ import fs from "fs";
 import { Octokit } from "@octokit/rest";
 import trueContributorsMixin from "true-github-contributors";
 import _ from "lodash";
-
+// shift to WR
 // Record the time this script started running so it can be stored later
 const dateRan = new Date();
 // Hard coded list of untagged repos we would like to fetch data on
