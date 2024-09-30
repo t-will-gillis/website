@@ -4,7 +4,7 @@ const postIssueComment = require('../utils/post-issue-comment');
 // Global variables
 var github;
 var context;
-
+// nonsense
 async function main({ g, c }) {
   github = g;
   context = c;
