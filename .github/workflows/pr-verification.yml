@@ -4,13 +4,7 @@ on:
     types: [opened]
 
 jobs:
-  Check-Team-Membership:
+  Hello-World:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
-          script: |
-            const verifyPR = require('./github-actions/trigger-pr-target/verify-pr.js');
-            verifyPR({github, context});
+     - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
