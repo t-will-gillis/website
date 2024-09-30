@@ -8,6 +8,8 @@ jobs:
   Hello-World:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v4
+    
     - name: Check for keyword and issue number
       id: check-for-keyword
       uses: actions/github-script@v7
