@@ -10,7 +10,7 @@ on:
 jobs:
   Update-Label-Directory:
     runs-on: ubuntu-latest
-    if: github.repository == 'hackforla/website'
+    if: github.repository == 't-will-gillis/website'
     steps:
       - uses: actions/checkout@v4
         with:
