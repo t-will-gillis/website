@@ -10,6 +10,7 @@ var labelData = {};
  * @return {Array} displayNames  - List of display names
  */
 function labelRetrieveNames(...labelKeys) {
+  console.log(labelData);
   // Retrieve label directory
   if (labelData) {
     console.log(`data exists already`);
