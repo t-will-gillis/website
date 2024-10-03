@@ -21,8 +21,8 @@ const [
   dependency,
 ] = [
   "statusUpdated",
-  "toUpdate",
-  "2WeeksInactive",
+  "statusInactive1",
+  "statusInactive2",
   "draft",
   "er",
   "epic",
