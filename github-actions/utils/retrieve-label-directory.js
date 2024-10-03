@@ -13,9 +13,12 @@ function labelRetrieveNames(...labelKeys) {
 
   // Retrieve label directory
   if (labelData === undefined) {
+    console.log(`creating Label Data`);
     const rawData = fs.readFileSync(filepath, 'utf8');
     labelData = JSON.parse(rawData);
-  } 
+  } else {
+    console.log(`data exists`);
+  }
 /*  
   const displayNames = [ ];
   for(let labelKey of labelKeys) {
@@ -33,8 +36,8 @@ function labelRetrieveNames(...labelKeys) {
   for(let labelKey of labelKeys) {
     console.log(labelKey);
     try {
-      displayNames.push(labelData[labelKey][0]);
-      console.log(`Success! Found labelKey: '${labelKey}', returning labelName: '${labelData[labelKey][0]}'`);
+      displayNames.push(labelData[labelKeys][0]);
+      console.log(`Success! Found labelKey: '${labelKey}', returning labelName: '${labelData[labelKeys][0]}'`);
     } catch (err) {
       console.error(`Failed to find labelKey: '${labelKey}'`)
     }
