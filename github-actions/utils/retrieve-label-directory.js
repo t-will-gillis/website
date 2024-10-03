@@ -9,7 +9,7 @@ var filepath = 'github-actions/utils/_data/label-directory.json';
  * @param {Array} labelKeys       - List of reference names to look up display names
  * @return {Array} displayNames  - List of display names
  */
-function labelRetrieveNames(...labelKeys) {
+function labelRetrieveNames(labelKeys) {
   console.log(labelKeys);
   // Retrieve label directory
   const rawData = fs.readFileSync(filepath, 'utf8');
