@@ -27,7 +27,7 @@ const [
   "er",
   "epic",
   "dependency"
-].map(retrieveLabelNames);
+].map(retrieveLabelDirectory);
 
 const updatedByDays = 3;                // If last update update  3 days, the issue is considered updated
 const commentByDays = 7;                // If last update between 7 to 14 days ago, issue is outdated and needs update
