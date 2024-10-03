@@ -2,18 +2,24 @@ const fs = require('fs');
 
 // Global variables
 var filepath = 'github-actions/utils/_data/label-directory.json';
-
+var data = {};
 /*
  * Matches label reference name(s) to the label display name(s) from JSON
  * @param {string } filepath     - Path to `label_directory.json`
  * @param {Array} labelKeys       - List of reference names to look up display names
  * @return {Array} displayNames  - List of display names
  */
-function labelRetrieveNames(labelKeys) {
+function labelRetrieveNames(...labelKeys) {
   console.log(labelKeys);
   // Retrieve label directory
-  const rawData = fs.readFileSync(filepath, 'utf8');
-  const data = JSON.parse(rawData);
+  if (!data) {
+    console.log(`no data yet! gonna run now`);
+    const rawData = fs.readFileSync(filepath, 'utf8');
+    data = JSON.parse(rawData);
+  } else {
+    console.log(`data exists already`);
+  }
+  
 
   const displayNames = [ ];
   for(let labelKey of labelKeys) {
