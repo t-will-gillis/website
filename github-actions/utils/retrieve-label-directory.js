@@ -6,24 +6,21 @@ var labelData;
 
 /*
  * Matches label reference name(s) to the label display name(s) from JSON
- * @param {string } filepath     - Path to `label_directory.json`
  * @param {Array} labelKeys       - List of reference names to look up display names
- * @return {Array} displayNames  - List of display names
+ * @return {Array} labelName      - Display name for each label
  */
 function labelRetrieveNames(...labelKeys) {
 
-  // Retrieve label directory
+  // Retrieve label directory if not read already
   const rawData = fs.readFileSync(filepath, 'utf8');
   if (labelData === undefined) {
-    console.log(`creating Label Data`);
+    console.log(`Reading label directory...`);
     const rawData = fs.readFileSync(filepath, 'utf8');
     labelData = JSON.parse(rawData);
-  } else {
-    console.log(`data exists`);
-  }
+  } 
   
   let labelKey = '';
-  let labelName = ''
+  let labelName = '';
 
   try {
     labelKey = labelKeys[0];
@@ -33,63 +30,7 @@ function labelRetrieveNames(...labelKeys) {
     console.error(`Failed to find labelKey: '${labelKey}'`)
   }
 
-
   return labelName;
-
 }
 
 module.exports = labelRetrieveNames;
-
-
-
-
-// const fs = require('fs');
-
-// // Global variables
-// var filepath = 'github-actions/utils/_data/label-directory.json';
-
-// /*
-//  * Matches label reference name(s) to the label display name(s) from JSON
-//  * @param {string } filepath     - Path to `label_directory.json`
-//  * @param {Array} labelKeys       - List of reference names to look up display names
-//  * @return {Array} displayNames  - List of display names
-//  */
-// function labelRetrieveNames(...labelKeys) {
-
-//   // Retrieve label directory
-//   if (labelData === undefined) {
-//     console.log(`creating Label Data`);
-//     const rawData = fs.readFileSync(filepath, 'utf8');
-//     labelData = JSON.parse(rawData);
-//   } else {
-//     console.log(`data exists`);
-//   }
- 
-//   let displayNames = '';
-//   for(let labelKey of labelKeys) {
-//     console.log(labelKey);
-//     try {
-//       displayNames.push(labelData[labelKey][0]);
-//       console.log(`Success! Found labelKey: '${labelKey}', returning labelName: '${labelData[labelKey][0]}'`);
-//     } catch (err) {
-//       console.error(`Failed to find labelKey: '${labelKey}'`)
-//     }
-//   }
-// /*
-//   console.log(labelKeys);
-//   let displayNames = '';
-//   for(let labelKey of labelKeys) {
-//     console.log(labelKey);
-//     try {
-//       displayNames.push(labelData[labelKeys][0]);
-//       console.log(`Success! Found labelKey: '${labelKey}', returning labelName: '${labelData[labelKeys][0]}'`);
-//     } catch (err) {
-//       console.error(`Failed to find labelKey: '${labelKey}'`)
-//     }
-//   }
-//   */
-//   return displayNames;
-// }
-
-
-// module.exports = labelRetrieveNames;
