@@ -10,7 +10,7 @@ var labelData;
  * @return {Array} displayNames  - List of display names
  */
 function labelRetrieveNames(...labelKeys) {
-  console.log(labelData);
+
   // Retrieve label directory
   if (labelData === undefined) {
     console.log(`no data yet! gonna run now`);
@@ -20,13 +20,12 @@ function labelRetrieveNames(...labelKeys) {
     console.log(`data exists already`);
   }
   
-
   const displayNames = [ ];
   for(let labelKey of labelKeys) {
     console.log(labelKey);
     try {
-      displayNames.push(data[labelKey][0]);
-      console.log(`Success! Found labelKey: '${labelKey}', returning labelName: '${data[labelKey][0]}'`);
+      displayNames.push(labelData[labelKey][0]);
+      console.log(`Success! Found labelKey: '${labelKey}', returning labelName: '${labelData[labelKey][0]}'`);
     } catch (err) {
       console.error(`Failed to find labelKey: '${labelKey}'`)
     }
