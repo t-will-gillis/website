@@ -15,6 +15,8 @@ function labelRetrieveNames(...labelKeys) {
   const rawData = fs.readFileSync(filepath, 'utf8');
   const data = JSON.parse(rawData);
 
+  console.log(labelKeys);
+  /*
   const displayNames = [ ];
   for(let labelKey of labelKeys) {
     try {
@@ -26,6 +28,7 @@ function labelRetrieveNames(...labelKeys) {
   }
 
   return displayNames;
+  */
 }
 
 module.exports = labelRetrieveNames;
