@@ -10,14 +10,13 @@ var labelData = {};
  * @return {Array} displayNames  - List of display names
  */
 function labelRetrieveNames(...labelKeys) {
-  console.log(labelKeys);
   // Retrieve label directory
-  if (!labelData) {
+  if (labelData) {
+    console.log(`data exists already`);
+  } else {
     console.log(`no data yet! gonna run now`);
     const rawData = fs.readFileSync(filepath, 'utf8');
     labelData = JSON.parse(rawData);
-  } else {
-    console.log(`data exists already`);
   }
   
 
