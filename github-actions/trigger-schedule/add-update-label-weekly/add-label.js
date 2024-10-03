@@ -11,6 +11,18 @@ var github;
 var context;
 
 // Use labelIds to retrieve current labelNames from directory
+let myArrays = retrieveLabelDirectory([
+  "statusUpdated",
+  "statusInactive1",
+  "statusInactive2",
+  "draft",
+  "er",
+  "epic",
+  "dependency"
+]);
+console.log(`***************************************`);
+console.log(myArrays);
+console.log(`***************************************`);
 const [
   statusUpdated,
   statusInactive1,
