@@ -24,7 +24,9 @@ function labelRetrieveNames(...labelKeys) {
       console.error(`Failed to find labelKey: '${labelKey}'`)
     }
   }
-
+  console.log(`-----------------------------------------`);
+  console.log(displayNames);
+  console.log(`-----------------------------------------`);
   return displayNames;
 }
 
