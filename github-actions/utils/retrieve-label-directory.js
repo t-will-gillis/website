@@ -20,7 +20,7 @@ function labelRetrieveNames(...labelKeys) {
   const displayNames = '';
 
   try {
-    displayNames = labelData[labelKeys][0]);
+    displayNames = labelData[labelKeys][0];
     console.log(`Success! Found labelKey: '${labelKeys[0]}', returning labelName: '${labelData[labelKeys][0]}'`);
   } catch (err) {
     console.error(`Failed to find labelKey: '${labelKeys[0]}'`)
