@@ -17,8 +17,8 @@ function labelRetrieveNames(labelKey) {
 
   const displayName = '';
   try {
-    displayName = (data[labelKey][0]);
-    console.log(`Success! From label key: '${labelKey}' found label display: '${data[labelKey][0]}'`);
+    displayName = (data[labelKey]);
+    console.log(`Success! From label key: '${labelKey}' found label display: '${data[labelKey]}'`);
   } catch (err) {
     console.error(`Failed to find label display for label key: '${labelKey}'`)
   }
