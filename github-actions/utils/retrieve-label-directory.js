@@ -9,21 +9,24 @@ var filepath = 'github-actions/utils/_data/label-directory.json';
  * @param {Array} labelKeys       - List of reference names to look up display names
  * @return {Array} displayNames  - List of display names
  */
-function labelRetrieveNames(labelKey) {
+function labelRetrieveNames(...labelKeys) {
 
   // Retrieve label directory
   const rawData = fs.readFileSync(filepath, 'utf8');
   const data = JSON.parse(rawData);
 
-  const displayName = '';
-  try {
-    displayName = (data[labelKey]);
-    console.log(`Success! From label key: '${labelKey}' found label display: '${data[labelKey]}'`);
-  } catch (err) {
-    console.error(`Failed to find label display for label key: '${labelKey}'`)
+  const displayNames = [ ];
+  for(let labelKey of labelKeys) {
+    try {
+      displayNames.push(data[labelKey][0]);
+      console.log(`Success! Found labelKey: '${labelKey}', returning labelName: '${data[labelKey][0]}'`);
+    } catch (err) {
+      console.error(`Failed to find labelKey: '${labelKey}'`)
+    }
   }
 
-  return displayName;
+  return displayNames;
 }
+
 
 module.exports = labelRetrieveNames;
