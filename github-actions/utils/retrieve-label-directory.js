@@ -19,8 +19,8 @@ function labelRetrieveNames(...labelKeys) {
   } else {
     console.log(`data exists`);
   }
-/*  
-  const displayNames = [ ];
+ 
+  let displayNames = '';
   for(let labelKey of labelKeys) {
     console.log(labelKey);
     try {
@@ -30,7 +30,7 @@ function labelRetrieveNames(...labelKeys) {
       console.error(`Failed to find labelKey: '${labelKey}'`)
     }
   }
-*/
+/*
   console.log(labelKeys);
   let displayNames = '';
   for(let labelKey of labelKeys) {
@@ -42,6 +42,7 @@ function labelRetrieveNames(...labelKeys) {
       console.error(`Failed to find labelKey: '${labelKey}'`)
     }
   }
+  */
   return displayNames;
 }
 
