@@ -15,12 +15,13 @@ function labelRetrieveNames(...labelKeys) {
   const rawData = fs.readFileSync(filepath, 'utf8');
   const labelData = JSON.parse(rawData);
 
-  const displayNames = '';
-
+  const labelId = labelKeys[0];
+  console.log(labelId)
+  const labelName = labelData[labelId];
+  console.log(labelName);
   try {
     displayNames = labelData[labelKeys[0]];
     console.log(displayNames)
-    conso
     console.log(`Success! Found labelKey: '${labelKeys[0]}', returning labelName: '${labelData[labelKeys[0]]}'`);
   } catch (err) {
     console.error(`Failed to find labelKey: '${labelKeys[0]}'`)
