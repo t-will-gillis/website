@@ -188,7 +188,7 @@ function isTimelineOutdated(timeline, issueNum, assignees) { // assignees is an 
     }
 
     // If this event is more than 7 days old AND this event is a comment by the GitHub Actions Bot, then hide the comment as outdated.
-    if (isMomentRecent(eventObj.created_at, expiredDayCutoffTime) && (!isMomentRecent(eventObj.created_at, sevenDayCutoffTime) && eventType === 'commented' && isCommentByBot(eventObj)) { 
+    if (isMomentRecent(eventObj.created_at, expiredDayCutoffTime) && !isMomentRecent(eventObj.created_at, sevenDayCutoffTime) && eventType === 'commented' && isCommentByBot(eventObj)) { 
       console.log(`Comment ${eventObj.node_id} is outdated (i.e. > 7 days old) and will be minimized.`);
       commentsToBeMinimized.push(eventObj.node_id); // retain node id so its associated comment can be minimized later
     }
