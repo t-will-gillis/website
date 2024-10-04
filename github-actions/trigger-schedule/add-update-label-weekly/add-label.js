@@ -32,6 +32,7 @@ const [
 const updatedByDays = 3;                // If last update update  3 days, the issue is considered updated
 const commentByDays = 7;                // If last update between 7 to 14 days ago, issue is outdated and needs update
 const inactiveUpdatedByDays = 14;       // If last update greater than 14 days ago, the issue is considered inactive
+const expiredDays = 28;
 
 const threeDayCutoffTime = new Date();
 threeDayCutoffTime.setDate(threeDayCutoffTime.getDate() - updatedByDays);
@@ -39,6 +40,8 @@ const sevenDayCutoffTime = new Date();
 sevenDayCutoffTime.setDate(sevenDayCutoffTime.getDate() - commentByDays);
 const fourteenDayCutoffTime = new Date();
 fourteenDayCutoffTime.setDate(fourteenDayCutoffTime.getDate() - inactiveUpdatedByDays);
+const expiredDayCutoffTime = new Date();
+expiredDayCutoffTime.setDate(expiredDayCutoffTime.getDate() - expiredDays);
 
 
 
@@ -185,7 +188,7 @@ function isTimelineOutdated(timeline, issueNum, assignees) { // assignees is an 
     }
 
     // If this event is more than 7 days old AND this event is a comment by the GitHub Actions Bot, then hide the comment as outdated.
-    if (!isMomentRecent(eventObj.created_at, sevenDayCutoffTime) && eventType === 'commented' && isCommentByBot(eventObj)) { 
+    if (isMomentRecent(eventObj.created_at, expiredDayCutoffTime) && (!isMomentRecent(eventObj.created_at, sevenDayCutoffTime) && eventType === 'commented' && isCommentByBot(eventObj)) { 
       console.log(`Comment ${eventObj.node_id} is outdated (i.e. > 7 days old) and will be minimized.`);
       commentsToBeMinimized.push(eventObj.node_id); // retain node id so its associated comment can be minimized later
     }
