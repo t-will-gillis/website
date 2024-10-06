@@ -4,7 +4,7 @@ const queryIssueInfo = require("../../utils/query-issue-info");
 const findLinkedIssue = require('../../utils/find-linked-issue');
 const getTimeline = require('../../utils/get-timeline');
 const minimizeIssueComment = require('../../utils/hide-issue-comment');
-
+// junky
 // Global variables
 var github;
 var context;
