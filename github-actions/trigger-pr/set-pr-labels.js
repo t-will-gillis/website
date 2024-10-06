@@ -108,7 +108,7 @@ async function _listLabelsOnIssue({ github, context }, issue) {
  * Returns the resulting Object from the GitHub API setLabels call.
  * This function is a wrapper for the setLabels method in the
  * octokit/rest.js client.
- * https://octokit.github.io/rest.js/v18#issues-set-labels
+ * https://octokit.github.io/rest.js/v20/#issues-set-labels
  * @param {Object} packages.github - The octokit/rest.js client
  * @param {Object} packages.context - The context of the workflow run
  * @returns {Object} The resulting Object
@@ -122,6 +122,26 @@ async function _setLabels({ github, context }, pr, labels) {
     labels,
   });
 }
+
+/**
+ * Returns the resulting Object from the GitHub API setLabels call.
+ * This function is a wrapper for the setLabels method in the
+ * octokit/rest.js client.
+ * https://octokit.github.io/rest.js/v20/#create-comment
+ * @param {Object} packages.github - The octokit/rest.js client
+ * @param {Object} packages.context - The context of the workflow run
+ * @returns {Object} The resulting Object
+ */
+async function _postIssueComment({ github, context }, pr, comment) {
+  const { owner, repo } = context.repo;
+  return await github.rest.issues.createComment({
+    owner,
+    repo,
+    issue_number: pr,
+    body: comment,
+  });
+}
+
 
 /** **************************************
  ** MAIN FUNCTIONS
@@ -166,11 +186,12 @@ function listIssuesFromPRBody({ context, core }) {
   }, []);
 
   if (!issues.length) {
-    core.setFailed('No linked issues.');
+    // core.setFailed('No linked issues.');
+    core.info('No linked issue(s) found');
     return [];
   }
 
-  core.info(`Found ${issues.length} issues:`);
+  core.info(`Found ${issues.length} issue(s):`);
   core.info(JSON.stringify(issues));
   return issues;
 }
@@ -188,6 +209,12 @@ function listIssuesFromPRBody({ context, core }) {
  * @returns {string} A stringified object of the pull request number and labels.
  */
 async function listLabelsFromIssues({ github, context, core }, issues) {
+
+  // If no linked issue, return null PR number and `noLinkedIssue`
+  if (issues.length === 0) {
+    return JSON.stringify({ pr: process.env.PR_NUMBER, labels: 'noLinkedIssue' });
+  }
+
   const res = await Promise.all(
     issues.map(({ issue }) => _listLabelsOnIssue({ github, context }, issue))
   );
@@ -216,6 +243,12 @@ async function listLabelsFromIssues({ github, context, core }, issues) {
 async function setLabelsOnPR({ github, context, core }, filepath) {
   const data = JSON.parse(fs.readFileSync(filepath, 'utf8'));
   const { pr, labels } = data;
+
+  // If there is no linked issue, intercept and post message
+  if ( labels === 'noLinkedIssue') {
+    comment = `@${prOwner}, this Pull Request is not linked to a valid issue. In the Pull Request body above, you **_must_** link the number of the issue that you worked on using the format of 'Fixes #' + issue number, for example:   **_Fixes #0000_**\n\nNote: Do **_not_** use the number of this PR.`;
+    await _postIssueComment({ github, context }, pr, comment);
+  }
 
   core.info(`Adding ${labels.length} labels.`);
   const res = await _setLabels({ github, context, core }, pr, labels);
