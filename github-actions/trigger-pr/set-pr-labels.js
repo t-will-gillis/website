@@ -246,7 +246,7 @@ async function setLabelsOnPR({ github, context, core }, filepath) {
 
   // If there is no linked issue, intercept and post message
   if ( labels === 'noLinkedIssue') {
-    comment = `@${prOwner}, this Pull Request is not linked to a valid issue. In the Pull Request body above, you **_must_** link the number of the issue that you worked on using the format of 'Fixes #' + issue number, for example:   **_Fixes #0000_**\n\nNote: Do **_not_** use the number of this PR.`;
+    comment = `@${context.repo.owner}, this Pull Request is not linked to a valid issue. In the Pull Request body above, you **_must_** link the number of the issue that you worked on using the format of 'Fixes #' + issue number, for example:   **_Fixes #0000_**\n\nNote: Do **_not_** use the number of this PR.`;
     await _postIssueComment({ github, context }, pr, comment);
   }
 
