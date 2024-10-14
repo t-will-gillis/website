@@ -9,7 +9,7 @@ var labelData;
  * @param {Array} labelKeys       - List of reference names to look up display names
  * @return {Array} labelName      - Display name for each label
  */
-function labelRetrieveNames(...labelKeys) {
+function labelRetrieveNames(labelKey) {
 
   // Retrieve label directory if not read already
   if (labelData === undefined) {
@@ -18,11 +18,12 @@ function labelRetrieveNames(...labelKeys) {
     labelData = JSON.parse(rawData);
   }
 
-  let labelKey = labelKeys[0];
+  // let labelKey = labelKeys[0]; REMOVED IF NON-VARIATIC
   let labelName = '';
 
   try {
-    labelName = labelData[labelKey][0];
+    // labelName = labelData[labelKey][0];  REMOVED IF NON-VARIATIC
+    labelName = labelData[labelKey];
     console.log(`Success! Found labelKey: '${labelKey}', returning labelName: '${labelName}'`);
   } catch (err) {
     console.error(`Failed to find labelKey: '${labelKey}'`)
