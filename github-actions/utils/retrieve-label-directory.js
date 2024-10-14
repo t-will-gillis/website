@@ -22,8 +22,7 @@ function labelRetrieveNames(labelKey) {
   let labelName = '';
 
   try {
-    // labelName = labelData[labelKey][0];  REMOVED IF NON-VARIATIC
-    labelName = labelData[labelKey];
+    labelName = labelData[labelKey][0]; 
     console.log(`Success! Found labelKey: '${labelKey}', returning labelName: '${labelName}'`);
   } catch (err) {
     console.error(`Failed to find labelKey: '${labelKey}'`)
