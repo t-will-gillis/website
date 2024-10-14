@@ -5,11 +5,11 @@ var filepath = 'github-actions/utils/_data/label-directory.json';
 var labelData;
 
 /*
- * Matches label reference name(s) to the label display name(s) from JSON
- * @param {Array} labelKeys       - List of reference names to look up display names
+ * Matches label reference name) to the label display name from JSON
+ * @param {Array} labelKey        - Key names to look up display name
  * @return {Array} labelName      - Display name for each label
  */
-function labelRetrieveNames(labelKey) {
+function retrieveLabelName(labelKey) {
 
   // Retrieve label directory if not read already
   if (labelData === undefined) {
@@ -18,7 +18,6 @@ function labelRetrieveNames(labelKey) {
     labelData = JSON.parse(rawData);
   }
 
-  // let labelKey = labelKeys[0]; REMOVED IF NON-VARIATIC
   let labelName = '';
 
   try {
@@ -31,4 +30,4 @@ function labelRetrieveNames(labelKey) {
   return labelName;
 }
 
-module.exports = labelRetrieveNames;
+module.exports = retrieveLabelName;
