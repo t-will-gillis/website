@@ -19,8 +19,10 @@ function retrieveLabelName(labelKey) {
     labelData = JSON.parse(rawData);
   }
 
+  let labelName = '';
+  
   try {
-    const labelName = labelData[labelKey][0];
+    labelName = labelData[labelKey][0];
     console.log(`Success! Found labelKey: '${labelKey}', returning labelName: '${labelName}'`);
   } catch (err) {
     console.error(`Failed to find labelKey: '${labelKey}'`)
