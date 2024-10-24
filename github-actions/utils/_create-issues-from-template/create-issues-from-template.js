@@ -17,7 +17,6 @@ async function main({ g, c }) {
   github = g;
   context = c;
 
-
   // Read .csv file line by line
   const input = fs.createReadStream(sourceFilepath);
   const rl = readline.createInterface({input});
@@ -67,10 +66,7 @@ const createIssue = async (owner, repo, {textToInsert, listToAppend, fileName}) 
     labels,
     milestone,
   });
-  console.log('Created issue ' + thisIssueNumber);
-  return issue.data;
+  console.log(`Created issue "${title}"`);
 };
-
-
 
 module.exports = main;
