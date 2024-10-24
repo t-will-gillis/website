@@ -17,25 +17,35 @@ async function main({ g, c }) {
   github = g;
   context = c;
 
-  // Read .csv file line by line
+
   const input = fs.createReadStream(sourceFilepath);
   const rl = readline.createInterface({input});
 
-  rl.on('line', (row) => {
-    // Process each line to extract variables
-    row = row.split(',');
+  // Flag which lines in .csv file to process 
+  const regex = /words|ignoreWords/;
 
-    // The following are the variables to be extracted from the file
-    // once it has been read- this will vary with each condition
-    // Flag which lines in .csv file to process 
-    const regex = /words|ignoreWords/;
+  // Track which words are added
+  const addedText = [];
+
+  // Read .csv file line by line, then extract variables if line condition met
+  rl.on('line', (row) => {
+    row = row.split(',');
     if (regex.test(row[3])) {
       let textToInsert = row[1].split(':')[0].replaceAll('"','');
-      let listToAppend = row[4];
-      let fileName = row[0];
-      createIssue(github, context, {textToInsert, listToAppend, fileName})
+      // Create new issue only if text is not already added
+      if (!addedText.includes(textToInsert)) {
+        addedText.push(textToInsert);
+        let listToAppend = row[3];
+        let fileName = row[0];
+        createIssue(github, context, {textToInsert, listToAppend, fileName});
+      }
     }
   });
+  rl.on('close', () => {
+      console.log('File reading completed.');
+  });
+  console.log('\nWords added: ' + addedText);
+  
 }
 
 const createIssue = async (github, context, {textToInsert, listToAppend, fileName}) => {
