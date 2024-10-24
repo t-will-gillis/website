@@ -1,7 +1,7 @@
 ---
-name: Update `cspell.json` to accept the text "${textToInsert}"
+name: Update `cspell.json` to ignore the text ${textToInsert}
 about: Instructions for adding text exceptions to `cspell.json`
-title: Update `cspell.json` to accept the text "${textToInsert}"
+title: Update `cspell.json` to ignore the text ${textToInsert}
 labels: ['Template Labels']
 milestone: 3
 assignees: ''
@@ -19,13 +19,13 @@ We need to update the Code Spell Checker configuration file `cspell.json` with f
 - [ ] Do not change any configuration settings or make any spell corrections.
 - [ ] Open the file `cspell.json` and locate the list / array named `"${listToAppend}"`.  
 
-You are adding a new term to the end of this list, therefore:
-- [ ] **_Add a comma_** (important!) to the last item in the existing `"${listToAppend}"`, then
-- [ ] **_Add_** the text `"${textToInsert}"` at the end of the list `"${listToAppend}"`:
+You are adding a new item to the end of this list, and since all list items are separated by a comma:
+- [ ] **_Add a comma_** (important!) to the last item in the existing `"${listToAppend}"`, then:
+- [ ] **_Add_** the new text item `"${textToInsert}"` t0 the end of the list `"${listToAppend}"`:
 ```
       "${textToInsert}"
 ```
-- [ ] To reiterate, you are adding a new term to the end of the list. Do not remove or replace any of the other terms. Do not add a comma to the term you just added (The Code Spell Checker does not like this).
+- [ ] To reiterate, you are adding a new term to the end of the list- do not remove or replace any other term. Do not add a comma to the term you just added (The Code Spell Checker does not like this).
 - [ ] Save `cspell.json` and then test the change by opening `${fileName}` and confirming that no Code Spell Checker errors/messages are displayed for this file.  
 - [ ] Docker testing is not required. Create a Pull Request in the usual manner, with changes only to `cspell.json`.
 
