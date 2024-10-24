@@ -38,7 +38,7 @@ async function main({ g, c }) {
   });
 }
 
-const createIssue = async (owner, repo, {textToInsert, listToAppend, fileName}) => {
+const createIssue = async (github, context, {textToInsert, listToAppend, fileName}) => {
 
   const owner = context.repo.owner;
   const repo = context.repo.repo;
