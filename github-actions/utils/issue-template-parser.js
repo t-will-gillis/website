@@ -1,8 +1,8 @@
- // import modules
+// import modules
 const fs = require('fs');
 
 /**
- * Parses a GitHub markdwon/ schema issue template
+ * Parses a GitHub markdown/ schema issue template
  *
  * @param {string} filepath - filepath to issue template
  * @return {array} issueObject - parameters to create issue

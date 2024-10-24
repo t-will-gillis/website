@@ -3,6 +3,7 @@ const getTimeline = require('../../utils/get-timeline');
 const getTeamMembers = require('../../utils/get-team-members');
 
 // Global variables
+var breakLine = `-`.repeat(60);
 var github;
 var context;
 
@@ -37,8 +38,8 @@ async function main({ g, c }) {
   context = c;
 
   const [contributorsOneMonthAgo, contributorsTwoMonthsAgo, inactiveWithOpenIssue] = await fetchContributors(dates);
-  console.log('-------------------------------------------------------');
-  console.log('List of active contributors since ' + dates[0].slice(0, 10) + ':');
+  console.log(breakLine);
+  console.log(`List of active contributors since ${dates[0].slice(0, 10)}:`);
   console.log(contributorsOneMonthAgo);
 
   return {
@@ -122,10 +123,11 @@ async function fetchContributors(dates){
           if(responseObject.result === false){
             allContributorsSince[assignee] = true;
           } 
-          // If timeline is more than two months ago, add to open issues with inactive 
-          // comments with flag = true if issue is "Pre-work Checklist", false otherwise
-          else if(date === dates[1]){
-            if(contributorInfo.title.includes("Pre-work Checklist")){
+          // If timeline is more than two months ago, add to open issues with inactive. Then check if 
+          // issue title includes "Pre-work Checklist" or "Skills Issue" and set flag = true, else false
+          else if (date === dates[1]) {
+            const regex = /Pre-work Checklist|Skills Issue/i;
+            if (regex.test(contributorInfo.title)) {
               inactiveWithOpenIssue[assignee] = [issueNum, true];
             } else {
               inactiveWithOpenIssue[assignee] = [issueNum, false];

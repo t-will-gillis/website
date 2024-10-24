@@ -4,6 +4,7 @@ const getTeamMembers = require('../../utils/get-team-members');
 const addTeamMember = require('../../utils/add-team-member');
 
 // Global variables
+var breakLine = `-`.repeat(60);
 var github;
 var context;
 
@@ -29,24 +30,24 @@ async function main({ g, c }, { recentContributors, previousContributors, inacti
   context = c;
   
   const currentTeamMembers = await getTeamMembers(github, context, writeTeam);
-  console.log('-------------------------------------------------------');
-  console.log('Current members of ' + writeTeam + ':');
+  console.log(breakLine);
+  console.log(`Current members of ${writeTeam}:`);
   console.log(currentTeamMembers);
 
-  const [removedContributors, cannotRemoveYet] = await removeInactiveMembers(previousContributors, inactiveWithOpenIssue);
-  console.log('-------------------------------------------------------');
-  console.log('Removed members from ' + writeTeam + ' inactive since ' + dates[1].slice(0, 10) + ':');
+  const [removedContributors, cannotRemoveYet] = await removeInactiveMembers(previousContributors, inactiveWithOpenIssue, currentTeamMembers);
+  console.log(breakLine);
+  console.log(`Removed members from ${writeTeam} inactive since ${dates[1].slice(0, 10)}:`);
   console.log(removedContributors);
 
-  console.log('-------------------------------------------------------');
-  console.log('Members inactive since ' + dates[1].slice(0, 10) + ' with open issues preventing removal:');
+  console.log(breakLine);
+  console.log(`Members inactive since ${dates[1].slice(0, 10)} with open issues preventing removal:`);
   console.log(cannotRemoveYet);
 
   // Repeat getTeamMembers() after removedContributors to compare with recentContributors
   const updatedTeamMembers = await getTeamMembers(github, context, writeTeam);
   const notifiedContributors = await notifyInactiveMembers(updatedTeamMembers, recentContributors);
-  console.log('-------------------------------------------------------');
-  console.log('Notified members from ' + writeTeam + ' inactive since ' + dates[0].slice(0, 10) + ':');
+  console.log(breakLine);
+  console.log(`Notified members from ${writeTeam} inactive since ${dates[0].slice(0, 10)}:`);
   console.log(notifiedContributors);
 
   writeData(removedContributors, notifiedContributors, cannotRemoveYet);
@@ -61,11 +62,10 @@ async function main({ g, c }, { recentContributors, previousContributors, inacti
  * @returns {Array} removedMembers        - List of members that were removed 
  * @returns {Object} cannotRemoveYet      - List of members that cannot be removed due to open issues
  */
-async function removeInactiveMembers(previousContributors, inactiveWithOpenIssue){
+async function removeInactiveMembers(previousContributors, inactiveWithOpenIssue, currentTeamMembers){
   const removedMembers = [];
   const cannotRemoveYet = {};
   const previouslyNotified = await readPreviousNotifyList();
-  const currentTeamMembers = await getTeamMembers(github, context, writeTeam);
   
   // Loop over team members and remove them from the team if they are not in previousContributors list
   for(const username in currentTeamMembers){
@@ -76,7 +76,7 @@ async function removeInactiveMembers(previousContributors, inactiveWithOpenIssue
       if(username in inactiveWithOpenIssue && inactiveWithOpenIssue[username][1] === false){
         cannotRemoveYet[username] = inactiveWithOpenIssue[username][0];
       } else if((previouslyNotified.length > 0) && !(previouslyNotified.includes(username))){
-        console.log('Member was not on last month\'s \'Inactive Members\' list, do not remove: ' + username);
+        console.log(`Member was not on last month\'s \'Inactive Members\' list, do not remove: ${username}`);
       } else {
         // Remove member from all teams (except baseTeam)
         const teams = [writeTeam, mergeTeam];
@@ -106,14 +106,14 @@ async function removeInactiveMembers(previousContributors, inactiveWithOpenIssue
  * @param {Number} issueNum      - number of member's "Pre-work checklist"
  */
 async function closePrework(member, issueNum){ 
-  // Close the assignee's "Pre-work Checklist" and add comment
+  // Close the assignee's "Skills Issue" and add comment
   await github.request('PATCH /repos/{owner}/{repo}/issues/{issue_number}', {
     owner: context.repo.owner,
     repo: context.repo.repo,
     issue_number: issueNum,
     state: 'closed'
   });
-  console.log('Closing "Pre-work Checklist" issue number ' + issueNum + ' for ' + member);
+  console.log(`Closing "Skills Issue" issue number ${issueNum} for ${member}`);
   // Add comment to issue
   await github.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
     owner: context.repo.owner,
@@ -164,7 +164,7 @@ async function checkMemberIsNotNew(member){
     });
     for(const memberRepo of memberRepoResults.data){
       if(memberRepo.description === "Hack for LA's website" && memberRepo.created_at > dates[0]){
-        console.log("Member created organization repo within last month: " + member);
+        console.log(`Member created organization repo within last month: ${member}`);
         return false;
       }
     }
@@ -211,7 +211,7 @@ function writeData(removedContributors, notifiedContributors, cannotRemoveYet){
 
   fs.writeFile(filepath, JSON.stringify(inactiveMemberLists, null, 2), (err) => {
     if (err) throw err;
-    console.log('-------------------------------------------------------');
+    console.log(breakLine);
     console.log("File 'inactive-members.json' saved successfully!");
    });
 }

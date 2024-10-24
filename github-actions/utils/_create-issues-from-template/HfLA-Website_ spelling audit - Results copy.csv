@@ -1,0 +1,4 @@
+File,cSpell message,Result type,Template,Issue,notes
+_data/external/_wins-data.json,Bubar: Unknown word. (2),False Positive,ignoreWords,,
+_data/external/_wins-data.json,Stubbs: Unknown word. (2),False Positive,ignoreWords,,
+_data/external/_wins-data.json,Prashant: Unknown word. (2),False Positive,ignoreWords,,
