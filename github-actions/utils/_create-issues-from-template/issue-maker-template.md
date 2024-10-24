@@ -2,7 +2,7 @@
 name: Update `cspell.json` to accept the text ${textToInsert}
 about: Instructions for adding text exceptions to `cspell.json`
 title: Update `cspell.json` to accept the text ${textToInsert}
-labels: 'Template Labels'
+labels: ['Template Labels']
 milestone: 8
 assignees: ''
 ---
