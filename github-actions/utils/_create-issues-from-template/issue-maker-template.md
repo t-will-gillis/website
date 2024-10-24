@@ -1,9 +1,9 @@
 ---
-name: Update `cspell.json` to accept the text ${textToInsert}
+name: Update `cspell.json` to accept the text "${textToInsert}"
 about: Instructions for adding text exceptions to `cspell.json`
-title: Update `cspell.json` to accept the text ${textToInsert}
+title: Update `cspell.json` to accept the text "${textToInsert}"
 labels: ['Template Labels']
-milestone: 8
+milestone: 3
 assignees: ''
 ---
 
@@ -32,4 +32,4 @@ You are adding a new term to the end of this list, therefore:
 ### Resources
 [^1]: [Installing Code Spell Checker from the VS Code text editor](https://code.visualstudio.com/learn/get-started/extensions)
 [^2]:[Code Spell Checker - VS Marketplace](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
-- This issue was created as part of #5312
+- This issue was created as part of # 5312
