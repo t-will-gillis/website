@@ -8,8 +8,8 @@ var github;
 var context;
 
 // Filepaths to source data and to issue template
-var sourceFilepath = './HfLA-Website_ spelling audit - Results copy.csv';
-var templateFilepath = './issue-maker-template.md';
+var sourceFilepath = 'github-actions/utils/_create-issues-from-template/HfLA-Website_ spelling audit - Results copy.csv';
+var templateFilepath = 'github-actions/utils/_create-issues-from-template/issue-maker-template.md';
 
 
 
