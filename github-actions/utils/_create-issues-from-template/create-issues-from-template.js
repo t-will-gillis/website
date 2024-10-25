@@ -62,7 +62,8 @@ const createIssue = async (github, context, {textToInsert, listToAppend, fileNam
   let body = issueObject['body'];
 
   // Replace variables in issue template body
-  title = title.replace('${textToInsert}', textToInsert);
+  titleText = '"' + textToInsert + '"'
+  title = title.replace('${textToInsert}', titleText);
   body = body.replaceAll('${textToInsert}', textToInsert);
   body = body.replaceAll('${listToAppend}', listToAppend);
   body = body.replaceAll('${fileName}', fileName);
