@@ -4,3 +4,4 @@ _data/external/_wins-data.json,Stubbs: Unknown word. (2),False Positive,ignoreWo
 _data/external/_wins-data.json,Prashant: Unknown word. (2),False Positive,words,,
 _guide-pages/2FA.html,"""Authy"": Unknown word. [ln 36]",False Positive,ignoreWords,,
 _guide-pages/2FA.html,"""Authy"": Unknown word. [ln 40]",False Positive,ignoreWords,,
+CONTRIBUTING.md,"""adrianang"": Unknown word. [ln 890]",False Positive,ignoreWords,,
