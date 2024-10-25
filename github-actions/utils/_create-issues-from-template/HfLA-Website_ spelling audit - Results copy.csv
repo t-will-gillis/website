@@ -1,7 +1,10 @@
 File,cSpell message,Result type,Template,Issue,notes
 _data/external/_wins-data.json,Bubar: Unknown word. (2),False Positive,ignoreWords,,
 _data/external/_wins-data.json,Stubbs: Unknown word. (2),False Positive,ignoreWords,,
-_data/external/_wins-data.json,Prashant: Unknown word. (2),False Positive,words,,
 _guide-pages/2FA.html,"""Authy"": Unknown word. [ln 36]",False Positive,ignoreWords,,
 _guide-pages/2FA.html,"""Authy"": Unknown word. [ln 40]",False Positive,ignoreWords,,
+_guide-pages/2FA.html,"""Authy"": Unknown word. [ln 40]",False Positive,ignoreWords,,
+CONTRIBUTING.md,"""hfla"": Unknown word. [ln 257]",False Positive,,,
+CONTRIBUTING.md,"""hfla"": Unknown word. [ln 258]",False Positive,,,
+CONTRIBUTING.md,"""hfla"": Unknown word. [ln 259]",False Positive,,,
 CONTRIBUTING.md,"""adrianang"": Unknown word. [ln 890]",False Positive,ignoreWords,,
