@@ -1,7 +1,7 @@
 ---
-name: Update `cspell.json` to ignore the text \'${textToInsert}\'
+name: 'Update `cspell.json` to ignore the text "${textToInsert}"'
 about: Instructions for adding text exceptions to `cspell.json`
-title: Update `cspell.json` to ignore the text \'${textToInsert}\'
+title: 'Update `cspell.json` to ignore the text "${textToInsert}"'
 labels: ['Template Labels']
 milestone: 3
 assignees: ''
