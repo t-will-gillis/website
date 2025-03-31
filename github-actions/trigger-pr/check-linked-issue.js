@@ -1,7 +1,7 @@
 // Import modules
 const postIssueComment = require('../utils/post-issue-comment');
 
-// Global variables
+// Global variables yup
 var github;
 var context;
 
