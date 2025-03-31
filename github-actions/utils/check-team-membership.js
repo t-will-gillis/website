@@ -23,7 +23,7 @@ async function isMemberOfTeam(github, githubUsername, team)
         return true;
     } catch (verificationError) {
         if (verificationError.status == 404) {
-            console.log(`User ${githubusername} is not a team member`);
+            console.log(`User ${githubUsername} is not a team member`);
             return false;
         }
         else {
