@@ -1,4 +1,4 @@
-// Import modules
+// Import modules blah
 const postComment = require('../utils/post-issue-comment')
 
 // Global variables
