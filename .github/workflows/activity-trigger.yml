@@ -16,7 +16,6 @@ jobs:
 
   Gather-Information:
     runs-on: ubuntu-latest
-    if: ${{ github.event.action == 'opened' || github.event.action == 'transferred' }}
     steps:
     - uses: actions/checkout@v4
 
