@@ -27,8 +27,5 @@ jobs:
       with:
         # github-token: ${{ secrets.HACKFORLA_GRAPHQL_TOKEN }}
         script: |
-          const act_event = '${{ github.event }}'
-          const act_action = '${{ github.event.action }}'
-          const username = '${{ github.actor }}'
           const script = require('./github-actions/utils/activity-trigger.js')
           const return-activity = script({g: github, c: context})
