@@ -8,9 +8,9 @@ async function activityTrigger({g, c}, eventName, eventAction, eventActor) {
     context = c;
     let issueNum = '';
 
-    if (eventName.includes('issue') {
+    if (eventName.includes('issue')) {
         issueNum = context.payload.issue.number;
-    } else if (eventName.includes('pull_request') {
+    } else if (eventName.includes('pull_request')) {
         issueNum = context.payload.pull_request.number;
     } else {
         issueNum = 'unknown'
