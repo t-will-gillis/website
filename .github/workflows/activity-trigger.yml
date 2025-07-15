@@ -1,7 +1,6 @@
 name: Member Activity Trigger
 
 on:
-  workflow_call:
   issues:
     types: [opened, assigned, unassigned, closed]
   issue_comment: 
