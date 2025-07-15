@@ -43,5 +43,5 @@ jobs:
 
 
 
-        #   const script = require('./github-actions/utils/activity-trigger.js')
-        #   const activity = script({g: github, c: context}, actEvent, actAction)
+          const script = require('./github-actions/utils/activity-trigger.js')
+          const activity = script({g: github, c: context})
