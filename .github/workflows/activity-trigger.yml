@@ -26,4 +26,4 @@ jobs:
 
         script: |
           const script = require('./github-actions/utils/activity-trigger.js')
-          const return-activity = script({g: github, c: context})
+          const rtn_activity = script({g: github, c: context})
