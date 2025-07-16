@@ -10,10 +10,7 @@ async function activityTrigger({g, c}, eventName, eventAction, eventActor) {
     let issueNum = '';
     let assignee = '';
     
-    console.log(`eventName = ${eventName}`);
-    console.log(`eventAction = ${eventAction}`);
-    console.log(`eventActor = ${eventActor}`);
-    console.log(`issueNum = ${issueNum}`);
+
 
     if (eventName.includes('issue')) {
         issueNum = context.payload.issue.number;
@@ -28,7 +25,11 @@ async function activityTrigger({g, c}, eventName, eventAction, eventActor) {
     } else {
         issueNum = 'unknown'
     }
-
+    
+    console.log(`eventName = ${eventName}`);
+    console.log(`eventAction = ${eventAction}`);
+    console.log(`eventActor = ${eventActor}`);
+    console.log(`issueNum = ${issueNum}`);
 
 }
 
