@@ -14,12 +14,10 @@ async function activityTrigger({g, c}, eventName, eventAction, eventActor, event
 
     if (eventName.includes('issue')) {
         issueNum = context.payload.issue.number;
-        assignee = context.payload.issue.assignee;
-        console.log(context.payload.issue.assignee);
-        takeTwo = context.payload.assignee.login;
-        console.log(takeTwo)
+        assignee = context.payload.assignee.login;
+        console.log(`assignee = ${assignee}`);
         if (eventAction.includes('assigned')) {
-            eventActor = takeTwo;
+            eventActor = assignee;
         }
     } else if (eventName.includes('pull_request')) {
         issueNum = context.payload.pull_request.number;
