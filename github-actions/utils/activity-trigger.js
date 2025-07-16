@@ -33,7 +33,6 @@ async function activityTrigger({g, c}) {
             console.log(`Issue is ${eventAction}. Change eventActor => ${assignee}`);
             eventActor = assignee;
         }
-        messageSnip = `has ${eventAction} an issue:`
     } else if (eventName == 'issue_comment') {
         issueNum = context.payload.issue.number;
         eventUrl = context.payload.comment.html_url;
@@ -52,18 +51,21 @@ async function activityTrigger({g, c}) {
     console.log(`eventAction = ${eventAction}`);
     console.log(`eventActor = ${eventActor}`);
     console.log(`issueNum = ${issueNum}`);
+    console.log(`eventUrl = ${eventUrl}`);
 
-    let message = `#[${issueNum}](${eventUrl}) has been ${eventAction} by ${eventActor}`
-    console.log(message);
+    const actionMap = {
+        'issues.opened': 'opened an issue',
+        'issues.closed': 'closed an issue', 
+        'issues.assigned': 'been assigned to an issue',
+        'issues.unassigned': 'been unassigned from an issue',
+        'issue_comment.created': 'commented on an issue',
+        'pull_request.opened': 'opened a pull request',
+        'pull_request.closed': 'closed a pull request',
+        'pull_request_review.submitted': 'submitted a pull request review'
+    };
+    const action = actionMap[`${eventName}.${eventAction}`];
+    let message = `@ ${eventActor} has ${action}: #[${issueNum}](eventUrl)`;
+    return message;
 }
-
-/*
-`Contributor Bob has opened an issue:` 
-`Contributor Bob has been assigned to an issue:`
-`Contributor Bob has been unassigned from an issue:`
-`Contributor Bob has created an issue comment:`
-`Contributor Bob has opened a pull request:` 
-`Contributor Bob has submitted a pull request review for #xxxx:`
-*/
 
 module.exports = activityTrigger;
