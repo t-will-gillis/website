@@ -2,7 +2,7 @@
 
 
 
-async function activityTrigger({g, c}, eventName, eventAction, eventActor) {
+async function activityTrigger({g, c}, eventName, eventAction, eventActor, eventAssignee) {
 
     github = g;
     context = c;
@@ -16,8 +16,10 @@ async function activityTrigger({g, c}, eventName, eventAction, eventActor) {
         issueNum = context.payload.issue.number;
         assignee = context.payload.issue.assignee;
         console.log(context.payload.issue.assignee);
+        takeTwo = context.payload.assignee.login;
+        console.log(takeTwo)
         if (eventAction.includes('assigned')) {
-            eventActor = assignee;
+            eventActor = takeTwo;
         }
     } else if (eventName.includes('pull_request')) {
         issueNum = context.payload.pull_request.number;
@@ -25,7 +27,7 @@ async function activityTrigger({g, c}, eventName, eventAction, eventActor) {
     } else {
         issueNum = 'unknown'
     }
-    
+
     console.log(`eventName = ${eventName}`);
     console.log(`eventAction = ${eventAction}`);
     console.log(`eventActor = ${eventActor}`);

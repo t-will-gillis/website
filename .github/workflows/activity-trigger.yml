@@ -28,10 +28,12 @@ jobs:
           let eventName = '${{ github.event_name }}'
           let eventAction = '${{ github.event.action }}'
           let eventActor = '${{ github.actor }}'
+          let eventAssignee = '${{ github.event.assignee.login }}'
           console.log(eventName)
           console.log(eventAction)
           console.log(eventActor)
+          console.log(eventAssignee)
           console.log('-------------')
 
           const script = require('./github-actions/utils/activity-trigger.js')
-          const activity = script({g: github, c: context}, eventName, eventAction, eventActor)
+          const activity = script({g: github, c: context}, eventName, eventAction, eventActor, eventAssignee)
