@@ -25,14 +25,11 @@ jobs:
       with:
         github-token: ${{ secrets.HACKFORLA_GRAPHQL_TOKEN }}
         script: |
-          const eventName = '${{ github.event_name }}'
-          const eventAction = '${{ github.event.action }}'
-          const eventActor = '${{ github.actor }}'
-          console.log('-------------')
+          let eventName = '${{ github.event_name }}'
+          let eventAction = '${{ github.event.action }}'
+          let eventActor = '${{ github.actor }}'
           console.log(eventName)
-          console.log('-------------')
           console.log(eventAction)
-          console.log('-------------')
           console.log(eventActor)
           console.log('-------------')
 
