@@ -1,6 +1,7 @@
 name: Member Activity Trigger
 
 on:
+  workflow_call:
   issues:
     types: [opened, assigned, unassigned, closed]
   issue_comment: 
@@ -9,31 +10,19 @@ on:
     types: [opened, closed]
   pull_request_review:
     types: [submitted]
-  pull_request_review_comment:
-    types: [created]
 
 jobs:
 
-  Gather-Information:
+  Gather-Event-Information:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
 
-    - name: Identify Action, Actor, and Location
-      id: id-action-actor-location
+    - name: Identify Event Name, Action, and Actor
+      id: id-name-action-actor
       uses: actions/github-script@v7
       with:
         github-token: ${{ secrets.HACKFORLA_GRAPHQL_TOKEN }}
         script: |
-          let eventName = '${{ github.event_name }}'
-          let eventAction = '${{ github.event.action }}'
-          let eventActor = '${{ github.actor }}'
-          let eventAssignee = '${{ github.event.assignee.login }}'
-          console.log(eventName)
-          console.log(eventAction)
-          console.log(eventActor)
-          console.log(eventAssignee)
-          console.log('-------------')
-
           const script = require('./github-actions/utils/activity-trigger.js')
-          const activity = script({g: github, c: context}, eventName, eventAction, eventActor, eventAssignee)
+          const activity = script({g: github, c: context})
