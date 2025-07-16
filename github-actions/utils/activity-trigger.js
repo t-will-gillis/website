@@ -65,6 +65,7 @@ async function activityTrigger({g, c}) {
     };
     const action = actionMap[`${eventName}.${eventAction}`];
     let message = `@ ${eventActor} has ${action}: #[${issueNum}](eventUrl)`;
+    console.log(message);
     return message;
 }
 
