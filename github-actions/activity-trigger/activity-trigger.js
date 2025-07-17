@@ -23,6 +23,7 @@ async function activityTrigger({g, c}) {
 
 
     if (eventName.includes('issue')) {
+        console.log('line 26')
         issueNum = context.payload.issue.number;
         eventUrl = context.payload.issue.html_url;
 
@@ -30,9 +31,11 @@ async function activityTrigger({g, c}) {
         // change eventActor to the issue assignee, else to issue author
         assignee = context.payload.assignee?.login;
         if (eventAction !== 'opened' && assignee != null ) {
+            console.log('line 34')
             console.log(`Issue is ${eventAction}. Change eventActor => ${assignee}`);
             eventActor = assignee;
         } else {
+            console.log('line 38')
             eventActor = context.payload.issue.user.login;
         }
         if (eventAction === 'closed') {
@@ -40,6 +43,7 @@ async function activityTrigger({g, c}) {
             eventAction = reason;
         }
     } else if (eventName === 'issue_comment') {
+        console.log('line 46')
         issueNum = context.payload.issue.number;
         eventUrl = context.payload.comment.html_url;
     } else if (eventName === 'pull_request') {
