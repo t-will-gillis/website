@@ -22,7 +22,7 @@ async function activityTrigger({g, c}) {
     let eventActor = context.actor;
 
 
-    if (eventName.includes('issue')) {
+    if (eventName === 'issues') {
         console.log('line 26')
         issueNum = context.payload.issue.number;
         eventUrl = context.payload.issue.html_url;
@@ -30,7 +30,7 @@ async function activityTrigger({g, c}) {
         // If issue action is not opened and an assignee exists, then 
         // change eventActor to the issue assignee, else to issue author
         assignee = context.payload.assignee?.login;
-        if (eventAction !== 'opened' && assignee != null ) {
+        if (eventAction != 'opened' && assignee != null ) {
             console.log('line 34')
             console.log(`Issue is ${eventAction}. Change eventActor => ${assignee}`);
             eventActor = assignee;
