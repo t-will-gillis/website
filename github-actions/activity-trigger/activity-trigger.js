@@ -26,25 +26,33 @@ async function activityTrigger({g, c}) {
         issueNum = context.payload.issue.number;
         eventUrl = context.payload.issue.html_url;
 
-        // If issue action is not opened and an assignee exists, 
-        // then change the eventActor to the issue assignee
-        assignee = context.payload.assignee.login;
-        if (eventAction != 'opened' && assignee != null ) {
+        // If issue action is not opened and an assignee exists, then 
+        // change eventActor to the issue assignee, else to issue author
+        assignee = context.payload.assignee?.login;
+        if (eventAction !== 'opened' && assignee != null ) {
             console.log(`Issue is ${eventAction}. Change eventActor => ${assignee}`);
             eventActor = assignee;
+        } else {
+            eventActor = context.payload.issue.user.login;
         }
-    } else if (eventName == 'issue_comment') {
+        if (eventAction === 'closed') {
+            let reason = context.payload.issue.state_reason;
+            eventAction = reason;
+        }
+    } else if (eventName === 'issue_comment') {
         issueNum = context.payload.issue.number;
         eventUrl = context.payload.comment.html_url;
-        // eventActor = context.actor;
-    } else if (eventName == 'pull_request') {
+    } else if (eventName === 'pull_request') {
         issueNum = context.payload.pull_request.number;
         eventUrl = context.payload.pull_request.html_url;
-        // eventActor = context.actor;
-    } else if (eventName == 'pull_request_review') {
+        // If PR closed, change eventActor to the original author and check if merged
+        if (eventAction === 'closed') {
+            eventAction = context.payload.pull_request.merged ? 'merged' : 'closed';
+            eventActor = context.payload.pull_request.user.login;
+        }
+    } else if (eventName === 'pull_request_review') {
         issueNum = context.payload.pull_request.number;
         eventUrl = context.payload.review.html_url;
-        // eventActor = context.actor;
     }
 
     console.log(`eventName = ${eventName}`);
@@ -55,18 +63,21 @@ async function activityTrigger({g, c}) {
 
     const actionMap = {
         'issues.opened': 'opened an issue',
-        'issues.closed': 'closed an issue', 
+        'issues.completed': 'closed an issue as completed',
+        'issues.not_planned': 'closed an issue as not planned',
+        'issues.duplicate': 'closed an issue as duplicate',
         'issues.assigned': 'been assigned to an issue',
         'issues.unassigned': 'been unassigned from an issue',
-        'issue_comment.created': 'commented on an issue',
+        'issue_comment.created': 'commented on an issue or pr',
         'pull_request.opened': 'opened a pull request',
-        'pull_request.closed': 'closed a pull request',
+        'pull_request.closed': 'had a pull request closed w/o merging',
+        'pull_request.merged': 'had a pull request merged',
         'pull_request_review.submitted': 'submitted a pull request review'
     };
     const action = actionMap[`${eventName}.${eventAction}`];
-    let message = `@ ${eventActor} has ${action}: #[${issueNum}](eventUrl)`;
+    let message = `@ ${eventActor} has ${action}: #[${issueNum}](${eventUrl})`;
     console.log(message);
-    return message;
+    return [eventActor, message];
 }
 
 module.exports = activityTrigger;
