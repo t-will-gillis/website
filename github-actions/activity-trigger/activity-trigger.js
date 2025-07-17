@@ -23,7 +23,7 @@ async function activityTrigger({g, c}) {
 
 
     if (eventName === 'issues') {
-        console.log('line 26')
+        // console.log('line 26')  // DELETE
         issueNum = context.payload.issue.number;
         eventUrl = context.payload.issue.html_url;
 
@@ -31,11 +31,11 @@ async function activityTrigger({g, c}) {
         // change eventActor to the issue assignee, else to issue author
         assignee = context.payload.assignee?.login;
         if (eventAction != 'opened' && assignee != null ) {
-            console.log('line 34')
+            // console.log('line 34')  // DELETE
             console.log(`Issue is ${eventAction}. Change eventActor => ${assignee}`);
             eventActor = assignee;
         } else {
-            console.log('line 38')
+            // console.log('line 38')  // DELETE
             eventActor = context.payload.issue.user.login;
         }
         if (eventAction === 'closed') {
@@ -43,7 +43,7 @@ async function activityTrigger({g, c}) {
             eventAction = reason;
         }
     } else if (eventName === 'issue_comment') {
-        console.log('line 46')
+        // console.log('line 46')  // DELETE
         issueNum = context.payload.issue.number;
         eventUrl = context.payload.comment.html_url;
     } else if (eventName === 'pull_request') {
@@ -81,7 +81,9 @@ async function activityTrigger({g, c}) {
     const action = actionMap[`${eventName}.${eventAction}`];
     let message = `@ ${eventActor} has ${action}: #[${issueNum}](${eventUrl})`;
     console.log(message);
-    return [eventActor, message];
+
+    activity = [eventActor, message];
+    return activity;
 }
 
 module.exports = activityTrigger;

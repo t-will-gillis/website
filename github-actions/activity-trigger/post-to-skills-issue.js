@@ -3,8 +3,8 @@ async function postToSkillsIssue({g, c}, activity) {
     github = g;
     context = c;
 
-    console.log(activity['eventActor']);
-    console.log(activity['message']);
+    console.log(activity[0]);
+    console.log(activity[1]);
 
 }
 
