@@ -10,10 +10,11 @@ async function queryIssueHistory(github, context) {
 
   const repoOwner = 'hackforla';
   const repoName = 'website';
+  let issueNum = 7610;
 
   const query = `query ($owner: String!, $repo: String!, $issueNum:Int!) {
   repository(owner: $owner, name: $repo) {
-    issue(number: $number) {
+    issue(number: $issueNum) {
       author { login }
       createdAt
       timelineItems(first: 100) {
@@ -35,7 +36,7 @@ async function queryIssueHistory(github, context) {
         }
       }
     }
-    pullRequest(number: $number) {
+    pullRequest(number: $issueNum) {
       author { login }
       createdAt
       timelineItems(first: 100) {
@@ -59,7 +60,7 @@ async function queryIssueHistory(github, context) {
   const variables = {
     owner: repoOwner,
     repo: repoName,
-    issueNum: 7610,
+    issueNum
   };
 
   try {
