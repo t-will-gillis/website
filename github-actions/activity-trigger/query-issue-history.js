@@ -12,50 +12,55 @@ async function queryIssueHistory({g, c}) {
   const repoName = 'website';
   let issueNum = 7610;
 
-  const query = `query($owner: String!, $repo: String!, $issueNum:Int!) {
-  repository(owner: $owner, name: $repo) {
-    issue(number: $issueNum) {
-      author { login }
-      createdAt
-      timelineItems(first: 100) {
-        nodes {
-          __typename
-          ... on ClosedEvent {
-            actor { login }
-            createdAt
-            stateReason
-          }
-          ... on AssignedEvent {
-            createdAt
-            assignee { ... on User { login } }
-          }
-          ... on UnassignedEvent {
-            createdAt
-            assignee { ... on User { login } }
-          }
-        }
-      }
-    }
-    pullRequest(number: $issueNum) {
-      author { login }
-      createdAt
-      timelineItems(first: 100) {
-        nodes {
-          __typename
-          ... on PullRequestReview {
-            createdAt
-            author { login }
-          }
-          ... on ClosedEvent {
-            actor { login }
-            createdAt
-            stateReason
+  const issueQuery = `query($owner: String!, $repo: String!, $issueNum:Int!) {
+    repository(owner: $owner, name: $repo) {
+      issue(number: $issueNum) {
+        author { login }
+        createdAt
+        timelineItems(first: 100) {
+          nodes {
+            __typename
+            ... on ClosedEvent {
+              actor { login }
+              createdAt
+              stateReason
+            }
+            ... on AssignedEvent {
+              createdAt
+              assignee { ... on User { login } }
+            }
+            ... on UnassignedEvent {
+              createdAt
+              assignee { ... on User { login } }
+            }
           }
         }
       }
     }
-  }
-}`;
+  }`;
+
+  const prQuery = `query($owner: String!, $repo: String!, $issueNum:Int!) {
+    repository(owner: $owner, name: $repo) {
+      pullRequest(number: $issueNum) {
+        author { login }
+        createdAt
+        timelineItems(first: 100) {
+          nodes {
+            __typename
+            ... on PullRequestReview {
+              createdAt
+              author { login }
+            }
+            ... on ClosedEvent {
+              actor { login }
+              createdAt
+              stateReason
+            }
+          }
+        }
+      }
+    }
+  }`;
 
   const variables = {
     owner: repoOwner,
@@ -64,7 +69,7 @@ async function queryIssueHistory({g, c}) {
   };
 
   try {
-    const response = await github.graphql(query, variables);
+    const response = await github.graphql(issueQuery, variables);
     console.log(response)
     
     /*
