@@ -16,7 +16,7 @@ jobs:
       with:
         github-token: ${{ secrets.HACKFORLA_GRAPHQL_TOKEN }}
         script: |
-          const script = require('./github-actions/utils/query-issue-history.js')
+          const script = require('./github-actions/activity-trigger/query-issue-history.js')
           const activity = script({g: github, c: context})
           return activity
 
