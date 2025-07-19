@@ -16,17 +16,19 @@ async function activityTrigger({g, c}) {
 
     let issueNum = '';
     let assignee = '';
+    let timeline = '';
 
     let eventName = context.eventName;
     let eventAction = context.payload.action;
     let eventActor = context.actor;
+    
 
 
     if (eventName === 'issues') {
         // console.log('line 26')  // DELETE
         issueNum = context.payload.issue.number;
         eventUrl = context.payload.issue.html_url;
-
+        timeline = context.payload.issue.updated_at;
         // If issue action is not opened and an assignee exists, then 
         // change eventActor to the issue assignee, else to issue author
         assignee = context.payload.assignee?.login;
@@ -46,9 +48,11 @@ async function activityTrigger({g, c}) {
         // console.log('line 46')  // DELETE
         issueNum = context.payload.issue.number;
         eventUrl = context.payload.comment.html_url;
+        timeline = context.payload.comment.updated_at;
     } else if (eventName === 'pull_request') {
         issueNum = context.payload.pull_request.number;
         eventUrl = context.payload.pull_request.html_url;
+        timeline = context.payload.pull_request.updated_at;
         // If PR closed, change eventActor to the original author and check if merged
         if (eventAction === 'closed') {
             eventAction = context.payload.pull_request.merged ? 'merged' : 'closed';
@@ -57,6 +61,7 @@ async function activityTrigger({g, c}) {
     } else if (eventName === 'pull_request_review') {
         issueNum = context.payload.pull_request.number;
         eventUrl = context.payload.review.html_url;
+        timeline = context.payload.review.updated_at;
     }
 
     console.log(`eventName = ${eventName}`);
@@ -64,6 +69,7 @@ async function activityTrigger({g, c}) {
     console.log(`eventActor = ${eventActor}`);
     console.log(`issueNum = ${issueNum}`);
     console.log(`eventUrl = ${eventUrl}`);
+    console.log(`eventTime = ${timeline}`);
 
     const actionMap = {
         'issues.opened': 'opened an issue',
@@ -79,7 +85,7 @@ async function activityTrigger({g, c}) {
         'pull_request_review.submitted': 'submitted a pull request review'
     };
     const action = actionMap[`${eventName}.${eventAction}`];
-    let message = `@ ${eventActor} has ${action}: #[${issueNum}](${eventUrl})`;
+    let message = `@ ${eventActor} has ${action}: #[${issueNum}](${eventUrl}) at ${timeline}`;
     console.log(message);
 
     activity = [eventActor, message];
