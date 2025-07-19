@@ -4,7 +4,10 @@
  * @param {Object} context   - Context of the function calling queryIssueInfo()
  * @returns {Object}         - An object containing user activity history for issue
  */
-async function queryIssueHistory(github, context, issueNum) {
+async function queryIssueHistory(github, context) {
+  var github = github;
+  var context = context;
+
   const repoOwner = 'hackforla';
   const repoName = 'website';
 
