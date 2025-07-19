@@ -5,8 +5,8 @@
  * @returns {Object}         - An object containing user activity history for issue
  */
 async function queryIssueHistory(github, context, issueNum) {
-  const repoOwner = context.repo.owner;
-  const repoName = context.repo.repo;
+  const repoOwner = 'hackforla';
+  const repoName = 'website';
 
   const query = `query ($owner: String!, $repo: String!, $issueNum:Int!) {
   repository(owner: $owner, name: $repo) {
