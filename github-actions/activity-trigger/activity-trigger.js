@@ -73,7 +73,7 @@ async function activityTrigger({g, c}) {
     console.log(`eventUrl = ${eventUrl}`);
     console.log(`eventTime = ${timeline}`);
 
-    const isSkillsIssue = checkIfSkillsIssue(issueNum);
+    const isSkillsIssue = await checkIfSkillsIssue(issueNum);
     console.log(`isSkillsIssue: ${isSkillsIssue}`)
     if (isSkillsIssue) {
         console.log(`issueNum: ${issueNum} identified as Skills Issue`);
