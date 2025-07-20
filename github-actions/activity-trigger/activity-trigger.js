@@ -23,7 +23,7 @@ async function activityTrigger({g, c}) {
     let eventName = context.eventName;
     let eventAction = context.payload.action;
     let eventActor = context.actor;
-    
+    let activity = [];
 
 
     if (eventName === 'issues') {
@@ -74,9 +74,10 @@ async function activityTrigger({g, c}) {
     console.log(`eventTime = ${timeline}`);
 
     const isSkillsIssue = await checkIfSkillsIssue(issueNum);
-    console.log(`isSkillsIssue: ${isSkillsIssue}`)
-    if (isSkillsIssue) {
+    if (isSkillsIssue && eventAction == 'opened') {
         console.log(`issueNum: ${issueNum} identified as Skills Issue`);
+        // If Skills Issue doesn't exist in directory, add to it
+        return activity;
     }
 
     const actionMap = {
@@ -96,8 +97,8 @@ async function activityTrigger({g, c}) {
     let message = `@ ${eventActor} has ${action}: #[${issueNum}](${eventUrl}) at ${timeline}`;
     console.log(message);
 
-    // activity = [eventActor, message];
-    // return activity;
+    activity = [eventActor, message];
+    return activity;
 
 
     /**
@@ -113,9 +114,8 @@ async function activityTrigger({g, c}) {
             repo: context.repo.repo,
             issue_number: issueNum
         });
-        console.log(labelData.data);
         const isSkillsIssue = labelData.data.some(label => label.name === "Complexity: Prework");
-        console.log(isSkillsIssue);
+
         return isSkillsIssue;
     }
 

@@ -5,7 +5,7 @@ const fs = require('fs');
 var filepath = 'github-actions/utils/_data/skills-issue-directory.json';
 var skillsIssueData;
 
-/*
+/**
  * Matches username to the user's skillsIssueNum from JSON
  * @param {Array} username          - Key reference to look up user's Skill Issue
  * @return {Array} skillsIssueNum   - Corres. Skills Issue for user
