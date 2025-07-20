@@ -77,7 +77,7 @@ async function activityTrigger({g, c}) {
     if (isSkillsIssue) {
         console.log(`issueNum: ${issueNum} identified as Skills Issue`);
     }
-    
+
     const actionMap = {
         'issues.opened': 'opened an issue',
         'issues.completed': 'closed an issue as completed',
@@ -112,7 +112,7 @@ async function activityTrigger({g, c}) {
             repo: context.repo.repo,
             issue_number: issueNum
         });
-
+        console.log(labelData);
         const isSkillsIssue = labelData.some(label => label.name === "Complexity: Prework");
         return isSkillsIssue;
     }
