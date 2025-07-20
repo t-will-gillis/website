@@ -74,9 +74,11 @@ async function activityTrigger({g, c}) {
     console.log(`eventTime = ${timeline}`);
 
     const isSkillsIssue = await checkIfSkillsIssue(issueNum);
-    if (isSkillsIssue && eventAction == 'opened') {
+    if (isSkillsIssue) {
         console.log(`issueNum: ${issueNum} identified as Skills Issue`);
-        // If Skills Issue doesn't exist in directory, add to it
+        
+        // To do: If Skills Issue doesn't exist in directory, add to it
+        // To do: If eventAction == 'opened', let continue
         return activity;
     }
 
