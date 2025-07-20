@@ -95,8 +95,8 @@ async function activityTrigger({g, c}) {
     let message = `@ ${eventActor} has ${action}: #[${issueNum}](${eventUrl}) at ${timeline}`;
     console.log(message);
 
-    activity = [eventActor, message];
-    return activity;
+    // activity = [eventActor, message];
+    // return activity;
 
 
     /**
@@ -112,7 +112,9 @@ async function activityTrigger({g, c}) {
             repo: context.repo.repo,
             issue_number: issueNum
         });
+        console.log(labelData.data);
         const isSkillsIssue = labelData.data.some(label => label.name === "Complexity: Prework");
+        console.log(isSkillsIssue);
         return isSkillsIssue;
     }
 
