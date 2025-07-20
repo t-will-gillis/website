@@ -15,6 +15,7 @@ async function queryIssueHistory({g, c}) {
   const issueQuery = `query($owner: String!, $repo: String!, $issueNum:Int!) {
     repository(owner: $owner, name: $repo) {
       issue(number: $issueNum) {
+        title
         author { login }
         createdAt
         timelineItems(first: 100) {
@@ -32,6 +33,10 @@ async function queryIssueHistory({g, c}) {
             ... on UnassignedEvent {
               createdAt
               assignee { ... on User { login } }
+            }
+            ... on IssueComment {
+              createdAt
+              author { ... on User { login } }
             }
           }
         }
@@ -72,14 +77,15 @@ async function queryIssueHistory({g, c}) {
     const response = await github.graphql(issueQuery, variables);
     console.log(response)
     
+    // Extract the issue author and createdAt date
+    const issueAuthor = response.repository.issue.author.login;
+    const issueCreated = response.repository.issue.createdAt;
+
+    // Get timelineItems and then iterate
+    const timelineItems = response.repository.issue.timelineItems;
+
+
     /*
-    // Extract the list of project items associated with the issue
-    const projectData = response.repository.issue.projectItems.nodes;
-
-    // Since there is always one item associated with the issue,
-    // directly get the item's ID from the first index
-    const id = projectData[0].id;
-
     // Iterate through the field values of the first project item
     // and find the node that contains the 'name' property, then get its 'name' value
     const statusName = projectData[0].fieldValues.nodes.find((item) => 

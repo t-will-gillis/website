@@ -6,6 +6,8 @@
  * 
  */
 
+const retrieveSkillsIssue = require("../utils/retrieve-skills-issue");
+
 
 
 
@@ -71,6 +73,11 @@ async function activityTrigger({g, c}) {
     console.log(`eventUrl = ${eventUrl}`);
     console.log(`eventTime = ${timeline}`);
 
+    const isSkillsIssue = checkIfSkillsIssue(issueNum);
+    if (isSkillsIssue) {
+        console.log(`issueNum: ${issueNum} identified as Skills Issue`);
+    }
+    
     const actionMap = {
         'issues.opened': 'opened an issue',
         'issues.completed': 'closed an issue as completed',
@@ -90,6 +97,42 @@ async function activityTrigger({g, c}) {
 
     activity = [eventActor, message];
     return activity;
+
+
+    /**
+     * Helper function to check if issueNum references a Skills Issue
+     * @param {Number} issueNum   - issue number to check 
+     * @returns {Boolean}         - true if Skills Issue, false if not
+     */
+    async function checkIfSkillsIssue(issueNum) {
+
+        // https://docs.github.com/en/rest/issues/labels?apiVersion=2022-11-28#list-labels-for-an-issue
+        const labelData = await github.request('GET /repos/{owner}/{repo}/issues/{issue_number}/labels', {
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: issueNum
+        });
+
+        const isSkillsIssue = labelData.some(label => label.name === "Complexity: Prework");
+        return isSkillsIssue;
+    }
+
+    
+    /**
+     * Helper function to add entry to Skills Issue if not exists
+     * @param {String} assignee   - Assignee that should match
+     * @param {Number} issueNum   - issue number to check 
+     */
+    /*
+    async function addToSkillsDirectory(assignee, issueNum) {
+
+        try {
+            const entryExists = retrieveSkillsIssue(assignee);
+        }
+
+        return isSkillsIssue;
+    }
+    */
 }
 
 module.exports = activityTrigger;
