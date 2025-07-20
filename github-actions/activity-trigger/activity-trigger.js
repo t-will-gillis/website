@@ -112,8 +112,7 @@ async function activityTrigger({g, c}) {
             repo: context.repo.repo,
             issue_number: issueNum
         });
-        console.log(labelData);
-        const isSkillsIssue = labelData.some(label => label.name === "Complexity: Prework");
+        const isSkillsIssue = labelData.data.some(label => label.name === "Complexity: Prework");
         return isSkillsIssue;
     }
 
