@@ -16,12 +16,20 @@ async function retrieveSkillsIssue(eventActor) {
         direction: 'asc',
         per_page: 5,
     });
-    console.log('issueData:', issueData);
-    console.log('issueData.data:', issueData?.data);
-    const skillsIssue = issueData.data.find(issue => issue.labels.some(label => label.name === "Complexity: Prework"));
-    console.log(`FOUND IT?: ${skillsIssue.number}`)
 
-    return skillsIssueNum = skillsIssue ? skillsIssue.number : null;
+    console.log('Data check:', {
+        hasIssueData: !!issueData,
+        hasData: !!issueData?.data,
+        isArray: Array.isArray(issueData?.data),
+        firstIssue: issueData?.data?.[0]
+    });
+    // const skillsIssueNum = issueData.data.find(issue => issue.labels.some(label => label.name === "Complexity: Prework"));
+    // console.log(`FOUND IT?: ${skillsIssue.number}`)
+    const skillsIssueNum = issueData.data.find(issue => issue.labels.some(label => label.name === "Complexity: Prework")
+    )?.number || null;
+
+    console.log('Skills issue number:', skillsIssueNum);
+    return skillsIssueNum;
 
 }
 
