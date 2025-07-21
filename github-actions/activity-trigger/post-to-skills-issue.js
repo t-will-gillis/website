@@ -51,7 +51,7 @@ async function postToSkillsIssue({g, c}, activity) {
 
     if (commentFound) {
         const commentId = commentFoundId;
-        const originalBody = targetComment.body;
+        const originalBody = commentFound.body;
         const updatedBody = `${originalBody}\n${message}`;
         const body= JSON.stringify({ body: updatedBody })
         // https://docs.github.com/en/rest/issues/comments?apiVersion=2022-11-28#update-an-issue-comment
