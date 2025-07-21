@@ -17,10 +17,10 @@ async function retrieveSkillsIssue(eventActor) {
         per_page: 5,
     });
 
-    const skillsIssueNum = issueData.data.find(issue => issue.labels.some(label => label.name === "Complexity: Prework"))?.number || null;
-    console.log(`FOUND IT?: ${skillsIssueNum}`)
+    const skillsIssue = issueData.data.find(issue => issue.labels.some(label => label.name === "Complexity: Prework"));
+    console.log(`FOUND IT?: ${skillsIssue.number}`)
 
-    return skillsIssueNum;
+    return skillsIssueNum = skillsIssue ? skillsIssue.number : null;
 
 }
 
