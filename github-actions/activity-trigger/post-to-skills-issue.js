@@ -17,7 +17,7 @@ async function postToSkillsIssue({g, c}, activity) {
     // DONE: function to find Skills Issue
     // DONE: then add message to Skills Issue
     // DONE: check whether bot can edit an existing message... 
-    
+
     // to d0: If active member, open Skills- move to 'In progress'. else close Skills 
 
 
@@ -41,9 +41,9 @@ async function postToSkillsIssue({g, c}, activity) {
         issueNum: skillsIssueNum,
     });
 
-    if (!skillsPostComments.ok) {
-        throw new Error(`Failed to fetch comments: ${skillsPostComments.statusText}`);
-    }
+    // if (!skillsPostComments.ok) {
+    //     throw new Error(`Failed to fetch comments: ${skillsPostComments.statusText}`);
+    // }
     
     // Find the comment that included the MARKER text and append
     const comments = await skillsPostComments.json();
