@@ -69,11 +69,6 @@ async function postToSkillsIssue({g, c}, activity) {
     } else {
         const body = `${MARKER}\n## ${username} Activity Log\n${message}`;
         const postToSkillsIssue = await postComment(github, context, skillsIssueNum, body);
-        if (!postToSkillsIssue.ok) {
-            throw new Error(`Failed to update comment: ${postToSkillsIssue.statusText}`);
-        }
-        const addedComment = await postToSkillsIssue.json();
-        console.log('Comment added successfully:', addedComment.html_url);
     }
 
 
