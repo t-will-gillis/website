@@ -35,7 +35,7 @@ async function postToSkillsIssue({g, c}, activity) {
 
     // Retrieve all comments from the Skills Issue
     // https://docs.github.com/en/rest/issues/comments?apiVersion=2022-11-28#list-issue-comments
-    const skillsPostComments = await github.request('GET /repos/{owner}/{repo}/issues/{issueNum}/comments', {
+    const commentData = await github.request('GET /repos/{owner}/{repo}/issues/{issueNum}/comments', {
         owner,
         repo,
         issueNum: skillsIssueNum,
@@ -46,11 +46,11 @@ async function postToSkillsIssue({g, c}, activity) {
     // }
     
     // Find the comment that included the MARKER text and append
-    const comments = await skillsPostComments.json();
-    const targetComment = comments.find(comment.body.includes(MARKER));
+    const commentFound = commentData.data.some(comment => comment.body.includes(MARKER))
+    const commentFoundId = commentFound ? commentFound.id : null;
 
-    if (targetComment) {
-        const commentId = targetComment.id;
+    if (commentFound) {
+        const commentId = commentFoundId;
         const originalBody = targetComment.body;
         const updatedBody = `${originalBody}\n${message}`;
         const body= JSON.stringify({ body: updatedBody })
