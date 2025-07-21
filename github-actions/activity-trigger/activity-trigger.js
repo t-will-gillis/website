@@ -93,8 +93,6 @@ async function activityTrigger({g, c}) {
         return activity;
     }
 
-    getSkillsIssue(eventActor);
-    
     const actionMap = {
         'issues.opened': 'opened an issue',
         'issues.completed': 'closed an issue as completed',
@@ -133,9 +131,6 @@ async function activityTrigger({g, c}) {
 
         return isSkillsIssue;
     }
-
-
-
 }
 
 module.exports = activityTrigger;
