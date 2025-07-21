@@ -19,7 +19,7 @@ async function main({ g, c }) {
   const instructions = await makeComment()
   if (instructions !== null) {
     // the actual creation of the comment in github
-    await postComment(issueNumber, instructions, github, context)
+    await postComment(github, context, issueNumber, instructions);
   }
 }
 

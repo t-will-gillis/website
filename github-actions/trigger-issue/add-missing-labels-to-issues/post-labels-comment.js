@@ -52,7 +52,7 @@ async function main({ g, c }, { actionResult, addedLabels, issueNum }) {
 
   console.log('Comment will be posted to issue regarding missing labels.');
   const instructions = makeComment(addedLabels);
-  await postComment(issueNum, instructions, github, context);
+  await postComment(github, context, issueNum, instructions);
 }
 
 /**

@@ -35,7 +35,7 @@ async function main({ g, c }) {
 
   // Add issue number used to reference the issue and comment on the `Dev/PM Agenda and Notes`
   const commentBody = `**Review Inactive Team Members:** #` + issueNumber + inactiveWithOpen + nonTeamWithOpen;
-  await postComment(AGENDA_ISSUE_NUM, commentBody, github, context);
+  await postComment(github, context, AGENDA_ISSUE_NUM, commentBody);
 }
 
 const createIssue = async (owner, repo, inactiveLists) => {

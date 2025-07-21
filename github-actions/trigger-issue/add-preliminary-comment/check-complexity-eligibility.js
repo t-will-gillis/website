@@ -412,10 +412,10 @@ async function handleIssueComplexityNotPermitted(
     );  
 
     // Post comment on the issue
-    await postComment(currentIssueNum, commentBody, github, context);  
+    await postComment(github, context, currentIssueNum, commentBody);  
 
     // Post comment on the assignee's Skills Issue (Pre-work Checklist)
-    await postComment(preWorkIssue.issueNum, commentBody, github, context);
+    await postComment(github, context, preWorkIssue.issueNum, commentBody);
 
   } catch (error) {
     throw new Error(

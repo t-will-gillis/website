@@ -16,7 +16,7 @@ var context;
 async function main({ g, c }, { issueNum, instruction }) {
     github = g;
     context = c;
-    postComment(issueNum, decodeURI(instruction), github, context);
+    postComment(github, context, issueNum, decodeURI(instruction));
 }
 
 module.exports = main
