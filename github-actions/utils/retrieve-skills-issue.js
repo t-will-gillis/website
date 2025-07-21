@@ -14,9 +14,9 @@ async function retrieveSkillsIssue(eventActor) {
         assignee: eventActor,
         state: 'all',
         direction: 'asc',
-        per_page: 5,
+        per_page: 10,
     });
-
+/*
     console.log('First few issues with their labels:');
     issueData.data.slice(0, 5).forEach((issue, index) => {
     console.log(`Issue ${index + 1} (#${issue.number}):`, 
@@ -58,8 +58,7 @@ async function retrieveSkillsIssue(eventActor) {
     issue.labels.some(label => label.name.toLowerCase() === "complexity: prework")
     )?.number || null;
 
-    console.log('Skills issue number (case-insensitive):', skillsIssueNumCaseInsensitive);
-/*
+    console.log('Skills issue number (case-insensitive):', */
     // const skillsIssueNum = issueData.data.find(issue => issue.labels.some(label => label.name === "Complexity: Prework"));
     // console.log(`FOUND IT?: ${skillsIssue.number}`)
     const skillsIssueNum = issueData.data.find(issue => issue.labels.some(label => label.name === "Complexity: Prework")
@@ -67,7 +66,7 @@ async function retrieveSkillsIssue(eventActor) {
 
     console.log('Skills issue number:', skillsIssueNum);
     return skillsIssueNum;
-*/
+
 }
 
 
