@@ -1,8 +1,3 @@
-const { sk } = require("date-fns/locale");
-const retrieveSkillsIssue = require("../utils/retrieve-skills-issue");
-
-const excludedActors = ['HackforLABot', 'elizabethhonest'];
-
 /**
  * This function is triggered by member activities, which include:
  * the eventName (i.e. "issues", "pull_request", "pull_request_review", etc. ), 
@@ -10,12 +5,6 @@ const excludedActors = ['HackforLABot', 'elizabethhonest'];
  * the eventActor (user who is credited for the event).
  * 
  */
-
-
-
-
-
-
 async function activityTrigger({g, c}) {
 
     github = g;
@@ -30,6 +19,7 @@ async function activityTrigger({g, c}) {
     let eventActor = context.actor;
     let activity = [];
 
+    const excludedActors = ['HackforLABot', 'elizabethhonest'];
 
     if (eventName === 'issues') {
         // console.log('line 26')  // DELETE
