@@ -17,12 +17,49 @@ async function retrieveSkillsIssue(eventActor) {
         per_page: 5,
     });
 
-    console.log('Data check:', {
-        hasIssueData: !!issueData,
-        hasData: !!issueData?.data,
-        isArray: Array.isArray(issueData?.data),
-        firstIssue: issueData?.data?.[0]
+    console.log('First few issues with their labels:');
+    issueData.data.slice(0, 5).forEach((issue, index) => {
+    console.log(`Issue ${index + 1} (#${issue.number}):`, 
+        issue.labels.map(label => label.name)
+    );
     });
+
+    // Look for any labels that contain "Prework" (case-insensitive)
+    const preworkLabels = new Set();
+    issueData.data.forEach(issue => {
+    issue.labels.forEach(label => {
+        if (label.name.toLowerCase().includes('prework')) {
+        preworkLabels.add(label.name);
+        }
+    });
+    });
+    console.log('All labels containing "prework":', [...preworkLabels]);
+
+    // Look for any labels that contain "Complexity"
+    const complexityLabels = new Set();
+    issueData.data.forEach(issue => {
+    issue.labels.forEach(label => {
+        if (label.name.toLowerCase().includes('complexity')) {
+        complexityLabels.add(label.name);
+        }
+    });
+    });
+    console.log('All labels containing "complexity":', [...complexityLabels]);
+
+    // Try the original search
+    const skillsIssueNum = issueData.data.find(issue => 
+    issue.labels.some(label => label.name === "Complexity: Prework")
+    )?.number || null;
+
+    console.log('Skills issue number:', skillsIssueNum);
+
+    // Try case-insensitive search as backup
+    const skillsIssueNumCaseInsensitive = issueData.data.find(issue => 
+    issue.labels.some(label => label.name.toLowerCase() === "complexity: prework")
+    )?.number || null;
+
+    console.log('Skills issue number (case-insensitive):', skillsIssueNumCaseInsensitive);
+/*
     // const skillsIssueNum = issueData.data.find(issue => issue.labels.some(label => label.name === "Complexity: Prework"));
     // console.log(`FOUND IT?: ${skillsIssue.number}`)
     const skillsIssueNum = issueData.data.find(issue => issue.labels.some(label => label.name === "Complexity: Prework")
@@ -30,7 +67,7 @@ async function retrieveSkillsIssue(eventActor) {
 
     console.log('Skills issue number:', skillsIssueNum);
     return skillsIssueNum;
-
+*/
 }
 
 
