@@ -48,7 +48,8 @@ async function postToSkillsIssue({g, c}, activity) {
     // Find the comment that included the MARKER text and append
     const commentFound = commentData.data.some(comment => comment.body.includes(MARKER))
     const commentFoundId = commentFound ? commentFound.id : null;
-
+    console.log(commentFound.id);
+    console.log(commentFound.body);
     if (commentFound) {
         const commentId = commentFoundId;
         const originalBody = commentFound.body;
