@@ -16,12 +16,14 @@ async function postToSkillsIssue({g, c}, activity) {
     // DONE: if `username` == bot account (yes) or nonwebsite (maybe) END workflow
     // DONE: function to find Skills Issue
     // DONE: then add message to Skills Issue
-
+    // DONE: check whether bot can edit an existing message... 
+    
     // to d0: If active member, open Skills- move to 'In progress'. else close Skills 
-    // to do: check whether bot can edit an existing message... 
+
 
     // Retrieve user's Skills Issue
-    const skillsIssueNum = await retrieveSkillsIssue(username);
+    // const skillsIssueNum = await retrieveSkillsIssue(username);
+    const skillsIssueNum = 1191;
     
     if (skillsIssueNum) {
         console.log(`Found Skills Issue for ${username}: ${skillsIssueNum}`);
