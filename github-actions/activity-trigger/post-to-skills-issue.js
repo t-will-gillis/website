@@ -18,9 +18,9 @@ async function postToSkillsIssue({g, c}, activity) {
     // to do: check whether bot can edit an existing message... 
 
     // Retrieve user's Skills Issue
-    const skillsIssueNum = retrieveSkillsIssue(username);
-    await postComment(skillsIssueNum, message, github, context);
-    
+    const skillsIssueNum = await retrieveSkillsIssue(username);
+    // await postComment(skillsIssueNum, message, github, context);
+
 }
 
 module.exports = postToSkillsIssue;

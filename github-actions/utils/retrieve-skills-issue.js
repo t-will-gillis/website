@@ -1,33 +1,28 @@
-// Import modules
-const fs = require('fs');
-
-// Global variables
-var filepath = 'github-actions/utils/_data/skills-issue-directory.json';
-var skillsIssueData;
 
 /**
- * Matches username to the user's skillsIssueNum from JSON
- * @param {Array} username          - Key reference to look up user's Skill Issue
+ * Helper function to retrieve actor's Skills Issue
+ * @param {Array} eventActor          - Key reference to look up user's Skill Issue
  * @return {Array} skillsIssueNum   - Corres. Skills Issue for user
  */
-function retrieveSkillsIssue(username) {
+async function retrieveSkillsIssue(eventActor) {
 
-  // Retrieve Skills Issue directory if not read already
-  if (skillsIssueData === undefined) {
-    console.log(`Reading Skills Issue directory...`);
-    const rawData = fs.readFileSync(filepath, 'utf8');
-    skillsIssueData = JSON.parse(rawData);
-  }
+    // https://docs.github.com/en/rest/issues/labels?apiVersion=2022-11-28#list-repository-issues
+    const issueData = await github.request('GET /repos/{owner}/{repo}/issues', {
+        // owner: context.repo.owner,
+        owner: 'hackforla',
+        repo: context.repo.repo,
+        assignee: eventActor,
+        state: 'all',
+        direction: 'asc',
+        per_page: 5,
+    });
 
-  let skillsIssueNum = '';
+    const skillsIssueNum = issueData.data.find(issue => issue.labels.some(label => label.name === "Complexity: Prework"));
+    console.log(`FOUND IT: ${skillsIssueNum}`)
 
-  if (!username in skillsIssueData) {
-    throw new Error(`Failed to find username: '${username}'`);
-  }
-  skillsIssueNum = skillsIssueData[username];
-  console.log(`Success! Found Skills Issue: '${username}': '${skillsIssueNum}'`);
+    return skillsIssueNum ? skillsIssueNum.number : null;
 
-  return skillsIssueNum;
 }
+
 
 module.exports = retrieveSkillsIssue;

@@ -1,3 +1,8 @@
+const { sk } = require("date-fns/locale");
+const retrieveSkillsIssue = require("../utils/retrieve-skills-issue");
+
+const excludedActors = ['HackforLABot', 'elizabethhonest'];
+
 /**
  * This function is triggered by member activities, which include:
  * the eventName (i.e. "issues", "pull_request", "pull_request_review", etc. ), 
@@ -6,7 +11,7 @@
  * 
  */
 
-const retrieveSkillsIssue = require("../utils/retrieve-skills-issue");
+
 
 
 
@@ -73,15 +78,23 @@ async function activityTrigger({g, c}) {
     console.log(`eventUrl = ${eventUrl}`);
     console.log(`eventTime = ${timeline}`);
 
+    // Return immediately if the issueNum is a Skills Issue
     const isSkillsIssue = await checkIfSkillsIssue(issueNum);
     if (isSkillsIssue) {
         console.log(`issueNum: ${issueNum} identified as Skills Issue`);
-        
+
         // To do: If Skills Issue doesn't exist in directory, add to it
         // To do: If eventAction == 'opened', let continue
         return activity;
     }
 
+    // Return immediately if the eventActor is a bot
+    if (eventActor in excludedActors) {
+        return activity;
+    }
+
+    getSkillsIssue(eventActor);
+    
     const actionMap = {
         'issues.opened': 'opened an issue',
         'issues.completed': 'closed an issue as completed',
@@ -121,22 +134,8 @@ async function activityTrigger({g, c}) {
         return isSkillsIssue;
     }
 
-    
-    /**
-     * Helper function to add entry to Skills Issue if not exists
-     * @param {String} assignee   - Assignee that should match
-     * @param {Number} issueNum   - issue number to check 
-     */
-    /*
-    async function addToSkillsDirectory(assignee, issueNum) {
 
-        try {
-            const entryExists = retrieveSkillsIssue(assignee);
-        }
 
-        return isSkillsIssue;
-    }
-    */
 }
 
 module.exports = activityTrigger;
