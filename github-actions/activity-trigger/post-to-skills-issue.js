@@ -62,14 +62,9 @@ async function postToSkillsIssue({g, c}, activity) {
             commentId,
             body: updatedBody
         });
-        if (!patchSkillsIssue.ok) {
-            throw new Error(`Failed to update comment: ${patchSkillsIssue.statusText}`);
-        }
-        const updatedComment = await patchSkillsIssue.json();
-        console.log('Comment updated successfully:', updatedComment.html_url);
     } else {
         const body = `${MARKER}\n## ${username} Activity Log\n${message}`;
-        const postToSkillsIssue = await postComment(github, context, skillsIssueNum, body);
+        await postComment(github, context, skillsIssueNum, body);
     }
 
 
