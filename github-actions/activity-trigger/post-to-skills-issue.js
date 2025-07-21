@@ -53,13 +53,13 @@ async function postToSkillsIssue({g, c}, activity) {
         const commentId = commentFoundId;
         const originalBody = commentFound.body;
         const updatedBody = `${originalBody}\n${message}`;
-        const body= JSON.stringify({ body: updatedBody })
+        // const body= JSON.stringify({ body: updatedBody })
         // https://docs.github.com/en/rest/issues/comments?apiVersion=2022-11-28#update-an-issue-comment
         const patchSkillsIssue = await github.request('PATCH /repos/{owner}/{repo}/issues/comments/{commentId}', {
             owner,
             repo,
             commentId,
-            body
+            body: updatedBody
         });
         if (!patchSkillsIssue.ok) {
             throw new Error(`Failed to update comment: ${patchSkillsIssue.statusText}`);
