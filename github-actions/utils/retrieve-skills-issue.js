@@ -18,9 +18,9 @@ async function retrieveSkillsIssue(eventActor) {
     });
 
     const skillsIssueNum = issueData.data.find(issue => issue.labels.some(label => label.name === "Complexity: Prework"));
-    console.log(`FOUND IT: ${skillsIssueNum.number}`)
+    console.log(`FOUND IT: ${issueData.data.number}`)
 
-    return skillsIssueNum ? skillsIssueNum.number : null;
+    return skillsIssueNum ? issueData.data.number : null;
 
 }
 

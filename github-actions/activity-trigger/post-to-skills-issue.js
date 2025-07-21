@@ -19,6 +19,7 @@ async function postToSkillsIssue({g, c}, activity) {
 
     // Retrieve user's Skills Issue
     const skillsIssueNum = await retrieveSkillsIssue(username);
+    console.log(`in post to skills: ${skillsIssueNum}`)
     // await postComment(skillsIssueNum, message, github, context);
 
 }
