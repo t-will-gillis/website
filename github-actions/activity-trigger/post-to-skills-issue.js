@@ -26,9 +26,9 @@ async function postToSkillsIssue({g, c}, activity) {
     // DONE: If active member, open Skills- move to 'In progress'.
 
     // Retrieve user's Skills Issue
-    // const { skillsIssueNum, skillsIssueNodeId } = await retrieveSkillsIssue(username);
-    const skillsIssueNum  = 1191; 
-    const skillsIssueNodeId = "I_kwDOIOiMwM68Q49F";
+    const { skillsIssueNum, skillsIssueNodeId } = await retrieveSkillsIssue(username);
+    // const skillsIssueNum  = 1191; 
+    // const skillsIssueNodeId = "I_kwDOIOiMwM68Q49F";
 
     if (skillsIssueNum) {
         console.log(`Found Skills Issue for ${username}: ${skillsIssueNum}`);
@@ -49,8 +49,8 @@ async function postToSkillsIssue({g, c}, activity) {
     // Find the comment that included the MARKER text and append
     const commentFound = commentData.data.find(comment => comment.body.includes(MARKER))
     const commentFoundId = commentFound ? commentFound.id : null;
-    console.log(commentFound.id);
-    console.log(commentFound.body);
+    // console.log(commentFound.id);
+    // console.log(commentFound.body);
     if (commentFound) {
         const commentId = commentFoundId;
         const originalBody = commentFound.body;

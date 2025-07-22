@@ -21,7 +21,7 @@ async function retrieveSkillsIssue(eventActor) {
     const skillsIssueNum = skillsIssue ? skillsIssue.number : null;
     const skillsIssueNodeId = skillsIssue ? skillsIssue.node_id : null;
     
-    console.log(`Found skills issue: ${skillsIssueNum}`);
+    console.log(`Found skills issue ${skillsIssueNum}: ${skillsIssueNodeId}`);
 
     return {skillsIssueNum, skillsIssueNodeId};
 }
