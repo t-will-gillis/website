@@ -1,7 +1,7 @@
 const retrieveSkillsIssue = require('../utils/retrieve-skills-issue');
 const postComment = require('../utils/post-issue-comment');
 const checkTeamMembership = require('../utils/check-team-membership');
-const statusFieldIds = require('../../utils/_data/status-field-ids');
+const statusFieldIds = require('../utils/_data/status-field-ids');
 const mutateIssueStatus = require('../utils/mutate-issue-status');
 
 
@@ -77,8 +77,8 @@ async function postToSkillsIssue({g, c}, activity) {
             issueNum: skillsIssueNum,
             state: "open",
         });
-        // Update item's status to "New Issue Approval"
-        let statusValue = statusFieldIds('New_Issue_Approval');
+        // Update item's status to "In progress (actively working)"
+        let statusValue = statusFieldIds('In_Progress');
         await mutateIssueStatus(github, context, skillsIssueNodeId, statusValue);
     }
 }
