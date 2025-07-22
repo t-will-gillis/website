@@ -26,13 +26,12 @@ async function postToSkillsIssue({g, c}, activity) {
     // DONE: If active member, open Skills- move to 'In progress'.
 
     // Retrieve user's Skills Issue
-    const { skillsIssueNum, skillsIssueNodeId } = await retrieveSkillsIssue(username);
-    // const skillsIssueNum  = 1191; 
-    // const skillsIssueNodeId = "I_kwDOIOiMwM68Q49F";
+    // const { skillsIssueNum, skillsIssueNodeId } = await retrieveSkillsIssue(username);
+    const skillsIssueNum  = 1191; 
+    const skillsIssueNodeId = "I_kwDOIOiMwM68Q49F";
 
     if (skillsIssueNum) {
         console.log(`Found Skills Issue for ${username}: ${skillsIssueNum}`);
-        // await postComment(skillsIssueNum, message, github, context);
     } else {
         console.log(`Did not find Skills Issue for ${username}. Cannot post message.`);
         return
@@ -71,6 +70,7 @@ async function postToSkillsIssue({g, c}, activity) {
     const isActiveMember = await checkTeamMembership(github, username, team);
 
     if (isActiveMember) {
+        // Make sure Skills Issue is open
         await github.request('PATCH /repos/{owner}/{repo}/issues/{issueNum}', {
             owner,
             repo,
