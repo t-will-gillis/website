@@ -22,7 +22,6 @@ async function activityTrigger({g, c}) {
     const excludedActors = ['HackforLABot', 'elizabethhonest'];
 
     if (eventName === 'issues') {
-        // console.log('line 26')  // DELETE
         issueNum = context.payload.issue.number;
         eventUrl = context.payload.issue.html_url;
         timeline = context.payload.issue.updated_at;
@@ -30,11 +29,9 @@ async function activityTrigger({g, c}) {
         // change eventActor to the issue assignee, else to issue author
         assignee = context.payload.assignee?.login;
         if (eventAction != 'opened' && assignee != null ) {
-            // console.log('line 34')  // DELETE
             console.log(`Issue is ${eventAction}. Change eventActor => ${assignee}`);
             eventActor = assignee;
         } else {
-            // console.log('line 38')  // DELETE
             eventActor = context.payload.issue.user.login;
         }
         if (eventAction === 'closed') {
@@ -42,7 +39,6 @@ async function activityTrigger({g, c}) {
             eventAction = reason;
         }
     } else if (eventName === 'issue_comment') {
-        // console.log('line 46')  // DELETE
         issueNum = context.payload.issue.number;
         eventUrl = context.payload.comment.html_url;
         timeline = context.payload.comment.updated_at;
@@ -72,12 +68,8 @@ async function activityTrigger({g, c}) {
     const isSkillsIssue = await checkIfSkillsIssue(issueNum);
     if (isSkillsIssue) {
         console.log(`issueNum: ${issueNum} identified as Skills Issue`);
-
-        // To do: If Skills Issue doesn't exist in directory, add to it
-        // To do: If eventAction == 'opened', let continue
         return activity;
     }
-
     // Return immediately if the eventActor is a bot
     if (eventActor in excludedActors) {
         return activity;
@@ -110,7 +102,6 @@ async function activityTrigger({g, c}) {
      * @returns {Boolean}         - true if Skills Issue, false if not
      */
     async function checkIfSkillsIssue(issueNum) {
-
         // https://docs.github.com/en/rest/issues/labels?apiVersion=2022-11-28#list-labels-for-an-issue
         const labelData = await github.request('GET /repos/{owner}/{repo}/issues/{issue_number}/labels', {
             owner: context.repo.owner,

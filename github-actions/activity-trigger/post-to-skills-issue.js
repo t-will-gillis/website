@@ -1,11 +1,17 @@
+// Import modules
 const retrieveSkillsIssue = require('../utils/retrieve-skills-issue');
 const postComment = require('../utils/post-issue-comment');
 const checkTeamMembership = require('../utils/check-team-membership');
 const statusFieldIds = require('../utils/_data/status-field-ids');
 const mutateIssueStatus = require('../utils/mutate-issue-status');
 
-
-
+/**
+ * Function to retrieve Skills Issue and add comments
+ * @param {Object} github    - GitHub object 
+ * @param {Object} context   - Context object
+ * @param {Object} activity  - eventActor and message 
+ * 
+ */
 async function postToSkillsIssue({g, c}, activity) {
 
     github = g;
@@ -67,7 +73,7 @@ async function postToSkillsIssue({g, c}, activity) {
     }
 
     // Check whether eventActor is team member; if so open issue and move to "In progress"
-    const isActiveMember = await checkTeamMembership(github, username, team);
+    const isActiveMember = await checkTeamMembership(github, context, username, team);
 
     if (isActiveMember) {
         // Make sure Skills Issue is open
