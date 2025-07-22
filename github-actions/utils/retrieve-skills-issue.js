@@ -1,7 +1,7 @@
 
 /**
  * Helper function to retrieve actor's Skills Issue
- * @param {Array} eventActor          - Key reference to look up user's Skill Issue
+ * @param {Array} eventActor        - Key reference to look up user's Skill Issue
  * @return {Array} skillsIssueNum   - Corres. Skills Issue for user
  */
 async function retrieveSkillsIssue(eventActor) {
@@ -16,12 +16,14 @@ async function retrieveSkillsIssue(eventActor) {
         per_page: 10,
     });
 
-    const skillsIssueNum = issueData.data.find(issue => issue.labels.some(label => label.name === "Complexity: Prework")
-    )?.number || null;
+    // Find issue with the prework label, then extract issueNum and node_id
+    const skillsIssue = issueData.data.find(issue => issue.labels.some(label => label.name === "Complexity: Prework"));
+    const skillsIssueNum = skillsIssue ? skillsIssue.number : null;
+    const skillsIssueNodeId = skillsIssue ? skillsIssue.node_id : null;
     
     console.log(`Found skills issue: ${skillsIssueNum}`);
 
-    return skillsIssueNum;
+    return {skillsIssueNum, skillsIssueNodeId};
 }
 
 module.exports = retrieveSkillsIssue;
