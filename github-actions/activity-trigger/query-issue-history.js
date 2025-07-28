@@ -75,15 +75,16 @@ async function queryIssueHistory({g, c}) {
 
   try {
     const response = await github.graphql(issueQuery, variables);
-    console.log(response)
+    console.log(response);
     
     // Extract the issue author and createdAt date
     const issueAuthor = response.repository.issue.author.login;
     const issueCreated = response.repository.issue.createdAt;
-
+    console.log(issueAuthor);
+    console.log(issueCreated);
     // Get timelineItems and then iterate
     const timelineItems = response.repository.issue.timelineItems;
-
+    console.log(timelineItems);
 
     /*
     // Iterate through the field values of the first project item
