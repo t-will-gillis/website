@@ -109,6 +109,8 @@ async function queryIssueHistory({g, c}) {
   
       history.push([actor, __typename, createdAt]);
     });
+
+    console.log(history);
     /*
     // and find the node that contains the 'name' property, then get its 'name' value
     const statusName = projectData[0].fieldValues.nodes.find((item) => 
@@ -120,7 +122,7 @@ async function queryIssueHistory({g, c}) {
   
     return { id, statusName, statusId };
     */
-
+    
   } catch (error) {
     throw new Error(`Error finding Issue #${issueNum} id and status; error = ${error}`);
   }
