@@ -73,14 +73,17 @@ async function queryIssueHistory({g, c}) {
     issueNum
   };
 
-  const history = [];
+  let history = [];
+  let response;
+
   try {
-    const response = await github.graphql(issueQuery, variables);
+    response = await github.graphql(issueQuery, variables);
     
     // Extract the issue author and createdAt date
-    const issueAuthor = response.repository.issue.author.login;
-    const issueCreated = response.repository.issue.createdAt;
-    history.push([issueAuthor, 'OpenedEvent', issueCreated]);
+    let issueAuthor = response.repository.issue.author.login;
+    let issueCreated = response.repository.issue.createdAt;
+    let issueUrl = response.repository.issue.url;
+    history.push([issueAuthor, 'OpenedEvent', issueNum, issueUrl, issueCreated]);
     // console.log(issueAuthor);
     // console.log(issueCreated);
     
@@ -100,14 +103,16 @@ async function queryIssueHistory({g, c}) {
       let actor = null;
   
       if (__typename === 'AssignedEvent' || __typename === 'UnassignedEvent') {
-        actor = item.assignee?.login ?? null;
+        actor = item.assignee.login;
       } else if (__typename === 'IssueComment') {
-        actor = item.author?.login ?? null;
+        actor = item.author.login;
+        issueUrl = item.url;
       } else if (__typename === 'ClosedEvent') {
-        actor = item.actor?.login ?? null;
+        actor = item.actor.login;
+        issueUrl = item.url;
       }
   
-      history.push([actor, __typename, createdAt]);
+      history.push([actor, __typename, issueNum, issueUrl, createdAt]);
     });
 
     console.log(history);
@@ -123,8 +128,17 @@ async function queryIssueHistory({g, c}) {
     return { id, statusName, statusId };
     */
     
-  } catch (error) {
-    throw new Error(`Error finding Issue #${issueNum} id and status; error = ${error}`);
+  catch (issueError) {
+    console.warn('issueQuery failed, trying prQuery...', issueError.message);
+  
+    try {
+      response = await github.graphql(prQuery, variables);
+
+      
+    } catch (prError) {
+      console.error('Both issueQuery and prQuery failed.');
+      throw new Error(`GraphQL query failed:\n- Issue error: ${issueError.message}\n- PR error: ${prError.message}`);
+    }
   }
 }
 
