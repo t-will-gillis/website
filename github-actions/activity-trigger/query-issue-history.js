@@ -128,7 +128,7 @@ async function queryIssueHistory({g, c}) {
     return { id, statusName, statusId };
     */
     
-  catch (issueError) {
+  } catch (issueError) {
     console.warn('issueQuery failed, trying prQuery...', issueError.message);
   
     try {
