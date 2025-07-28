@@ -73,21 +73,43 @@ async function queryIssueHistory({g, c}) {
     issueNum
   };
 
+  const history = [];
   try {
     const response = await github.graphql(issueQuery, variables);
-    console.log(response);
     
     // Extract the issue author and createdAt date
     const issueAuthor = response.repository.issue.author.login;
     const issueCreated = response.repository.issue.createdAt;
-    console.log(issueAuthor);
-    console.log(issueCreated);
-    // Get timelineItems and then iterate
-    const timelineItems = response.repository.issue.timelineItems;
-    console.log(timelineItems);
+    history.push([issueAuthor, 'OpenedEvent', issueCreated]);
+    // console.log(issueAuthor);
+    // console.log(issueCreated);
+    
+    // Get timelineItems and then iterate and extract relevant info
+    const timelineItems = response.repository.issue.timelineItems.nodes;
+    const relevantTypes = new Set([
+      'AssignedEvent',
+      'UnassignedEvent',
+      'IssueComment',
+      'ClosedEvent'
+    ]);
 
-    /*
     // Iterate through the field values of the first project item
+    timelineItems.filter(item => relevantTypes.has(item.__typename)).map(item => {    
+      const { __typename, createdAt } = item;
+  
+      let actor = null;
+  
+      if (__typename === 'AssignedEvent' || __typename === 'UnassignedEvent') {
+        actor = item.assignee?.login ?? null;
+      } else if (__typename === 'IssueComment') {
+        actor = item.author?.login ?? null;
+      } else if (__typename === 'ClosedEvent') {
+        actor = item.actor?.login ?? null;
+      }
+  
+      history.push([actor, __typename, createdAt]);
+    });
+    /*
     // and find the node that contains the 'name' property, then get its 'name' value
     const statusName = projectData[0].fieldValues.nodes.find((item) => 
       item.hasOwnProperty("name")).name;
