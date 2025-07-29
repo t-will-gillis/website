@@ -18,6 +18,7 @@ async function queryIssueHistory({g, c}) {
         title
         author { login }
         createdAt
+        url
         timelineItems(first: 100) {
           nodes {
             __typename
@@ -25,6 +26,7 @@ async function queryIssueHistory({g, c}) {
               actor { login }
               createdAt
               stateReason
+              url
             }
             ... on AssignedEvent {
               createdAt
@@ -37,6 +39,7 @@ async function queryIssueHistory({g, c}) {
             ... on IssueComment {
               createdAt
               author { ... on User { login } }
+              url
             }
           }
         }
@@ -100,7 +103,8 @@ async function queryIssueHistory({g, c}) {
     timelineItems.filter(item => relevantTypes.has(item.__typename)).map(item => {    
       const { __typename, createdAt } = item;
   
-      let actor = null;
+      let actor = '';
+      let reason = '';
   
       if (__typename === 'AssignedEvent' || __typename === 'UnassignedEvent') {
         actor = item.assignee.login;
@@ -110,6 +114,8 @@ async function queryIssueHistory({g, c}) {
       } else if (__typename === 'ClosedEvent') {
         actor = item.actor.login;
         issueUrl = item.url;
+        reason = item.reason
+        __typename = 'Closed'+ reason;
       }
   
       history.push([actor, __typename, issueNum, issueUrl, createdAt]);
