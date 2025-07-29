@@ -10,7 +10,7 @@ async function queryIssueHistory({g, c}) {
 
   const repoOwner = 'hackforla';
   const repoName = 'website';
-  let issueNum = 7610;
+  let issueNum = 8250;
 
   const issueQuery = `query($owner: String!, $repo: String!, $issueNum:Int!) {
     repository(owner: $owner, name: $repo) {
