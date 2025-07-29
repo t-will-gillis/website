@@ -82,13 +82,11 @@ async function queryIssueHistory({g, c}) {
   try {
     response = await github.graphql(issueQuery, variables);
     
-    // Extract the issue author and createdAt date
+    // Extract the issueAuthor, issueCreated date, and issueUrl
     let issueAuthor = response.repository.issue.author.login;
     let issueCreated = response.repository.issue.createdAt;
     let issueUrl = response.repository.issue.url;
     history.push([issueAuthor, 'OpenedEvent', issueNum, issueUrl, issueCreated]);
-    // console.log(issueAuthor);
-    // console.log(issueCreated);
     
     // Get timelineItems and then iterate and extract relevant info
     const timelineItems = response.repository.issue.timelineItems.nodes;
@@ -99,7 +97,7 @@ async function queryIssueHistory({g, c}) {
       'ClosedEvent'
     ]);
 
-    // Iterate through the field values of the first project item
+    // Iterate through the field values of the timeline to extract actors, events, timelines
     timelineItems.filter(item => relevantTypes.has(item.__typename)).map(item => {    
       const { __typename, createdAt } = item;
   
@@ -115,32 +113,57 @@ async function queryIssueHistory({g, c}) {
       } else if (__typename === 'ClosedEvent') {
         actor = item.actor.login;
         issueUrl = item.url;
-        reason = item.reason
+        reason = item.stateReason;
         issueEvent = 'Closed'+ reason;
       }
-  
       history.push([actor, issueEvent, issueNum, issueUrl, createdAt]);
     });
 
     console.log(history);
-    /*
-    // and find the node that contains the 'name' property, then get its 'name' value
-    const statusName = projectData[0].fieldValues.nodes.find((item) => 
-      item.hasOwnProperty("name")).name;
-    
-    // Similarly, find node with 'optionId' property, then get is 'optionId' value
-    const statusId = projectData[0].fieldValues.nodes.find((item) => 
-      item.hasOwnProperty("optionId")).optionId;
-  
-    return { id, statusName, statusId };
-    */
+    return history;
     
   } catch (issueError) {
     console.warn('issueQuery failed, trying prQuery...', issueError.message);
-  
+
+    // If issueQuery fails, proceed with prQuery
     try {
       response = await github.graphql(prQuery, variables);
 
+      // Extract the prAuthor, createdAt date, and url
+      let prAuthor = response.repository.pullRequest.author.login;
+      let prCreated = response.repository.pullRequest.createdAt;
+      let prUrl = response.repository.pullRequest.url;
+      history.push([prAuthor, 'OpenedEvent', issueNum, prUrl, prCreated]);
+  
+      
+      // Get timelineItems and then iterate and extract relevant info
+      const timelineItems = response.repository.pullRequest.timelineItems.nodes;
+      const relevantTypes = new Set([
+        'PullRequestReview',
+        'ClosedEvent'
+      ]);
+  
+      // Iterate through the timeline field values to extract actors, events, timelines
+      timelineItems.filter(item => relevantTypes.has(item.__typename)).map(item => {    
+        const { __typename, createdAt } = item;
+    
+        let actor = '';
+        let reason = '';
+        let prEvent = __typename;
+    
+        if (__typename === 'PullRequestReview') {
+          actor = item.author.login;
+        } else if (__typename === 'ClosedEvent') {
+          actor = item.actor.login;
+          prUrl = item.url;
+          reason = item.stateReason;
+          prEvent = 'PR_'+ reason;
+        }
+        history.push([actor, prEvent, issueNum, prUrl, createdAt]);
+      });
+  
+      console.log(history);
+      return history;
       
     } catch (prError) {
       console.error('Both issueQuery and prQuery failed.');
