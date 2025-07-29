@@ -114,7 +114,7 @@ async function queryIssueHistory({g, c}) {
         actor = item.actor.login;
         issueUrl = item.url;
         reason = item.stateReason;
-        issueEvent = 'Closed'+ reason;
+        issueEvent = 'ISSUE_'+ reason;
       }
       history.push([actor, issueEvent, issueNum, issueUrl, createdAt]);
     });
@@ -156,6 +156,7 @@ async function queryIssueHistory({g, c}) {
         } else if (__typename === 'ClosedEvent') {
           actor = item.actor.login;
           prUrl = item.url;
+          console.log(item.url);
           reason = item.stateReason;
           prEvent = 'PR_'+ reason;
         }
