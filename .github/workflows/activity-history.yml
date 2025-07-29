@@ -20,3 +20,12 @@ jobs:
           const activity = script({g: github, c: context})
           return activity
 
+    # NOTE: the the URL below matches the **current deployment URL** of the Apps Script
+    - name: Send POST request to Google Apps Script
+      env:
+        activity_history: ${{ steps.gather-issue-event-details.outputs.result }}
+      run: |
+        curl -X POST "https://script.google.com/macros/s/AKfycbzrnC_8DpiAFEIObQKkLmQrl74bc7b3JIyg-piK5ZI9QEeb1_ok11PFfgRG1HJC5nscPQ/exec" \
+        -H "Content-Type: application/json" \
+        -d "$activity_history"
+
