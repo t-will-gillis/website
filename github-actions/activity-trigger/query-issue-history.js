@@ -52,17 +52,20 @@ async function queryIssueHistory({g, c}) {
       pullRequest(number: $issueNum) {
         author { login }
         createdAt
+        url
         timelineItems(first: 100) {
           nodes {
             __typename
             ... on PullRequestReview {
               createdAt
               author { login }
+              url
             }
             ... on ClosedEvent {
               actor { login }
               createdAt
               stateReason
+              url
             }
           }
         }
@@ -145,7 +148,7 @@ async function queryIssueHistory({g, c}) {
   
       // Iterate through the timeline field values to extract actors, events, timelines
       timelineItems.filter(item => relevantTypes.has(item.__typename)).map(item => {    
-        const { __typename, url, createdAt } = item;
+        const { __typename, createdAt } = item;
     
         let actor = '';
         let reason = '';
@@ -156,7 +159,6 @@ async function queryIssueHistory({g, c}) {
         } else if (__typename === 'ClosedEvent') {
           actor = item.actor.login;
           prUrl = item.url;
-          console.log(item);
           reason = item.stateReason;
           prEvent = 'PR_'+ reason;
         }
