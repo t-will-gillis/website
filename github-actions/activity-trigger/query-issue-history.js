@@ -105,6 +105,7 @@ async function queryIssueHistory({g, c}) {
   
       let actor = '';
       let reason = '';
+      let issueEvent = __typename;
   
       if (__typename === 'AssignedEvent' || __typename === 'UnassignedEvent') {
         actor = item.assignee.login;
@@ -115,10 +116,10 @@ async function queryIssueHistory({g, c}) {
         actor = item.actor.login;
         issueUrl = item.url;
         reason = item.reason
-        __typename = 'Closed'+ reason;
+        issueEvent = 'Closed'+ reason;
       }
   
-      history.push([actor, __typename, issueNum, issueUrl, createdAt]);
+      history.push([actor, issueEvent, issueNum, issueUrl, createdAt]);
     });
 
     console.log(history);
