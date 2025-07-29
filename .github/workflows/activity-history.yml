@@ -25,7 +25,8 @@ jobs:
       env:
         activity_history: ${{ steps.gather-issue-event-details.outputs.result }}
       run: |
-        curl -X POST "https://script.google.com/macros/s/AKfycbwFfcjdp0-6scK6mW4cVtE47KPH7VGWvcR3n8caM0vl3DWRkC6RgusAvLqku88459CY8g/exec" \
+        echo ${{ steps.gather-issue-event-details.outputs.result }}
+        curl -X POST "https://script.google.com/macros/s/AKfycbzz1eBI6-w4Qk3SMwsj_slbFN6ES-jJPym6xT2mW3oREcHndTLZtnzIuMSQiR_rFWmtTg/exec" \
         -H "Content-Type: application/json" \
         -d "$activity_history"
 
