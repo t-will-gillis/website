@@ -156,6 +156,7 @@ async function queryIssueHistory({g, c}) {
     
         if (__typename === 'PullRequestReview') {
           actor = item.author.login;
+          prUrl = item.url;
         } else if (__typename === 'ClosedEvent') {
           actor = item.actor.login;
           prUrl = item.url;
