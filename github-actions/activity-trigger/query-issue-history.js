@@ -59,6 +59,7 @@ async function queryIssueHistory({g, c}) {
           author { login }
           createdAt
           url
+          state
           timelineItems(first: 100) {
             nodes {
               __typename
@@ -164,6 +165,7 @@ async function queryIssueHistory({g, c}) {
         let eventActor = response.repository.pullRequest.author.login;
         let createdAt = response.repository.pullRequest.createdAt;
         let prUrl = response.repository.pullRequest.url;
+        let closeState = response.repository.pullRequest.state;
         let message = `@ ${eventActor} has opened a pull request: #[${issueNum}](${prUrl}) at ${createdAt}`;
         history.push([eventActor, createdAt, message]);
     
@@ -189,8 +191,7 @@ async function queryIssueHistory({g, c}) {
           } else if (__typename === 'ClosedEvent') {
             eventActor = item.actor.login;
             prUrl = item.url;
-            reason = item.stateReason;
-            prEvent = 'PullRequest'+ reason;
+            prEvent = 'PullRequest'+ closeState;
           }
           const actionMap = {
             'PullRequestCLOSED': 'had a pull request closed w/o merging',
