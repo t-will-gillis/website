@@ -89,7 +89,8 @@ async function queryIssueHistory({g, c}) {
     let issueAuthor = response.repository.issue.author.login;
     let issueCreated = response.repository.issue.createdAt;
     let issueUrl = response.repository.issue.url;
-    history.push([issueAuthor, 'OpenedEvent', issueNum, issueUrl, issueCreated]);
+    let message = `@ ${eventActor} has opened an issue: #[${issueNum}](${eventUrl}) at ${timeline}`;
+    history.push([issueAuthor, issueCreated, message]);
     
     // Get timelineItems and then iterate and extract relevant info
     const timelineItems = response.repository.issue.timelineItems.nodes;
@@ -110,6 +111,8 @@ async function queryIssueHistory({g, c}) {
   
       if (__typename === 'AssignedEvent' || __typename === 'UnassignedEvent') {
         actor = item.assignee.login;
+      } else if (__typename === 'UnassignedEvent') {
+        actor = item.assignee.login;
       } else if (__typename === 'IssueComment') {
         actor = item.author.login;
         issueUrl = item.url;
@@ -117,9 +120,21 @@ async function queryIssueHistory({g, c}) {
         actor = item.actor.login;
         issueUrl = item.url;
         reason = item.stateReason;
-        issueEvent = 'ISSUE_'+ reason;
+        issueEvent = 'Issue'+ reason;
       }
-      history.push([actor, issueEvent, issueNum, issueUrl, createdAt]);
+
+      const actionMap = {
+        'IssueCOMPLETED': 'closed an issue as completed',
+        'IssueNOT_PLANNED': 'closed an issue as not planned',
+        'IssueDUPLICATE': 'closed an issue as duplicate',
+        'AssignedEvent': 'been assigned to an issue',
+        'UnssignedEvent': 'been unassigned from an issue',
+        'IssueComment': 'commented on an issue or pr'
+      };
+      const action = actionMap[`${issueEvent}`];
+      message = `@ ${eventActor} has ${action}: #[${issueNum}](${eventUrl}) at ${timeline}`;
+
+      history.push([actor, createdAt, message]);
     });
 
     console.log(history);
@@ -136,7 +151,8 @@ async function queryIssueHistory({g, c}) {
       let prAuthor = response.repository.pullRequest.author.login;
       let prCreated = response.repository.pullRequest.createdAt;
       let prUrl = response.repository.pullRequest.url;
-      history.push([prAuthor, 'OpenedEvent', issueNum, prUrl, prCreated]);
+      let message = `@ ${eventActor} has opened a pull request: #[${issueNum}](${eventUrl}) at ${timeline}`;
+      history.push([prAuthor, prCreated, message]);
   
       
       // Get timelineItems and then iterate and extract relevant info
@@ -161,9 +177,17 @@ async function queryIssueHistory({g, c}) {
           actor = item.actor.login;
           prUrl = item.url;
           reason = item.stateReason;
-          prEvent = 'PR_'+ reason;
+          prEvent = 'PullRequest'+ reason;
         }
-        history.push([actor, prEvent, issueNum, prUrl, createdAt]);
+        const actionMap = {
+          'PullRequestCLOSED': 'had a pull request closed w/o merging',
+          'PullRequestMERGED': 'had a pull request merged',
+          'PullRequestReview': 'submitted a pull request review'
+        };
+        const action = actionMap[`${prEvent}`];
+        message = `@ ${eventActor} has ${action}: #[${issueNum}](${eventUrl}) at ${timeline}`;
+
+        history.push([actor, createdAt, message]);
       });
   
       console.log(history);
