@@ -222,8 +222,8 @@ async function queryIssueHistory({g, c}) {
         });
         if (!labelData.ok) {
           if (labelData.status === 410) {
-            console.log(`issueNumL ${issueNum} identified as MISSING`);
-            return false
+            console.log(`issueNumL ${issueNum} identified as MISSING ***`);
+            return True
           } else {
             throw new Error(`Unexpected status: ${labelData.status}`);
           }
