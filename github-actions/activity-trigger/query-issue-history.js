@@ -151,7 +151,7 @@ async function queryIssueHistory({g, c}) {
       let prAuthor = response.repository.pullRequest.author.login;
       let prCreated = response.repository.pullRequest.createdAt;
       let prUrl = response.repository.pullRequest.url;
-      let message = `@ ${eventActor} has opened a pull request: #[${issueNum}](${eventUrl}) at ${timeline}`;
+      let message = `@ ${prAuthor} has opened a pull request: #[${issueNum}](${prUrl}) at ${prCreated}`;
       history.push([prAuthor, prCreated, message]);
   
       
@@ -166,15 +166,15 @@ async function queryIssueHistory({g, c}) {
       timelineItems.filter(item => relevantTypes.has(item.__typename)).map(item => {    
         const { __typename, createdAt } = item;
     
-        let actor = '';
+        let prActor = '';
         let reason = '';
         let prEvent = __typename;
     
         if (__typename === 'PullRequestReview') {
-          actor = item.author.login;
+          prActor = item.author.login;
           prUrl = item.url;
         } else if (__typename === 'ClosedEvent') {
-          actor = item.actor.login;
+          prActor = item.actor.login;
           prUrl = item.url;
           reason = item.stateReason;
           prEvent = 'PullRequest'+ reason;
@@ -185,9 +185,9 @@ async function queryIssueHistory({g, c}) {
           'PullRequestReview': 'submitted a pull request review'
         };
         const action = actionMap[`${prEvent}`];
-        message = `@ ${eventActor} has ${action}: #[${issueNum}](${eventUrl}) at ${timeline}`;
+        message = `@ ${prActor} has ${action}: #[${issueNum}](${prUrl}) at ${createdAt}`;
 
-        history.push([actor, createdAt, message]);
+        history.push([prActor, createdAt, message]);
       });
   
       console.log(history);
