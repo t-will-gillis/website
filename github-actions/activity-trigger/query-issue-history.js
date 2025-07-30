@@ -96,11 +96,11 @@ async function queryIssueHistory({g, c}) {
       response = await github.graphql(issueQuery, variables);
       
       // Extract the issueAuthor, issueCreated date, and issueUrl
-      let issueAuthor = response.repository.issue.author.login;
+      let eventActor = response.repository.issue.author.login;
       let issueCreated = response.repository.issue.createdAt;
       let issueUrl = response.repository.issue.url;
       let message = `@ ${eventActor} has opened an issue: #[${issueNum}](${eventUrl}) at ${timeline}`;
-      history.push([issueAuthor, issueCreated, message]);
+      history.push([eventActor, issueCreated, message]);
       
       // Get timelineItems and then iterate and extract relevant info
       const timelineItems = response.repository.issue.timelineItems.nodes;
@@ -120,14 +120,14 @@ async function queryIssueHistory({g, c}) {
         let issueEvent = __typename;
     
         if (__typename === 'AssignedEvent' || __typename === 'UnassignedEvent') {
-          actor = item.assignee.login;
+          eventActor = item.assignee.login;
         } else if (__typename === 'UnassignedEvent') {
-          actor = item.assignee.login;
+          eventActor = item.assignee.login;
         } else if (__typename === 'IssueComment') {
-          actor = item.author.login;
+          eventActor = item.author.login;
           issueUrl = item.url;
         } else if (__typename === 'ClosedEvent') {
-          actor = item.actor.login;
+          eventActor = item.actor.login;
           issueUrl = item.url;
           reason = item.stateReason;
           issueEvent = 'Issue'+ reason;
@@ -158,11 +158,11 @@ async function queryIssueHistory({g, c}) {
         response = await github.graphql(prQuery, variables);
   
         // Extract the prAuthor, createdAt date, and url
-        let prAuthor = response.repository.pullRequest.author.login;
-        let prCreated = response.repository.pullRequest.createdAt;
+        let eventActor = response.repository.pullRequest.author.login;
+        let createdAt = response.repository.pullRequest.createdAt;
         let prUrl = response.repository.pullRequest.url;
-        let message = `@ ${prAuthor} has opened a pull request: #[${issueNum}](${prUrl}) at ${prCreated}`;
-        history.push([prAuthor, prCreated, message]);
+        let message = `@ ${eventActor} has opened a pull request: #[${issueNum}](${prUrl}) at ${createdAt}`;
+        history.push([eventActor, createdAt, message]);
     
         
         // Get timelineItems and then iterate and extract relevant info
@@ -181,10 +181,10 @@ async function queryIssueHistory({g, c}) {
           let prEvent = __typename;
       
           if (__typename === 'PullRequestReview') {
-            prActor = item.author.login;
+            eventActor = item.author.login;
             prUrl = item.url;
           } else if (__typename === 'ClosedEvent') {
-            prActor = item.actor.login;
+            eventActor = item.actor.login;
             prUrl = item.url;
             reason = item.stateReason;
             prEvent = 'PullRequest'+ reason;
@@ -195,9 +195,8 @@ async function queryIssueHistory({g, c}) {
             'PullRequestReview': 'submitted a pull request review'
           };
           const action = actionMap[`${prEvent}`];
-          message = `@ ${prActor} has ${action}: #[${issueNum}](${prUrl}) at ${createdAt}`;
-  
-          history.push([prActor, createdAt, message]);
+          message = `@ ${eventActor} has ${action}: #[${issueNum}](${prUrl}) at ${createdAt}`;
+          history.push([eventActor, createdAt, message]);
         });
     
         console.log(history);
