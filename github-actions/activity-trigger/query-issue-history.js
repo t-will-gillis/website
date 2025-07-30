@@ -123,7 +123,7 @@ async function queryIssueHistory({g, c}) {
     });
 
     console.log(history);
-    return history;
+    return JSON.stringify(history);
     
   } catch (issueError) {
     console.warn('issueQuery failed, trying prQuery...', issueError.message);
@@ -167,7 +167,7 @@ async function queryIssueHistory({g, c}) {
       });
   
       console.log(history);
-      return history;
+      return JSON.stringify(history);
       
     } catch (prError) {
       console.error('Both issueQuery and prQuery failed.');
