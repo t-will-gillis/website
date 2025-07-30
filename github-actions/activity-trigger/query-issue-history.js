@@ -224,7 +224,7 @@ async function queryIssueHistory({g, c}) {
         return isSkillsIssue;
       } catch (err) {
         console.log(`issueNum: ${issueNum} some error occured: `);
-        return True;
+        return true;
       }
      
   }
