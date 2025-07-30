@@ -97,10 +97,10 @@ async function queryIssueHistory({g, c}) {
       
       // Extract the issueAuthor, issueCreated date, and issueUrl
       let eventActor = response.repository.issue.author.login;
-      let issueCreated = response.repository.issue.createdAt;
+      let createdAt = response.repository.issue.createdAt;
       let issueUrl = response.repository.issue.url;
       let message = `@ ${eventActor} has opened an issue: #[${issueNum}](${issueUrl}) at ${createdAt}`;
-      history.push([eventActor, issueCreated, message]);
+      history.push([eventActor, createdAt, message]);
       
       // Get timelineItems and then iterate and extract relevant info
       const timelineItems = response.repository.issue.timelineItems.nodes;
