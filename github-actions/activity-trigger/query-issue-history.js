@@ -99,7 +99,7 @@ async function queryIssueHistory({g, c}) {
       let eventActor = response.repository.issue.author.login;
       let issueCreated = response.repository.issue.createdAt;
       let issueUrl = response.repository.issue.url;
-      let message = `@ ${eventActor} has opened an issue: #[${issueNum}](${eventUrl}) at ${timeline}`;
+      let message = `@ ${eventActor} has opened an issue: #[${issueNum}](${issueUrl}) at ${timeline}`;
       history.push([eventActor, issueCreated, message]);
       
       // Get timelineItems and then iterate and extract relevant info
@@ -142,9 +142,9 @@ async function queryIssueHistory({g, c}) {
           'IssueComment': 'commented on an issue or pr'
         };
         const action = actionMap[`${issueEvent}`];
-        message = `@ ${eventActor} has ${action}: #[${issueNum}](${eventUrl}) at ${timeline}`;
+        message = `@ ${eventActor} has ${action}: #[${issueNum}](${issueUrl}) at ${createdAt}`;
   
-        history.push([actor, createdAt, message]);
+        history.push([eventActor, createdAt, message]);
       });
   
       console.log(history);
