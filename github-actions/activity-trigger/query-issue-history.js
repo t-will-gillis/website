@@ -13,8 +13,8 @@ async function queryIssueHistory({g, c}) {
   
   let history = [];
   
-  let start = 8026;
-  let end = 8099;
+  let start = 8100;
+  let end = 8199;
   for (let i = start; i <= end; i++) {
     let issueNum = i;
   
@@ -151,7 +151,7 @@ async function queryIssueHistory({g, c}) {
         history.push([eventActor, createdAt, message]);
       });
   
-      console.log(history);
+      // console.log(history);
 
       
     } catch (issueError) {
@@ -203,7 +203,7 @@ async function queryIssueHistory({g, c}) {
           history.push([eventActor, createdAt, message]);
         });
     
-        console.log(history);
+        // console.log(history);
         
         
       } catch (prError) {
