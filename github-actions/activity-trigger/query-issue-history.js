@@ -10,7 +10,10 @@ async function queryIssueHistory({g, c}) {
 
   const repoOwner = 'hackforla';
   const repoName = 'website';
-  let start = 8000;
+  
+  let history = [];
+  
+  let start = 8001;
   let end = 8025;
   for (let i = start; i <= end; i++) {
     let issueNum = i;
@@ -82,7 +85,7 @@ async function queryIssueHistory({g, c}) {
       issueNum
     };
   
-    let history = [];
+
     let response;
 
     // Return immediately if the issueNum is a Skills Issue
@@ -148,7 +151,7 @@ async function queryIssueHistory({g, c}) {
       });
   
       console.log(history);
-      return JSON.stringify(history);
+
       
     } catch (issueError) {
       console.warn('issueQuery failed, trying prQuery...', issueError.message);
@@ -200,7 +203,7 @@ async function queryIssueHistory({g, c}) {
         });
     
         console.log(history);
-        return JSON.stringify(history);
+        
         
       } catch (prError) {
         console.error('Both issueQuery and prQuery failed.');
@@ -219,6 +222,7 @@ async function queryIssueHistory({g, c}) {
 
       return isSkillsIssue;
   }
+  return JSON.stringify(history);
 }
 
 module.exports = queryIssueHistory;
