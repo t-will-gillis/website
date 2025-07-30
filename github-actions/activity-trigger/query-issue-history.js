@@ -213,15 +213,27 @@ async function queryIssueHistory({g, c}) {
     }
   }
     async function checkIfSkillsIssue(issueNum) {
-      // https://docs.github.com/en/rest/issues/labels?apiVersion=2022-11-28#list-labels-for-an-issue
-      const labelData = await github.request('GET /repos/{owner}/{repo}/issues/{issue_number}/labels', {
-          owner: 'hackforla',
-          repo: 'website',
-          issue_number: issueNum
-      });
-      const isSkillsIssue = labelData.data.some(label => label.name === "Complexity: Prework");
-
-      return isSkillsIssue;
+      try {
+        // https://docs.github.com/en/rest/issues/labels?apiVersion=2022-11-28#list-labels-for-an-issue
+        const labelData = await github.request('GET /repos/{owner}/{repo}/issues/{issue_number}/labels', {
+            owner: 'hackforla',
+            repo: 'website',
+            issue_number: issueNum
+        });
+        if (!labelData.ok) {
+          if (labelData.status === 410) {
+            console.log(`issueNumL ${issueNum} identified as MISSING`);
+            return false
+          } else {
+            throw new Error(`Unexpected status: ${labelData.status}`);
+          }
+        }
+        const isSkillsIssue = labelData.data.some(label => label.name === "Complexity: Prework");
+        return isSkillsIssue;
+      } catch (err) {
+        console.error('Some error occured: ', err.message);
+      }
+     
   }
   return JSON.stringify(history);
 }
