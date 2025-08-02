@@ -115,23 +115,26 @@ async function queryIssueHistory({g, c}) {
         'ClosedEvent'
       ]);
   
+      let assignee = '';
+      let reason = '';
+
       // Iterate through the field values of the timeline to extract actors, events, timelines
       timelineItems.filter(item => relevantTypes.has(item.__typename)).map(item => {    
         const { __typename, createdAt } = item;
-    
-        let actor = '';
-        let reason = '';
+
         let issueEvent = __typename;
     
-        if (__typename === 'AssignedEvent' || __typename === 'UnassignedEvent') {
-          eventActor = item.assignee.login;
+        if (__typename === 'AssignedEvent') {
+          assignee = item.assignee.login;
+          eventActor = assignee;
         } else if (__typename === 'UnassignedEvent') {
           eventActor = item.assignee.login;
         } else if (__typename === 'IssueComment') {
           eventActor = item.author.login;
           issueUrl = item.url;
         } else if (__typename === 'ClosedEvent') {
-          eventActor = item.actor.login;
+          // If assignee exists, eventActor --> assignee
+          eventActor = assignee || item.actor.login;
           issueUrl = item.url;
           reason = item.stateReason;
           issueEvent = 'Issue'+ reason;
