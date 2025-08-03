@@ -176,7 +176,6 @@ async function queryIssueHistory({g, c}) {
         let message = `@ ${eventActor} has opened a pull request: #[${issueNum}](${prUrl}) at ${createdAt}`;
         history.push([eventActor, createdAt, message]);
     
-        
         // Get timelineItems and then iterate and extract relevant info
         const timelineItems = response.repository.pullRequest.timelineItems.nodes;
         const relevantTypes = new Set([
@@ -201,7 +200,6 @@ async function queryIssueHistory({g, c}) {
             prUrl = item.url;
           } else if (__typename === 'ClosedEvent') {
             // eventActor is the PR author, not merge team
-            // eventActor = item.actor.login;
             eventActor = response.repository.pullRequest.author.login;
             prUrl = item.url;
             prEvent = 'PullRequest'+ closeState;
@@ -216,9 +214,6 @@ async function queryIssueHistory({g, c}) {
           message = `@ ${eventActor} has ${action}: #[${issueNum}](${prUrl}) at ${createdAt}`;
           history.push([eventActor, createdAt, message]);
         });
-    
-        // console.log(history);
-        
         
       } catch (prError) {
         console.warn('prQuery failed also, skipping issue...', issueError.message);
