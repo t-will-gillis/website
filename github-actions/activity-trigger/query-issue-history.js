@@ -120,9 +120,8 @@ async function queryIssueHistory({g, c}) {
       let eventActor = response.repository.issue.author.login;
       let createdAt = response.repository.issue.createdAt;
       let issueUrl = response.repository.issue.url;
-      let closedByPr = response.repository.issue.closedByPullRequestsReferences.nodes.number;
-      console.log(response.repository.issue);
-      console.log(response.repository.issue.closedByPullRequestsReferences);
+      let closedByPr = response.repository.issue.closedByPullRequestsReferences.nodes[0].number;     
+      console.log(closedByPr);
       let message = `@ ${eventActor} has opened an issue: #[${issueNum}](${issueUrl}) at ${createdAt}`;
       history.push([eventActor, createdAt, message]);
       
