@@ -78,7 +78,6 @@ async function queryIssueHistory({g, c}) {
                 createdAt
                 url
               }
-              ... on Re
             }
           }
         }
@@ -201,8 +200,9 @@ async function queryIssueHistory({g, c}) {
             eventActor = item.author.login;
             prUrl = item.url;
           } else if (__typename === 'ClosedEvent') {
-            eventActor = item.actor.login;
-            // eventActor = response.repository.pullRequest.author.login;
+            // eventActor is the PR author, not merge team
+            // eventActor = item.actor.login;
+            eventActor = response.repository.pullRequest.author.login;
             prUrl = item.url;
             prEvent = 'PullRequest'+ closeState;
           }
