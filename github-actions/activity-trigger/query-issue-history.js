@@ -25,6 +25,11 @@ async function queryIssueHistory({g, c}) {
           author { login }
           createdAt
           url
+          closedByPullRequestsReferences(first: 1) {
+            nodes {
+              number
+            }
+          }
           timelineItems(first: 100) {
             nodes {
               __typename
@@ -115,6 +120,7 @@ async function queryIssueHistory({g, c}) {
       let eventActor = response.repository.issue.author.login;
       let createdAt = response.repository.issue.createdAt;
       let issueUrl = response.repository.issue.url;
+      let closedByPr = response.repository.issue.closedByPullRequestsReferences.nodes.number;
       let message = `@ ${eventActor} has opened an issue: #[${issueNum}](${issueUrl}) at ${createdAt}`;
       history.push([eventActor, createdAt, message]);
       
@@ -150,7 +156,7 @@ async function queryIssueHistory({g, c}) {
           eventActor = assignee || item.actor.login;
           issueUrl = item.url;
           reason = item.stateReason;
-          issueEvent = 'Issue'+ reason;
+          issueEvent = closedByPr ? 'IssueCLOSEDbyPR' : 'Issue'+ reason;
         } else if (issueEvent === 'ReopenedEvent') {
           eventActor = item.actor.login; 
         }
@@ -159,6 +165,7 @@ async function queryIssueHistory({g, c}) {
           'AssignedEvent': 'been assigned to an issue',
           'UnssignedEvent': 'been unassigned from an issue',
           'IssueComment': 'commented on an issue',
+          'IssueCLOSEDbyPR': 'had an issue closed by PR ' + closedByPr;
           'IssueCOMPLETED': 'closed an issue as completed',
           'IssueNOT_PLANNED': 'closed an issue as not planned',
           'IssueDUPLICATE': 'closed an issue as duplicate',
