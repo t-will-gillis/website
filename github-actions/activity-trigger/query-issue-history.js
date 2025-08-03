@@ -162,7 +162,7 @@ async function queryIssueHistory({g, c}) {
           'IssueCOMPLETED': 'closed an issue as completed',
           'IssueNOT_PLANNED': 'closed an issue as not planned',
           'IssueDUPLICATE': 'closed an issue as duplicate',
-          'ReopenedEvent': 'has reopened an issue'
+          'ReopenedEvent': 'has reopened an issue',
         };
         const action = actionMap[`${issueEvent}`];
         message = `@ ${eventActor} has ${action}: #[${issueNum}](${issueUrl}) at ${createdAt}`;
@@ -191,7 +191,7 @@ async function queryIssueHistory({g, c}) {
           'PullRequestReview',
           'IssueComment',
           'ClosedEvent',
-          'ReopenedEvent
+          'ReopenedEvent',
         ]);
     
         // Iterate through the timeline field values to extract actors, events, timelines
