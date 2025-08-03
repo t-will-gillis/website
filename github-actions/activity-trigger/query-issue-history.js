@@ -28,12 +28,6 @@ async function queryIssueHistory({g, c}) {
           timelineItems(first: 100) {
             nodes {
               __typename
-              ... on ClosedEvent {
-                actor { login }
-                createdAt
-                stateReason
-                url
-              }
               ... on AssignedEvent {
                 createdAt
                 assignee { ... on User { login } }
@@ -46,6 +40,16 @@ async function queryIssueHistory({g, c}) {
                 createdAt
                 author { ... on User { login } }
                 url
+              }
+              ... on ClosedEvent {
+                actor { login }
+                createdAt
+                stateReason
+                url
+              }
+              ... on ReopenedEvent {
+                actor { login }
+                createdAt
               }
             }
           }
@@ -77,6 +81,10 @@ async function queryIssueHistory({g, c}) {
                 actor { login }
                 createdAt
                 url
+              }
+              ... on ReopenedEvent {
+                actor { login }
+                createdAt
               }
             }
           }
@@ -116,7 +124,8 @@ async function queryIssueHistory({g, c}) {
         'AssignedEvent',
         'UnassignedEvent',
         'IssueComment',
-        'ClosedEvent'
+        'ClosedEvent',
+        'ReopenedEvent'
       ]);
   
       let assignee = '';
@@ -128,38 +137,38 @@ async function queryIssueHistory({g, c}) {
 
         let issueEvent = __typename;
     
-        if (__typename === 'AssignedEvent') {
+        if (issueEvent === 'AssignedEvent') {
           assignee = item.assignee.login;
           eventActor = assignee;
-        } else if (__typename === 'UnassignedEvent') {
+        } else if (issueEvent === 'UnassignedEvent') {
           eventActor = item.assignee.login;
-        } else if (__typename === 'IssueComment') {
+        } else if (issueEvent === 'IssueComment') {
           eventActor = item.author.login;
           issueUrl = item.url;
-        } else if (__typename === 'ClosedEvent') {
+        } else if (issueEvent === 'ClosedEvent') {
           // If assignee exists, eventActor --> assignee
           eventActor = assignee || item.actor.login;
           issueUrl = item.url;
           reason = item.stateReason;
           issueEvent = 'Issue'+ reason;
+        } else if (issueEvent === 'ReopenedEvent') {
+          eventActor = item.actor.login; 
         }
   
         const actionMap = {
+          'AssignedEvent': 'been assigned to an issue',
+          'UnssignedEvent': 'been unassigned from an issue',
+          'IssueComment': 'commented on an issue',
           'IssueCOMPLETED': 'closed an issue as completed',
           'IssueNOT_PLANNED': 'closed an issue as not planned',
           'IssueDUPLICATE': 'closed an issue as duplicate',
-          'AssignedEvent': 'been assigned to an issue',
-          'UnssignedEvent': 'been unassigned from an issue',
-          'IssueComment': 'commented on an issue'
+          'ReopenedEvent': 'has reopened an issue'
         };
         const action = actionMap[`${issueEvent}`];
         message = `@ ${eventActor} has ${action}: #[${issueNum}](${issueUrl}) at ${createdAt}`;
   
         history.push([eventActor, createdAt, message]);
       });
-  
-      // console.log(history);
-
       
     } catch (issueError) {
       console.warn('issueQuery failed, trying prQuery...', issueError.message);
@@ -181,7 +190,8 @@ async function queryIssueHistory({g, c}) {
         const relevantTypes = new Set([
           'PullRequestReview',
           'IssueComment',
-          'ClosedEvent'
+          'ClosedEvent',
+          'ReopenedEvent
         ]);
     
         // Iterate through the timeline field values to extract actors, events, timelines
@@ -192,23 +202,26 @@ async function queryIssueHistory({g, c}) {
           let reason = '';
           let prEvent = __typename;
       
-          if (__typename === 'PullRequestReview') {
+          if (prEvent === 'PullRequestReview') {
             eventActor = item.author.login;
             prUrl = item.url;
-          } else if (__typename === 'IssueComment') {
+          } else if (prEvent === 'IssueComment') {
             eventActor = item.author.login;
             prUrl = item.url;
-          } else if (__typename === 'ClosedEvent') {
+          } else if (prEvent === 'ClosedEvent') {
             // eventActor is the PR author, not merge team
             eventActor = response.repository.pullRequest.author.login;
             prUrl = item.url;
             prEvent = 'PullRequest'+ closeState;
+          } else if (prEvent === 'ReopenedEvent') {
+            eventActor = item.actor.login;
           }
           const actionMap = {
+            'PullRequestReview': 'submitted a pull request review',
+            'IssueComment': 'commented on a pull request',
             'PullRequestCLOSED': 'had a pull request closed w/o merging',
             'PullRequestMERGED': 'had a pull request merged',
-            'PullRequestReview': 'submitted a pull request review',
-            'IssueComment': 'commented on a pull request'
+            'ReopenedEvent': 'has reopened a pull request'
           };
           const action = actionMap[`${prEvent}`];
           message = `@ ${eventActor} has ${action}: #[${issueNum}](${prUrl}) at ${createdAt}`;
