@@ -14,7 +14,7 @@ async function queryIssueHistory({g, c}) {
   let history = [];
   
   let start = 8044;
-  let end = 8045;
+  let end = 8044;
   for (let i = start; i <= end; i++) {
     let issueNum = i;
   
@@ -76,9 +76,9 @@ async function queryIssueHistory({g, c}) {
               ... on ClosedEvent {
                 actor { login }
                 createdAt
-                stateReason
                 url
               }
+              ... on Re
             }
           }
         }
@@ -201,14 +201,16 @@ async function queryIssueHistory({g, c}) {
             eventActor = item.author.login;
             prUrl = item.url;
           } else if (__typename === 'ClosedEvent') {
-            eventActor = item.actor.login;
+            // eventActor = item.actor.login;
+            eventActor = response.repository.pullRequest.author.login;
             prUrl = item.url;
             prEvent = 'PullRequest'+ closeState;
           }
           const actionMap = {
             'PullRequestCLOSED': 'had a pull request closed w/o merging',
             'PullRequestMERGED': 'had a pull request merged',
-            'PullRequestReview': 'submitted a pull request review'
+            'PullRequestReview': 'submitted a pull request review',
+            'IssueComment': 'commented on a pull request'
           };
           const action = actionMap[`${prEvent}`];
           message = `@ ${eventActor} has ${action}: #[${issueNum}](${prUrl}) at ${createdAt}`;
