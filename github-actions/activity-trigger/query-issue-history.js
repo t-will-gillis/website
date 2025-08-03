@@ -121,6 +121,8 @@ async function queryIssueHistory({g, c}) {
       let createdAt = response.repository.issue.createdAt;
       let issueUrl = response.repository.issue.url;
       let closedByPr = response.repository.issue.closedByPullRequestsReferences.nodes.number;
+      console.log(response.repository.issue);
+      console.log(response.repository.issue.closedByPullRequestsReferences);
       let message = `@ ${eventActor} has opened an issue: #[${issueNum}](${issueUrl}) at ${createdAt}`;
       history.push([eventActor, createdAt, message]);
       
@@ -160,7 +162,7 @@ async function queryIssueHistory({g, c}) {
         } else if (issueEvent === 'ReopenedEvent') {
           eventActor = item.actor.login; 
         }
-        console.log(`*********** ${closedByPr}***********************`);
+
         const actionMap = {
           'AssignedEvent': 'been assigned to an issue',
           'UnssignedEvent': 'been unassigned from an issue',
