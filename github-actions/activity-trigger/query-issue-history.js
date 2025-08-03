@@ -165,7 +165,7 @@ async function queryIssueHistory({g, c}) {
           'AssignedEvent': 'been assigned to an issue',
           'UnssignedEvent': 'been unassigned from an issue',
           'IssueComment': 'commented on an issue',
-          'IssueCLOSEDbyPR': 'had an issue closed by PR ' + closedByPr;
+          'IssueCLOSEDbyPR': 'had an issue closed by PR ' + closedByPr,
           'IssueCOMPLETED': 'closed an issue as completed',
           'IssueNOT_PLANNED': 'closed an issue as not planned',
           'IssueDUPLICATE': 'closed an issue as duplicate',
