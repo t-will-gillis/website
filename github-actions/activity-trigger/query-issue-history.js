@@ -13,8 +13,8 @@ async function queryIssueHistory({g, c}) {
   
   let history = [];
   
-  let start = 101;
-  let end = 300;
+  let start = 8044;
+  let end = 8045;
   for (let i = start; i <= end; i++) {
     let issueNum = i;
   
@@ -66,6 +66,11 @@ async function queryIssueHistory({g, c}) {
               ... on PullRequestReview {
                 createdAt
                 author { login }
+                url
+              }
+              ... on IssueComment {
+                author { login }
+                createdAt
                 url
               }
               ... on ClosedEvent {
@@ -146,7 +151,7 @@ async function queryIssueHistory({g, c}) {
           'IssueDUPLICATE': 'closed an issue as duplicate',
           'AssignedEvent': 'been assigned to an issue',
           'UnssignedEvent': 'been unassigned from an issue',
-          'IssueComment': 'commented on an issue or pr'
+          'IssueComment': 'commented on an issue'
         };
         const action = actionMap[`${issueEvent}`];
         message = `@ ${eventActor} has ${action}: #[${issueNum}](${issueUrl}) at ${createdAt}`;
@@ -177,6 +182,7 @@ async function queryIssueHistory({g, c}) {
         const timelineItems = response.repository.pullRequest.timelineItems.nodes;
         const relevantTypes = new Set([
           'PullRequestReview',
+          'IssueComment',
           'ClosedEvent'
         ]);
     
@@ -189,6 +195,9 @@ async function queryIssueHistory({g, c}) {
           let prEvent = __typename;
       
           if (__typename === 'PullRequestReview') {
+            eventActor = item.author.login;
+            prUrl = item.url;
+          } else if (__typename === 'IssueComment') {
             eventActor = item.author.login;
             prUrl = item.url;
           } else if (__typename === 'ClosedEvent') {
