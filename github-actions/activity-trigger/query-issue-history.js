@@ -210,8 +210,8 @@ async function queryIssueHistory({g, c}) {
         
         
       } catch (prError) {
-        console.error('Both issueQuery and prQuery failed.');
-        throw new Error(`GraphQL query failed:\n- Issue error: ${issueError.message}\n- PR error: ${prError.message}`);
+        console.warn('prQuery failed also, skipping issue...', issueError.message);
+        continue
       }
     }
   }
