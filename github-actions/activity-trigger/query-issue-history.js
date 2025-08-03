@@ -201,8 +201,8 @@ async function queryIssueHistory({g, c}) {
             eventActor = item.author.login;
             prUrl = item.url;
           } else if (__typename === 'ClosedEvent') {
-            // eventActor = item.actor.login;
-            eventActor = response.repository.pullRequest.author.login;
+            eventActor = item.actor.login;
+            // eventActor = response.repository.pullRequest.author.login;
             prUrl = item.url;
             prEvent = 'PullRequest'+ closeState;
           }
