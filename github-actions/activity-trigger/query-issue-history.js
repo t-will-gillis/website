@@ -160,7 +160,7 @@ async function queryIssueHistory({g, c}) {
         } else if (issueEvent === 'ReopenedEvent') {
           eventActor = item.actor.login; 
         }
-  
+        console.log(`*********** ${closedByPr}***********************`);
         const actionMap = {
           'AssignedEvent': 'been assigned to an issue',
           'UnssignedEvent': 'been unassigned from an issue',
