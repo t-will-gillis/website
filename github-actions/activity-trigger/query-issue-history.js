@@ -13,8 +13,8 @@ async function queryIssueHistory({g, c}) {
   
   let history = [];
   
-  let start = 5028;
-  let end = 5028;
+  let start = 8188;
+  let end = 8188;
   for (let i = start; i <= end; i++) {
     let issueNum = i;
   
@@ -103,13 +103,15 @@ async function queryIssueHistory({g, c}) {
       issueNum
     };
   
-
+    let skills_directory = {};
     let response;
 
     // Return immediately if the issueNum is a Skills Issue
-    const isSkillsIssue = await checkIfSkillsIssue(issueNum);
+    const [isSkillsIssue, assignee] = await checkIfSkillsIssue(issueNum);
     if (isSkillsIssue) {
+        skills_directory[assignee] = issueNum;
         console.log(`issueNum: ${issueNum} identified as Skills Issue`);
+        console.log(skills_directory);
         continue;
     }
     
@@ -242,6 +244,7 @@ async function queryIssueHistory({g, c}) {
       }
     }
   }
+  /*
     async function checkIfSkillsIssue(issueNum) {
       try {
         // https://docs.github.com/en/rest/issues/labels?apiVersion=2022-11-28#list-labels-for-an-issue
@@ -256,8 +259,25 @@ async function queryIssueHistory({g, c}) {
         console.log(`issueNum: ${issueNum} some error occured: `);
         return true;
       }
-     
-  }
+    }
+  */
+    async function checkIfSkillsIssue(issueNum) {
+      try {
+        // https://docs.github.com/en/rest/issues/labels?apiVersion=2022-11-28#list-labels-for-an-issue
+        const issueData = await github.request('GET /repos/{owner}/{repo}/issues/{issue_number}', {
+            owner: 'hackforla',
+            repo: 'website',
+            issue_number: issueNum
+        });
+        const assignee = issueData.data.assignee.login;
+        const isSkillsIssue = issueData.data.labels.some(label => label.name === "Complexity: Prework");
+        return [isSkillsIssue, assignee];
+      } catch (err) {
+        console.log(`issueNum: ${issueNum} some error occured: `);
+        return true;
+      }
+    }
+  
   return JSON.stringify(history);
 }
 
