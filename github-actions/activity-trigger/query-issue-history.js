@@ -12,7 +12,6 @@ async function queryIssueHistory({g, c}) {
   const repoName = 'website';
   
   let history = [];
-  let skillsDirectory = {};
   
   let start = 8188;
   let end = 8188;
@@ -109,7 +108,6 @@ async function queryIssueHistory({g, c}) {
     // Return immediately if the issueNum is a Skills Issue
     const [isSkillsIssue, assignee] = await checkIfSkillsIssue(issueNum);
     if (isSkillsIssue) {
-        skillsDirectory[assignee] = issueNum;
         console.log(`issueNum: ${issueNum} identified as Skills Issue`);
         message = 'SKILLS ISSUE';
         history.push([assignee, issueNum, message]);
