@@ -244,7 +244,13 @@ async function queryIssueHistory({g, c}) {
     }
   }
 
+
+  
     async function checkIfSkillsIssue(issueNum) {
+      
+      let assignee = null;
+      let isSkillsIssue = false;
+      
       try {
         // https://docs.github.com/en/rest/issues/labels?apiVersion=2022-11-28#list-labels-for-an-issue
         const issueData = await github.request('GET /repos/{owner}/{repo}/issues/{issue_number}', {
@@ -252,8 +258,8 @@ async function queryIssueHistory({g, c}) {
             repo: repoName,
             issue_number: issueNum
         });
-        const assignee = issueData.data.assignee?.login || 'none';
-        const isSkillsIssue = (issueData.data.labels || []).some(label => label.name === "Complexity: Prework");
+        assignee = issueData.data.assignee?.login || 'none';
+        isSkillsIssue = (issueData.data.labels || []).some(label => label.name === "Complexity: Prework");
 
       } catch (error) {
         if (error.status === 410) {
@@ -264,6 +270,8 @@ async function queryIssueHistory({g, c}) {
       }
       return [isSkillsIssue, assignee];
     }
+
+  
   
   return JSON.stringify(history);
 }
