@@ -14,7 +14,7 @@ async function queryIssueHistory({g, c}) {
   let history = [];
   
   let start = 501;
-  let end = 625;
+  let end = 600;
   for (let i = start; i <= end; i++) {
     let issueNum = i;
   
@@ -155,7 +155,7 @@ async function queryIssueHistory({g, c}) {
           issueUrl = item.url;
         } else if (issueEvent === 'ClosedEvent') {
           // If assignee exists, eventActor --> assignee
-          eventActor = assignee || (item.actor?.login || null);
+          eventActor = (item.assignee?.login || null) || (item.actor?.login || null);
           issueUrl = item.url;
           reason = item.stateReason;
           issueEvent = closedByPr ? 'IssueCLOSEDbyPR' : 'Issue'+ reason;
