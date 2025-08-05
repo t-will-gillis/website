@@ -255,11 +255,11 @@ async function queryIssueHistory({g, c}) {
         const assignee = issueData.data.assignee?.login || 'none';
         const isSkillsIssue = (issueData.data.labels || []).some(label => label.name === "Complexity: Prework");
 
-      } catch (err) {
+      } catch (error) {
         if (error.status === 410) {
           console.warn(`Issue gone, error 410, skipping Issue with the number of ${issueNum}`);
         } else {
-          console.log('Unk error while checking if Skills Issue...', err.message);
+          console.log('Unk error while checking if Skills Issue...', error.message);
         }
       }
       return [isSkillsIssue, assignee];
