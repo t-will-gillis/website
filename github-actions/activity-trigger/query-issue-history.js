@@ -13,8 +13,8 @@ async function queryIssueHistory({g, c}) {
   
   let history = [];
   
-  let start = 8188;
-  let end = 8188;
+  let start = 1;
+  let end = 100;
   for (let i = start; i <= end; i++) {
     let issueNum = i;
   
@@ -110,7 +110,7 @@ async function queryIssueHistory({g, c}) {
     if (isSkillsIssue) {
         console.log(`issueNum: ${issueNum} identified as Skills Issue`);
         message = 'SKILLS ISSUE';
-        history.push([assignee, issueNum, message]);
+        history.push([assignee, createdAt, message]);
         continue;
     }
     
@@ -122,8 +122,7 @@ async function queryIssueHistory({g, c}) {
       let createdAt = response.repository.issue.createdAt;
       let issueUrl = response.repository.issue.url;
       let closedByPr = response.repository.issue.closedByPullRequestsReferences.nodes[0].number;     
-      console.log(closedByPr);
-      let message = `@ ${eventActor} has opened an issue: #[${issueNum}](${issueUrl}) at ${createdAt}`;
+      let message = `- ${eventActor} opened issue: [${issueNum}](${issueUrl}) at `;
       history.push([eventActor, createdAt, message]);
       
       // Get timelineItems and then iterate and extract relevant info
@@ -164,17 +163,17 @@ async function queryIssueHistory({g, c}) {
         }
 
         const actionMap = {
-          'AssignedEvent': 'been assigned to an issue',
-          'UnssignedEvent': 'been unassigned from an issue',
-          'IssueComment': 'commented on an issue',
-          'IssueCLOSEDbyPR': 'had an issue closed by PR ' + closedByPr,
-          'IssueCOMPLETED': 'closed an issue as completed',
-          'IssueNOT_PLANNED': 'closed an issue as not planned',
-          'IssueDUPLICATE': 'closed an issue as duplicate',
-          'ReopenedEvent': 'has reopened an issue',
+          'AssignedEvent': 'assigned to issue',
+          'UnssignedEvent': 'unassigned from issue',
+          'IssueComment': 'commented on issue',
+          'IssueCLOSEDbyPR': 'issue closed by PR ' + closedByPr,
+          'IssueCOMPLETED': 'closed issue as completed',
+          'IssueNOT_PLANNED': 'closed issue as not planned',
+          'IssueDUPLICATE': 'closed issue as duplicate',
+          'ReopenedEvent': 'reopened issue',
         };
         const action = actionMap[`${issueEvent}`];
-        message = `@ ${eventActor} has ${action}: #[${issueNum}](${issueUrl}) at ${createdAt}`;
+        message = `- ${eventActor} ${action}: [${issueNum}](${issueUrl}) at `;
   
         history.push([eventActor, createdAt, message]);
       });
@@ -191,7 +190,7 @@ async function queryIssueHistory({g, c}) {
         let createdAt = response.repository.pullRequest.createdAt;
         let prUrl = response.repository.pullRequest.url;
         let closeState = response.repository.pullRequest.state;
-        let message = `@ ${eventActor} has opened a pull request: #[${issueNum}](${prUrl}) at ${createdAt}`;
+        let message = `- ${eventActor} opened pull request: [${issueNum}](${prUrl}) at `;
         history.push([eventActor, createdAt, message]);
     
         // Get timelineItems and then iterate and extract relevant info
@@ -226,14 +225,14 @@ async function queryIssueHistory({g, c}) {
             eventActor = item.actor.login;
           }
           const actionMap = {
-            'PullRequestReview': 'submitted a pull request review',
-            'IssueComment': 'commented on a pull request',
-            'PullRequestCLOSED': 'had a pull request closed w/o merging',
-            'PullRequestMERGED': 'had a pull request merged',
-            'ReopenedEvent': 'has reopened a pull request'
+            'PullRequestReview': 'submitted pull request review',
+            'IssueComment': 'commented on pull request',
+            'PullRequestCLOSED': 'had pull request closed w/o merging',
+            'PullRequestMERGED': 'had pull request merged',
+            'ReopenedEvent': 'reopened pull request'
           };
           const action = actionMap[`${prEvent}`];
-          message = `@ ${eventActor} has ${action}: #[${issueNum}](${prUrl}) at ${createdAt}`;
+          message = `- ${eventActor} ${action}: [${issueNum}](${prUrl}) at `;
           history.push([eventActor, createdAt, message]);
         });
         
@@ -243,23 +242,7 @@ async function queryIssueHistory({g, c}) {
       }
     }
   }
-  /*
-    async function checkIfSkillsIssue(issueNum) {
-      try {
-        // https://docs.github.com/en/rest/issues/labels?apiVersion=2022-11-28#list-labels-for-an-issue
-        const labelData = await github.request('GET /repos/{owner}/{repo}/issues/{issue_number}/labels', {
-            owner: 'hackforla',
-            repo: 'website',
-            issue_number: issueNum
-        });
-        const isSkillsIssue = labelData.data.some(label => label.name === "Complexity: Prework");
-        return isSkillsIssue;
-      } catch (err) {
-        console.log(`issueNum: ${issueNum} some error occured: `);
-        return true;
-      }
-    }
-  */
+
     async function checkIfSkillsIssue(issueNum) {
       try {
         // https://docs.github.com/en/rest/issues/labels?apiVersion=2022-11-28#list-labels-for-an-issue
