@@ -13,8 +13,8 @@ async function queryIssueHistory({g, c}) {
   
   let history = [];
   
-  let start = 101;
-  let end = 300;
+  let start = 249;
+  let end = 249;
   for (let i = start; i <= end; i++) {
     let issueNum = i;
   
@@ -253,7 +253,7 @@ async function queryIssueHistory({g, c}) {
             issue_number: issueNum
         });
         const assignee = issueData.data.assignee?.login || 'none';
-        const isSkillsIssue = issueData.data.labels.some(label => label.name === "Complexity: Prework");
+        const isSkillsIssue = (issueData.data.labels || []).some(label => label.name === "Complexity: Prework");
         return [isSkillsIssue, assignee];
       } catch (err) {
         console.log(`issueNum: ${issueNum} some error occured: `);
