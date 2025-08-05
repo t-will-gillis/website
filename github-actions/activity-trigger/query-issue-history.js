@@ -252,8 +252,10 @@ async function queryIssueHistory({g, c}) {
             issue_number: issueNum
         });
         const assignee = issueData.data.assignee.login;
-        const labels = issueData.data.labels || [];
-        const isSkillsIssue = labels.some(label => label.name === "Complexity: Prework");
+        const isSkillsIssue = issueData.data.labels.some(label => label.name === "Complexity: Prework");
+        console.log('Labels:', issueData.data.labels);
+        console.log('Assignee:', issueData.data.assignee);
+        console.log('Returning:', [isSkillsIssue, assignee]);
         return [isSkillsIssue, assignee];
       } catch (err) {
         console.log(`issueNum: ${issueNum} some error occured: `);
