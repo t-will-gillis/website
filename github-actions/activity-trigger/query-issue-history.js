@@ -13,8 +13,8 @@ async function queryIssueHistory({g, c}) {
   
   let history = [];
   
-  let start = 1;
-  let end = 100;
+  let start = 101;
+  let end = 300;
   for (let i = start; i <= end; i++) {
     let issueNum = i;
   
@@ -167,7 +167,7 @@ async function queryIssueHistory({g, c}) {
           'AssignedEvent': 'assigned to issue',
           'UnassignedEvent': 'unassigned from issue',
           'IssueComment': 'commented on issue',
-          'IssueCLOSEDbyPR': 'issue closed by PR ' + closedByPr,
+          'IssueCLOSEDbyPR': 'closed issue by PR ' + closedByPr,
           'IssueCOMPLETED': 'closed issue as completed',
           'IssueNOT_PLANNED': 'closed issue as not planned',
           'IssueDUPLICATE': 'closed issue as duplicate',
@@ -228,8 +228,8 @@ async function queryIssueHistory({g, c}) {
           const actionMap = {
             'PullRequestReview': 'submitted pull request review',
             'IssueComment': 'commented on pull request',
-            'PullRequestCLOSED': 'had pull request closed w/o merging',
-            'PullRequestMERGED': 'had pull request merged',
+            'PullRequestCLOSED': 'pull request closed w/o merging',
+            'PullRequestMERGED': 'pull request merged',
             'ReopenedEvent': 'reopened pull request'
           };
           const action = actionMap[`${prEvent}`];
