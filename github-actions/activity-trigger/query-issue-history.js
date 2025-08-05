@@ -247,14 +247,15 @@ async function queryIssueHistory({g, c}) {
       try {
         // https://docs.github.com/en/rest/issues/labels?apiVersion=2022-11-28#list-labels-for-an-issue
         const issueData = await github.request('GET /repos/{owner}/{repo}/issues/{issue_number}', {
-            owner: 'hackforla',
-            repo: 'website',
+            owner: repoOwner,
+            repo: repoName,
             issue_number: issueNum
         });
-        const assignee = issueData.data.assignee.login;
-        const isSkillsIssue = issueData.data.labels.some(label => label.name === "Complexity: Prework");
         console.log('Labels:', issueData.data.labels);
         console.log('Assignee:', issueData.data.assignee);
+        const assignee = issueData.data.assignee.login;
+        const isSkillsIssue = issueData.data.labels.some(label => label.name === "Complexity: Prework");
+
         console.log('Returning:', [isSkillsIssue, assignee]);
         return [isSkillsIssue, assignee];
       } catch (err) {
