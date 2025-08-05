@@ -13,7 +13,7 @@ async function queryIssueHistory({g, c}) {
   
   let history = [];
   
-  let start = 101;
+  let start = 124;
   let end = 200;
   for (let i = start; i <= end; i++) {
     let issueNum = i;
