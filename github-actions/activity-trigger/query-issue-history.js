@@ -14,7 +14,7 @@ async function queryIssueHistory({g, c}) {
   let history = [];
   
   let start = 501;
-  let end = 750;
+  let end = 625;
   for (let i = start; i <= end; i++) {
     let issueNum = i;
   
@@ -118,7 +118,7 @@ async function queryIssueHistory({g, c}) {
       response = await github.graphql(issueQuery, variables);
       
       // Extract the issueAuthor, issueCreated date, and issueUrl
-      let eventActor = response.repository.issue.author.login;
+      let eventActor = response.repository.issue.author?.login || null;
       let createdAt = response.repository.issue.createdAt;
       let issueUrl = response.repository.issue.url;
       let message = `- ${eventActor} opened issue: [${issueNum}](${issueUrl}) at `;
@@ -146,16 +146,16 @@ async function queryIssueHistory({g, c}) {
         let issueEvent = __typename;
     
         if (issueEvent === 'AssignedEvent') {
-          assignee = item.assignee.login;
+          assignee = item.assignee?.login || null;
           eventActor = assignee;
         } else if (issueEvent === 'UnassignedEvent') {
-          eventActor = item.assignee.login;
+          eventActor = item.assignee?.login || null;
         } else if (issueEvent === 'IssueComment') {
-          eventActor = item.author.login;
+          eventActor = item.author?.login || null;
           issueUrl = item.url;
         } else if (issueEvent === 'ClosedEvent') {
           // If assignee exists, eventActor --> assignee
-          eventActor = assignee || item.actor.login;
+          eventActor = assignee || (item.actor?.login || null);
           issueUrl = item.url;
           reason = item.stateReason;
           issueEvent = closedByPr ? 'IssueCLOSEDbyPR' : 'Issue'+ reason;
