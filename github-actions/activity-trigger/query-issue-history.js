@@ -121,10 +121,11 @@ async function queryIssueHistory({g, c}) {
       let eventActor = response.repository.issue.author.login;
       let createdAt = response.repository.issue.createdAt;
       let issueUrl = response.repository.issue.url;
-      let closedByPr = response.repository.issue.closedByPullRequestsReferences.nodes[0].number;     
       let message = `- ${eventActor} opened issue: [${issueNum}](${issueUrl}) at `;
       history.push([eventActor, createdAt, message]);
-      
+
+      // Equals PR number if exists, else null
+      let closedByPr = response.repository.issue.closedByPullRequestsReferences?.nodes?.[0]?.number ?? null;  
       // Get timelineItems and then iterate and extract relevant info
       const timelineItems = response.repository.issue.timelineItems.nodes;
       const relevantTypes = new Set([
