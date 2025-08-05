@@ -13,8 +13,8 @@ async function queryIssueHistory({g, c}) {
   
   let history = [];
   
-  let start = 501;
-  let end = 600;
+  let start = 578;
+  let end = 578;
   for (let i = start; i <= end; i++) {
     let issueNum = i;
   
@@ -187,7 +187,7 @@ async function queryIssueHistory({g, c}) {
         response = await github.graphql(prQuery, variables);
   
         // Extract the prAuthor, createdAt date, and url
-        let eventActor = response.repository.pullRequest.author.login;
+        let eventActor = response.repository.pullRequest.author?.login || null;
         let createdAt = response.repository.pullRequest.createdAt;
         let prUrl = response.repository.pullRequest.url;
         let closeState = response.repository.pullRequest.state;
@@ -212,18 +212,18 @@ async function queryIssueHistory({g, c}) {
           let prEvent = __typename;
       
           if (prEvent === 'PullRequestReview') {
-            eventActor = item.author.login;
+            eventActor = item.author?.login || null;
             prUrl = item.url;
           } else if (prEvent === 'IssueComment') {
-            eventActor = item.author.login;
+            eventActor = item.author?.login || null;
             prUrl = item.url;
           } else if (prEvent === 'ClosedEvent') {
             // eventActor is the PR author, not merge team
-            eventActor = response.repository.pullRequest.author.login;
+            eventActor = response.repository.pullRequest.author?.login || null;
             prUrl = item.url;
             prEvent = 'PullRequest'+ closeState;
           } else if (prEvent === 'ReopenedEvent') {
-            eventActor = item.actor.login;
+            eventActor = item.actor?.login || null;
           }
           const actionMap = {
             'PullRequestReview': 'submitted pull request review',
