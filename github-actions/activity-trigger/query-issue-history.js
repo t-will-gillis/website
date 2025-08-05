@@ -239,7 +239,7 @@ async function queryIssueHistory({g, c}) {
         
       } catch (prError) {
         console.warn('prQuery failed also, skipping issue...', prError.message);
-        continue
+        continue;
       }
     }
   }
@@ -254,16 +254,13 @@ async function queryIssueHistory({g, c}) {
         });
         const assignee = issueData.data.assignee?.login || 'none';
         const isSkillsIssue = (issueData.data.labels || []).some(label => label.name === "Complexity: Prework");
-        return [isSkillsIssue, assignee];
+
       } catch (err) {
           if (error.status === 410) {
-          console.warn(`Issue gone, error 410, skipping Issue with the number of ${issueNum}`);
-        } else {
-          console.log('Unk error while checking if Skills Issue...', err.message);
-          continue;
-        }
-        
-        return true;
+            console.warn(`Issue gone, error 410, skipping Issue with the number of ${issueNum}`);
+          } else {
+            console.log('Unk error while checking if Skills Issue...', err.message);
+          }
       }
     }
   
