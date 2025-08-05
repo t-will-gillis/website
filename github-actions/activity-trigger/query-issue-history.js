@@ -13,8 +13,8 @@ async function queryIssueHistory({g, c}) {
   
   let history = [];
   
-  let start = 3;
-  let end = 7;
+  let start = 1;
+  let end = 100;
   for (let i = start; i <= end; i++) {
     let issueNum = i;
   
@@ -165,7 +165,7 @@ async function queryIssueHistory({g, c}) {
 
         const actionMap = {
           'AssignedEvent': 'assigned to issue',
-          'UnssignedEvent': 'unassigned from issue',
+          'UnassignedEvent': 'unassigned from issue',
           'IssueComment': 'commented on issue',
           'IssueCLOSEDbyPR': 'issue closed by PR ' + closedByPr,
           'IssueCOMPLETED': 'closed issue as completed',
