@@ -1,4 +1,4 @@
-name: Issue Activity History
+name: Issue Activity History!
 
 on:
   workflow_dispatch:
