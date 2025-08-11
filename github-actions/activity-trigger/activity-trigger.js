@@ -38,6 +38,10 @@ async function activityTrigger({g, c}) {
             let reason = context.payload.issue.state_reason;
             eventAction = reason;
         }
+    } else if (eventName === 'pull_request_review_comment') {
+        issueNum = context.payload.issue.number;
+        eventUrl = context.payload.comment.html_url;
+        timeline = context.payload.comment.updated_at;
     } else if (eventName === 'issue_comment') {
         issueNum = context.payload.issue.number;
         eventUrl = context.payload.comment.html_url;
@@ -86,7 +90,8 @@ async function activityTrigger({g, c}) {
         'pull_request.opened': 'opened a pull request',
         'pull_request.closed': 'had a pull request closed w/o merging',
         'pull_request.merged': 'had a pull request merged',
-        'pull_request_review.submitted': 'submitted a pull request review'
+        'pull_request_review.submitted': 'submitted a pull request review',
+        'pull_request_review_comment.created': 'wrote a pr comment'
     };
     const action = actionMap[`${eventName}.${eventAction}`];
     let message = `@ ${eventActor} has ${action}: #[${issueNum}](${eventUrl}) at ${timeline}`;
