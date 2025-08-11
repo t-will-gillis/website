@@ -12,8 +12,10 @@ async function retrieveSkillsIssue(eventActor) {
         repo: context.repo.repo,
         assignee: eventActor,
         state: 'all',
-        direction: 'asc',
-        per_page: 10,
+        // direction: 'asc',
+        // per_page: 10,
+        direction: 'desc',
+        per_page: 20,
     });
 
     // Find issue with the `Complexity: Prework` label, then extract skillsIssueNum and skillsIssueNodeId
