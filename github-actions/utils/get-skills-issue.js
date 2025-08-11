@@ -3,7 +3,7 @@
  * @param {String} eventActor        - Key reference to look up user's Skill Issue
  * @return {Object}                  - eventActor's skillsIssueNum and skillsIssueNodeId
  */
-async function retrieveSkillsIssue(eventActor) {
+async function retrieveSkillsIssue(github, context, eventActor) {
     // Note that this returns the first 10 issues assigned to the eventActor- which is presumed
     // to include that person's Skills Issue- this might need to be changed if Skill's Issues not found 
     // https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#list-repository-issues
