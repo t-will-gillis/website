@@ -2,7 +2,7 @@
  * This function is triggered by member activities, which include:
  * the eventName (i.e. "issues", "pull_request", "pull_request_review", etc. ), 
  * the eventAction (i.e. "opened", "assigned", "submitted", etc.), and
- * the eventActor (user who is credited for the event).
+ * the eventActor (user who is credited for the event).!!!
  * 
  */
 async function activityTrigger({g, c}) {
