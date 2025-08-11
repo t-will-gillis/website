@@ -55,6 +55,7 @@ async function postToSkillsIssue({g, c}, activity) {
     const commentFoundId = commentFound ? commentFound.id : null;
 
     if (commentFound) {
+        console.log(`Found the MARKER: ${MARKER}`);
         const commentId = commentFoundId;
         const originalBody = commentFound.body;
         const updatedBody = `${originalBody}\n${message}`;
@@ -83,7 +84,8 @@ async function postToSkillsIssue({g, c}, activity) {
         });
         // Update item's status to "In progress (actively working)"
         let statusValue = statusFieldIds('In_Progress');
-        await mutateIssueStatus(github, context, skillsIssueNodeId, statusValue);
+        console.log(`made it to mutate, which should fail!`);
+        // await mutateIssueStatus(github, context, skillsIssueNodeId, statusValue);
     }
 }
 
