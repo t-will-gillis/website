@@ -10,9 +10,10 @@ on:
     types: [opened, closed]
   pull_request_review:
     types: [submitted]
+  pull_request_review_comment:
+    types: [created]
 
 jobs:
-
   Gather-Activity-Event-Information:
     runs-on: ubuntu-latest
     steps:
