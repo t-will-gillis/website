@@ -123,8 +123,7 @@ async function activityTrigger({g, c}) {
     async function checkIfSkillsIssue(issueNum) {
         // https://docs.github.com/en/rest/issues/labels?apiVersion=2022-11-28#list-labels-for-an-issue
         const labelData = await github.request('GET /repos/{owner}/{repo}/issues/{issue_number}/labels', {
-            // owner: context.repo.owner,
-            owner: 'hackforla',
+            owner: context.repo.owner,
             repo: context.repo.repo,
             issue_number: issueNum
         });
