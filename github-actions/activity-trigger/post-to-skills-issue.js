@@ -67,6 +67,7 @@ async function postToSkillsIssue({g, c}, activity) {
             body: updatedBody
         });
     } else {
+        console.log(`if here, did not find marker`);
         const body = `${MARKER}\n## Activity Log: ${username}\n\n#####  ⚠ Important note: The bot updates this issue automatically - do not edit\n\n${message}`;
         await postComment(skillsIssueNum, body, github, context);
     }
