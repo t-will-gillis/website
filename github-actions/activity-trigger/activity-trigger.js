@@ -75,7 +75,7 @@ async function activityTrigger({g, c}) {
     console.log(`eventActor = ${eventActor}`);
     console.log(`issueNum = ${issueNum}`);
     console.log(`eventUrl = ${eventUrl}`);
-    console.log(`eventTime = ${timeline}`);
+    console.log(`eventTime = ${getDateTime(timeline)}`);
 
     // Return immediately if the issueNum is a Skills Issue- to discourage
     // infinite loop (recording comment, recording the recording of comment, etc.)
