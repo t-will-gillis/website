@@ -81,7 +81,7 @@ async function activityTrigger({g, c}) {
     // infinite loop (recording comment, recording the recording of comment, etc.)
     const isSkillsIssue = await checkIfSkillsIssue(issueNum);
     if (isSkillsIssue) {
-        console.log(`issueNum: ${issueNum} identified as Skills Issue`);
+        console.log(`- issueNum: ${issueNum} identified as Skills Issue`);
         return activity;
     }
     // Return immediately if the eventActor is a bot- same reason
@@ -109,7 +109,7 @@ async function activityTrigger({g, c}) {
     
     let localTime = getDateTime(timeline);
     let action = actionMap[`${eventName}.${eventAction}`];
-    let message = `@ ${eventActor} ${action}: ${eventUrl} at ${localTime}`;
+    let message = `- ${eventActor} ${action}: ${eventUrl} at ${localTime}`;
     console.log(message);
 
     activity = [eventActor, message];
