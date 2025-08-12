@@ -17,6 +17,11 @@ async function mutateIssueStatus(
   const PROJECT_ID = statusFieldIds("PROJECT_ID");
   const FIELD_ID = statusFieldIds("FIELD_ID");
 
+  console.log(`project id: ${PROJECT_ID}`);
+  console.log(`field id: ${FIELD_ID}`);
+  console.log(`item id: ${itemId}`);
+  console.log(`new status: ${newStatusValue}`);
+  
   const mutation = `mutation($projectId: ID!, $fieldId: ID!, $itemId: ID!, $value: String!) {
     updateProjectV2ItemFieldValue(input: {
       projectId: $projectId,
