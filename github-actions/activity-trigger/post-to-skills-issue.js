@@ -85,8 +85,8 @@ async function postToSkillsIssue({g, c}, activity) {
         });
         // Update item's status to "In progress (actively working)"
         let statusValue = statusFieldIds('In_Progress');
-        console.log(`made it to mutate, which should fail!`);
-        // await mutateIssueStatus(github, context, skillsIssueNodeId, statusValue);
+        console.log(`made it to mutate`);
+        await mutateIssueStatus(github, context, skillsIssueNodeId, statusValue);
     }
 }
 
