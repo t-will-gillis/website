@@ -38,6 +38,7 @@ async function postToSkillsIssue({g, c}, activity) {
 
     // Get eventActor's Skills Issue number, nodeId, current status, 
     const { skillsIssueNum, skillsIssueNodeId, skillsStatusName, skillsStatusId } = await querySkillsIssue(github, context, username, SKILLS_LABEL);
+    console.log(skillsIssueNum);
     // Return immediately if Skills Issue not found
     if (skillsIssueNum) {
         console.log(`Found Skills Issue for ${username}: ${skillsIssueNum}`);
