@@ -48,33 +48,15 @@ async function querySkillsIssue(github, context, assignee, label) {
     label: label
   };
 
-  console.log(repoOwner);
-  console.log(repoName);
-  console.log(assignee);
-  console.log(label);
-  
   try {
     const response = await github.graphql(query, variables);
 
     // Extract the list of project items associated with the issue
     const issueNode = response.repository.issues.nodes[0];  
     const issueNum = issueNode.number;
-        // Check how many issues you actually have
-    console.log('Number of issues:', response.repository.issues.nodes.length);
-    
-    // Check the issue number you're accessing
-    console.log('Issue number:', response.repository.issues.nodes[0].number);
-    
-    // Check how many project items this issue has
-    console.log('Number of project items:', response.repository.issues.nodes[0].projectItems.nodes.length);
-    
-    // Check all project items and their field values
-    response.repository.issues.nodes[0].projectItems.nodes.forEach((projectItem, index) => {
-      console.log(`Project Item ${index}:`, projectItem.project.title);
-      console.log(`Field Values:`, projectItem.fieldValues.nodes);
-    });
+
     const id = issueNode.projectItems.nodes[0]?.id;  
-    console.log(response.repository.issues.nodes[0].projectItems.nodes[0].fieldValues.nodes);
+
     const fieldValues = response.repository.issues.nodes[0].projectItems.nodes[0].fieldValues.nodes;
     const statusField = fieldValues.find(node => node.name && node.optionId);
     const statusName = statusField?.name;
