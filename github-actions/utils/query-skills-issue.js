@@ -53,21 +53,15 @@ async function querySkillsIssue(github, context, assignee, label) {
 
     // Extract the list of project items associated with the issue
     const issueNode = response.repository.issues.nodes[0];  
+    
     const issueNum = issueNode.number;
-
     const id = issueNode.projectItems.nodes[0]?.id;  
 
     const fieldValues = response.repository.issues.nodes[0].projectItems.nodes[0].fieldValues.nodes;
     const statusField = fieldValues.find(node => node.name && node.optionId);
     const statusName = statusField?.name;
     const statusId = statusField?.optionId;
-
-    
-    console.log(issueNum);
-    console.log(id);
-    console.log(statusName);
-    console.log(statusId);
-    
+   
     return { issueNum, id, statusName, statusId };
   } catch (error) {
     // If an error occurs, log it and return an object with null values
