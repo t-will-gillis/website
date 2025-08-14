@@ -26,7 +26,7 @@ async function querySkillsIssue(github, context, assignee, label) {
                 id
                 title
               }
-              fieldValues(first: 1) {
+              fieldValues(first: 10) {
                 nodes {
                   ... on ProjectV2ItemFieldSingleSelectValue {
                     name
