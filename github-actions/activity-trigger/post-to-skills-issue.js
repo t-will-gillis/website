@@ -10,7 +10,10 @@ const mutateIssueStatus = require('../utils/mutate-issue-status');
 var github;
 var context;
 
-const SKILLS_LABEL = retrieveLabelDirectory("complexityPrework");
+// `complexity0` refers `Complexity: Prework` label
+const SKILLS_LABEL = retrieveLabelDirectory("complexity0");
+
+
 
 /**
  * Function to get eventActor's Skills Issue and post message
