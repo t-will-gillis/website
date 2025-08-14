@@ -62,6 +62,11 @@ async function querySkillsIssue(github, context, assignee, label) {
     const statusName = statusField?.name;
     const statusId = statusField?.optionId;
 
+    console.log(issueNum);
+    console.log(issueId);
+    console.log(statusName);
+    console.log(statusId);
+    
     return { issueNum, issueId, statusName, statusId };
   } catch (error) {
     // If an error occurs, log it and return an object with null values
