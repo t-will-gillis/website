@@ -57,20 +57,18 @@ async function querySkillsIssue(github, context, assignee, label) {
     const response = await github.graphql(query, variables);
 
     // Extract the list of project items associated with the issue
-    const issueNum = response.repository.issues.nodes[0]?.number || null;
-
-    // Get issue's global ID and status name and ID
-    const projectData = response.repository.issue.projectItems.nodes;
-    const id = projectData[0].id;
+    const projectData = response.repository.issues.nodes[0];
+    const issueNum = projectData.number || null;
 
     // Iterate through the field values of the first project item and find the nodes
-    // for 'name' and 'optionId' properties, then get 'statusName' and 'statusId'
-    const fieldValues = projectData[0].fieldValues?.nodes || [];
+    const projectItems = projectData.projectItems.nodes || [];
 
-    const statusNameNode = fieldValues.find((item) =>
+    // Get issue's global ID and status name and ID    
+    const id = projectItems.id;
+    const statusNameNode = projectItems.fieldValues.find((item) =>
       item.hasOwnProperty("name")
     );
-    const statusIdNode = fieldValues.find((item) =>
+    const statusIdNode = projectItems.find((item) =>
       item.hasOwnProperty("optionId")
     );
 
