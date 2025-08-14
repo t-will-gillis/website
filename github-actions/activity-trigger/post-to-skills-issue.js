@@ -43,7 +43,7 @@ async function postToSkillsIssue({g, c}, activity) {
         skillsStatusName: statusName,
         skillsStatusId: statusId 
     } = await querySkillsIssue(github, context, username, SKILLS_LABEL);
-   
+    console.log(skillsIssueNum)
     // Return immediately if Skills Issue not found
     if (skillsIssueNum) {
         console.log(`Found Skills Issue for ${username}: ${skillsIssueNum}`);
