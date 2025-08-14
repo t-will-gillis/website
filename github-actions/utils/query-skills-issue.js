@@ -65,16 +65,19 @@ async function querySkillsIssue(github, context, assignee, label) {
 
     // Get issue's global ID and status name and ID    
     const id = projectItems.id;
+    console.log(issueNum);
+    console.log(id);
     const statusNameNode = projectItems.fieldValues.find((item) =>
       item.hasOwnProperty("name")
     );
-    const statusIdNode = projectItems.find((item) =>
+    const statusIdNode = projectItems.fieldValues.find((item) =>
       item.hasOwnProperty("optionId")
     );
 
     const statusName = statusNameNode?.name || "Unknown Status";
     const statusId = statusIdNode?.optionId || null;
-
+    console.log(statusName);
+    console.log(statusId);
     return { issueNum, id, statusName, statusId };
   } catch (error) {
     // If an error occurs, log it and return an object with null values
