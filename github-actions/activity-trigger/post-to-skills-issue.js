@@ -41,7 +41,7 @@ async function postToSkillsIssue({g, c}, activity) {
     const skillsIssueNum = skillsInfo.issueNum;
     const skillsIssueNodeId = skillsInfo.issueId;
     const skillsStatusId = skillsInfo.statusId;
-    console.log(skillsIssueNum);
+  
     // Return immediately if Skills Issue not found
     if (skillsIssueNum) {
         console.log(`Found Skills Issue for ${username}: ${skillsIssueNum}`);
