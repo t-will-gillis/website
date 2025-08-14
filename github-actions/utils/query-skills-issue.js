@@ -44,7 +44,7 @@ async function querySkillsIssue(github, context, assignee, label) {
     owner: repoOwner,
     repo: repoName,
     assignee: assignee,
-    label: label,
+    label: label
   };
 
   console.log(repoOwner);
