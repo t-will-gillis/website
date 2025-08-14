@@ -55,21 +55,20 @@ async function querySkillsIssue(github, context, assignee, label) {
     const issueNode = response.repository.issues.nodes[0];  
     
     const issueNum = issueNode.number;
-    const id = issueNode.projectItems.nodes[0]?.id;  
+    const issueId = issueNode.projectItems.nodes[0]?.id;  
 
     const fieldValues = response.repository.issues.nodes[0].projectItems.nodes[0].fieldValues.nodes;
     const statusField = fieldValues.find(node => node.name && node.optionId);
     const statusName = statusField?.name;
     const statusId = statusField?.optionId;
 
-    const results = { issueNum, id, statusName, statusId }
-    return results;
+    return { issueNum, issueId, statusName, statusId };
   } catch (error) {
     // If an error occurs, log it and return an object with null values
     console.error(`Error querying skills issue: ${error.message}`);
     return {
       issueNum: null,
-      id: null,
+      issueId: null,
       statusName: "Unknown Status",
       statusId: null,
     };
