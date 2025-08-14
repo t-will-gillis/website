@@ -1,6 +1,6 @@
 // Import modules
 const retrieveLabelDirectory = require('../utils/retrieve-label-directory');
-const getSkillsIssue = require('../utils/get-skills-issue');
+const querySkillsIssue = require('../utils/query-skills-issue');
 const postComment = require('../utils/post-issue-comment');
 const checkTeamMembership = require('../utils/check-team-membership');
 const statusFieldIds = require('../utils/_data/status-field-ids');
