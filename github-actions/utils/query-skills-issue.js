@@ -61,8 +61,10 @@ async function querySkillsIssue(github, context, assignee, label) {
     const issueNum = issueNode.number;
     
     const id = issueNode.projectItems.nodes[0]?.id;  
-    const statusName = issueNode.projectItems.nodes[0]?.fieldValues.nodes[0]?.name;
-    const statusId = issueNode.projectItems.nodes[0]?.fieldValues.nodes[0]?.optionId;
+    const statusName = issueNode.projectItems.nodes[0]?.fieldValues.nodes[0]?.find((item) => 
+      item.hasOwnProperty("name")).name;;
+    const statusId = issueNode.projectItems.nodes[0]?.fieldValues.nodes[0]?.find((item) => 
+      item.hasOwnProperty("optionId")).optionId;
     
     console.log(issueNum);
     console.log(id);
