@@ -36,9 +36,14 @@ async function postToSkillsIssue({g, c}, activity) {
     const MARKER = '<!-- Skills Issue Activity Record -->';
     const IN_PROGRESS_ID = statusFieldIds('In_Progress');
 
-    // Get eventActor's Skills Issue number, nodeId, current status, 
-    const { skillsIssueNum, skillsIssueNodeId, skillsStatusName, skillsStatusId } = await querySkillsIssue(github, context, username, SKILLS_LABEL);
-    console.log(skillsIssueNum);
+    // Get eventActor's Skills Issue number, nodeId, current status
+    const { 
+        skillsIssueNum: issueNum, 
+        skillsIssueNodeId: issueId, 
+        skillsStatusName: statusName,
+        skillsStatusId: statusId 
+    } = await querySkillsIssue(github, context, username, SKILLS_LABEL);
+   
     // Return immediately if Skills Issue not found
     if (skillsIssueNum) {
         console.log(`Found Skills Issue for ${username}: ${skillsIssueNum}`);
