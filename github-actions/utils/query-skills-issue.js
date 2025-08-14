@@ -67,8 +67,8 @@ async function querySkillsIssue(github, context, assignee, label) {
       node => typeof node.name === 'string' && typeof node.optionId === 'string'
     );
     
-    const fieldName = fieldNode?.name ?? null;
-    const fieldId = fieldNode?.optionId ?? null;
+    const statusName = fieldNode?.name ?? null;
+    const statusId = fieldNode?.optionId ?? null;
 
     
     console.log(issueNum);
