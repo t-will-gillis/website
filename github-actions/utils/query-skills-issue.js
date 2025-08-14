@@ -61,7 +61,7 @@ async function querySkillsIssue(github, context, assignee, label) {
 
     // Get issue's global ID and status name and ID    
     const id = response.repository.issues.nodes?.[0]?.projectItems.nodes?.[0]?.id ?? null;
-    const statusdName = response.repository.issues.nodes?.[0]?.projectItems.nodes?.[0]?.fieldValues.nodes?.[0]?.name ?? null;
+    const statusName = response.repository.issues.nodes?.[0]?.projectItems.nodes?.[0]?.fieldValues.nodes?.[0]?.name ?? null;
     const statusId = response.repository.issues.nodes?.[0]?.projectItems.nodes?.[0]?.fieldValues.nodes?.[0]?.optionId ?? null;
     
     console.log(issueNum);
