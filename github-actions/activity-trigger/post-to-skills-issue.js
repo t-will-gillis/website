@@ -24,8 +24,7 @@ async function postToSkillsIssue({g, c}, activity) {
     github = g;
     context = c;
 
-    // const owner = context.repo.owner;
-    const owner = 'hackforla';
+    const owner = context.repo.owner;
     const repo = context.repo.repo;
     const TEAM = 'website-write';
 
