@@ -16,21 +16,22 @@ async function querySkillsIssue(github, context, assignee, label) {
       first: 5
       filterBy: {assignee: $assignee, labels: [$label]}
       states: [OPEN, CLOSED]
-    ) {
-      nodes {
-        number
-        projectItems(first: 5) {
-          nodes {
-            id
-            project {
+      ) {
+        nodes {
+          number
+          projectItems(first: 5) {
+            nodes {
               id
-              title
-            }
-            fieldValues(first: 10) {
-              nodes {
-                ... on ProjectV2ItemFieldSingleSelectValue {
-                  name
-                  optionId
+              project {
+                id
+                title
+              }
+              fieldValues(first: 1) {
+                nodes {
+                  ... on ProjectV2ItemFieldSingleSelectValue {
+                    name
+                    optionId
+                  }
                 }
               }
             }
