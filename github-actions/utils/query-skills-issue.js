@@ -26,7 +26,7 @@ async function querySkillsIssue(github, context, assignee, label) {
               id
               title
             }
-            fieldValues(first: 1) {
+            fieldValues(first: 10) {
               nodes {
                 ... on ProjectV2ItemFieldSingleSelectValue {
                   name
@@ -47,6 +47,11 @@ async function querySkillsIssue(github, context, assignee, label) {
     label: label,
   };
 
+  console.log(repoOwner);
+  console.log(repoName);
+  console.log(assignee);
+  console.log(label);
+  
   try {
     const response = await github.graphql(query, variables);
 
