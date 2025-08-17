@@ -82,20 +82,21 @@ async function postToSkillsIssue({g, c}, activity) {
 
     // Check whether eventActor is current team member; if so open issue and move to "In progress"
     const isActiveMember = await checkTeamMembership(github, username, TEAM);
+    let skillsIssueState = "closed";
 
     if (isActiveMember) {
-        // Make sure Skills Issue is open
-        await github.request('PATCH /repos/{owner}/{repo}/issues/{issueNum}', {
-            owner,
-            repo,
-            issueNum: skillsIssueNum,
-            state: "open",
-        });
+        skillsIssueState = "open";
         // Update item's status to "In progress (actively working)" if not already
         if (skillsStatusId != IN_PROGRESS_ID) {
             await mutateIssueStatus(github, context, skillsIssueNodeId, IN_PROGRESS_ID);
         }
     }
+    await github.request('PATCH /repos/{owner}/{repo}/issues/{issueNum}', {
+        owner,
+        repo,
+        issueNum: skillsIssueNum,
+        state: skillsIssueState,
+    });
 }
 
 module.exports = postToSkillsIssue;
