@@ -69,14 +69,6 @@ async function activityTrigger({g, c}) {
         timeline = context.payload.review.updated_at;
     }
 
-    // Following are for confirmation, can be removed
-    console.log(`eventName = ${eventName}`);
-    console.log(`eventAction = ${eventAction}`);
-    console.log(`eventActor = ${eventActor}`);
-    console.log(`issueNum = ${issueNum}`);
-    console.log(`eventUrl = ${eventUrl}`);
-    console.log(`eventTime = ${getDateTime(timeline)}`);
-
     // Return immediately if the issueNum is a Skills Issue- to discourage
     // infinite loop (recording comment, recording the recording of comment, etc.)
     const isSkillsIssue = await checkIfSkillsIssue(issueNum);
@@ -91,20 +83,20 @@ async function activityTrigger({g, c}) {
 
     // Message templates to post on Skills Issue
     const actionMap = {
-        'issues.opened': 'opened issue:',
-        'issues.completed': 'closed issue as completed',
-        'issues.not_planned': 'closed issue as not planned',
-        'issues.duplicate': 'closed issue as duplicate',
-        'issues.reopened': 'reopened issue',
-        'issues.assigned': 'assigned to issue',
-        'issues.unassigned': 'unassigned from issue',
-        'issue_comment.created': 'commented on issue',
-        'pull_request_review.created': 'submitted pull request review',
-        'pull_request_comment.created': 'commented on pull request',
-        'pull_request.opened': 'opened a pull request',
-        'pull_request.closed': 'pull request closed w/o merging',
-        'pull_request.merged': 'pull request merged',
-        'pull_request.reopened': 'reopened pull request'
+        'issues.opened': 'opened',
+        'issues.completed': 'closed- completed',
+        'issues.not_planned': 'closed- not planned',
+        'issues.duplicate': 'closed- duplicate',
+        'issues.reopened': 'reopened',
+        'issues.assigned': 'assigned',
+        'issues.unassigned': 'unassigned',
+        'issue_comment.created': 'commented',
+        'pull_request_review.created': 'submitted review',
+        'pull_request_comment.created': 'commented',
+        'pull_request.opened': 'opened',
+        'pull_request.closed': 'closed w/o merging',
+        'pull_request.merged': 'merged',
+        'pull_request.reopened': 'reopened'
     };
     
     let localTime = getDateTime(timeline);
