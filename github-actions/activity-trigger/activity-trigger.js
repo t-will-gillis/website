@@ -1,4 +1,4 @@
-// Global variables
+// Global variables These are global variables!!!!!
 var github;
 var context;
 
