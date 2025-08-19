@@ -27,7 +27,7 @@ async function activityTrigger({g, c}) {
     let activities = [];
 
     // Exclude all bot actors from being recorded as a guardrail against infinite loops
-    const EXCLUDED_ACTORS = ['HackforLABot', 'elizabethhonest', 'github-actions', 'github-advanced-security', 'github-pages', 'dependabot[bot]', 'dependabot-preview[bot]', 'dependabot', 'dependabot-preview'];
+    const EXCLUDED_ACTORS = ['t-will-gillis-dummy','HackforLABot', 'elizabethhonest', 'github-actions', 'github-advanced-security', 'github-pages', 'dependabot[bot]', 'dependabot-preview[bot]', 'dependabot', 'dependabot-preview'];
 
     if (eventName === 'issues') {
         issueNum = context.payload.issue.number;
@@ -100,7 +100,7 @@ async function activityTrigger({g, c}) {
     let localTime = getDateTime(timeline);
     let action = actionMap[`${eventName}.${eventAction}`];
     let message = `- ${eventActor} ${action}: ${eventUrl} at ${localTime}`;
-
+    console.log(`Message to post:   ${message}`);
     // Check to confirm the eventActor isn't a bot
     const isExcluded = (eventActor) => EXCLUDED_ACTORS.includes(eventActor);
     if (!isExcluded(eventActor)) {
