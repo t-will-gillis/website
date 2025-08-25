@@ -13,9 +13,9 @@
  * action docs on printing context information into the log.
  */
 async function isMemberOfTeam(github, context, githubUsername, team) {
+  console.log(`context.repo: ${context.repo}`);
   try {
     await github.rest.teams.getMembershipForUserInOrg({
-      console.log(`context.repo: ${context.repo}`);
       // org: context.repo.org,
       org: 'hackforla';
       team_slug: team,
