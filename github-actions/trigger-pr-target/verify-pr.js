@@ -5,12 +5,12 @@ If you have been though onboarding, and feel this message was sent in error, ple
 #hfla-site team Slack channel with the link to this PR.';
 
 async function main({github,context}) {
-    const prAuthor = context.payload.sender.login;  
+    const prAuthor = context.payload.sender.login;
     const prNumber = context.payload.number;
     const repo = context.payload.pull_request.base.repo.name;
     const owner = context.payload.pull_request.base.repo.owner.login;
     const isMember = await isMemberOfTeam(github, context, prAuthor, 'website-write');
-    if (isMember || prAuthor =='dependabot[bot]') {    
+    if (isMember || prAuthor =='dependabot[bot]') {
         console.log('Successfully verified!');
     }
     else {
@@ -30,8 +30,8 @@ async function main({github,context}) {
         } catch (closeCommentError) {
             console.log(`Failed to close PR #${prNumber} created by ${prAuthor}. See logs for details.`);
             throw closeCommentError;
-        } 
-    }    
+        }
+    }
 }
 
 module.exports = main;
