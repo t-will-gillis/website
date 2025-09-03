@@ -22,7 +22,7 @@ async function activityTrigger({github, context}) {
     console.log(`eventName: ${eventName}`);
     console.log(`eventAction: ${eventAction}`);
     console.log(`eventActor: ${eventActor}`);
-    console.log(`assignee: ${context.payload.assignee?.login}`);
+    console.log(`assignee: ${context.payload.assignee?.login}`); // moot comment
     if (eventName === 'issues') {
         issueNum = context.payload.issue.number;
         eventUrl = context.payload.issue.html_url;
