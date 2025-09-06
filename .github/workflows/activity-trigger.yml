@@ -22,6 +22,7 @@ permissions:
 jobs:
   Gather-Activity-Event-Information:
     runs-on: ubuntu-latest
+    # Halt workflow if not in repo or if bot
     if: |
       github.repository == 't-will-gillis/website' && 
       contains(fromJson('[
