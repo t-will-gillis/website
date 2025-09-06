@@ -25,6 +25,7 @@ jobs:
     if: |
       github.repository == 't-will-gillis/website' && 
       contains(fromJson('[
+        "t-will-gillis",
         "HackforLABot",
         "elizabethhonest",
         "dependabot",
