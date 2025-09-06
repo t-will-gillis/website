@@ -20,7 +20,7 @@ async function activityTrigger({github, context}) {
     // Exclude all bot actors from being recorded as a guardrail against infinite loops
     const EXCLUDED_ACTORS = ['HackforLABot', 'elizabethhonest', 'github-actions', 'github-advanced-security', 'github-pages', 'dependabot[bot]', 'dependabot-preview[bot]', 'dependabot', 'dependabot-preview'];
 
-     if (eventName === 'issues') {
+    if (eventName === 'issues') {
         issueNum = context.payload.issue.number;
         eventUrl = context.payload.issue.html_url;
         timeline = context.payload.issue.updated_at;
@@ -66,7 +66,7 @@ async function activityTrigger({github, context}) {
         eventUrl = context.payload.comment.html_url;
         timeline = context.payload.comment.updated_at;
     }
-    
+
     // Return immediately if the issueNum is a Skills Issue- to discourage
     // infinite loop (recording comment, recording the recording of comment, etc.)
     const isSkillsIssue = await checkIfSkillsIssue(issueNum);
@@ -103,7 +103,7 @@ async function activityTrigger({github, context}) {
     if (!isExcluded(eventActor)) {
         console.log(`Not a bot. Message to post:  ${message}`);
         activities.push([eventActor, message]);
-    } 
+    }
 
     // Only if issue is closed, and eventActor != assignee, return assignee and message
     if (eventAction.includes('Closed-') && (eventActor !== assignee)) {
