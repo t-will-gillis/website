@@ -26,6 +26,7 @@ jobs:
     env:
       EXCLUDED_BOTS: |
         [
+          "t-will-gillis",
           "HackforLABot",
           "elizabethhonest",
           "dependabot",
