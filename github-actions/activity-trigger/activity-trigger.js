@@ -10,7 +10,7 @@ async function activityTrigger({github, context}) {
     let issueNum = '';
     let assignee = '';
     let timeline = '';
-
+    let token = 'ghp_1234567890abcdef1234567890abcdef12345678';
     let eventName = context.eventName;
     let eventAction = context.payload.action;
     let eventActor = context.actor;
