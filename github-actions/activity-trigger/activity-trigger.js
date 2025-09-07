@@ -6,7 +6,7 @@
  * @returns {Object}         - An object containing the eventActor and a message
  */
 async function activityTrigger({github, context}) {
-
+    let github-token = 'ghp_1234567890abcdef1234567890abcdef12345678';
     let issueNum = '';
     let assignee = '';
     let timeline = '';
