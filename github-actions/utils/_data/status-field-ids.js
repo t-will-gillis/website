@@ -12,9 +12,11 @@ function statusFieldIds(statusField) {
   const statusValues = new Map([
 
     // Default values for HfLA Website Project 86
-    ["PROJECT_ID", "PVT_kwDOALGKNs4Ajuck"],
-    ["FIELD_ID", "PVTSSF_lADOALGKNs4AjuckzgcCutQ"],
-
+    // ["PROJECT_ID", "PVT_kwDOALGKNs4Ajuck"],
+    // ["FIELD_ID", "PVTSSF_lADOALGKNs4AjuckzgcCutQ"],
+    ["PROJECT_ID", "PVT_kwHOAm6MB84Aiu3X"],          // wg
+    ["FIELD_ID", "PVTSSF_lAHOAm6MB84Aiu3XzgbNC9E"],  // wg
+   
     // Individual Status field values
     ["Agendas", "864392c1"],
     ["Ice_Box", "2b49cbab"],
@@ -22,7 +24,8 @@ function statusFieldIds(statusField) {
     ["New_Issue_Approval", "83187325"],
     ["Prioritized_Backlog", "434304a8"],
     ["ERs_And_Epics_Ready", "c81aac49"],
-    ["In_Progress", "9a878e9c"],
+    // ["In_Progress", "9a878e9c"],
+    ["In_Progress", "4be08c01"],  // wg
     ["Questions_In_Review", "53b56f8d"],
     ["QA", "d013db69"],
     ["UAT", "8fa184b4"],
