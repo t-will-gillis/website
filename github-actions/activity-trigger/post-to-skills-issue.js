@@ -121,6 +121,7 @@ async function postToSkillsIssue({github, context}, activity) {
             }
         }
     }
+    if (unfinished if statement!)
     
 }
 
