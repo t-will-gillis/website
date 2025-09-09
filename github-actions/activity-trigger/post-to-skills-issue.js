@@ -80,9 +80,9 @@ async function postToSkillsIssue({github, context}, activity) {
                 commentId,
                 body: updatedBody
             });
-            console.log(` ✅ Success. Entry posted to Skills Issue #${skillsIssueNum}`);
+            console.log(`Success! Entry posted to Skills Issue #${skillsIssueNum}`);
         } catch (err) {
-            console.error(` ❌ Something went wrong posting entry:`, err);
+            console.error(`Something went wrong posting entry:`, err);
         }
         
     } else {
@@ -90,7 +90,7 @@ async function postToSkillsIssue({github, context}, activity) {
         const body = `${MARKER}\n## Activity Log: ${eventActor}\n### Repo: https://github.com/hackforla/website\n\n#####  ⚠ Important note: The bot updates this comment automatically - do not edit\n\n${message}`;
         const commentPosted = await postComment(skillsIssueNum, body, github, context);
         if (commentPosted) {
-            console.log(` ✅ Success. Entry posted to Skills Issue #${skillsIssueNum}`);
+            console.log(`Success! Entry posted to Skills Issue #${skillsIssueNum}`);
         }
     }
 
