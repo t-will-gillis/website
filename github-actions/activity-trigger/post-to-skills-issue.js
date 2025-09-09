@@ -80,7 +80,7 @@ async function postToSkillsIssue({github, context}, activity) {
                 commentId,
                 body: updatedBody
             });
-            console.log(` ✅ Success. Entry posted to Skills Issue`);
+            console.log(` ✅ Success. Entry posted to Skills Issue #${skillsIssueNum}`);
         } catch (err) {
             console.error(` ❌ Something went wrong posting entry:`, err);
         }
@@ -90,36 +90,38 @@ async function postToSkillsIssue({github, context}, activity) {
         const body = `${MARKER}\n## Activity Log: ${eventActor}\n### Repo: https://github.com/hackforla/website\n\n#####  ⚠ Important note: The bot updates this comment automatically - do not edit\n\n${message}`;
         const commentPosted = await postComment(skillsIssueNum, body, github, context);
         if (commentPosted) {
-            console.log(` ✅ Success. Entry posted to Skills Issue`);
+            console.log(` ✅ Success. Entry posted to Skills Issue #${skillsIssueNum}`);
         }
     }
 
     // Do not move or reopen Skills Issue if message includes the string 'closed'
     if (!message.includes('closed')) {
-        // If eventActor is team member, open issue and move to "In progress". Else, close issue
-        // const isActiveMember = await checkTeamMembership(github, context, eventActor, TEAM);
-        const isActiveMember = true;
-        let skillsIssueState = "closed";
 
+        // If eventActor is team member, open issue and move to "In progress"
+        // const isActiveMember = await checkTeamMembership(github, context, eventActor, TEAM);
+        isActiveMember = true;
         if (isActiveMember) {
-            skillsIssueState = "open";
-            // Update item's status to "In progress (actively working)" if not already
-            if (skillsIssueNodeId && skillsStatusId !== IN_PROGRESS_ID) {
-                await mutateIssueStatus(github, context, skillsIssueNodeId, IN_PROGRESS_ID);
+            try {
+                await github.request('PATCH /repos/{owner}/{repo}/issues/{issue_number}', {
+                    owner,
+                    repo,
+                    issue_number: skillsIssueNum,
+                    state: "open",
+                });
+                console.log(` ⮡  Re-opened issue #${skillsIssueNum}`);
+                // Update item's status to "In progress (actively working)" if not already
+                if (skillsIssueNodeId && skillsStatusId !== IN_PROGRESS_ID) {
+                    const statusMutated = await mutateIssueStatus(github, context, skillsIssueNodeId, IN_PROGRESS_ID);
+                    if (statusMutated) {
+                        console.log(` ⮡  Changed issue #${skillsIssueNum} to "In progress"`);
+                    }
+                }
+            } catch (err) {
+                console.error(` ⮡  Failed to update issue #${skillsIssueNum} state:`, err);
             }
         }
-        try {
-            await github.request('PATCH /repos/{owner}/{repo}/issues/{issue_number}', {
-                owner,
-                repo,
-                issue_number: skillsIssueNum,
-                state: skillsIssueState,
-            });
-            console.log(` ⮡  Re-opened issue #${skillsIssueNum}`)
-        } catch (err) {
-            console.error(` ⮡  Failed to update issue #${skillsIssueNum} state:`, err);
-        }
     }
+    
 }
 
 module.exports = postToSkillsIssue;
