@@ -94,28 +94,31 @@ async function postToSkillsIssue({github, context}, activity) {
         }
     }
 
-    // If eventActor is team member, open issue and move to "In progress". Else, close issue
-    // const isActiveMember = await checkTeamMembership(github, context, eventActor, TEAM);
-    const isActiveMember = true;
-    let skillsIssueState = "closed";
+    // Do not move or reopen Skills Issue if message includes the string 'closed'
+    if (!message.includes('closed')) {
+        // If eventActor is team member, open issue and move to "In progress". Else, close issue
+        // const isActiveMember = await checkTeamMembership(github, context, eventActor, TEAM);
+        const isActiveMember = true;
+        let skillsIssueState = "closed";
 
-    if (isActiveMember) {
-        skillsIssueState = "open";
-        // Update item's status to "In progress (actively working)" if not already
-        if (skillsIssueNodeId && skillsStatusId !== IN_PROGRESS_ID) {
-            await mutateIssueStatus(github, context, skillsIssueNodeId, IN_PROGRESS_ID);
+        if (isActiveMember) {
+            skillsIssueState = "open";
+            // Update item's status to "In progress (actively working)" if not already
+            if (skillsIssueNodeId && skillsStatusId !== IN_PROGRESS_ID) {
+                await mutateIssueStatus(github, context, skillsIssueNodeId, IN_PROGRESS_ID);
+            }
         }
-    }
-    try {
-        await github.request('PATCH /repos/{owner}/{repo}/issues/{issue_number}', {
-            owner,
-            repo,
-            issue_number: skillsIssueNum,
-            state: skillsIssueState,
-        });
-        console.log(` ⮡  Re-opened issue #${skillsIssueNum}`)
-    } catch (err) {
-        console.error(` ⮡  Failed to update issue #${skillsIssueNum} state:`, err);
+        try {
+            await github.request('PATCH /repos/{owner}/{repo}/issues/{issue_number}', {
+                owner,
+                repo,
+                issue_number: skillsIssueNum,
+                state: skillsIssueState,
+            });
+            console.log(` ⮡  Re-opened issue #${skillsIssueNum}`)
+        } catch (err) {
+            console.error(` ⮡  Failed to update issue #${skillsIssueNum} state:`, err);
+        }
     }
 }
 

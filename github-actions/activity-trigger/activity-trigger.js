@@ -121,7 +121,7 @@ async function activityTrigger({github, context}) {
 
     // Only if issue is closed, and eventActor !== eventObserver, return eventObserver and message
     if (eventAction.includes('Closed-') && (eventActor !== eventObserver)) {
-        message = `- ${eventObserver} issue ${action}: ${eventUrl} at ${localTime}`;
+        message = `- ${eventObserver} was ${action}: ${eventUrl} at ${localTime}`;
         activities.push([eventObserver, message]);
     }
     // Only if PRclosed or PRmerged, and PRAuthor != eventActor, return PRAuthor and message
