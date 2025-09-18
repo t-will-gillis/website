@@ -17,7 +17,7 @@ async function activityTrigger({github, context}) {
     let eventPRAuthor = '';
     let activities = [];
 
-    // Exclude all bot actors from being recorded as a guardrail against infinite loops
+    // Exclude all bot actors from being recorded as a guardrail against infinite loops TESTTING!!!
     const EXCLUDED_ACTORS = ['HackforLABot', 'elizabethhonest', 'github-actions', 'github-advanced-security', 'github-pages', 'dependabot[bot]', 'dependabot-preview[bot]', 'dependabot', 'dependabot-preview'];
 
     if (eventName === 'issues') {
