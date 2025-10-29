@@ -42,9 +42,10 @@ jobs:
         env:
           label_edits: ${{ steps.update-label-directory.outputs.result }}
         run: |
-          curl -X POST "https://script.google.com/macros/s/AKfycbw_kmDVqQW5J8wXWl1BXvJzALU6k0XYpAc5XJ7inQSyq8_opUuNg4ToBzh3Gf4M5jhw/exec" \
-          -H "Content-Type: application/json" \
-          -d "$label_edits"
+          echo "do not post to Google Sheets"
+          # curl -X POST "https://script.google.com/macros/s/AKfycbw_kmDVqQW5J8wXWl1BXvJzALU6k0XYpAc5XJ7inQSyq8_opUuNg4ToBzh3Gf4M5jhw/exec" \
+          # -H "Content-Type: application/json" \
+          # -d "$label_edits"
 
       # Before next step, run `git pull` so that branch is current
       - name: Pull latest changes from gh-pages
