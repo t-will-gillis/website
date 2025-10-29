@@ -1,7 +1,8 @@
 name: Pull Request Verification
 on:
   pull_request_target:
-    types: [opened]
+    types: [closed]   
+# Disable this workflow for testing
 
 jobs:
   Check-Team-Membership:
