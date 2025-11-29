@@ -8,12 +8,12 @@ on:
 jobs:
   Trim_Contributors:
     runs-on: ubuntu-latest
-    if: github.repository == 'hackforla/website'
+    if: github.repository == 't-will-gillis/website'
 
     steps:
     # Checkout repo, and provide authorization token for `stefanzweifel/git-auto-commit-action` below
     - name: Checkout repository
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
       with: 
         token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
 

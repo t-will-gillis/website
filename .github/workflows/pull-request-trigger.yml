@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [opened, edited]
     branches:
-      - 'gh-pages'
+      - '*'
 
 jobs:
   Check-For-Linked-Issue:
@@ -11,7 +11,7 @@ jobs:
     if: ${{ github.event.action == 'opened' || github.event.action == 'edited' }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Check for keyword and issue number
         id: check-for-keyword
