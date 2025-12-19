@@ -1,7 +1,7 @@
 name: Pull Request Verification
 on:
   pull_request_target:
-    types: [opened]
+    types: [reopened]
 
 jobs:
   Check-Team-Membership:
