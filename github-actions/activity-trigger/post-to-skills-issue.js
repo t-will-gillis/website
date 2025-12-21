@@ -45,7 +45,6 @@ async function postToSkillsIssue({github, context}, activity) {
   // Step 1: Check for eventActor's Skills Issue
   let needsUpdate = false;
   let skillsInfo = lookupSkillsDirectory(eventActor);
-  let commentInfo = null;
 
   if (!skillsInfo) {
     console.log(`No cached Skills Issue found for ${eventActor}, querying GitHub...`);
