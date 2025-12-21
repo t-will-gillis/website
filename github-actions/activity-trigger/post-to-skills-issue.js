@@ -1,7 +1,6 @@
 // Import modules
 const retrieveLabelDirectory = require('../utils/retrieve-label-directory');
 const querySkillsIssue = require('../utils/query-skills-issue');
-const querySkillsIssueWithComments = require('../utils/query-skills-issue-with-comments');
 const postComment = require('../utils/post-issue-comment');
 const checkTeamMembership = require('../utils/check-team-membership');
 const statusFieldIds = require('../utils/_data/status-field-ids');
@@ -48,7 +47,7 @@ async function postToSkillsIssue({github, context}, activity) {
 
   if (!skillsInfo) {
     console.log(`No cached Skills Issue found for ${eventActor}, querying GitHub...`);
-    skillsInfo = await querySkillsIssueWithComments(github, context, eventActor, SKILLS_LABEL, MARKER);
+    skillsInfo = await querySkillsIssue(github, context, eventActor, SKILLS_LABEL, MARKER);
     if (skillsInfo && skillsInfo.issueNum) {
       needsUpdate = true;
     } else {
@@ -150,7 +149,7 @@ async function postToSkillsIssue({github, context}, activity) {
 
     // If eventActor is team member, open issue and move to "In progress"
     // const isActiveMember = await checkTeamMembership(github, context, eventActor, TEAM);
-    const isActiveMember = true; // REMOVE THIS LINE AND UNCOMMENT ABOVE FOR FINAL
+    const isActiveMember = true;                                                   // REMOVE THIS LINE AND UNCOMMENT ABOVE FOR FINAL
 
     if (isActiveMember) {
       try {
