@@ -19,9 +19,7 @@ function lookupSkillsDirectory(eventActor) {
 }
 
 function updateSkillsDirectory(eventActor, skillsInfo) {
-    const directory = loadDirectory();
-    // const result = directory.find(entry => entry.eventActor === eventActor);
-   //  directory[eventActor] = skillsInfo;
+  const directory = loadDirectory();
   const index = directory.findIndex(entry => entry.eventActor === eventActor);
   if (index !== -1) {
     directory[index] = {
@@ -30,7 +28,6 @@ function updateSkillsDirectory(eventActor, skillsInfo) {
       nodeId,
       commentId
     };
-  console.log(`directory[index]: ${JSON.stringify(directory[index])}`);  // only for debugging
   } else {
     directory.push({
       eventActor,

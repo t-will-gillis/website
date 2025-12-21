@@ -55,18 +55,18 @@ jobs:
           }
           return needsUpdate;
 
-      # Run `git pull` so that branch is current prior to next step
+    # Run `git pull` so that branch is current prior to next step
     - if: ${{ steps.post-to-skills-issue.outputs.result == 'true' }}
       name: Pull latest changes from gh-pages
       run: git pull
 
     # Commits list of inactive members to repo for using in next step, and in one month
     - if : ${{ steps.post-to-skills-issue.outputs.result == 'true' }}
-      name: Update Inactive Members JSON
-      id: update-inactive-members-json
+      name: Update Skills Directory JSON
+      id: update-skills-directory-json
       uses: stefanzweifel/git-auto-commit-action@v7.1.0
       with:
-      # Glob pattern of file which should be added to the commit
+        # Glob pattern of file which should be added to the commit
         file_pattern: github-actions/utils/_data/skills-directory.json
 
         # Optional commit message and author settings
