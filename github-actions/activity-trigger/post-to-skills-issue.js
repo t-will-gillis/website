@@ -43,7 +43,7 @@ async function postToSkillsIssue({github, context}, activity) {
         console.log(`No cached Skills Issue found for ${eventActor}, querying GitHub...`);
 
         // Step 2: Fallback to GitHub API
-        skillsInfo = await querySkillsIssue(github, context, eventActor, SKILLS_LABEL);
+        skillsInfo = await querySkillsIssue(github, context, eventActor, SKILLS_LABEL, MARKER);
 
         // Step 3: Save result to local directory if found
         if (skillsInfo && skillsInfo.issueNum) {
@@ -55,7 +55,7 @@ async function postToSkillsIssue({github, context}, activity) {
     }
     // Get eventActor's Skills Issue number, nodeId, current statusId (all null if no Skills Issue found) 
     //const skillsIssueNum = skillsInfo.issueNum;
-    const skillsIssueNum = 17;
+    const skillsIssueNum = skillsInfo.issueNum;
     const skillsIssueNodeId = skillsInfo.issueId;
     const skillsStatusId = skillsInfo?.statusId || 'unknown';
     const isArchived = skillsInfo?.isArchived || false;

@@ -6,7 +6,7 @@
  * @params {String} label    - The label to filter issues by (e.g., "Complexity: Prework")
  * @returns {Object}         - An object containing the item ID and its status name
  */
-async function querySkillsIssue(github, context, assignee, label) {
+async function querySkillsIssue(github, context, assignee, label, MARKER) {
   const repoOwner = context.repo.owner;
   const repoName = context.repo.repo;
 
@@ -19,6 +19,13 @@ async function querySkillsIssue(github, context, assignee, label) {
       ) {
         nodes {
           number
+          comments(first: 100) {
+            nodes {
+              author { login }
+              databaseId
+              body
+            }
+          }
           projectItems(first: 5) {
             nodes {
               id
@@ -64,7 +71,12 @@ async function querySkillsIssue(github, context, assignee, label) {
     const statusName = statusField?.name;
     const statusId = statusField?.optionId;
 
-    return { issueNum, issueId, statusName, statusId, isArchived };
+    const comments = issueNode.comments.nodes || [];
+    const commentMatch = comments.filter(comment => comment.body.includes(MARKER));
+    const commentId = commentMatch.length > 0 ? commentMatch[0].databaseId : null; 
+    const commentBody = commentMatch.length > 0 ? commentMatch[0].body : null;
+
+    return { issueNum, issueId, statusName, statusId, isArchived, commentId, commentBody};
   } catch (error) {
     // If an error occurs, log it and return an object with null values
     console.error(`Error querying skills issue: ${error.message}`);
