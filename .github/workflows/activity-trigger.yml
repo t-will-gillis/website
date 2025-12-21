@@ -25,6 +25,8 @@ jobs:
     if: github.repository == 't-will-gillis/website'
     steps:
     - uses: actions/checkout@v6
+      with: 
+        token: ${{ secrets.HACKFORLA_ADMIN_TOKEN }}
 
     - name: Gather Event Details
       id: gather-event-details
