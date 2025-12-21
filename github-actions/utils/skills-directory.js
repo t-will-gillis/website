@@ -18,7 +18,7 @@ function lookupSkillsDirectory(eventActor) {
     return result || null;
 }
 
-function updateSkillsDirectory(eventActor, skillsInfo) {
+function updateSkillsDirectory(eventActor, issueNum, nodeId, commentId) {
   const directory = loadDirectory();
   const index = directory.findIndex(entry => entry.eventActor === eventActor);
   if (index !== -1) {
