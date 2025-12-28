@@ -22,20 +22,13 @@ on:
 jobs:
   Add-Update-Label-Weekly:
     runs-on: ubuntu-latest
-    if: github.repository == 'hackforla/website' # ⓶
+    if: github.repository == 't-will-gillis/website' # ⓶
     steps:
-      - name: Generate token from GitHub App
-        id: generate-app-token
-        uses: actions/create-github-app-token@v2
-        with:
-          app-id: ${{ secrets.HFLA_GRAPHQL_APP_ID }}
-          private-key: ${{ secrets.HFLA_GRAPHQL_APP_PRIVATE_KEY }}
-
       - name: Checkout repository
         uses: actions/checkout@v5
 
       - name: Run workflow
         uses: hackforla/automate-the-org/gha-add-update-label-weekly@v0 # ⓷ 
         with:
-          github-token: ${{ steps.generate-app-token.outputs.token }}
+          github-token: ${{ secrets.HACKFORLA_GRAPHQL_TOKEN }}
           dry-run: ${{ github.event.inputs.dry-run || 'true' }}
