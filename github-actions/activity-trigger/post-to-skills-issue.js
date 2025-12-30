@@ -8,7 +8,7 @@ const mutateIssueStatus = require('../utils/mutate-issue-status');
 const { lookupSkillsDirectory, updateSkillsDirectory } = require('../utils/skills-directory'); 
 
 // `complexity0` refers `Complexity: Prework` label
-const SKILLS_LABEL = retrieveLabelDirectory("complexity0");
+const SKILLS_LABEL = retrieveLabelDirectory('complexity0');
 
 
 
@@ -24,7 +24,7 @@ async function postToSkillsIssue({github, context}, activity) {
     const owner = context.repo.owner;
     const repo = context.repo.repo;
     const TEAM = 'website-write';
-  
+
     const [eventActor, message] = activity;
     const MARKER = '<!-- Skills Issue Activity Record -->';
     const COMMENT_BODY_HEADER =
@@ -34,17 +34,17 @@ async function postToSkillsIssue({github, context}, activity) {
         `##### ⚠ Important note: The bot updates this comment automatically - do not edit\n\n` +
         `${message}`;
     const IN_PROGRESS_ID = statusFieldIds('In_Progress');
-  
+
     // If eventActor undefined, exit
     if (!eventActor) {
         console.log(`eventActor is undefined (likely a bot). Cannot post message...`);
         return;
     }
-  
+
     // Step 1: Check for eventActor's Skills Issue
     let needsUpdate = false;
     let skillsInfo = lookupSkillsDirectory(eventActor);
-  
+
     if (!skillsInfo) {
         console.log(`No cached Skills Issue found for ${eventActor}, querying GitHub...`);
         skillsInfo = await querySkillsIssue(github, context, eventActor, SKILLS_LABEL, MARKER);
@@ -55,7 +55,7 @@ async function postToSkillsIssue({github, context}, activity) {
             return;
         }
     }
-  
+
     // Step 2: Get eventActor's Skills Issue number, nodeId, current statusId, isArchived, and cached commentId
     const skillsIssueNum = skillsInfo.issueNum;
     const skillsIssueNodeId = skillsInfo.issueId;
@@ -71,9 +71,9 @@ async function postToSkillsIssue({github, context}, activity) {
     console.log(`skillsStatusId: ${skillsStatusId}`);
     console.log(`isArchived: ${isArchived}`);
     console.log(`commentIdFound: ${commentIdFound}`);
-  
+
     console.log(` ⮡  Found Skills Issue for ${eventActor}: #${skillsIssueNum}`);
-  
+
     // If commentIdFound does not exist, retrieve from skills issue
     if (!commentIdFound) {
         console.log(` ⮡  No cached comment ID for ${eventActor}, will search #${skillsIssueNum} for MARKER...`);
@@ -93,7 +93,7 @@ async function postToSkillsIssue({github, context}, activity) {
             return;
         }
     }
-  
+
     // If commentIdFound from either cached ID or search
     if (commentIdFound) {
         console.log(` ⮡  Found comment with MARKER...`);
@@ -143,14 +143,14 @@ async function postToSkillsIssue({github, context}, activity) {
         console.log(` ⮡  Updating Skills Directory for ${eventActor}...`);
         updateSkillsDirectory(eventActor, skillsIssueNum, skillsIssueNodeId, commentIdFound);
     };
-    
+
     // Only proceed if Skills Issue message does not include: 'closed', 'assigned', or isArchived 
     if (!(message.includes('closed') || message.includes('assigned') || isArchived)) {
-  
+
         // If eventActor is team member, open issue and move to "In progress"
         // const isActiveMember = await checkTeamMembership(github, context, eventActor, TEAM);
         const isActiveMember = true;                                                   // REMOVE THIS LINE AND UNCOMMENT ABOVE FOR FINAL
-    
+
         if (isActiveMember) {
             try {
                 await github.request('PATCH /repos/{owner}/{repo}/issues/{issue_number}', {
