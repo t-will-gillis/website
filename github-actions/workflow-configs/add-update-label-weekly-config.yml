@@ -40,10 +40,10 @@
 
 labels:
   required:
-    statusUpdated: "status: updated" # <-- confirm default value
-    statusInactive1: "status: to update!" # <-- confirm default value
-    statusInactive2: "status: 2 weeks inactive" # <-- confirm default value
-    statusHelpWanted: "status: help wanted" # <-- confirm default value
+    statusUpdated: "Status: Updated" # <-- confirm default value
+    statusInactive1: "status: To Update !" # <-- confirm default value
+    statusInactive2: "status: 2 Weeks Inactive" # <-- confirm default value
+    statusHelpWanted: "Status: Help Wanted" # <-- confirm default value
 
   ignored:
     - "draft" # <-- confirm default value
