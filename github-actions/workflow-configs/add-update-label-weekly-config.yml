@@ -43,7 +43,7 @@ labels:
     statusUpdated: "Status: Updated" # <-- confirm default value
     statusInactive1: "status: To Update !" # <-- confirm default value
     statusInactive2: "status: 2 Weeks Inactive" # <-- confirm default value
-    statusHelpWanted: "Status: Help wanted" # <-- confirm default value
+    statusHelpWanted: "Status: Help Wanted" # <-- confirm default value
 
   ignored:
     - "draft" # <-- confirm default value
