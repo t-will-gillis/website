@@ -45,7 +45,7 @@ labels:
     statusInactive2: "status: 2 Weeks Inactive" # <-- confirm default value
     statusHelpWanted: "Status: Help Wanted" # <-- confirm default value
 
-  ignored:
+  filtering:
     - "draft" # <-- confirm default value
     - "emergent request" # <-- confirm default value
     - "epic" # <-- confirm default value
