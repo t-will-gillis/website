@@ -2,9 +2,6 @@ name: Add Pull Request Instructions
 on:
   pull_request:
     types: [opened]
-    branches:
-      - '*'
-      - 'feature-homepage-launch'
 
 jobs:
   Add-Pull-Request-Instructions:
