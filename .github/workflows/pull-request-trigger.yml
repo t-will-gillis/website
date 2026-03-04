@@ -2,8 +2,7 @@ name: Pull Request Trigger
 on:
   pull_request:
     types: [opened, edited]
-    branches:
-      - '*'
+
 
 jobs:
   Check-For-Linked-Issue:
