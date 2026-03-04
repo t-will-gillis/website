@@ -3,7 +3,7 @@ var github;
 var context;
 
 /**
- * Fetches a list of open CodeQL alerts from the GitHub API.
+ * Fetches a list of open CodeQL alerts from the GitHub API.!!!
  * @param {Object} params - The parameters for the fetch operation.
  * @param {Object} params.g - The GitHub object for making API requests.
  * @param {Object} params.c - The context object containing repository information.
