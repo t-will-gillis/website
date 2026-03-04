@@ -1,6 +1,7 @@
 name: Pull Request Verification
 on:
-  workflow_dispatch: 
+  pull_request:
+    types: [opened]
 
 jobs:
   Check-Team-Membership:
