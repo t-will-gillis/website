@@ -45,34 +45,33 @@
 
 labels:
   required:
-    statusUpdated: "status: updated" # <-- confirm default label name
-    statusInactive1: "status: to update!" # <-- confirm default label name
-    statusInactive2: "status: 2 weeks inactive" # <-- confirm default label name
-    statusHelpWanted: "status: HELP wanted" # <-- confirm default label name
-
-  filtering:
-    - "draft" # <-- confirm default label name
-    - "er" # <-- confirm default label name
+    statusUpdated:
+      status: Updated
+    statusInactive1:
+      status: To Update!
+    statusInactive2:
+      status: 2 Weeks Inactive
+    statusHelpWanted:
+      status: Help Wanted
+  filtering: # <-- confirm default label name
+    - "Draft" # <-- confirm default label name
+    - "ER" # <-- confirm default label name
     - "epic" # <-- confirm default label name
     - "dePENdency" # <-- confirm default label name
     # - "" # <-- Uncomment and add label name if needed.
     # - "" # <-- Uncomment and add label name if needed.
-
-#
-#   NOTE: the following is only applicable to teams that a.) use Skills Issues 
-#   and b.) **have installed the "Member Activity Trigger" workflow**.  
-#   Currently, the only team this applies to is the Website team. 
-#
-# The `modifying` section includes label(s) that change the workflow of the 
-# workflow. For example, the `skills_issue` label is used to identify issues 
-# related to skills development. These issues use different criteria for 
-# determining their update status and are never unassigned. 
+  #
+  #   NOTE: the following is only applicable to teams that a.) use Skills Issues 
+  #   and b.) **have installed the "Member Activity Trigger" workflow**.  
+  #   Currently, the only team this applies to is the Website team. 
+  #
+  # The `modifying` section includes label(s) that change the workflow of the 
+  # workflow. For example, the `skills_issue` label is used to identify issues 
+  # related to skills development. These issues use different criteria for 
+  # determining their update status and are never unassigned. 
 
   modifying:
     - "complexity: PREWORK"
-
-
-
 # ==============================================================================
 # Time thresholds (in days)
 # ==============================================================================
@@ -91,22 +90,18 @@ labels:
 #   isInactiveByDays:      Issues not updated for this many days are marked as inactive
 #   unassignedByDays:      Issues not updated for this many days have assignees removed <-- FUTURE FEATURE
 #   upperLimitDays:        Bot comments older than this not processed for minimization
-
 timeframes:
   recentlyUpdatedByDays: 3
   needsUpdatingByDays: 7
   isInactiveByDays: 14
-  unassignedByDays: 21 
+  unassignedByDays: 21
   upperLimitDays: 35
-
 # To reduce issue clutter and repetition, this workflow minimizes previous bot 
 # comments via a GraphQL mutation. To limit GitHub GraphQL rate usage, only bot 
 # comments created between `isInactiveByDays` and `upperLimitDays` ago are 
 # processed. Adjust this value to include greater or fewer comments.
 #
 # Refer to "Bot configuration" below to set the bot username (if needed).
-
-
 
 # ==============================================================================
 # Project Board status-column configuration
@@ -120,14 +115,9 @@ timeframes:
 #
 #  targetStatus:    Required for inclusion in update checks
 #  questionsStatus: Optional; assignees may move issues here to skip checks
-
 projectBoard:
   targetStatus: "In progress (actively working)" # <-- confirm default value
   questionsStatus: "Questions / IN Review" # <-- confirm default value
-
-
-
-
 # ==============================================================================
 # Bot configuration- If needed
 # ==============================================================================
@@ -135,14 +125,10 @@ projectBoard:
 # Relevant to "timeframes.upperLimitDays" setting above, repetitive comments 
 # from bots with the following usernames are processed for minimization. Only 
 # if needed, this value can be updated to ensure bot comments are minimized. 
-
 bots:
   - "hfla-graphql-app[bot]"
   - "github-actions[bot]"
   - "HackforLABot"
-
-
-
 # ==============================================================================
 # Bot comment template
 # ==============================================================================
@@ -158,11 +144,7 @@ bots:
 #   ${statusHelpWanted}   - The "help wanted" label name from your label directory 
 #   ${questionsStatus}    - The "questions" status on your Project Board (e.g., "Questions / In Review")
 #   ${cutoffTime}         - The formatted timestamp of the issue's last update
-
-teamSlackChannel: ""  # Only if needed, for example "#project-site"
-
-
-
+teamSlackChannel: "" # Only if needed, for example "#project-site"
 # ==============================================================================
 # Advanced options
 # ==============================================================================
