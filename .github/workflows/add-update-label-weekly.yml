@@ -9,11 +9,11 @@ name: Add Update Label Weekly - ATO
 
 on:
   schedule:
-    - cron: '0 7 * 1-6,8-11 5' 
+    - cron: '0 7 * 1-6,8-11 5'
   workflow_dispatch:
     inputs:
       dry-run:
-        description: 'Check to run in dry-run preview mode- will not update labels or comments.'
+        description: 'Run in dry-run mode to preview changes: will not update labels or comments.'
         type: boolean
         default: true
 
