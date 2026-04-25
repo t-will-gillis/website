@@ -1,5 +1,5 @@
 /**
- * This function parses the triggered event to determine the trigger eventName and eventAction
+ * This function parses the triggered event to determine the trigger eventName and eventAction!!!
  * and from this information decide the eventActor (user who is credited for the event).
  * @param {Object} github    - GitHub object from function calling activity-trigger.js
  * @param {Object} context   - Context of the function calling activity-trigger.js
