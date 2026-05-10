@@ -138,27 +138,29 @@ async function assignedToAnotherIssue() {
       owner: context.repo.owner,
       repo: context.repo.repo,
       assignee: assignee
-    })).data.filter(issue => !issue.pull_request);
+    })).data;
+    // })).data.filter(issue => !issue.pull_request);
 
     const otherIssues = [];
 
     for(const issue of issues) {
-      let repoIssueNum = issue.number;
-      // Check is it's an "Agenda" issue
-      const isAgendaIssue = issue.labels.some(label => label.name === featureAgenda);
+      console.log(`Issue number ${issue.number}`);
+      // let repoIssueNum = issue.number;
+      // // Check is it's an "Agenda" issue
+      // const isAgendaIssue = issue.labels.some(label => label.name === featureAgenda);
 
-      // Check if it's a "Prework" issue
-      const isPreWork = issue.labels.some(label => label.name === complexity0);
+      // // Check if it's a "Prework" issue
+      // const isPreWork = issue.labels.some(label => label.name === complexity0);
 
-      // Check if it exists in "Emergent Request" Status
-      const inEmergentRequestStatus = (await queryIssueInfo(github, context, repoIssueNum)).statusName === EMERGENT_REQUEST;
+      // // Check if it exists in "Emergent Request" Status
+      // const inEmergentRequestStatus = (await queryIssueInfo(github, context, repoIssueNum)).statusName === EMERGENT_REQUEST;
     
-      // Check if it exists in "New Issue Approval" Status
-      const inNewIssueApprovalStatus = (await queryIssueInfo(github, context, repoIssueNum)).statusName === NEW_ISSUE_APPROVAL;
+      // // Check if it exists in "New Issue Approval" Status
+      // const inNewIssueApprovalStatus = (await queryIssueInfo(github, context, repoIssueNum)).statusName === NEW_ISSUE_APPROVAL;
     
-      // Include the issue only if none of the conditions are met
-      if(!(isAgendaIssue || isPreWork || inEmergentRequestStatus || inNewIssueApprovalStatus))
-        otherIssues.push(issue);
+      // // Include the issue only if none of the conditions are met
+      // if(!(isAgendaIssue || isPreWork || inEmergentRequestStatus || inNewIssueApprovalStatus))
+      //   otherIssues.push(issue);
     }
   
     // If developer is assigned to another issue/s, return true 
