@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [gh-pages]
   push:
-    branches: [*]
+    # branches: [gh-pages]
 
 # permissions:
 #     contents: read
