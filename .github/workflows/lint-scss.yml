@@ -6,6 +6,10 @@ on:
   push:
     branches: [gh-pages]
 
+# permissions:
+#     contents: read
+#     statuses: write
+
 jobs:
   build:
     name: Lint SCSS
