@@ -26,7 +26,7 @@ jobs:
         uses: github/super-linter@v4.8.1
         env:
           VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: gh-pages
+          # DEFAULT_BRANCH: gh-pages
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
