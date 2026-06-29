@@ -23,7 +23,7 @@ permissions:
 jobs:
   Add-Update-Label-Weekly:
     runs-on: ubuntu-latest
-    if: github.repository == 'hackforla/website'
+    # if: github.repository == 'hackforla/website'
     steps:
       - name: Generate token from GitHub App
         id: generate-app-token
