@@ -9,7 +9,7 @@ const mutateIssueStatus = require('../utils/mutate-issue-status');
 // `complexity0` refers `Complexity: Prework` label
 const SKILLS_LABEL = retrieveLabelDirectory("complexity0");
 
-
+// fake comment
 
 /**
  * Function to get eventActor's Skills Issue and post message
