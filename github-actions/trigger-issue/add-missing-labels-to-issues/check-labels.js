@@ -3,7 +3,7 @@ const statusFieldIds = require('../../utils/_data/status-field-ids');
 const queryIssueInfo = require('../../utils/query-issue-info');
 const mutateIssueStatus = require('../../utils/mutate-issue-status');
 const retrieveLabelDirectory = require('../../utils/retrieve-label-directory');
-
+// yikes
 // Use labelKeys to retrieve current labelNames from directory
 const [
   sizeMissing,
