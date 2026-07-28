@@ -18,7 +18,7 @@ async function activityTrigger({github, context}) {
     let eventObserver = '';
     let eventPRAuthor = '';
     let activities = [];
-
+// nonsense comment for testing
     // Exclude all bot actors from being recorded as a guardrail against infinite loops
     const EXCLUDED_ACTORS = [
         "HackforLABot",
