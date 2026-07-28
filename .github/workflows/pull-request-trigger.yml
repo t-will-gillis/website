@@ -2,12 +2,12 @@ name: Pull Request Trigger
 on:
   pull_request:
     types: [opened, edited]
-    branches:
-      - 'gh-pages'
+#     branches:
+#       - 'gh-pages'
 
-permissions:
-  contents: read
-  issues: write
+# permissions:
+#   contents: read
+#   issues: write
 
 jobs:
   Check-For-Linked-Issue:
