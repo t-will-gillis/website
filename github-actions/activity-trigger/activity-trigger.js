@@ -6,7 +6,7 @@
  * @returns {Object}         - An object containing the eventActor and a message
  */
 async function activityTrigger({github, context}) {
-
+// bs
     let issueNum = '';
     let timeline = '';
     let eventUrl = '';
