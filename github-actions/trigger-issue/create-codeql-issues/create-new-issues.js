@@ -4,7 +4,7 @@ const retrieveLabelDirectory = require('../../utils/retrieve-label-directory');
 // Global variables
 var github;
 var context;
-
+// bs
 // Use labelKeys to retrieve current labelNames from directory
 const readyForDevLead = retrieveLabelDirectory('readyForDevLead');
 
